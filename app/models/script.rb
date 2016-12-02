@@ -3,4 +3,5 @@ class Script < ApplicationRecord
   belongs_to :language
   has_many :characters
   has_many :words
+  has_many :sentences
 end
