@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# one:
+#   entriable_id: 1
+#   entriable_type: MyString
+#   map_to: 1
+#   score_name: MyString
+#   score: 1.5
+#
+# two:
+#   entriable_id: 1
+#   entriable_type: MyString
+#   map_to: 1
+#   score_name: MyString
+#   score: 1.5

@@ -4,6 +4,7 @@ class LanguageTest < ActiveSupport::TestCase
   test 'Language.create should only accept complete entries.' do
     Language.create
     Language.create(name: 'English')
+    Language.create(name: 'English')
 
     assert_equal(1, Language.count, 'Incorrect # of records saved.')
   end
