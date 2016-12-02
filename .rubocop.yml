@@ -1,0 +1,24 @@
+# This is the configuration used to check the rubocop source code.
+# For list of cops 'https://github.com/bbatsov/rubocop/tree/master/config'
+
+
+AllCops:
+  Exclude:
+    - 'config/**/*'
+    - 'app/main/config/**/*'
+    - 'Gemfile'
+    - 'Guardfile'
+    - 'bin/spring'
+    - 'test/test_helper.rb'
+    - 'db/schema.rb'
+    - 'Rakefile'
+    - 'db/seeds.rb'
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Lint/UselessAssignment:
+  Enabled: false
