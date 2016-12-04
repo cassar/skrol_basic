@@ -2,6 +2,11 @@ require_relative 'boot'
 
 require 'rails/all'
 
+# Require all ruby files in ./lib directory.
+Dir["./lib/console_methods/*.rb"].each {|file| require file }
+
+require './lib/console_methods/translate_string.rb'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

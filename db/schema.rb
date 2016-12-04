@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161202061002) do
+ActiveRecord::Schema.define(version: 20161204033512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20161202061002) do
 
   create_table "scripts", force: :cascade do |t|
     t.string   "name"
+    t.string   "lang_code"
     t.integer  "language_id"
     t.integer  "parent_script_id"
     t.datetime "created_at",       null: false
