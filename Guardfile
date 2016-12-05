@@ -57,6 +57,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/console_methods/translate_string_test.rb'
   end
 
+  # utilities lib and its test
+  watch('lib/console_methods/utilities.rb') do
+    'test/lib/console_methods/utilities_test.rb'
+  end
+  watch('test/lib/console_methods/utilities_test.rb') do
+    'test/lib/console_methods/utilities_test.rb'
+  end
+
   # Language model and its tests
   watch('app/models/language.rb') do 'test/models/language_test.rb' end
   watch('test/models/language_test.rb') do 'test/models/language_test.rb' end
