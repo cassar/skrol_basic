@@ -11,11 +11,8 @@ end
 # Assigns a CFILS score to all character records of a base_script mapped to a
 # target_script.
 def assign_cfils_scores(base_script, target_script, target_char_total)
-  base_catalogue = derive_chars_catalogue(base_script)
   target_catalogue = derive_chars_catalogue(target_script)
-  base_catalogue.each do |key, _value|
-    char = base_script.characters.where(entry: key).first
-    raise Invalid, "No Char record '#{key}' found" if char.nil?
+  base_script.characters.each do |char|
     assign_cfils_score(char, target_script, target_catalogue, target_char_total)
   end
 end
