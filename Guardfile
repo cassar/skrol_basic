@@ -33,14 +33,6 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   watch(%r{^lib/(.*/)?([^/]+)\.rb$})     { |m| "test/#{m[1]}test_#{m[2]}.rb" }
   watch(%r{^test/test_helper\.rb$})      { 'test' }
 
-  # calculate_cfils lib and its tests
-  watch('lib/console_methods/calculate_cfils.rb') do
-    'test/lib/console_methods/calculate_cfils_test.rb'
-  end
-  watch('test/lib/console_methods/calculate_cfils_test.rb') do
-    'test/lib/console_methods/calculate_cfils_test.rb'
-  end
-
   # populate_chars_cfs lib and its tests
   watch('lib/console_methods/populate_chars_cfs.rb') do
     'test/lib/console_methods/populate_chars_cfs_test.rb'
@@ -63,6 +55,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   end
   watch('test/lib/console_methods/calculate_wcfbs_test.rb') do
     'test/lib/console_methods/calculate_wcfbs_test.rb'
+  end
+
+  # calculate_wcfts lib and its tests
+  watch('lib/console_methods/calculate_wcfts.rb') do
+    'test/lib/console_methods/calculate_wcfts_test.rb'
+  end
+  watch('test/lib/console_methods/calculate_wcfts_test.rb') do
+    'test/lib/console_methods/calculate_wcfts_test.rb'
   end
 
   # utilities lib and its test

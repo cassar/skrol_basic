@@ -10,8 +10,8 @@ def calculate_wcfbs(word)
                      score_name: 'WCFBS', score: score)
 end
 
-# Retrieves a CFS score for a particular char entry and script and add it to
-# a scores_sum total.
+# Retrieves a CFS score for a particular char entry and script mapped to a
+# particular target_script.
 def return_cfs_score(char_entry, script)
   char = script.characters.where(entry: char_entry).first
   raise Invalid, "No chars matching '#{char_entry}'!" if char.nil?

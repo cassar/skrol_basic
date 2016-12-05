@@ -9,6 +9,7 @@ require './lib/console_methods/translate_string.rb'
 require './lib/console_methods/utilities.rb'
 require './lib/console_methods/populate_chars_cfs.rb'
 require './lib/console_methods/calculate_wcfbs.rb'
+require './lib/console_methods/calculate_wcfts.rb'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
