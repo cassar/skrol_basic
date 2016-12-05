@@ -13,6 +13,8 @@ class ScriptTest < ActiveSupport::TestCase
   test 'Script.phonetic methods should work.' do
     lang = Language.create(name: 'English')
     b_script = lang.scripts.create(name: 'Latin script (English alphabet)')
+    assert_raises(Invalid) { b_script.phonetic }
+
     p_script = b_script.create_phonetic('IPA')
 
     assert_not_nil(p_script, 'phonetic script failed to save.')

@@ -26,7 +26,7 @@ def to_ipa(base_code, phonetic)
   str_arr = gsub(/(\.|\!|\?)/, '').split
   str_arr.each do |entry|
     base_arr = retrieve_base_arr(base_code, entry)
-    phonetic << if base_arr.first.nil?
+    phonetic << if base_arr.first.nil? || base_arr.first.phonetic.nil?
                   '[none] '
                 else
                   base_arr.first.phonetic.entry + ' '

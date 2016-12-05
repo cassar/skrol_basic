@@ -31,10 +31,12 @@ class WordTest < ActiveSupport::TestCase
     b_script = lang.scripts.create(name: 'Latin script (English alphabet)')
     p_script = b_script.create_phonetic('IPA')
 
+    b_word = b_script.words.create(entry: 'car')
+
     b_word = b_script.words.create(entry: 'apple')
     p_word = b_word.create_phonetic('ˈæ.pl̩')
 
-    assert_equal(2, Word.count, 'wrong number of words saved.')
+    assert_equal(3, Word.count, 'wrong number of words saved.')
     assert_equal(b_word['group_id'], p_word['group_id'], 'group_id mismatch!')
     assert_equal(p_word, b_word.phonetic, ".phonetic doesn't work")
   end

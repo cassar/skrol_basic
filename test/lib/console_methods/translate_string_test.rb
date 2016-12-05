@@ -16,10 +16,9 @@ class TranslateStringTest < ActiveSupport::TestCase
     base.create_phonetic('bʊl')
 
     base = b_script.words.create(entry: 'dust')
-    base.create_phonetic('dʌst')
 
     string = 'bull dust test'.translate('en', 'ipa')
-    assert_equal('bʊl dʌst [none]', string, 'IPA translate not working')
+    assert_equal('bʊl [none] [none]', string, 'IPA translate not working')
   end
 
   test 'retrieve_base_arr should work as advertised' do
