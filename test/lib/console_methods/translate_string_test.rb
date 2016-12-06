@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class TranslateStringTest < ActiveSupport::TestCase
-  test 'String.translate should convert to bing language' do
-    string = 'hello'.translate('en', 'es')
-    assert_equal('Hola', string, 'bing translate not working')
-  end
+  # test 'String.translate should convert to bing language' do
+  #   string = 'hello'.translate('en', 'es')
+  #   assert_equal('Hola', string, 'bing translate not working')
+  # end
 
   test 'String.translate should convert to IPA' do
     lang = Language.create(name: 'English')

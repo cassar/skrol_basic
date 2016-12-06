@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CalculateWCFBSTest < ActiveSupport::TestCase
+class CalculateWFSTest < ActiveSupport::TestCase
   test 'calculate_wfs should work as advertised' do
     lang = Language.create(name: 'English')
     script = lang.scripts.create(name: 'Latin')
