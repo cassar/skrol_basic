@@ -1,5 +1,6 @@
 class Script < ApplicationRecord
   validates :name, :language_id, presence: true
+  validates :name, uniqueness: { scope: :language_id }
   belongs_to :language
   has_many :characters
   has_many :words

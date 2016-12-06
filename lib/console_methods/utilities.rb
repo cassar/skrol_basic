@@ -24,6 +24,29 @@ def add_chars_to_catalogue(word, catalogue)
   end
 end
 
+# Takes a script record and return a catalogue object with all the words
+# used in the sentence records of that script along with its corresponding count
+def derive_words_catalogue(script)
+  catalogue = {}
+  Sentence.where(script_id: script.id).each do |sentence|
+    add_words_to_catalogue(sentence, catalogue)
+  end
+  catalogue
+end
+
+# Adds chars to catalogue object, increments existing entry by 1 if already
+# present.
+def add_words_to_catalogue(sentence, catalogue)
+  word_arr = sentence.entry.gsub(/(\.|\!|\?)/, '').split
+  word_arr.each do |word|
+    if catalogue[word.downcase].nil?
+      catalogue[word.downcase] = 1
+    else
+      catalogue[word] += 1
+    end
+  end
+end
+
 def translate_all_sentences(base, target)
   Sentence.where('language' => base).each do |sentence|
     translated = sentence['base'].translate(base, target)

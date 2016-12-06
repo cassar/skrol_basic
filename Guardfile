@@ -65,6 +65,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/console_methods/calculate_wcfts_test.rb'
   end
 
+  # calculate_wfs lib and its tests
+  watch('lib/console_methods/calculate_wfs.rb') do
+    'test/lib/console_methods/calculate_wfs_test.rb'
+  end
+  watch('test/lib/console_methods/calculate_wfs_test.rb') do
+    'test/lib/console_methods/calculate_wfs_test.rb'
+  end
+
   # utilities lib and its test
   watch('lib/console_methods/utilities.rb') do
     'test/lib/console_methods/utilities_test.rb'
