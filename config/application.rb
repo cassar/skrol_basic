@@ -12,6 +12,7 @@ require './lib/console_methods/calculate_wcfbs.rb'
 require './lib/console_methods/calculate_wcfts.rb'
 require './lib/console_methods/calculate_wfs.rb'
 require './lib/console_methods/calculate_wls.rb'
+require './lib/console_methods/calculate_wss.rb'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

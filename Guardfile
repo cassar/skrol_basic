@@ -81,6 +81,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/console_methods/calculate_wls_test.rb'
   end
 
+  # calculate_wss lib and its tests
+  watch('lib/console_methods/calculate_wss.rb') do
+    'test/lib/console_methods/calculate_wss_test.rb'
+  end
+  watch('test/lib/console_methods/calculate_wss_test.rb') do
+    'test/lib/console_methods/calculate_wss_test.rb'
+  end
+
   # utilities lib and its test
   watch('lib/console_methods/utilities.rb') do
     'test/lib/console_methods/utilities_test.rb'
