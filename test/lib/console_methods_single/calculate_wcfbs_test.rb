@@ -10,9 +10,9 @@ class CalculateWCFBSTest < ActiveSupport::TestCase
 
     compile_wcfbs(word)
 
-    wcfbs_score = word.scores.where(score_name: 'WCFBS').first
+    wcfbs_score = word.scores.where(name: 'WCFBS').first
     assert_not_nil(wcfbs_score, 'WCFBS score did not save')
-    assert_equal(0.141025641025641, wcfbs_score.score, 'Incorrect WCFBS score')
+    assert_equal(0.141025641025641, wcfbs_score.entry, 'Incorrect WCFBS score')
   end
 
   test 'calculate_wcfbs works as advertised' do

@@ -3,7 +3,7 @@ def compile_wls_script(script)
   script.words.each do |word|
     score = compute_wls(word, max_length)
     word.scores.create(map_to_id: script.id, map_to_type: 'scripts',
-                       score_name: 'WLS', score: score)
+                       name: 'WLS', entry: score)
   end
 end
 

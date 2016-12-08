@@ -4,12 +4,12 @@
 #   entriable_id: 1
 #   entriable_type: MyString
 #   map_to: 1
-#   score_name: MyString
-#   score: 1.5
+#   name: MyString
+#   entry: 1.5
 #
 # two:
 #   entriable_id: 1
 #   entriable_type: MyString
 #   map_to: 1
-#   score_name: MyString
-#   score: 1.5
+#   name: MyString
+#   entry: 1.5

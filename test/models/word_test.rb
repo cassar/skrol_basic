@@ -12,7 +12,7 @@ class WordTest < ActiveSupport::TestCase
     script = lang.scripts.create(name: 'Latin script (Spanish alphabet)')
     word = script.words.create(entry: 'apple')
     score = word.scores.create(map_to_id: 2, map_to_type: 'words',
-                               score_name: 'WSS', score: 0.23)
+                               name: 'WSS', entry: 0.23)
 
     assert_not_nil(score, 'Score did not save.')
     assert_equal(1, Score.count, 'No scores saved.')

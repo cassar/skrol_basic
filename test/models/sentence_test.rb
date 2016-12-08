@@ -12,7 +12,7 @@ class SentenceTest < ActiveSupport::TestCase
     script = lang.scripts.create(name: 'Latin script (Spanish alphabet)')
     sentence = script.sentences.create(entry: 'Apple on my head.')
     score = sentence.scores.create(map_to_id: 2, map_to_type: 'sentences',
-                                   score_name: 'SWLS', score: 0.23)
+                                   name: 'SWLS', entry: 0.23)
 
     assert_not_nil(score, 'Score did not save.')
     assert_equal(1, Score.count, 'No scores saved.')

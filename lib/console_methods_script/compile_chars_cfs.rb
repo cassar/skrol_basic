@@ -28,6 +28,6 @@ def create_cfs_scores(catalogue, script, total)
     raise Invalid, "No char '#{key}' for that script on record!" if char.nil?
     score = value.to_f / total
     score = char.scores.create(map_to_id: script.id, map_to_type: 'scripts',
-                               score_name: 'CFS', score: score)
+                               name: 'CFS', entry: score)
   end
 end

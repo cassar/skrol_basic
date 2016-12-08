@@ -13,7 +13,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
     compile_wfs_script(script)
     assert_equal(4, Score.count, 'wrong number of scores saved')
     score = word.scores.first
-    assert_equal(0.142857142857143, score.score, 'wrong score for would saved')
+    assert_equal(0.142857142857143, score.entry, 'wrong score for would saved')
 
     script = lang.scripts.create(name: 'IPA')
     assert_raises(Invalid) { compile_wfs_script(script) }
@@ -58,7 +58,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
 
     assert_equal(2, Score.count, 'WFS scores did not save')
     score = word.scores.first
-    assert_equal(0.333333333333333, score.score, 'wrong WFS score for bottle')
+    assert_equal(0.333333333333333, score.entry, 'wrong WFS score for bottle')
   end
 
   test 'return_word should work as advertised' do

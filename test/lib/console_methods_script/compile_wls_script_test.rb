@@ -11,7 +11,7 @@ class CompileWLSScriptTest < ActiveSupport::TestCase
     compile_wls_script(script)
     assert_equal(3, Score.count, 'wrong # of scores saved')
     score = word.scores.first
-    assert_equal(0.25, score.score, 'incorrect wls score saved')
+    assert_equal(0.25, score.entry, 'incorrect wls score saved')
   end
 
   test 'compute_wls should work as advertised' do

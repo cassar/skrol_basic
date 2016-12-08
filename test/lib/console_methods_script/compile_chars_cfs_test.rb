@@ -13,12 +13,12 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
     char = Character.where(entry: 'h').first
     score_record = char.scores.first
     assert_not_nil(score_record, 'No score record found.')
-    assert_equal(0.125, score_record.score, 'h should have been 0.125')
+    assert_equal(0.125, score_record.entry, 'h should have been 0.125')
 
     char = Character.where(entry: 'l').first
     score_record = char.scores.first
     assert_not_nil(score_record, 'No score record found.')
-    assert_equal(0.25, score_record.score, 'l should have been 0.25')
+    assert_equal(0.25, score_record.entry, 'l should have been 0.25')
   end
 
   test 'create_chars_return_total should work as advertised' do
@@ -44,8 +44,8 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
     create_cfs_scores(catalogue, script, 5)
     score = char.scores.first
     assert_equal(4, Score.count, 'Incorrect number of scores saved.')
-    assert_equal(0.2, score.score, 'h should have score of .2')
-    assert_equal('CFS', score.score_name, 'score name should be CFS')
+    assert_equal(0.2, score.entry, 'h should have score of .2')
+    assert_equal('CFS', score.name, 'score name should be CFS')
 
     char.destroy
     assert_raises(Invalid) { create_cfs_scores(catalogue, script, 5) }

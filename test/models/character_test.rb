@@ -12,7 +12,7 @@ class CharacterTest < ActiveSupport::TestCase
     script = lang.scripts.create(name: 'Latin script (Spanish alphabet)')
     char = script.characters.create(entry: 'a')
     score = char.scores.create(map_to_id: 2, map_to_type: 'characters',
-                               score_name: 'CFS', score: 0.23)
+                               name: 'CFS', entry: 0.23)
 
     assert_not_nil(score, 'Score did not save.')
     assert_equal(1, Score.count, 'No scores saved.')

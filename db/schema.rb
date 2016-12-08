@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204033512) do
+ActiveRecord::Schema.define(version: 20161208045857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20161204033512) do
     t.string   "entriable_type"
     t.integer  "map_to_id"
     t.string   "map_to_type"
-    t.string   "score_name"
-    t.float    "score"
+    t.string   "name"
+    t.float    "entry"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["entriable_type", "entriable_id"], name: "index_scores_on_entriable_type_and_entriable_id", using: :btree

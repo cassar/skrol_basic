@@ -2,7 +2,7 @@
 def compile_wcfts(word, target_script)
   score = calculate_wcfts(word, target_script)
   word.scores.create(map_to_id: target_script.id, map_to_type: 'scripts',
-                     score_name: 'WCFTS', score: score)
+                     name: 'WCFTS', entry: score)
 end
 
 # Calculates the Word Characters Frequency Target Scores (WCFTS) for a
@@ -24,7 +24,7 @@ def return_cfils_score(char_entry, target_script)
   return 0.0 if char.nil?
   cfils_score = char.scores.where(map_to_id: target_script.id,
                                   map_to_type: 'scripts',
-                                  score_name: 'CFS').first
+                                  name: 'CFS').first
   raise Invalid, "No CFS score for '#{char_entry}'!" if cfils_score.nil?
-  cfils_score.score
+  cfils_score.entry
 end

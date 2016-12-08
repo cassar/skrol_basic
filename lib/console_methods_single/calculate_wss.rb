@@ -3,7 +3,7 @@
 def compile_wss(base_word, target_word)
   score = calculate_wss(base_word, target_word)
   base_word.scores.create(map_to_id: target_word.id, map_to_type: 'words',
-                          score_name: 'WSS', score: score)
+                          name: 'WSS', entry: score)
 end
 
 # Calculates the Word Similarity Scores (WSS) for a particular base_word record

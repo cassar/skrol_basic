@@ -14,13 +14,13 @@ class CalculateWCFBSTest < ActiveSupport::TestCase
     compile_chars_cfs(script2)
 
     compile_wcfts(word, script2)
-    score = word.scores.where(score_name: 'WCFTS')
+    score = word.scores.where(name: 'WCFTS')
     assert_equal(1, score.count, 'Score did not save')
-    assert_equal(0.166666666666667, score.first.score, 'incorrect WCFTS score')
+    assert_equal(0.166666666666667, score.first.entry, 'incorrect WCFTS score')
 
     compile_wcfts(word3, script2)
-    score = word3.scores.where(score_name: 'WCFTS')
-    assert_equal(0.0, score.first.score, 'WCFTS should be 0')
+    score = word3.scores.where(name: 'WCFTS')
+    assert_equal(0.0, score.first.entry, 'WCFTS should be 0')
   end
 
   test 'calculate_wcfts should work as advertised' do

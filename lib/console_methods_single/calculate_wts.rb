@@ -3,7 +3,7 @@
 def compile_wts(word, target_script)
   wts_score = calculate_wts(word, target_script)
   word.scores.create(map_to_id: target_script.id, map_to_type: 'scripts',
-                     score_name: 'WTS', score: wts_score)
+                     name: 'WTS', entry: wts_score)
 end
 
 # Calculates the Word Total Score (WTS) for a particular entry to a desired
