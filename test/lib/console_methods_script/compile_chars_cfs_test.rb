@@ -1,14 +1,13 @@
 require 'test_helper'
 
 class PopulateCharsCFSTest < ActiveSupport::TestCase
-  test 'populate_chars_cfs should word as advertised' do
+  test 'compile_chars_cfs should word as advertised' do
     lang = Language.create(name: 'English')
     script = lang.scripts.create(name: 'Latin')
     script.words.create(entry: 'hello')
     script.words.create(entry: 'cow')
 
-    populate_chars_cfs(script)
-
+    compile_chars_cfs(script)
     assert_equal(6, Score.count, 'Wrong number of scores saved!')
 
     char = Character.where(entry: 'h').first

@@ -1,3 +1,10 @@
+# Calculates and creates new WCFTS score given a word record and a target_script
+def compile_wcfts(word, target_script)
+  score = calculate_wcfts(word, target_script)
+  word.scores.create(map_to_id: target_script.id, map_to_type: 'scripts',
+                     score_name: 'WCFTS', score: score)
+end
+
 # Calculates the Word Characters Frequency Target Scores (WCFTS) for a
 # particular entry.
 def calculate_wcfts(word, target_script)
@@ -6,9 +13,7 @@ def calculate_wcfts(word, target_script)
   char_arr.each do |entry|
     scores_sum += return_cfils_score(entry, target_script)
   end
-  score = scores_sum / word.entry.length
-  word.scores.create(map_to_id: target_script.id, map_to_type: 'scripts',
-                     score_name: 'WCFTS', score: score)
+  scores_sum / word.entry.length
 end
 
 # Retrieves a CFILS score for a particular char entry and script mapped to a

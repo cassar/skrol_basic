@@ -3,16 +3,9 @@ require_relative 'boot'
 require 'rails/all'
 
 # Require all ruby files in ./lib directory.
-Dir["./lib/console_methods/*.rb"].each {|file| require file }
-
-require './lib/console_methods/translate_string.rb'
-require './lib/console_methods/utilities.rb'
-require './lib/console_methods/populate_chars_cfs.rb'
-require './lib/console_methods/calculate_wcfbs.rb'
-require './lib/console_methods/calculate_wcfts.rb'
-require './lib/console_methods/calculate_wfs.rb'
-require './lib/console_methods/calculate_wls.rb'
-require './lib/console_methods/calculate_wss.rb'
+Dir["./lib/console_methods_single/*.rb"].each {|file| require file }
+Dir["./lib/console_methods_script/*.rb"].each {|file| require file }
+Dir["./lib/*.rb"].each {|file| require file }
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

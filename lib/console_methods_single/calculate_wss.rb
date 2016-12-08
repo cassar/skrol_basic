@@ -1,11 +1,17 @@
 # Calculates the Word Similarity Scores (WSS) for a particular base_word record
 # to a target_word record and saves the record as a new score.
+def compile_wss(base_word, target_word)
+  score = calculate_wss(base_word, target_word)
+  base_word.scores.create(map_to_id: target_word.id, map_to_type: 'words',
+                          score_name: 'WSS', score: score)
+end
+
+# Calculates the Word Similarity Scores (WSS) for a particular base_word record
+# to a target_word record
 def calculate_wss(base_word, target_word)
   base_char_arr = base_word.entry.scan(/./)
   target_char_arr = target_word.entry.scan(/./)
-  score = return_score(base_char_arr, target_char_arr)
-  base_word.scores.create(map_to_id: target_word.id, map_to_type: 'words',
-                          score_name: 'WSS', score: score)
+  return_score(base_char_arr, target_char_arr)
 end
 
 # Returns wss score between two word arrays.

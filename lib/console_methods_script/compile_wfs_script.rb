@@ -1,14 +1,37 @@
 # Calculates and stores all the Word Frequency Score (WFS) for a particular
 # script.
-def calculate_wfs(script)
+def compile_wfs_script(script)
   raise Invalid, 'No words attached to script!' if script.words.count < 1
   catalogue = derive_words_catalogue(script)
-  total_words = return_total(catalogue)
+  total_words = return_word_total(catalogue)
   assign_wfs(script, catalogue, total_words)
 end
 
+# Takes a script record and return a catalogue object with all the words
+# used in the sentence records of that script along with its corresponding count
+def derive_words_catalogue(script)
+  catalogue = {}
+  Sentence.where(script_id: script.id).each do |sentence|
+    add_words_to_catalogue(sentence, catalogue)
+  end
+  catalogue
+end
+
+# Adds chars to catalogue object, increments existing entry by 1 if already
+# present.
+def add_words_to_catalogue(sentence, catalogue)
+  word_arr = sentence.entry.gsub(/(\.|\!|\?)/, '').split
+  word_arr.each do |word|
+    if catalogue[word.downcase].nil?
+      catalogue[word.downcase] = 1
+    else
+      catalogue[word] += 1
+    end
+  end
+end
+
 # Returns the total of all values in an object called catalogue
-def return_total(catalogue)
+def return_word_total(catalogue)
   total = 0
   catalogue.each do |_key, value|
     total += value

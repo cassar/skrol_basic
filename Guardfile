@@ -33,68 +33,92 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   watch(%r{^lib/(.*/)?([^/]+)\.rb$})     { |m| "test/#{m[1]}test_#{m[2]}.rb" }
   watch(%r{^test/test_helper\.rb$})      { 'test' }
 
-  # populate_chars_cfs lib and its tests
-  watch('lib/console_methods/populate_chars_cfs.rb') do
-    'test/lib/console_methods/populate_chars_cfs_test.rb'
+  # compile_chars_cfs lib and its tests
+  watch('lib/console_methods_script/compile_chars_cfs.rb') do
+    'test/lib/console_methods_script/compile_chars_cfs_test.rb'
   end
-  watch('test/lib/console_methods/populate_chars_cfs_test.rb') do
-    'test/lib/console_methods/populate_chars_cfs_test.rb'
+  watch('test/lib/console_methods_script/compile_chars_cfs_test.rb') do
+    'test/lib/console_methods_script/compile_chars_cfs_test.rb'
   end
 
   # translate_string lib and its tests
-  watch('lib/console_methods/translate_string.rb') do
-    'test/lib/console_methods/translate_string_test.rb'
+  watch('lib/console_methods_single/translate_string.rb') do
+    'test/lib/console_methods_single/translate_string_test.rb'
   end
-  watch('test/lib/console_methods/translate_string_test.rb') do
-    'test/lib/console_methods/translate_string_test.rb'
+  watch('test/lib/console_methods_single/translate_string_test.rb') do
+    'test/lib/console_methods_single/translate_string_test.rb'
   end
 
   # calculate_wcfbs lib and its tests
-  watch('lib/console_methods/calculate_wcfbs.rb') do
-    'test/lib/console_methods/calculate_wcfbs_test.rb'
+  watch('lib/console_methods_single/calculate_wcfbs.rb') do
+    'test/lib/console_methods_single/calculate_wcfbs_test.rb'
   end
-  watch('test/lib/console_methods/calculate_wcfbs_test.rb') do
-    'test/lib/console_methods/calculate_wcfbs_test.rb'
+  watch('test/lib/console_methods_single/calculate_wcfbs_test.rb') do
+    'test/lib/console_methods_single/calculate_wcfbs_test.rb'
   end
 
   # calculate_wcfts lib and its tests
-  watch('lib/console_methods/calculate_wcfts.rb') do
-    'test/lib/console_methods/calculate_wcfts_test.rb'
+  watch('lib/console_methods_single/calculate_wcfts.rb') do
+    'test/lib/console_methods_single/calculate_wcfts_test.rb'
   end
-  watch('test/lib/console_methods/calculate_wcfts_test.rb') do
-    'test/lib/console_methods/calculate_wcfts_test.rb'
+  watch('test/lib/console_methods_single/calculate_wcfts_test.rb') do
+    'test/lib/console_methods_single/calculate_wcfts_test.rb'
   end
 
   # calculate_wfs lib and its tests
-  watch('lib/console_methods/calculate_wfs.rb') do
-    'test/lib/console_methods/calculate_wfs_test.rb'
+  watch('lib/console_methods_single/calculate_wfs.rb') do
+    'test/lib/console_methods_single/calculate_wfs_test.rb'
   end
-  watch('test/lib/console_methods/calculate_wfs_test.rb') do
-    'test/lib/console_methods/calculate_wfs_test.rb'
+  watch('test/lib/console_methods_single/calculate_wfs_test.rb') do
+    'test/lib/console_methods_single/calculate_wfs_test.rb'
+  end
+
+  # compile_wfs_script lib and its tests
+  watch('lib/console_methods_script/compile_wfs_script.rb') do
+    'test/lib/console_methods_script/compile_wfs_script_test.rb'
+  end
+  watch('test/lib/console_methods_script/compile_wfs_script_test.rb') do
+    'test/lib/console_methods_script/compile_wfs_script_test.rb'
+  end
+
+  # compile_wls_script lib and its tests
+  watch('lib/console_methods_script/compile_wls_script.rb') do
+    'test/lib/console_methods_script/compile_wls_script_test.rb'
+  end
+  watch('test/lib/console_methods_script/compile_wls_script_test.rb') do
+    'test/lib/console_methods_script/compile_wls_script_test.rb'
   end
 
   # calculate_wls lib and its tests
-  watch('lib/console_methods/calculate_wls.rb') do
-    'test/lib/console_methods/calculate_wls_test.rb'
+  watch('lib/console_methods_single/calculate_wls.rb') do
+    'test/lib/console_methods_single/calculate_wls_test.rb'
   end
-  watch('test/lib/console_methods/calculate_wls_test.rb') do
-    'test/lib/console_methods/calculate_wls_test.rb'
+  watch('test/lib/console_methods_single/calculate_wls_test.rb') do
+    'test/lib/console_methods_single/calculate_wls_test.rb'
   end
 
   # calculate_wss lib and its tests
-  watch('lib/console_methods/calculate_wss.rb') do
-    'test/lib/console_methods/calculate_wss_test.rb'
+  watch('lib/console_methods_single/calculate_wss.rb') do
+    'test/lib/console_methods_single/calculate_wss_test.rb'
   end
-  watch('test/lib/console_methods/calculate_wss_test.rb') do
-    'test/lib/console_methods/calculate_wss_test.rb'
+  watch('test/lib/console_methods_single/calculate_wss_test.rb') do
+    'test/lib/console_methods_single/calculate_wss_test.rb'
+  end
+
+  # calculate_wts lib and its tests
+  watch('lib/console_methods_single/calculate_wts.rb') do
+    'test/lib/console_methods_single/calculate_wts_test.rb'
+  end
+  watch('test/lib/console_methods_single/calculate_wts_test.rb') do
+    'test/lib/console_methods_single/calculate_wts_test.rb'
   end
 
   # utilities lib and its test
-  watch('lib/console_methods/utilities.rb') do
-    'test/lib/console_methods/utilities_test.rb'
+  watch('lib/console_methods_single/utilities.rb') do
+    'test/lib/console_methods_single/utilities_test.rb'
   end
-  watch('test/lib/console_methods/utilities_test.rb') do
-    'test/lib/console_methods/utilities_test.rb'
+  watch('test/lib/console_methods_single/utilities_test.rb') do
+    'test/lib/console_methods_single/utilities_test.rb'
   end
 
   # Language model and its tests

@@ -1,7 +1,7 @@
 # Populates the characters table and Computes the Character Frequency Scores
 # (CFS) for all characters used by a particular script in a particular language
 # storing results in the scores table.
-def populate_chars_cfs(script)
+def compile_chars_cfs(script)
   catalogue = derive_chars_catalogue(script)
   total = create_chars_return_total(catalogue, script)
   create_cfs_scores(catalogue, script, total)

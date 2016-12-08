@@ -1,6 +1,16 @@
 class Invalid < StandardError
 end
 
+# Retrieves the max word length mapped to a particular script.
+def max_word_length(script)
+  max_length = 0
+  script.words.each do |word|
+    word_length = word.entry.length
+    max_length = word_length if max_length < word_length
+  end
+  max_length
+end
+
 # Takes a script record and return a catalogue object with all the characters
 # used in the word records of that script along with its corresponding count.
 def derive_chars_catalogue(script)
@@ -20,29 +30,6 @@ def add_chars_to_catalogue(word, catalogue)
       catalogue[char] = 1
     else
       catalogue[char] += 1
-    end
-  end
-end
-
-# Takes a script record and return a catalogue object with all the words
-# used in the sentence records of that script along with its corresponding count
-def derive_words_catalogue(script)
-  catalogue = {}
-  Sentence.where(script_id: script.id).each do |sentence|
-    add_words_to_catalogue(sentence, catalogue)
-  end
-  catalogue
-end
-
-# Adds chars to catalogue object, increments existing entry by 1 if already
-# present.
-def add_words_to_catalogue(sentence, catalogue)
-  word_arr = sentence.entry.gsub(/(\.|\!|\?)/, '').split
-  word_arr.each do |word|
-    if catalogue[word.downcase].nil?
-      catalogue[word.downcase] = 1
-    else
-      catalogue[word] += 1
     end
   end
 end
