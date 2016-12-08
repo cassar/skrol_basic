@@ -1,4 +1,5 @@
-
+# Calculates the word frequency score (WFS) for a word and maps it to
+# it's own script
 def calculate_wfs(word)
   word_count = 0
   total_words = 0

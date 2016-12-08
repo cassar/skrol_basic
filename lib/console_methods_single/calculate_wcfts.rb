@@ -1,30 +1,27 @@
-# Calculates and creates new WCFTS score given a word record and a target_script
-def compile_wcfts(word, target_script)
-  score = calculate_wcfts(word, target_script)
-  word.scores.create(map_to_id: target_script.id, map_to_type: 'scripts',
-                     name: 'WCFTS', entry: score)
+# Calculates and creates a new WCFTS score for a given word record.
+def compile_wcfts(target_word)
+  target_script = target_word.script
+  score = calculate_wcfts(target_word)
+  target_word.scores.create(map_to_id: target_script.id, map_to_type: 'scripts',
+                            name: 'WCFTS', entry: score)
 end
 
-# Calculates the Word Characters Frequency Target Scores (WCFTS) for a
-# particular entry.
-def calculate_wcfts(word, target_script)
+# Calculates the Word Characters Frequency Base Scores (WCFTS) for a
+# particular word record.
+def calculate_wcfts(target_word)
   scores_sum = 0.0
-  char_arr = word.entry.scan(/./)
-  char_arr.each do |entry|
-    scores_sum += return_cfils_score(entry, target_script)
-  end
-  scores_sum / word.entry.length
+  char_arr = target_word.entry.scan(/./)
+  target_script = target_word.script
+  char_arr.each { |entry| scores_sum += return_cfs_score(entry, target_script) }
+  score = scores_sum / target_word.entry.length
 end
 
-# Retrieves a CFILS score for a particular char entry and script mapped to a
+# Retrieves a CFS score for a particular char entry and script mapped to a
 # particular target_script.
-# This is the CFS of the charcter in a target script.
-def return_cfils_score(char_entry, target_script)
+def return_cfs_score(char_entry, target_script)
   char = target_script.characters.where(entry: char_entry).first
-  return 0.0 if char.nil?
-  cfils_score = char.scores.where(map_to_id: target_script.id,
-                                  map_to_type: 'scripts',
-                                  name: 'CFS').first
-  raise Invalid, "No CFS score for '#{char_entry}'!" if cfils_score.nil?
-  cfils_score.entry
+  raise Invalid, "No chars matching '#{char_entry}'!" if char.nil?
+  cfs_score = char.scores.where(name: 'CFS').first
+  raise Invalid, "No CFS score for '#{char_entry}'!" if cfs_score.nil?
+  cfs_score.entry
 end

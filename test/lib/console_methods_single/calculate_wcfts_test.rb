@@ -1,57 +1,39 @@
 require 'test_helper'
 
-class CalculateWCFBSTest < ActiveSupport::TestCase
+class CalculateWCFTSTest < ActiveSupport::TestCase
   test 'compile_wcfts should work as advertised' do
     lang = Language.create(name: 'English')
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'bottle')
-    word3 = script.words.create(entry: 'fun')
+    script.words.create(entry: 'crumble')
     compile_chars_cfs(script)
 
-    lang2 = Language.create(name: 'Spanish')
-    script2 = lang2.scripts.create(name: 'Latin')
-    word2 = script2.words.create(entry: 'botella')
-    compile_chars_cfs(script2)
+    compile_wcfts(word)
 
-    compile_wcfts(word, script2)
-    score = word.scores.where(name: 'WCFTS')
-    assert_equal(1, score.count, 'Score did not save')
-    assert_equal(0.166666666666667, score.first.entry, 'incorrect WCFTS score')
-
-    compile_wcfts(word3, script2)
-    score = word3.scores.where(name: 'WCFTS')
-    assert_equal(0.0, score.first.entry, 'WCFTS should be 0')
+    wcfts_score = word.scores.where(name: 'WCFTS').first
+    assert_not_nil(wcfts_score, 'WCFTS score did not save')
+    assert_equal(0.141025641025641, wcfts_score.entry, 'Incorrect WCFTS score')
   end
 
-  test 'calculate_wcfts should work as advertised' do
+  test 'calculate_wcfts works as advertised' do
     lang = Language.create(name: 'English')
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'bottle')
-    word3 = script.words.create(entry: 'fun')
+    script.words.create(entry: 'crumble')
     compile_chars_cfs(script)
 
-    lang2 = Language.create(name: 'Spanish')
-    script2 = lang2.scripts.create(name: 'Latin')
-    word2 = script2.words.create(entry: 'botella')
-    compile_chars_cfs(script2)
+    score = calculate_wcfts(word)
 
-    score = calculate_wcfts(word, script2)
-    assert_equal(0.16666666666666682, score, 'incorrect WCFTS score')
-
-    score = calculate_wcfts(word3, script2)
-    assert_equal(0.0, score, 'WCFTS should be 0')
+    assert_equal(0.14102564102564114, score, 'Incorrect WCFTS score')
   end
 
-  test 'return_cfils_score should work as advertised' do
+  test 'return_cfs_score need works as advertised' do
     lang = Language.create(name: 'English')
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'bottle')
     compile_chars_cfs(script)
 
-    increment = return_cfils_score('t', script)
+    increment = return_cfs_score('t', script)
     assert_equal(0.333333333333333, increment, 'incorrent amount incremented')
-
-    increment = return_cfils_score('s', script)
-    assert_equal(0.0, increment, 'should have returned 0')
   end
 end

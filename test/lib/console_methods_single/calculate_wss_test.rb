@@ -4,27 +4,27 @@ class CalculateWSSTest < ActiveSupport::TestCase
   test 'compile_wss should work as advertised' do
     lang = Language.create(name: 'English')
     script = lang.scripts.create(name: 'Latin')
-    word = script.words.create(entry: 'həˈləʊ̯')
+    word = script.words.create(entry: 'həˈləʊ̯', group_id: 1)
 
     lang2 = Language.create(name: 'German')
     script2 = lang2.scripts.create(name: 'Latin')
-    word2 = script2.words.create(entry: 'ˈhalo')
+    word2 = script2.words.create(entry: 'ˈhalo', group_id: 1)
 
-    compile_wss(word, word2)
+    compile_wss(word, script2)
     assert_equal(0.305555555555556, Score.first.entry, 'incorrect score saved')
   end
 
   test 'calculate_wss should work as advertised' do
     lang = Language.create(name: 'English')
     script = lang.scripts.create(name: 'Latin')
-    word = script.words.create(entry: 'həˈləʊ̯')
+    word = script.words.create(entry: 'həˈləʊ̯', group_id: 1)
 
     lang2 = Language.create(name: 'German')
     script2 = lang2.scripts.create(name: 'Latin')
-    word2 = script2.words.create(entry: 'ˈhalo')
+    word2 = script2.words.create(entry: 'ˈhalo', group_id: 1)
 
     template = 0.3055555555555555
-    result = calculate_wss(word, word2)
+    result = calculate_wss(word, script2)
     assert_equal(template, result, 'incorrect score saved')
   end
 

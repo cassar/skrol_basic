@@ -1,27 +1,31 @@
-# Calculates and creates a new WCFBS score for a given word record.
-def compile_wcfbs(word)
-  script = word.script
-  score = calculate_wcfbs(word)
-  word.scores.create(map_to_id: script.id, map_to_type: 'scripts',
-                     name: 'WCFBS', entry: score)
+# Calculates and creates new WCFBS score given a target_word record and a
+# base_script
+def compile_wcfbs(target_word, base_script)
+  score = calculate_wcfbs(target_word, base_script)
+  target_word.scores.create(map_to_id: base_script.id, map_to_type: 'scripts',
+                            name: 'WCFBS', entry: score)
 end
 
-# Calculates the Word Characters Frequency Base Scores (WCFBS) for a
-# particular word record.
-def calculate_wcfbs(word)
+# Calculates the Word Characters Frequency Target Scores (WCFBS) for a
+# particular entry.
+def calculate_wcfbs(target_word, base_script)
   scores_sum = 0.0
-  char_arr = word.entry.scan(/./)
-  script = word.script
-  char_arr.each { |entry| scores_sum += return_cfs_score(entry, script) }
-  score = scores_sum / word.entry.length
+  char_arr = target_word.entry.scan(/./)
+  char_arr.each do |entry|
+    scores_sum += return_cfils_score(entry, base_script)
+  end
+  scores_sum / target_word.entry.length
 end
 
-# Retrieves a CFS score for a particular char entry and script mapped to a
-# particular target_script.
-def return_cfs_score(char_entry, script)
-  char = script.characters.where(entry: char_entry).first
-  raise Invalid, "No chars matching '#{char_entry}'!" if char.nil?
-  cfs_score = char.scores.where(name: 'CFS').first
-  raise Invalid, "No CFS score for '#{char_entry}'!" if cfs_score.nil?
-  cfs_score.entry
+# Retrieves a CFILS score for a particular char entry and script mapped to a
+# particular base_script.
+# This is the CFS of the charcter in a target script.
+def return_cfils_score(char_entry, base_script)
+  char = base_script.characters.where(entry: char_entry).first
+  return 0.0 if char.nil?
+  cfils_score = char.scores.where(map_to_id: base_script.id,
+                                  map_to_type: 'scripts',
+                                  name: 'CFS').first
+  raise Invalid, "No CFS score for '#{char_entry}'!" if cfils_score.nil?
+  cfils_score.entry
 end
