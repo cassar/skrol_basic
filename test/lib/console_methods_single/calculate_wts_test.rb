@@ -46,7 +46,7 @@ class CalculateWTSTest < ActiveSupport::TestCase
     assert_equal(template, score, 'Incorrect WTS score saved')
   end
 
-  test 'return_scores_array should work as advertised' do
+  test 'return_word_scores should work as advertised' do
     lang = Language.create(name: 'English')
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'bottle', group_id: 1)
@@ -65,7 +65,7 @@ class CalculateWTSTest < ActiveSupport::TestCase
 
     template = [0.07692307692307698, 0.11111111111111081, 0.2857142857142857,
                 0.0, 0.5777777777777777]
-    result = return_scores_array(word2, script)
+    result = return_word_scores(word2, script)
     assert_equal(template, result, 'Incorrect score array calculated')
   end
 end

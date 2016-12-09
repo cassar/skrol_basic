@@ -145,6 +145,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/console_methods_single/calculate_swos_test.rb'
   end
 
+  # calculate_sts lib and its tests
+  watch('lib/console_methods_single/calculate_sts.rb') do
+    'test/lib/console_methods_single/calculate_sts_test.rb'
+  end
+  watch('test/lib/console_methods_single/calculate_sts_test.rb') do
+    'test/lib/console_methods_single/calculate_sts_test.rb'
+  end
+
   # Language model and its tests
   watch('app/models/language.rb') do 'test/models/language_test.rb' end
   watch('test/models/language_test.rb') do 'test/models/language_test.rb' end

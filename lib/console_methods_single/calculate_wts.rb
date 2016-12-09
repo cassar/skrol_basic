@@ -12,7 +12,7 @@ def calculate_wts(target_word, base_script)
   weights = [0.05, 0.05, 0.2, 0.2, 0.5]
   wts_score = 0
   counter = 0
-  scores = return_scores_array(target_word, base_script)
+  scores = return_word_scores(target_word, base_script)
   scores.each do |score|
     wts_score += score * weights[counter]
     counter += 1
@@ -21,7 +21,7 @@ def calculate_wts(target_word, base_script)
 end
 
 # Computes all scores needed for WTS and returns them in an array.
-def return_scores_array(target_word, base_script)
+def return_word_scores(target_word, base_script)
   scores = []
   scores << calculate_wcfbs(target_word, base_script)
   scores << calculate_wcfts(target_word)
