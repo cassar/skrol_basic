@@ -10,6 +10,7 @@ end
 # to a target_word record
 def calculate_wss(word, target_script)
   target_word = target_script.words.where(group_id: word.group_id).first
+  return 0.0 if target_word.nil?
   base_char_arr = word.entry.scan(/./)
   target_char_arr = target_word.entry.scan(/./)
   return_score(base_char_arr, target_char_arr)

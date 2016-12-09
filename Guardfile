@@ -129,20 +129,12 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/console_methods_single/calculate_swls_test.rb'
   end
 
-  # calculate_scwls lib and its tests
-  watch('lib/console_methods_single/calculate_scwls.rb') do
-    'test/lib/console_methods_single/calculate_scwls_test.rb'
+  # calculate_scwts lib and its tests
+  watch('lib/console_methods_single/calculate_scwts.rb') do
+    'test/lib/console_methods_single/calculate_scwts_test.rb'
   end
-  watch('test/lib/console_methods_single/calculate_scwls_test.rb') do
-    'test/lib/console_methods_single/calculate_scwls_test.rb'
-  end
-
-  # calculate_swfs lib and its tests
-  watch('lib/console_methods_single/calculate_swfs.rb') do
-    'test/lib/console_methods_single/calculate_swfs_test.rb'
-  end
-  watch('test/lib/console_methods_single/calculate_swfs_test.rb') do
-    'test/lib/console_methods_single/calculate_swfs_test.rb'
+  watch('test/lib/console_methods_single/calculate_scwts_test.rb') do
+    'test/lib/console_methods_single/calculate_scwts_test.rb'
   end
 
   # calculate_swos lib and its tests
