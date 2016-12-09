@@ -7,8 +7,6 @@ Dir["./lib/console_methods_single/*.rb"].each {|file| require file }
 Dir["./lib/console_methods_script/*.rb"].each {|file| require file }
 Dir["./lib/*.rb"].each {|file| require file }
 
-require './lib/console_methods_single/calculate_swls.rb'
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

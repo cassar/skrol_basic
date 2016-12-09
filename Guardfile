@@ -137,6 +137,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/console_methods_single/calculate_scwls_test.rb'
   end
 
+  # calculate_swfs lib and its tests
+  watch('lib/console_methods_single/calculate_swfs.rb') do
+    'test/lib/console_methods_single/calculate_swfs_test.rb'
+  end
+  watch('test/lib/console_methods_single/calculate_swfs_test.rb') do
+    'test/lib/console_methods_single/calculate_swfs_test.rb'
+  end
+
   # Language model and its tests
   watch('app/models/language.rb') do 'test/models/language_test.rb' end
   watch('test/models/language_test.rb') do 'test/models/language_test.rb' end
