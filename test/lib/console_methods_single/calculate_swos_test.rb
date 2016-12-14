@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CalculateSWOSTest < ActiveSupport::TestCase
   test 'calculate_swos should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     base_script = lang.scripts.create(name: 'Latin')
     sentence = base_script.sentences.create(entry: 'The car is blue!')
     word = base_script.words.create(entry: 'The', group_id: 1)
@@ -27,7 +27,7 @@ class CalculateSWOSTest < ActiveSupport::TestCase
   end
 
   test 'return_swos_score should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     sentence = script.sentences.create(entry: 'The car is blue!')
     word = script.words.create(entry: 'The', group_id: 1)
@@ -54,7 +54,7 @@ class CalculateSWOSTest < ActiveSupport::TestCase
   end
 
   test 'return_candidate_arr should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     sentence = script.sentences.create(entry: 'The car is blue!')
     word = script.words.create(entry: 'The', group_id: 1)
@@ -76,7 +76,7 @@ class CalculateSWOSTest < ActiveSupport::TestCase
   end
 
   test 'return_word_arr should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     sentence = script.sentences.create(entry: 'Would paper thin!')
     word = script.words.create(entry: 'Would')
@@ -90,7 +90,7 @@ class CalculateSWOSTest < ActiveSupport::TestCase
   end
 
   test 'retrieve_word should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'would')
     script.words.create(entry: 'paper')

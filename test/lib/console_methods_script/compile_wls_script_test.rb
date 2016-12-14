@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CompileWLSScriptTest < ActiveSupport::TestCase
   test 'compile_wls_script should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'bottle')
     script.words.create(entry: 'neighbor')
@@ -15,7 +15,7 @@ class CompileWLSScriptTest < ActiveSupport::TestCase
   end
 
   test 'compute_wls should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'bottle')
     score = compute_wls(word, 8)

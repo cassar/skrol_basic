@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CompileWFSScriptTest < ActiveSupport::TestCase
   test 'compile_wfs_script should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     script.sentences.create(entry: 'Would you like a apple a pear?')
     word = script.words.create(entry: 'would')
@@ -20,7 +20,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
   end
 
   test 'derive_words_catalogue should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     sentence = script.sentences.create(entry: 'Would you like a apple a pear?')
 
@@ -31,7 +31,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
   end
 
   test 'add_words_to_catalogue should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     sentence = script.sentences.create(entry: 'Would you like a apple or pear?')
 
@@ -47,7 +47,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
   end
 
   test 'assign_wfs should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'bottle')
     word2 = script.words.create(entry: 'Sydney')
@@ -62,7 +62,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
   end
 
   test 'return_word should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'bottle')
     word2 = script.words.create(entry: 'Sydney')

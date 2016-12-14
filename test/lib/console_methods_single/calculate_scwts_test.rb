@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CalculateSCWTSTest < ActiveSupport::TestCase
   test 'calculate_scwts works as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     base_script = lang.scripts.create(name: 'Latin')
     sentence = base_script.sentences.create(entry: 'The car is blue!')
     word = base_script.words.create(entry: 'The', group_id: 1)
@@ -29,7 +29,7 @@ class CalculateSCWTSTest < ActiveSupport::TestCase
   end
 
   test 'retrieve_wts_score works as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'bottle', group_id: 1)
     script.words.create(entry: 'crumble', group_id: 2)
@@ -37,7 +37,7 @@ class CalculateSCWTSTest < ActiveSupport::TestCase
     script.sentences.create(entry: 'crumble the bottle?')
     compile_chars_cfs(script)
 
-    lang2 = Language.create(name: 'Italian')
+    lang2 = Language.where(name: 'Italian').first
     script2 = lang2.scripts.create(name: 'Latin')
     word2 = script2.words.create(entry: 'bottiglia', group_id: 1)
     script2.words.create(entry: 'crollare', group_id: 2)

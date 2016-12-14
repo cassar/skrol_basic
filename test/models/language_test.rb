@@ -2,15 +2,23 @@ require 'test_helper'
 
 class LanguageTest < ActiveSupport::TestCase
   test 'Language.create should only accept complete entries.' do
-    Language.create
-    Language.create(name: 'English')
-    Language.create(name: 'English')
+    eval = 'Language.count'
 
-    assert_equal(1, Language.count, 'Incorrect # of records saved.')
+    assert_difference(eval, difference = 0, 'Record should not have saved') do
+      Language.create
+    end
+
+    assert_difference(eval, difference = 1, 'Record should have saved') do
+      Language.create(name: 'Spanish')
+    end
+
+    assert_difference(eval, difference = 0, 'Record should not have saved') do
+      Language.create(name: 'Spanish')
+    end
   end
 
   test 'Language.scripts.others.create creates a script.others' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin script (English alphabet)')
     script.characters.create(entry: 'a')
     script.words.create(entry: 'apple')

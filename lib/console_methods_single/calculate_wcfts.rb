@@ -10,6 +10,7 @@ end
 # particular word record.
 def calculate_wcfts(target_word)
   scores_sum = 0.0
+  return scores_sum if target_word.nil?
   char_arr = target_word.entry.scan(/./)
   target_script = target_word.script
   char_arr.each { |entry| scores_sum += return_cfs_score(entry, target_script) }

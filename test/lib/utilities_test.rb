@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UtilitiesTest < ActiveSupport::TestCase
   test 'max_word_length should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'bottle')
     script.words.create(entry: 'top')
@@ -12,7 +12,7 @@ class UtilitiesTest < ActiveSupport::TestCase
   end
 
   test 'derive_chars_catalogue should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     script.words.create(entry: 'apple')
 
@@ -21,7 +21,7 @@ class UtilitiesTest < ActiveSupport::TestCase
   end
 
   test 'add_chars_to_catalogue should do what it says' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'apple')
 

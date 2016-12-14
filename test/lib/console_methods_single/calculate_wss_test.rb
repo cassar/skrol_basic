@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CalculateWSSTest < ActiveSupport::TestCase
   test 'compile_wss should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'həˈləʊ̯', group_id: 1)
 
@@ -15,7 +15,7 @@ class CalculateWSSTest < ActiveSupport::TestCase
   end
 
   test 'calculate_wss should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     word = script.words.create(entry: 'həˈləʊ̯', group_id: 1)
 

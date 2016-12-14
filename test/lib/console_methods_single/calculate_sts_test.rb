@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CalculateSTSTest < ActiveSupport::TestCase
   test 'calculate_sts works as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     base_script = lang.scripts.create(name: 'Latin')
     sentence = base_script.sentences.create(entry: 'The car is blue!', group_id: 1)
     base_script.sentences.create(entry: 'The car is not blue!', group_id: 2)
@@ -31,7 +31,7 @@ class CalculateSTSTest < ActiveSupport::TestCase
   end
 
   test 'return_sentence_scores works as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     base_script = lang.scripts.create(name: 'Latin')
     sentence = base_script.sentences.create(entry: 'The car is blue!', group_id: 1)
     base_script.sentences.create(entry: 'The car is not blue!', group_id: 2)

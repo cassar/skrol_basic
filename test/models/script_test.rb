@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ScriptTest < ActiveSupport::TestCase
   test 'Script.create should only save whole entries' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin script (English alphabet)')
     lang.scripts.create(name: 'Latin script (English alphabet)')
     lang.scripts.create
@@ -12,9 +12,8 @@ class ScriptTest < ActiveSupport::TestCase
   end
 
   test 'Script.phonetic methods should work.' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     b_script = lang.scripts.create(name: 'Latin script (English alphabet)')
-    assert_raises(Invalid) { b_script.phonetic }
 
     p_script = b_script.create_phonetic('IPA')
 

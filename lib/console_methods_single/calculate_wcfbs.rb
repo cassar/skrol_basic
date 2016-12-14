@@ -10,6 +10,7 @@ end
 # particular entry.
 def calculate_wcfbs(target_word, base_script)
   scores_sum = 0.0
+  return scores_sum if target_word.nil?
   char_arr = target_word.entry.scan(/./)
   char_arr.each do |entry|
     scores_sum += return_cfils_score(entry, base_script)

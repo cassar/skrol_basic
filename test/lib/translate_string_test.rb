@@ -7,7 +7,7 @@ class TranslateStringTest < ActiveSupport::TestCase
   # end
 
   test 'String.translate should convert to IPA' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     b_script = lang.scripts.create(name: 'Latin script (English alphabet)',
                                    lang_code: 'en')
     b_script.create_phonetic('IPA')
@@ -22,7 +22,7 @@ class TranslateStringTest < ActiveSupport::TestCase
   end
 
   test 'retrieve_base_arr should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     b_script = lang.scripts.create(name: 'Latin script (English alphabet)',
                                    lang_code: 'en')
     b_script.create_phonetic('IPA')

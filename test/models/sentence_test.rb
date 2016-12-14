@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SentenceTest < ActiveSupport::TestCase
   test 'Sentence.create and destroy should satisfy integrity constraints' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin script (English alphabet)')
     sentence = script.sentences.create(entry: 'Apple on my head.')
     script.sentences.create(entry: 'Apple on my head.')

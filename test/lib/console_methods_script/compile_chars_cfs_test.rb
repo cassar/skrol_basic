@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PopulateCharsCFSTest < ActiveSupport::TestCase
   test 'compile_chars_cfs should word as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     script.words.create(entry: 'hello')
     script.words.create(entry: 'cow')
@@ -22,7 +22,7 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
   end
 
   test 'create_chars_return_total should work as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     char = script.characters.create(entry: 'h')
     script.characters.create(entry: 'e')
@@ -34,7 +34,7 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
   end
 
   test 'create_cfs_scores should word as advertised' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin')
     char = script.characters.create(entry: 'h')
     script.characters.create(entry: 'e')

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class WordTest < ActiveSupport::TestCase
   test 'Word.create and destroy should satisfy integrity constraints' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
     script = lang.scripts.create(name: 'Latin script (English alphabet)')
     word = script.words.create(entry: 'apple')
     script.words.create(entry: 'apple')
@@ -26,7 +26,7 @@ class WordTest < ActiveSupport::TestCase
   end
 
   test '.phonetic and .create_phonetic methods should work.' do
-    lang = Language.create(name: 'English')
+    lang = Language.where(name: 'English').first
 
     b_script = lang.scripts.create(name: 'Latin script (English alphabet)')
     p_script = b_script.create_phonetic('IPA')
