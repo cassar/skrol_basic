@@ -42,5 +42,13 @@ class WordTest < ActiveSupport::TestCase
 
     assert_equal(b_word.group_id, p_word.group_id, 'group_id mismatch!')
     assert_equal(p_word, b_word.phonetic, ".phonetic doesn't work")
+    assert_raises(Invalid, 'Invalid not raised') { p_word.phonetic }
+  end
+
+  test 'phonetic_present? words as advertised' do
+    word = lang_by_name('English').base_script.word_by_entry('bottle')
+    assert(word.phonetic_present?, 'Wrong bool returned')
+    word = lang_by_name('English').base_script.word_by_entry('paper')
+    assert_not(word.phonetic_present?, 'Wrong bool returned')
   end
 end

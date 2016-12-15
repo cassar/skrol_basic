@@ -167,3 +167,75 @@ hələʊ̯:
   entry: həˈləʊ̯
   script_id: 2
   group_id: 1
+
+bot'tiʎʎa:
+  id: 29
+  entry: bot'tiʎʎa
+  script_id: 4
+  group_id: 7
+
+ˈbɒ.təl:
+  id: 30
+  entry: ˈbɒ.təl
+  script_id: 2
+  group_id: 7
+
+ell:
+  id: 31
+  entry: el
+  script_id: 6
+  group_id: 9
+
+ˈko.tʃe:
+  id: 32
+  entry: ˈko.tʃe
+  script_id: 6
+  group_id: 10
+
+ess:
+  id: 33
+  entry: es
+  script_id: 6
+  group_id: 11
+
+dee:
+  id: 34
+  entry: de
+  script_id: 6
+  group_id: 16
+
+ko̞.'lo̞ɾ:
+  id: 35
+  entry: ko̞.'lo̞ɾ
+  script_id: 6
+  group_id: 17
+
+aˈsul:
+  id: 36
+  entry: aˈsul
+  script_id: 6
+  group_id: 12
+
+ðiː:
+  id: 37
+  entry: ðiː
+  script_id: 2
+  group_id: 9
+
+kɑː:
+  id: 38
+  entry: kɑː
+  script_id: 2
+  group_id: 10
+
+ɪz:
+  id: 39
+  entry: ɪz
+  script_id: 2
+  group_id: 11
+
+bluː:
+  id: 40
+  entry: bluː
+  script_id: 2
+  group_id: 12

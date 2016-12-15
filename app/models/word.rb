@@ -16,7 +16,15 @@ class Word < ApplicationRecord
   # The method currently assumes a word only has one phonetic entry.
   def phonetic
     p_script = script.phonetic
-    word_arr = p_script.words.where(group_id: group_id)
-    word_arr.first
+    phonetic = p_script.words.where(group_id: group_id).first
+    raise Invalid, "No phonetic for '#{entry}' found!" if phonetic.nil?
+    phonetic
+  end
+
+  def phonetic_present?
+    p_script = script.phonetic
+    phonetic = p_script.words.where(group_id: group_id).first
+    return false if phonetic.nil?
+    true
   end
 end

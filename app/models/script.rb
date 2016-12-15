@@ -8,8 +8,9 @@ class Script < ApplicationRecord
 
   # Returns the phonetic script of a particular base script.
   def phonetic
-    script_arr = Script.where(parent_script_id: id)
-    script_arr.first
+    phonetic = Script.where(parent_script_id: id).first
+    raise Invalid, 'No phonetic script found' if phonetic.nil?
+    phonetic
   end
 
   # Creates a new phonetic script for a base script.

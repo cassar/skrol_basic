@@ -22,10 +22,13 @@ class ScriptTest < ActiveSupport::TestCase
     lang = Language.create(name: 'Romanian')
     b_script = lang.scripts.create(name: 'Latin')
     eval = 'Script.count'
+    p_script = nil
 
     assert_difference(eval, difference = 1, 'Record should have saved') do
-      b_script.create_phonetic('IPA')
+      p_script = b_script.create_phonetic('IPA')
     end
+
+    assert_raises(Invalid, 'Invalid not raised') { p_script.phonetic }
   end
 
   test 'word_by_entry methods should work' do

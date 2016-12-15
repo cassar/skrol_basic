@@ -12,8 +12,7 @@ end
 # Note: Both records are in the base rather than the phonetic form.
 def calculate_wts(target_word, base_script)
   weights = [0.05, 0.05, 0.2, 0.2, 0.5]
-  wts_score = 0
-  counter = 0
+  wts_score = counter = 0
   scores = return_word_scores(target_word, base_script)
   scores.each do |score|
     wts_score += score * weights[counter]
@@ -23,11 +22,12 @@ def calculate_wts(target_word, base_script)
 end
 
 # Computes all scores needed for WTS and returns them in an array.
+# Compile the wcfbs, wcfts, and wss on the phonetic scripts.
 def return_word_scores(target_word, base_script)
   scores = []
-  scores << calculate_wcfbs(target_word, base_script)
-  scores << calculate_wcfts(target_word)
+  scores << calculate_wcfbs(target_word, base_script.phonetic)
+  scores << calculate_wcfts(target_word.phonetic)
   scores << calculate_wfs(target_word)
   scores << calculate_wls(target_word)
-  scores << calculate_wss(target_word, base_script)
+  scores << calculate_wss(target_word.phonetic, base_script.phonetic)
 end
