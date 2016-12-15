@@ -2,13 +2,11 @@ require 'test_helper'
 
 class CalculateWCFBSTest < ActiveSupport::TestCase
   test 'compile_wcfbs should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
     compile_chars_cfs(script)
 
-    lang2 = Language.where(name: 'Spanish').first
-    script2 = lang2.scripts.where(name: 'Latin').first
+    script2 = lang_by_name('Spanish').base_script
     word2 = script2.words.create(entry: 'botella')
     compile_chars_cfs(script2)
 
@@ -19,14 +17,12 @@ class CalculateWCFBSTest < ActiveSupport::TestCase
   end
 
   test 'calculate_wcfbs should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.create(entry: 'bottle')
     word3 = script.words.create(entry: 'fun')
     compile_chars_cfs(script)
 
-    lang2 = Language.where(name: 'Spanish').first
-    script2 = lang2.scripts.where(name: 'Latin').first
+    script2 = lang_by_name('Spanish').base_script
     word2 = script2.words.where(entry: 'botella').first
     compile_chars_cfs(script2)
 
@@ -35,8 +31,7 @@ class CalculateWCFBSTest < ActiveSupport::TestCase
   end
 
   test 'return_cfils_score should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
     compile_chars_cfs(script)
 

@@ -2,8 +2,7 @@ require 'test_helper'
 
 class CalculateWFSTest < ActiveSupport::TestCase
   test 'calculate_wfs should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'would').first
 
     result = calculate_wfs(word)
@@ -11,8 +10,7 @@ class CalculateWFSTest < ActiveSupport::TestCase
   end
 
   test 'count_sentence_words should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     sentence =
       script.sentences.where(entry: 'Would you like a apple a pear?').first
     word = script.words.where(entry: 'would').first

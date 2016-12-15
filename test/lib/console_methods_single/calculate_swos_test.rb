@@ -2,11 +2,9 @@ require 'test_helper'
 
 class CalculateSWOSTest < ActiveSupport::TestCase
   test 'calculate_swos should work as advertised' do
-    lang = Language.where(name: 'English').first
-    base_script = lang.scripts.where(name: 'Latin').first
+    base_script = lang_by_name('English').base_script
 
-    lang = Language.where(name: 'Spanish').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('Spanish').base_script
     target_sentence =
       script.sentences.where(entry: 'El coche es de color azul!').first
 
@@ -17,15 +15,13 @@ class CalculateSWOSTest < ActiveSupport::TestCase
   end
 
   test 'return_swos_score should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'the').first
     word2 = script.words.where(entry: 'car').first
     word3 = script.words.where(entry: 'is').first
     word4 = script.words.where(entry: 'blue').first
 
-    lang = Language.where(name: 'Spanish').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('Spanish').base_script
     word5 = script.words.where(entry: 'el').first
     word6 = script.words.where(entry: 'coche').first
     word7 = script.words.where(entry: 'es').first
@@ -42,15 +38,13 @@ class CalculateSWOSTest < ActiveSupport::TestCase
   end
 
   test 'return_candidate_arr should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'the').first
     word2 = script.words.where(entry: 'car').first
     word3 = script.words.where(entry: 'is').first
     word4 = script.words.where(entry: 'blue').first
 
-    lang = Language.where(name: 'Spanish').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('Spanish').base_script
     word10 = script.words.where(entry: 'azul').first
 
     base_word_arr = [word, word2, word3, word4]
@@ -62,8 +56,7 @@ class CalculateSWOSTest < ActiveSupport::TestCase
   end
 
   test 'return_word_arr should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     sentence = script.sentences.where(entry: 'Would paper thin!').first
     word = script.words.where(entry: 'would').first
     word2 = script.words.where(entry: 'paper').first
@@ -76,8 +69,7 @@ class CalculateSWOSTest < ActiveSupport::TestCase
   end
 
   test 'retrieve_word should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'would').first
 
     result = retrieve_word('Would', script)

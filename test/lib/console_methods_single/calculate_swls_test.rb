@@ -2,8 +2,7 @@ require 'test_helper'
 
 class CalculateSWLSTest < ActiveSupport::TestCase
   test 'calculate_swls works as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     sentence = script.sentences.create(entry: 'I would like it.')
 
     result = calculate_swls(sentence)
@@ -11,8 +10,7 @@ class CalculateSWLSTest < ActiveSupport::TestCase
   end
 
   test 'max_sentence_word_length works as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     sentence = script.sentences.create(entry: 'I would like it.')
 
     result = max_sentence_word_length(script)

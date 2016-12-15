@@ -2,13 +2,11 @@ require 'test_helper'
 
 class CalculateSTSTest < ActiveSupport::TestCase
   test 'calculate_sts works as advertised' do
-    lang = Language.where(name: 'English').first
-    base_script = lang.scripts.where(name: 'Latin').first
+    base_script = lang_by_name('English').base_script
     base_script.sentences.where(entry: 'The car is not blue!').first
     compile_chars_cfs(base_script)
 
-    lang = Language.where(name: 'Spanish').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('Spanish').base_script
     target_sentence =
       script.sentences.where(entry: 'El coche es de color azul!').first
     compile_chars_cfs(script)
@@ -18,12 +16,10 @@ class CalculateSTSTest < ActiveSupport::TestCase
   end
 
   test 'return_sentence_scores works as advertised' do
-    lang = Language.where(name: 'English').first
-    base_script = lang.scripts.where(name: 'Latin').first
+    base_script = lang_by_name('English').base_script
     compile_chars_cfs(base_script)
 
-    lang = Language.where(name: 'Spanish').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('Spanish').base_script
     target_sentence =
       script.sentences.where(entry: 'El coche es de color azul!').first
     compile_chars_cfs(script)

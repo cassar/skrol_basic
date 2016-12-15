@@ -2,12 +2,10 @@ require 'test_helper'
 
 class CalculateSCWTSTest < ActiveSupport::TestCase
   test 'calculate_scwts works as advertised' do
-    lang = Language.where(name: 'English').first
-    base_script = lang.scripts.where(name: 'Latin').first
+    base_script = lang_by_name('English').base_script
     compile_chars_cfs(base_script)
 
-    lang = Language.where(name: 'Spanish').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('Spanish').base_script
     target_sentence =
       script.sentences.where(entry: 'El coche es de color azul!').first
     compile_chars_cfs(script)
@@ -18,12 +16,10 @@ class CalculateSCWTSTest < ActiveSupport::TestCase
   end
 
   test 'retrieve_wts_score works as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     compile_chars_cfs(script)
 
-    lang2 = Language.where(name: 'Italian').first
-    script2 = lang2.scripts.where(name: 'Latin').first
+    script2 = lang_by_name('Italian').base_script
     compile_chars_cfs(script2)
 
     result = retrieve_wts_score('crollare', script2, script)

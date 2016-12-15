@@ -11,27 +11,11 @@ def max_word_length(script)
   max_length
 end
 
-# Takes a script record and return a catalogue object with all the characters
-# used in the word records of that script along with its corresponding count.
-def derive_chars_catalogue(script)
-  catalogue = {}
-  Word.where(script_id: script.id).each do |word|
-    add_chars_to_catalogue(word, catalogue)
-  end
-  catalogue
-end
-
-# Adds chars to catalogue object, increments existing entry by 1 if already
-# present.
-def add_chars_to_catalogue(word, catalogue)
-  char_arr = word.entry.scan(/./)
-  char_arr.each do |char|
-    if catalogue[char].nil?
-      catalogue[char] = 1
-    else
-      catalogue[char] += 1
-    end
-  end
+# Returns a language record given a name
+def lang_by_name(name)
+  lang = Language.where(name: name).first
+  raise Invalid, "No language with #{name} found!" if lang.nil?
+  lang
 end
 
 def translate_all_sentences(base, target)

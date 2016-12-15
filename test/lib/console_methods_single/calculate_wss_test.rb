@@ -2,12 +2,10 @@ require 'test_helper'
 
 class CalculateWSSTest < ActiveSupport::TestCase
   test 'compile_wss should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'IPA').first
+    script = lang_by_name('English').phonetic_script
     word = script.words.where(entry: 'həˈləʊ̯').first
 
-    lang2 = Language.where(name: 'German').first
-    script2 = lang2.scripts.where(name: 'IPA').first
+    script2 = lang_by_name('German').phonetic_script
     word2 = script2.words.where(entry: 'ˈhalo').first
 
     compile_wss(word, script2)
@@ -15,12 +13,10 @@ class CalculateWSSTest < ActiveSupport::TestCase
   end
 
   test 'calculate_wss should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'IPA').first
+    script = lang_by_name('English').phonetic_script
     word = script.words.where(entry: 'həˈləʊ̯').first
 
-    lang2 = Language.where(name: 'German').first
-    script2 = lang2.scripts.where(name: 'IPA').first
+    script2 = lang_by_name('German').phonetic_script
     word2 = script2.words.where(entry: 'ˈhalo').first
 
     template = 0.3055555555555555

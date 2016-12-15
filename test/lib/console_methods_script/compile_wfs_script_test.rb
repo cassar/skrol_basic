@@ -19,8 +19,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
   end
 
   test 'derive_words_catalogue should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     script.sentences.each(&:destroy)
     sentence =
       script.sentences.create(entry: 'Would you like a apple a pear?')
@@ -32,8 +31,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
   end
 
   test 'add_words_to_catalogue should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     sentence =
       script.sentences.where(entry: 'Would you like a apple a pear?').first
 
@@ -49,8 +47,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
   end
 
   test 'assign_wfs should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
     word2 = script.words.where(entry: 'Sydney').first
 
@@ -64,8 +61,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
   end
 
   test 'return_word should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
     word2 = script.words.where(entry: 'Sydney').first
 

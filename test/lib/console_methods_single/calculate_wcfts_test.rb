@@ -2,8 +2,7 @@ require 'test_helper'
 
 class CalculateWCFTSTest < ActiveSupport::TestCase
   test 'compile_wcfts should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
     script.words.where(entry: 'crumble').first
     compile_chars_cfs(script)
@@ -16,8 +15,7 @@ class CalculateWCFTSTest < ActiveSupport::TestCase
   end
 
   test 'calculate_wcfts works as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
     script.words.where(entry: 'crumble').first
     compile_chars_cfs(script)
@@ -28,8 +26,7 @@ class CalculateWCFTSTest < ActiveSupport::TestCase
   end
 
   test 'return_cfs_score need works as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
     compile_chars_cfs(script)
 

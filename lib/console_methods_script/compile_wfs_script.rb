@@ -25,7 +25,7 @@ def add_words_to_catalogue(sentence, catalogue)
     if catalogue[word.downcase].nil?
       catalogue[word.downcase] = 1
     else
-      catalogue[word] += 1
+      catalogue[word] += 1 unless word.nil?
     end
   end
 end

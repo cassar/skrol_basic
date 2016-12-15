@@ -2,13 +2,11 @@ require 'test_helper'
 
 class CalculateWTSTest < ActiveSupport::TestCase
   test 'compile_wts should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
     compile_chars_cfs(script)
 
-    lang2 = Language.where(name: 'Italian').first
-    script2 = lang2.scripts.where(name: 'Latin').first
+    script2 = lang_by_name('Italian').base_script
     word2 = script2.words.where(entry: 'bottiglia').first
     compile_chars_cfs(script2)
 
@@ -19,13 +17,11 @@ class CalculateWTSTest < ActiveSupport::TestCase
   end
 
   test 'calculate_wts should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
     compile_chars_cfs(script)
 
-    lang2 = Language.where(name: 'Italian').first
-    script2 = lang2.scripts.where(name: 'Latin').first
+    script2 = lang_by_name('Italian').base_script
     word2 = script2.words.where(entry: 'bottiglia').first
     compile_chars_cfs(script2)
 
@@ -35,13 +31,11 @@ class CalculateWTSTest < ActiveSupport::TestCase
   end
 
   test 'return_word_scores should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
     compile_chars_cfs(script)
 
-    lang2 = Language.where(name: 'Italian').first
-    script2 = lang2.scripts.where(name: 'Latin').first
+    script2 = lang_by_name('Italian').base_script
     word2 = script2.words.where(entry: 'bottiglia').first
     compile_chars_cfs(script2)
 

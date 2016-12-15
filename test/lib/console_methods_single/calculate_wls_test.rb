@@ -2,8 +2,7 @@ require 'test_helper'
 
 class CalculateWLSTest < ActiveSupport::TestCase
   test 'calculate_wls should work as advertised' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
     script.words.create(entry: 'neighbor')
     script.words.create(entry: 'top')
