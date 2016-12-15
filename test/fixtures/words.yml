@@ -1,11 +1,169 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   entry: MyString
-#   script_id: 1
-#   group_id: 1
-#
-# two:
-#   entry: MyString
-#   script_id: 1
-#   group_id: 1
+hello:
+  id: 1
+  entry: hello
+  script_id: 1
+  group_id: 1
+
+cow:
+  id: 2
+  entry: cow
+  script_id: 1
+  group_id: 2
+
+would:
+  id: 3
+  entry: would
+  script_id: 1
+  group_id: 3
+
+you:
+  id: 4
+  entry: you
+  script_id: 1
+  group_id: 4
+
+apple:
+  id: 5
+  entry: apple
+  script_id: 1
+  group_id: 5
+
+pear:
+  id: 6
+  entry: pear
+  script_id: 1
+  group_id: 6
+
+bottle:
+  id: 7
+  entry: bottle
+  script_id: 1
+  group_id: 7
+
+Sydney:
+  id: 8
+  entry: Sydney
+  script_id: 1
+  group_id: 8
+
+the:
+  id: 9
+  entry: the
+  script_id: 1
+  group_id: 9
+
+car:
+  id: 10
+  entry: car
+  script_id: 1
+  group_id: 10
+
+is:
+  id: 11
+  entry: is
+  script_id: 1
+  group_id: 11
+
+blue:
+  id: 12
+  entry: blue
+  script_id: 1
+  group_id: 12
+
+el:
+  id: 13
+  entry: el
+  script_id: 5
+  group_id: 9
+
+coche:
+  id: 14
+  entry: coche
+  script_id: 5
+  group_id: 10
+
+es:
+  id: 15
+  entry: es
+  script_id: 5
+  group_id: 11
+
+de:
+  id: 16
+  entry: de
+  script_id: 5
+  group_id: 16
+
+color:
+  id: 17
+  entry: color
+  script_id: 5
+  group_id: 17
+
+azul:
+  id: 18
+  entry: azul
+  script_id: 5
+  group_id: 12
+
+crumble:
+  id: 19
+  entry: crumble
+  script_id: 1
+  group_id: 19
+
+bottiglia:
+  id: 20
+  entry: bottiglia
+  script_id: 3
+  group_id: 7
+
+crollare:
+  id: 21
+  entry: crollare
+  script_id: 3
+  group_id: 19
+
+not:
+  id: 22
+  entry: not
+  script_id: 1
+  group_id: 22
+
+no:
+  id: 23
+  entry: no
+  script_id: 5
+  group_id: 22
+
+paper:
+  id: 24
+  entry: paper
+  script_id: 1
+  group_id: 24
+
+thin:
+  id: 25
+  entry: thin
+  script_id: 1
+  group_id: 25
+
+botella:
+  id: 26
+  entry: botella
+  script_id: 5
+  group_id: 7
+
+halo:
+  id: 27
+  entry: ˈhalo
+  script_id: 8
+  group_id: 1
+
+hələʊ̯:
+  id: 28
+  entry: həˈləʊ̯
+  script_id: 2
+  group_id: 1

@@ -3,12 +3,11 @@ require 'test_helper'
 class CompileWFSScriptTest < ActiveSupport::TestCase
   test 'compile_wfs_script should work as advertised' do
     lang = Language.where(name: 'English').first
-    script = lang.scripts.create(name: 'Latin')
-    script.sentences.create(entry: 'Would you like a apple a pear?')
-    word = script.words.create(entry: 'would')
-    script.words.create(entry: 'you')
-    script.words.create(entry: 'apple')
-    script.words.create(entry: 'pear')
+    script = lang.scripts.where(name: 'Latin').first
+    word = script.words.where(entry: 'would').first
+    script.sentences.each(&:destroy)
+    sentence =
+      script.sentences.create(entry: 'Would you like a apple a pear?')
 
     compile_wfs_script(script)
     assert_equal(4, Score.count, 'wrong number of scores saved')
@@ -21,8 +20,10 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
 
   test 'derive_words_catalogue should work as advertised' do
     lang = Language.where(name: 'English').first
-    script = lang.scripts.create(name: 'Latin')
-    sentence = script.sentences.create(entry: 'Would you like a apple a pear?')
+    script = lang.scripts.where(name: 'Latin').first
+    script.sentences.each(&:destroy)
+    sentence =
+      script.sentences.create(entry: 'Would you like a apple a pear?')
 
     template = { 'would' => 1, 'you' => 1, 'like' => 1,
                  'a' => 2, 'apple' => 1, 'pear' => 1 }
@@ -32,8 +33,9 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
 
   test 'add_words_to_catalogue should work as advertised' do
     lang = Language.where(name: 'English').first
-    script = lang.scripts.create(name: 'Latin')
-    sentence = script.sentences.create(entry: 'Would you like a apple or pear?')
+    script = lang.scripts.where(name: 'Latin').first
+    sentence =
+      script.sentences.where(entry: 'Would you like a apple a pear?').first
 
     catalogue = { 'apple' => 2, 'pear' => 1 }
     add_words_to_catalogue(sentence, catalogue)
@@ -48,9 +50,9 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
 
   test 'assign_wfs should work as advertised' do
     lang = Language.where(name: 'English').first
-    script = lang.scripts.create(name: 'Latin')
-    word = script.words.create(entry: 'bottle')
-    word2 = script.words.create(entry: 'Sydney')
+    script = lang.scripts.where(name: 'Latin').first
+    word = script.words.where(entry: 'bottle').first
+    word2 = script.words.where(entry: 'Sydney').first
 
     catalogue = { 'bottle' => 1, 'in' => 1, 'sydney' => 1 }
 
@@ -63,9 +65,9 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
 
   test 'return_word should work as advertised' do
     lang = Language.where(name: 'English').first
-    script = lang.scripts.create(name: 'Latin')
-    word = script.words.create(entry: 'bottle')
-    word2 = script.words.create(entry: 'Sydney')
+    script = lang.scripts.where(name: 'Latin').first
+    word = script.words.where(entry: 'bottle').first
+    word2 = script.words.where(entry: 'Sydney').first
 
     assert_equal(word, return_word(script, 'bottle'), 'Did not find bottle')
     assert_equal(word2, return_word(script, 'sydney'), 'Did not find Sydney')

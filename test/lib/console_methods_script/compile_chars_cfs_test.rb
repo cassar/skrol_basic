@@ -3,29 +3,29 @@ require 'test_helper'
 class PopulateCharsCFSTest < ActiveSupport::TestCase
   test 'compile_chars_cfs should word as advertised' do
     lang = Language.where(name: 'English').first
-    script = lang.scripts.create(name: 'Latin')
-    script.words.create(entry: 'hello')
-    script.words.create(entry: 'cow')
+    script = lang.scripts.where(name: 'Latin').first
 
     compile_chars_cfs(script)
-    assert_equal(6, Score.count, 'Wrong number of scores saved!')
+    char_count = script.characters.count
+    assert_equal(char_count, Score.count, 'Wrong number of scores saved!')
 
     char = Character.where(entry: 'h').first
     score_record = char.scores.first
     assert_not_nil(score_record, 'No score record found.')
-    assert_equal(0.125, score_record.entry, 'h should have been 0.125')
+    template = 0.0441176470588235
+    assert_equal(template, score_record.entry, 'h should be different')
 
     char = Character.where(entry: 'l').first
     score_record = char.scores.first
     assert_not_nil(score_record, 'No score record found.')
-    assert_equal(0.25, score_record.entry, 'l should have been 0.25')
+    template = 0.102941176470588
+    assert_equal(template, score_record.entry, 'l should be different')
   end
 
   test 'create_chars_return_total should work as advertised' do
     lang = Language.where(name: 'English').first
-    script = lang.scripts.create(name: 'Latin')
-    char = script.characters.create(entry: 'h')
-    script.characters.create(entry: 'e')
+    script = lang.scripts.where(name: 'Latin').first
+    char = script.characters.where(entry: 'h').first
     catalogue = { h: 1, e: 1, l: 2, o: 1 }
 
     total = create_chars_return_total(catalogue, script)
@@ -35,11 +35,8 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
 
   test 'create_cfs_scores should word as advertised' do
     lang = Language.where(name: 'English').first
-    script = lang.scripts.create(name: 'Latin')
-    char = script.characters.create(entry: 'h')
-    script.characters.create(entry: 'e')
-    script.characters.create(entry: 'l')
-    script.characters.create(entry: 'o')
+    script = lang.scripts.where(name: 'Latin').first
+    char = script.characters.where(entry: 'h').first
     catalogue = { h: 1, e: 1, l: 2, o: 1 }
     create_cfs_scores(catalogue, script, 5)
     score = char.scores.first

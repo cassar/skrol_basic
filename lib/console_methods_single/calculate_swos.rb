@@ -10,12 +10,13 @@ end
 
 # Returns the SWOS score for two given word arrays.
 def return_swos_score(target_word_arr, base_word_arr)
-  pos_scores = 0
-  target_counter = 0
+  pos_scores = target_counter = 0
   target_word_arr.each do |target_word|
-    candidate_arr = return_candidate_arr(base_word_arr, target_word,
-                                         target_counter)
-    pos_scores += 1.0 / (1 + candidate_arr.min) unless candidate_arr.empty?
+    unless target_word.group_id.nil?
+      candidate_arr = return_candidate_arr(base_word_arr, target_word,
+                                           target_counter)
+      pos_scores += 1.0 / (1 + candidate_arr.min) unless candidate_arr.empty?
+    end
     target_counter += 1
   end
   pos_scores / ((target_word_arr.length + base_word_arr.length) / 2)
@@ -26,8 +27,7 @@ def return_candidate_arr(base_word_arr, target_word, target_counter)
   candidate_arr = []
   base_counter = 0
   base_word_arr.each do |base_word|
-    next if target_word.group_id.nil? || base_word.group_id.nil?
-    if target_word.group_id == base_word.group_id
+    if target_word.group_id == base_word.group_id && !base_word.group_id.nil?
       candidate_arr << (target_counter - base_counter).abs
     end
     base_counter += 1

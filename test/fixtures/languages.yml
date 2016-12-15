@@ -1,7 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 english:
+  id: 1
   name: English
 
 italian:
+  id: 2
   name: Italian
+
+spanish:
+  id: 3
+  name: Spanish
+
+german:
+  id: 4
+  name: German

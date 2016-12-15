@@ -1,9 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   entry: MyString
-#   script_id: 1
-#
-# two:
-#   entry: MyString
-#   script_id: 1
+h:
+  id: 1
+  entry: h
+  script_id: 1
+
+e:
+  id: 2
+  entry: e
+  script_id: 1
+
+l:
+  id: 3
+  entry: l
+  script_id: 1
+
+o:
+  id: 4
+  entry: o
+  script_id: 1

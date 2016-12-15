@@ -42,11 +42,9 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   end
 
   # translate_string lib and its tests
-  watch('lib/console_methods_single/translate_string.rb') do
-    'test/lib/console_methods_single/translate_string_test.rb'
-  end
-  watch('test/lib/console_methods_single/translate_string_test.rb') do
-    'test/lib/console_methods_single/translate_string_test.rb'
+  watch('lib/translate_string.rb') { 'test/lib/translate_string_test.rb' }
+  watch('test/lib/translate_string_test.rb') do
+    'test/lib/translate_string_test.rb'
   end
 
   # calculate_wcfbs lib and its tests
@@ -113,14 +111,6 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/console_methods_single/calculate_wts_test.rb'
   end
 
-  # utilities lib and its test
-  watch('lib/console_methods_single/utilities.rb') do
-    'test/lib/console_methods_single/utilities_test.rb'
-  end
-  watch('test/lib/console_methods_single/utilities_test.rb') do
-    'test/lib/console_methods_single/utilities_test.rb'
-  end
-
   # calculate_swls lib and its tests
   watch('lib/console_methods_single/calculate_swls.rb') do
     'test/lib/console_methods_single/calculate_swls_test.rb'
@@ -153,29 +143,34 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/console_methods_single/calculate_sts_test.rb'
   end
 
+
+  # utilities lib and its test
+  watch('lib/utilities.rb') { 'test/lib/utilities_test.rb' }
+  watch('test/lib/utilities_test.rb') { 'test/lib/utilities_test.rb' }
+
   # Language model and its tests
-  watch('app/models/language.rb') do 'test/models/language_test.rb' end
-  watch('test/models/language_test.rb') do 'test/models/language_test.rb' end
+  watch('app/models/language.rb') { 'test/models/language_test.rb' }
+  watch('test/models/language_test.rb') { 'test/models/language_test.rb' }
 
   # Script model and its tests
-  watch('app/models/script.rb') do 'test/models/script_test.rb' end
-  watch('test/models/script_test.rb') do 'test/models/script_test.rb' end
+  watch('app/models/script.rb') { 'test/models/script_test.rb' }
+  watch('test/models/script_test.rb') { 'test/models/script_test.rb' }
 
   # Character model and its tests
-  watch('app/models/character.rb') do 'test/models/character_test.rb' end
-  watch('test/models/character_test.rb') do 'test/models/character_test.rb' end
+  watch('app/models/character.rb') { 'test/models/character_test.rb' }
+  watch('test/models/character_test.rb') { 'test/models/character_test.rb' }
 
   # Word model and its tests
-  watch('app/models/word.rb') do 'test/models/word_test.rb' end
-  watch('test/models/word_test.rb') do 'test/models/word_test.rb' end
+  watch('app/models/word.rb') { 'test/models/word_test.rb' }
+  watch('test/models/word_test.rb') { 'test/models/word_test.rb' }
 
   # Sentence model and its tests
-  watch('app/models/sentence.rb') do 'test/models/sentence_test.rb' end
-  watch('test/models/sentence_test.rb') do 'test/models/sentence_test.rb' end
+  watch('app/models/sentence.rb') { 'test/models/sentence_test.rb' }
+  watch('test/models/sentence_test.rb') { 'test/models/sentence_test.rb' }
 
   # Score model and its tests
-  watch('app/models/score.rb') do 'test/models/score_test.rb' end
-  watch('test/models/score_test.rb') do 'test/models/score_test.rb' end
+  watch('app/models/score.rb') { 'test/models/score_test.rb' }
+  watch('test/models/score_test.rb') { 'test/models/score_test.rb' }
 end
 
 guard :rubocop do

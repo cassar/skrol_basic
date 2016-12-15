@@ -3,12 +3,12 @@ require 'test_helper'
 class CalculateWSSTest < ActiveSupport::TestCase
   test 'compile_wss should work as advertised' do
     lang = Language.where(name: 'English').first
-    script = lang.scripts.create(name: 'Latin')
-    word = script.words.create(entry: 'həˈləʊ̯', group_id: 1)
+    script = lang.scripts.where(name: 'IPA').first
+    word = script.words.where(entry: 'həˈləʊ̯').first
 
-    lang2 = Language.create(name: 'German')
-    script2 = lang2.scripts.create(name: 'Latin')
-    word2 = script2.words.create(entry: 'ˈhalo', group_id: 1)
+    lang2 = Language.where(name: 'German').first
+    script2 = lang2.scripts.where(name: 'IPA').first
+    word2 = script2.words.where(entry: 'ˈhalo').first
 
     compile_wss(word, script2)
     assert_equal(0.305555555555556, Score.first.entry, 'incorrect score saved')
@@ -16,12 +16,12 @@ class CalculateWSSTest < ActiveSupport::TestCase
 
   test 'calculate_wss should work as advertised' do
     lang = Language.where(name: 'English').first
-    script = lang.scripts.create(name: 'Latin')
-    word = script.words.create(entry: 'həˈləʊ̯', group_id: 1)
+    script = lang.scripts.where(name: 'IPA').first
+    word = script.words.where(entry: 'həˈləʊ̯').first
 
-    lang2 = Language.create(name: 'German')
-    script2 = lang2.scripts.create(name: 'Latin')
-    word2 = script2.words.create(entry: 'ˈhalo', group_id: 1)
+    lang2 = Language.where(name: 'German').first
+    script2 = lang2.scripts.where(name: 'IPA').first
+    word2 = script2.words.where(entry: 'ˈhalo').first
 
     template = 0.3055555555555555
     result = calculate_wss(word, script2)

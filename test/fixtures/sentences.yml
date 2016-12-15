@@ -1,11 +1,67 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   entry: MyString
-#   script_id: 1
-#   group_id: 1
-#
-# two:
-#   entry: MyString
-#   script_id: 1
-#   group_id: 1
+pear-apple:
+  id: 1
+  entry: Would you like a apple a pear?
+  script_id: 1
+  group_id: 1
+
+car-blue:
+  id: 2
+  entry: The car is blue!
+  script_id: 1
+  group_id: 2
+
+coche-azul:
+  id: 3
+  entry: El coche es de color azul!
+  script_id: 5
+  group_id: 2
+
+bottle-crumble:
+  id: 4
+  entry: bottle and crumble!
+  script_id: 1
+  group_id: 4
+
+crumble-bottle:
+  id: 5
+  entry: crumble the bottle?
+  script_id: 1
+  group_id: 5
+
+bottiglia-sbriciolano:
+  id: 6
+  entry: bottiglia e si sbriciolano!
+  script_id: 3
+  group_id: 4
+
+sbriciolano-bottiglia:
+  id: 7
+  entry: sbriciolare la bottiglia?
+  script_id: 3
+  group_id: 5
+
+not-blue:
+  id: 8
+  entry: The car is not blue!
+  script_id: 1
+  group_id: 8
+
+no-azul:
+  id: 9
+  entry: El coche es de color azul!
+  script_id: 5
+  group_id: 8
+
+paper-thin:
+  id: 10
+  entry: Would paper thin!
+  script_id: 1
+  group_id: 10
+
+would-like:
+  id: 11
+  entry: I would like it.
+  script_id: 1
+  group_id: 11
