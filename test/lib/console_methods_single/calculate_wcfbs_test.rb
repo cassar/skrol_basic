@@ -3,11 +3,11 @@ require 'test_helper'
 class CalculateWCFBSTest < ActiveSupport::TestCase
   test 'compile_wcfbs should work as advertised' do
     script = lang_by_name('English').base_script
-    word = script.words.where(entry: 'bottle').first
+    word = script.word_by_entry('bottle')
     compile_chars_cfs(script)
 
     script2 = lang_by_name('Spanish').base_script
-    word2 = script2.words.create(entry: 'botella')
+    word2 = script2.word_by_entry('botella')
     compile_chars_cfs(script2)
 
     compile_wcfbs(word, script2)
@@ -18,12 +18,12 @@ class CalculateWCFBSTest < ActiveSupport::TestCase
 
   test 'calculate_wcfbs should work as advertised' do
     script = lang_by_name('English').base_script
-    word = script.words.create(entry: 'bottle')
+    word = script.word_by_entry('bottle')
     word3 = script.words.create(entry: 'fun')
     compile_chars_cfs(script)
 
     script2 = lang_by_name('Spanish').base_script
-    word2 = script2.words.where(entry: 'botella').first
+    word2 = script2.word_by_entry('botella')
     compile_chars_cfs(script2)
 
     score = calculate_wcfbs(word, script2)
@@ -32,7 +32,7 @@ class CalculateWCFBSTest < ActiveSupport::TestCase
 
   test 'return_cfils_score should work as advertised' do
     script = lang_by_name('English').base_script
-    word = script.words.where(entry: 'bottle').first
+    word = script.word_by_entry('bottle')
     compile_chars_cfs(script)
 
     increment = return_cfils_score('t', script)

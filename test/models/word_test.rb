@@ -2,11 +2,9 @@ require 'test_helper'
 
 class WordTest < ActiveSupport::TestCase
   test 'Word.create and destroy should satisfy integrity constraints' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
+    script = lang_by_name('English').base_script
 
-    lang = Language.where(name: 'Spanish').first
-    script2 = lang.scripts.where(name: 'Latin').first
+    script2 = lang_by_name('Spanish').base_script
 
     assert_difference('Word.count', 2, 'Wrong number of words saved!') do
       script.words.create(entry: 'unique')
@@ -16,7 +14,7 @@ class WordTest < ActiveSupport::TestCase
       script2.words.create(entry: 'unique')
     end
 
-    word = script.words.where(entry: 'apple').first
+    word = script.word_by_entry('apple')
     score = word.scores.create(map_to_id: 2, map_to_type: 'words',
                                name: 'WSS', entry: 0.23)
 

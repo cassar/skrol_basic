@@ -3,8 +3,7 @@ require 'test_helper'
 class CalculateWCFTSTest < ActiveSupport::TestCase
   test 'compile_wcfts should work as advertised' do
     script = lang_by_name('English').base_script
-    word = script.words.where(entry: 'bottle').first
-    script.words.where(entry: 'crumble').first
+    word = script.word_by_entry('bottle')
     compile_chars_cfs(script)
 
     compile_wcfts(word)
@@ -16,8 +15,7 @@ class CalculateWCFTSTest < ActiveSupport::TestCase
 
   test 'calculate_wcfts works as advertised' do
     script = lang_by_name('English').base_script
-    word = script.words.where(entry: 'bottle').first
-    script.words.where(entry: 'crumble').first
+    word = script.word_by_entry('bottle')
     compile_chars_cfs(script)
 
     score = calculate_wcfts(word)
@@ -27,7 +25,7 @@ class CalculateWCFTSTest < ActiveSupport::TestCase
 
   test 'return_cfs_score need works as advertised' do
     script = lang_by_name('English').base_script
-    word = script.words.where(entry: 'bottle').first
+    word = script.word_by_entry('bottle')
     compile_chars_cfs(script)
 
     increment = return_cfs_score('t', script)

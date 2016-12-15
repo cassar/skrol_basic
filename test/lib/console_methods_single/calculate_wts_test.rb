@@ -3,11 +3,11 @@ require 'test_helper'
 class CalculateWTSTest < ActiveSupport::TestCase
   test 'compile_wts should work as advertised' do
     script = lang_by_name('English').base_script
-    word = script.words.where(entry: 'bottle').first
+    word = script.word_by_entry('bottle')
     compile_chars_cfs(script)
 
     script2 = lang_by_name('Italian').base_script
-    word2 = script2.words.where(entry: 'bottiglia').first
+    word2 = script2.word_by_entry('bottiglia')
     compile_chars_cfs(script2)
 
     compile_wts(word2, script)
@@ -18,11 +18,11 @@ class CalculateWTSTest < ActiveSupport::TestCase
 
   test 'calculate_wts should work as advertised' do
     script = lang_by_name('English').base_script
-    word = script.words.where(entry: 'bottle').first
+    word = script.word_by_entry('bottle')
     compile_chars_cfs(script)
 
     script2 = lang_by_name('Italian').base_script
-    word2 = script2.words.where(entry: 'bottiglia').first
+    word2 = script2.word_by_entry('bottiglia')
     compile_chars_cfs(script2)
 
     score = calculate_wts(word2, script)
@@ -32,11 +32,11 @@ class CalculateWTSTest < ActiveSupport::TestCase
 
   test 'return_word_scores should work as advertised' do
     script = lang_by_name('English').base_script
-    word = script.words.where(entry: 'bottle').first
+    word = script.word_by_entry('bottle')
     compile_chars_cfs(script)
 
     script2 = lang_by_name('Italian').base_script
-    word2 = script2.words.where(entry: 'bottiglia').first
+    word2 = script2.word_by_entry('bottiglia')
     compile_chars_cfs(script2)
 
     template = [0.05555555555555555, 0.11111111111111081, 0.2857142857142857,

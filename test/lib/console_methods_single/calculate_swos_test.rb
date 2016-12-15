@@ -16,18 +16,18 @@ class CalculateSWOSTest < ActiveSupport::TestCase
 
   test 'return_swos_score should work as advertised' do
     script = lang_by_name('English').base_script
-    word = script.words.where(entry: 'the').first
-    word2 = script.words.where(entry: 'car').first
-    word3 = script.words.where(entry: 'is').first
-    word4 = script.words.where(entry: 'blue').first
+    word = script.word_by_entry('the')
+    word2 = script.word_by_entry('car')
+    word3 = script.word_by_entry('is')
+    word4 = script.word_by_entry('blue')
 
     script = lang_by_name('Spanish').base_script
-    word5 = script.words.where(entry: 'el').first
-    word6 = script.words.where(entry: 'coche').first
-    word7 = script.words.where(entry: 'es').first
-    word8 = script.words.where(entry: 'de').first
-    word9 = script.words.where(entry: 'color').first
-    word10 = script.words.where(entry: 'azul').first
+    word5 = script.word_by_entry('el')
+    word6 = script.word_by_entry('coche')
+    word7 = script.word_by_entry('es')
+    word8 = script.word_by_entry('de')
+    word9 = script.word_by_entry('color')
+    word10 = script.word_by_entry('azul')
 
     base_word_arr = [word, word2, word3, word4]
     target_word_arr = [word5, word6, word7, word8, word9, word10]
@@ -39,13 +39,13 @@ class CalculateSWOSTest < ActiveSupport::TestCase
 
   test 'return_candidate_arr should work as advertised' do
     script = lang_by_name('English').base_script
-    word = script.words.where(entry: 'the').first
-    word2 = script.words.where(entry: 'car').first
-    word3 = script.words.where(entry: 'is').first
-    word4 = script.words.where(entry: 'blue').first
+    word = script.word_by_entry('the')
+    word2 = script.word_by_entry('car')
+    word3 = script.word_by_entry('is')
+    word4 = script.word_by_entry('blue')
 
     script = lang_by_name('Spanish').base_script
-    word10 = script.words.where(entry: 'azul').first
+    word10 = script.word_by_entry('azul')
 
     base_word_arr = [word, word2, word3, word4]
     target_word = word10
@@ -58,9 +58,9 @@ class CalculateSWOSTest < ActiveSupport::TestCase
   test 'return_word_arr should work as advertised' do
     script = lang_by_name('English').base_script
     sentence = script.sentences.where(entry: 'Would paper thin!').first
-    word = script.words.where(entry: 'would').first
-    word2 = script.words.where(entry: 'paper').first
-    word3 = script.words.where(entry: 'thin').first
+    word = script.word_by_entry('would')
+    word2 = script.word_by_entry('paper')
+    word3 = script.word_by_entry('thin')
 
     template = [word, word2, word3]
 
@@ -70,7 +70,7 @@ class CalculateSWOSTest < ActiveSupport::TestCase
 
   test 'retrieve_word should work as advertised' do
     script = lang_by_name('English').base_script
-    word = script.words.where(entry: 'would').first
+    word = script.word_by_entry('would')
 
     result = retrieve_word('Would', script)
     assert_equal(word, result, 'incorrect record retrieved')

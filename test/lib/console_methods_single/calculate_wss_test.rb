@@ -3,10 +3,10 @@ require 'test_helper'
 class CalculateWSSTest < ActiveSupport::TestCase
   test 'compile_wss should work as advertised' do
     script = lang_by_name('English').phonetic_script
-    word = script.words.where(entry: 'həˈləʊ̯').first
+    word = script.word_by_entry('həˈləʊ̯')
 
     script2 = lang_by_name('German').phonetic_script
-    word2 = script2.words.where(entry: 'ˈhalo').first
+    word2 = script2.word_by_entry('ˈhalo')
 
     compile_wss(word, script2)
     assert_equal(0.305555555555556, Score.first.entry, 'incorrect score saved')
@@ -14,10 +14,10 @@ class CalculateWSSTest < ActiveSupport::TestCase
 
   test 'calculate_wss should work as advertised' do
     script = lang_by_name('English').phonetic_script
-    word = script.words.where(entry: 'həˈləʊ̯').first
+    word = script.word_by_entry('həˈləʊ̯')
 
     script2 = lang_by_name('German').phonetic_script
-    word2 = script2.words.where(entry: 'ˈhalo').first
+    word2 = script2.word_by_entry('ˈhalo')
 
     template = 0.3055555555555555
     result = calculate_wss(word, script2)

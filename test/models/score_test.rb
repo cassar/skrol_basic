@@ -2,9 +2,8 @@ require 'test_helper'
 
 class ScoreTest < ActiveSupport::TestCase
   test 'Score.create should only save whole records' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.create(name: 'Latin script (English alphabet)')
-    word = script.words.create(entry: 'apple')
+    script = lang_by_name('English').base_script
+    word = script.word_by_entry('apple')
     score = word.scores.create(map_to_id: 2, map_to_type: 'words',
                                name: 'WFS', entry: 0.5)
     word.scores.create(map_to_id: 2, map_to_type: 'words',

@@ -16,4 +16,11 @@ class Script < ApplicationRecord
   def create_phonetic(name)
     language.scripts.create(name: name, parent_script_id: id)
   end
+
+  # Retrieves a word record from a script given an entry
+  def word_by_entry(entry)
+    word = words.where(entry: entry).first
+    raise Invalid, "No entry: #{entry} found" if word.nil?
+    word
+  end
 end

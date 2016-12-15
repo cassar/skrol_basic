@@ -27,4 +27,9 @@ class ScriptTest < ActiveSupport::TestCase
       b_script.create_phonetic('IPA')
     end
   end
+
+  test 'word_by_entry methods should work' do
+    script = lang_by_name('English').base_script
+    assert_not_nil(script.word_by_entry('hello'), 'word_by_entry does not work')
+  end
 end

@@ -56,7 +56,7 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
 
   test 'add_chars_to_catalogue should do what it says' do
     script = lang_by_name('English').base_script
-    word = script.words.create(entry: 'apple')
+    word = script.word_by_entry('apple')
 
     catalogue = { a: 0, p: 0, l: 0, e: 0 }
     add_chars_to_catalogue(word, catalogue)
