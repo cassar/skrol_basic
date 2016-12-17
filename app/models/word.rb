@@ -21,10 +21,13 @@ class Word < ApplicationRecord
     phonetic
   end
 
+  # Returns true if a phoneic word is attached to word record
   def phonetic_present?
     p_script = script.phonetic
     phonetic = p_script.words.where(group_id: group_id).first
     return false if phonetic.nil?
     true
   end
+
+  # Would like a show group method.
 end
