@@ -13,4 +13,38 @@ class UtilitiesTest < ActiveSupport::TestCase
       lang_by_name('Jibberish')
     end
   end
+
+  test 'translate_all_sentences should work as advertised' do
+    base_lang = lang_by_name('English')
+    target_lang = lang_by_name('Spanish')
+
+    translate_all_sentences(base_lang, target_lang)
+
+    base_count = base_lang.base_script.sentences.count
+    target_count = target_lang.base_script.sentences.count
+
+    assert_equal(base_count, target_count, 'Wrong # of sentences saved')
+  end
+
+  test 'derive_phonetics should work as advertised' do
+    lang = lang_by_name('English')
+    derive_phonetics(lang)
+    base_count = lang.base_script.sentences.count
+    phonetic_count = lang.phonetic_script.sentences.count
+    assert_equal(base_count, phonetic_count, 'incorrect # of sentences saved')
+  end
+
+  test 'create_update_sentence should work as advertised' do
+    base_script = lang_by_name('English').base_script
+    phonetic_script = lang_by_name('English').phonetic_script
+
+    count = 'Sentence.all.where(group_id: 5).count'
+    assert_difference(count, 0, 'Wrong # of sentence objects saved') do
+      create_update_sentence('whatever', base_script, 5)
+    end
+
+    assert_difference(count, 1, 'Sentence object should have saved') do
+      create_update_sentence('whatever', phonetic_script, 5)
+    end
+  end
 end

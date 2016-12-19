@@ -45,10 +45,16 @@ class WordTest < ActiveSupport::TestCase
     assert_raises(Invalid, 'Invalid not raised') { p_word.phonetic }
   end
 
-  test 'phonetic_present? words as advertised' do
+  test 'phonetic_present? works as advertised' do
     word = lang_by_name('English').base_script.word_by_entry('bottle')
     assert(word.phonetic_present?, 'Wrong bool returned')
     word = lang_by_name('English').base_script.word_by_entry('paper')
     assert_not(word.phonetic_present?, 'Wrong bool returned')
+  end
+
+  test 'return_group works as advertised' do
+    word = lang_by_name('English').base_script.word_by_entry('car')
+
+    assert_equal(4, word.return_group.count, 'return_group does not work')
   end
 end

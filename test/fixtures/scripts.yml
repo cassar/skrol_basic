@@ -18,6 +18,7 @@ italian-latin:
   name: Latin
   language_id: 2
   parent_script_id:
+  lang_code: it
 
 italian-ipa:
   id: 4
@@ -30,6 +31,7 @@ spanish-latin:
   name: Latin
   language_id: 3
   parent_script_id:
+  lang_code: es
 
 spanish-ipa:
   id: 6
@@ -42,6 +44,7 @@ german-latin:
   name: Latin
   language_id: 4
   parent_script_id:
+  lang_code: de
 
 german-ipa:
   id: 8

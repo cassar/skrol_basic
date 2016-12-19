@@ -29,5 +29,8 @@ class Word < ApplicationRecord
     true
   end
 
-  # Would like a show group method.
+  # Returns all word records in the same group
+  def return_group
+    Word.where(group_id: group_id)
+  end
 end
