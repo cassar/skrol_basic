@@ -1,3 +1,15 @@
+# Will compile and save a new score record for STS from a given target_sentence
+# to a give base_script. Will remove old score if present.
+def compile_sts(target_sentence, base_script)
+  sts_score = calculate_sts(target_sentence, base_script)
+  target_sentence.scores.where(map_to_id: base_script.id,
+                               map_to_type: 'Script',
+                               name: 'STS').each(&:destroy)
+  target_sentence.scores.create(map_to_id: base_script.id,
+                                map_to_type: 'Script', name: 'STS',
+                                entry: sts_score)
+end
+
 # Calculates the Sentence Total Score (STS) for a particular sentence and any
 # number of other languages.
 def calculate_sts(target_sentence, base_script)

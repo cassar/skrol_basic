@@ -143,6 +143,9 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/console_methods_single/calculate_sts_test.rb'
   end
 
+  # setup_map lib and its test
+  watch('lib/setup_map.rb') { 'test/lib/setup_map_test.rb' }
+  watch('test/lib/setup_map_test.rb') { 'test/lib/setup_map_test.rb' }
 
   # utilities lib and its test
   watch('lib/utilities.rb') { 'test/lib/utilities_test.rb' }

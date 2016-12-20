@@ -15,17 +15,19 @@ class WordTest < ActiveSupport::TestCase
     end
 
     word = script.word_by_entry('apple')
-    score = word.scores.create(map_to_id: 2, map_to_type: 'words',
+    score = word.scores.create(map_to_id: 2, map_to_type: 'Word',
                                name: 'WSS', entry: 0.23)
 
     assert_not_nil(score, 'Score did not save.')
-    assert_equal(1, Score.count, 'No scores saved.')
+    score_count = Score.where(name: 'WSS').count
+    assert_equal(1, score_count, 'No scores saved.')
 
     assert_not_nil(word.script, '.script method does not work.')
     assert_not_nil(word.language, '.language method does not work.')
 
     word.destroy
-    assert_equal(0, Score.count, 'Score did not destroy.')
+    score_count = Score.where(name: 'WSS').count
+    assert_equal(0, score_count, 'Score did not destroy.')
   end
 
   test '.phonetic and .create_phonetic methods should work.' do

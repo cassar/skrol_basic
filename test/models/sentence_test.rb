@@ -13,13 +13,15 @@ class SentenceTest < ActiveSupport::TestCase
                                    name: 'SWLS', entry: 0.23)
 
     assert_not_nil(score, 'Score did not save.')
-    assert_equal(1, Score.count, 'No scores saved.')
+    score_count = Score.where(name: 'SWLS').count
+    assert_equal(1, score_count, 'No scores saved.')
 
     assert_equal(13, Sentence.count, 'Wrong number of sentences saved!')
     assert_not_nil(sentence.script, '.script method does not work.')
     assert_not_nil(sentence.language, '.language method does not work.')
 
     sentence.destroy
-    assert_equal(0, Score.count, 'Score did not destroy.')
+    score_count = Score.where(name: 'SWLS').count
+    assert_equal(0, score_count, 'Score did not destroy.')
   end
 end

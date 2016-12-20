@@ -13,7 +13,7 @@ class CalculateWCFBSTest < ActiveSupport::TestCase
     compile_wcfbs(word, script2)
     score = word.scores.where(name: 'WCFBS')
     assert_equal(1, score.count, 'Score did not save')
-    assert_equal(0.101190476190476, score.first.entry, 'incorrect WCFBS score')
+    assert_equal(0.103448275862069, score.first.entry, 'incorrect WCFBS score')
   end
 
   test 'calculate_wcfbs should work as advertised' do
@@ -27,7 +27,7 @@ class CalculateWCFBSTest < ActiveSupport::TestCase
     compile_chars_cfs(script2)
 
     score = calculate_wcfbs(word, script2)
-    assert_equal(0.10119047619047634, score, 'incorrect WCFBS score')
+    assert_equal(0.10344827586206885, score, 'incorrect WCFBS score')
   end
 
   test 'return_cfils_score should work as advertised' do

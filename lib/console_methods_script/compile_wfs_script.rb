@@ -45,7 +45,7 @@ def assign_wfs(script, catalogue, total_words)
   catalogue.each do |key, value|
     word = return_word(script, key)
     next if word.nil?
-    word.scores.create(map_to_id: script.id, map_to_type: 'scripts',
+    word.scores.create(map_to_id: script.id, map_to_type: 'Script',
                        name: 'WFS', entry: value.to_f / total_words)
   end
 end

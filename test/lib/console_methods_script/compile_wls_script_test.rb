@@ -6,7 +6,8 @@ class CompileWLSScriptTest < ActiveSupport::TestCase
     word = script.word_by_entry('apple')
 
     compile_wls_script(script)
-    assert_equal(script.words.count, Score.count, 'wrong # of scores saved')
+    score_count = Score.where(name: 'WLS').count
+    assert_equal(script.words.count, score_count, 'wrong # of scores saved')
     score = word.scores.where(name: 'WLS').first
     assert_equal(0.285714285714286, score.entry, 'incorrect wls score saved')
   end

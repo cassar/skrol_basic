@@ -134,7 +134,7 @@ not:
 
 no:
   id: 23
-  entry: no
+  entry: 'no'
   script_id: 5
   group_id: 22
 
@@ -239,3 +239,15 @@ bluː:
   entry: bluː
   script_id: 2
   group_id: 12
+
+nooo:
+  id: 41
+  entry: no
+  script_id: 6
+  group_id: 22
+
+bo.ˈte.ʎa:
+  id: 42
+  entry: bo.ˈte.ʎa
+  script_id: 6
+  group_id: 7

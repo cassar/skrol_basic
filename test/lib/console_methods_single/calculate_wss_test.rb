@@ -9,7 +9,10 @@ class CalculateWSSTest < ActiveSupport::TestCase
     word2 = script2.word_by_entry('ˈhalo')
 
     compile_wss(word, script2)
-    assert_equal(0.305555555555556, Score.first.entry, 'incorrect score saved')
+    assert_equal(0.6666, Score.first.entry, 'incorrect score saved')
+
+    word = lang_by_name('Spanish').base_script.word_by_entry('color')
+    assert_raises(Invalid, 'error not raised') { compile_wss(word, script) }
   end
 
   test 'calculate_wss should work as advertised' do

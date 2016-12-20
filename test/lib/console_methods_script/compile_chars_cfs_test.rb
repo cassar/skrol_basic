@@ -6,7 +6,8 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
 
     compile_chars_cfs(script)
     char_count = script.characters.count
-    assert_equal(char_count, Score.count, 'Wrong number of scores saved!')
+    cfs_count = Score.where(name: 'CFS').count
+    assert_equal(char_count, cfs_count, 'Wrong number of scores saved!')
 
     char = Character.where(entry: 'h').first
     score_record = char.scores.first
@@ -37,7 +38,8 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
     catalogue = { h: 1, e: 1, l: 2, o: 1 }
     create_cfs_scores(catalogue, script, 5)
     score = char.scores.first
-    assert_equal(4, Score.count, 'Incorrect number of scores saved.')
+    score_count = Score.where(name: 'CFS').count
+    assert_equal(4, score_count, 'Incorrect number of scores saved.')
     assert_equal(0.2, score.entry, 'h should have score of .2')
     assert_equal('CFS', score.name, 'score name should be CFS')
 

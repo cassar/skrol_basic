@@ -10,7 +10,8 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
       script.sentences.create(entry: 'Would you like a apple a pear?')
 
     compile_wfs_script(script)
-    assert_equal(4, Score.count, 'wrong number of scores saved')
+    expect = derive_words_catalogue(script).count
+    assert_equal(expect, Score.count, 'wrong number of scores saved')
     score = word.scores.first
     assert_equal(0.142857142857143, score.entry, 'wrong score for would saved')
 
@@ -54,8 +55,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
     catalogue = { 'bottle' => 1, 'in' => 1, 'sydney' => 1 }
 
     assign_wfs(script, catalogue, 3)
-
-    assert_equal(2, Score.count, 'WFS scores did not save')
+    assert_equal(2, Score.where(name: 'WFS').count, 'WFS scores did not save')
     score = word.scores.first
     assert_equal(0.333333333333333, score.entry, 'wrong WFS score for bottle')
   end
