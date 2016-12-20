@@ -1,0 +1,2 @@
+class UserMetric < ApplicationRecord
+end
