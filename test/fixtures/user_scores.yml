@@ -3,17 +3,11 @@
 # one:
 #   user_id: 1
 #   target_word_id: 1
-#   target_sentence_id: 1
-#   speed: 1
-#   pause:
-#   hover:
-#   hide:
+#   score: 1
+#   status: MyString
 #
 # two:
 #   user_id: 1
 #   target_word_id: 1
-#   target_sentence_id: 1
-#   speed: 1
-#   pause:
-#   hover:
-#   hide:
+#   score: 1
+#   status: MyString

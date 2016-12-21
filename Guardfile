@@ -143,6 +143,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/console_methods_single/calculate_sts_test.rb'
   end
 
+  # retrieve_user_word_helper and its tests
+  watch('app/helpers/retrieve_user_word_helper.rb') do
+    'test/helpers/retrieve_user_word_helper_test.rb'
+  end
+  watch('app/helpers/retrieve_user_word_helper_test.rb') do
+    'test/helpers/retrieve_user_word_helper_test.rb'
+  end
+
   # setup_map lib and its test
   watch('lib/setup_map.rb') { 'test/lib/setup_map_test.rb' }
   watch('test/lib/setup_map_test.rb') { 'test/lib/setup_map_test.rb' }
@@ -174,6 +182,20 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   # Score model and its tests
   watch('app/models/score.rb') { 'test/models/score_test.rb' }
   watch('test/models/score_test.rb') { 'test/models/score_test.rb' }
+
+  # User model and its tests
+  watch('app/models/user.rb') { 'test/models/user_test.rb' }
+  watch('test/models/user_test.rb') { 'test/models/user_test.rb' }
+
+  # User_score model and its tests
+  watch('app/models/user_score.rb') { 'test/models/user_score_test.rb' }
+  watch('test/models/user_score_test.rb') { 'test/models/user_score_test.rb' }
+
+  # user_metric model and its tests
+  watch('app/models/user_metric.rb') { 'test/models/user_metric_test.rb' }
+  watch('test/models/user_metric_test.rb') do
+    'test/models/user_metric_test.rb'
+  end
 end
 
 guard :rubocop do

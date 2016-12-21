@@ -14,17 +14,24 @@ class UtilitiesTest < ActiveSupport::TestCase
     end
   end
 
-  test 'translate_all_sentences should work as advertised' do
-    base_lang = lang_by_name('English')
-    target_lang = lang_by_name('Spanish')
-
-    translate_all_sentences(base_lang, target_lang)
-
-    base_count = base_lang.base_script.sentences.count
-    target_count = target_lang.base_script.sentences.count
-
-    assert_equal(base_count, target_count, 'Wrong # of sentences saved')
+  test 'user_by_name should work as advertised' do
+    assert_not_nil(user_by_name('Luke'), 'Failed to retrieve Luke')
+    assert_raises(Invalid, 'Did not raises Invalid') do
+      lang_by_name('No_name')
+    end
   end
+
+  # test 'translate_all_sentences should work as advertised' do
+  #   base_lang = lang_by_name('English')
+  #   target_lang = lang_by_name('Spanish')
+  #
+  #   translate_all_sentences(base_lang, target_lang)
+  #
+  #   base_count = base_lang.base_script.sentences.count
+  #   target_count = target_lang.base_script.sentences.count
+  #
+  #   assert_equal(base_count, target_count, 'Wrong # of sentences saved')
+  # end
 
   test 'derive_phonetics should work as advertised' do
     lang = lang_by_name('English')

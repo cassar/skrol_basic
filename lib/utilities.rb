@@ -18,6 +18,13 @@ def lang_by_name(name)
   lang
 end
 
+# Returns a User record given a name
+def user_by_name(name)
+  user = User.where(name: name).first
+  raise Invalid, "No user with #{name} found!" if user.nil?
+  user
+end
+
 # Translates all sentences under a particular base script to a given target
 # script and creates a new record.
 def translate_all_sentences(base_lang, target_lang)
