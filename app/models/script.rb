@@ -24,4 +24,14 @@ class Script < ApplicationRecord
     raise Invalid, "No entry: #{entry} found" if word.nil?
     word
   end
+
+  # Retrieves the WTS records for a particular script mapped to a given
+  # base_script
+  def retrieve_all_wts(base_script)
+    word_count = words.count
+    raise Invalid, "No words in #{language.name}:#{name}" if word_count < 1
+    scores = []
+    words.each { |word| scores << word.retrieve_wts(base_script) }
+    scores
+  end
 end

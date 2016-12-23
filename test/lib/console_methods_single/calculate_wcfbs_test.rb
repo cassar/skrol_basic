@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CalculateWCFBSTest < ActiveSupport::TestCase
-  test 'compile_wcfbs should work as advertised' do
+  test 'compile_wcfbs' do
     script = lang_by_name('English').base_script
     word = script.word_by_entry('bottle')
     compile_chars_cfs(script)
@@ -16,7 +16,7 @@ class CalculateWCFBSTest < ActiveSupport::TestCase
     assert_equal(0.103448275862069, score.first.entry, 'incorrect WCFBS score')
   end
 
-  test 'calculate_wcfbs should work as advertised' do
+  test 'calculate_wcfbs' do
     script = lang_by_name('English').base_script
     word = script.word_by_entry('bottle')
     word3 = script.words.create(entry: 'fun')
@@ -30,7 +30,7 @@ class CalculateWCFBSTest < ActiveSupport::TestCase
     assert_equal(0.10344827586206885, score, 'incorrect WCFBS score')
   end
 
-  test 'return_cfils_score should work as advertised' do
+  test 'return_cfils_score' do
     script = lang_by_name('English').base_script
     word = script.word_by_entry('bottle')
     compile_chars_cfs(script)

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CalculateSCWTSTest < ActiveSupport::TestCase
-  test 'calculate_scwts works as advertised' do
+  test 'calculate_scwts' do
     base_script = lang_by_name('English').base_script
     compile_chars_cfs(base_script)
     compile_chars_cfs(base_script.phonetic)
@@ -13,11 +13,11 @@ class CalculateSCWTSTest < ActiveSupport::TestCase
     compile_chars_cfs(script.phonetic)
 
     result = calculate_scwts(target_sentence, base_script)
-    template = 0.16556689244189246
+    template = 0.1625365894115894
     assert_equal(template, result, 'incorrect scwts returned')
   end
 
-  test 'retrieve_wts_score works as advertised' do
+  test 'retrieve_wts_score' do
     script = lang_by_name('English').base_script
     compile_chars_cfs(script)
     compile_chars_cfs(script.phonetic)

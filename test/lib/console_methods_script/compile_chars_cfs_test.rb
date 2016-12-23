@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class PopulateCharsCFSTest < ActiveSupport::TestCase
-  test 'compile_chars_cfs should word as advertised' do
+  test 'compile_chars_cfs' do
     script = lang_by_name('English').base_script
 
     compile_chars_cfs(script)
@@ -22,7 +22,7 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
     assert_equal(template, score_record.entry, 'l should be different')
   end
 
-  test 'create_chars_return_total should work as advertised' do
+  test 'create_chars_return_total' do
     script = lang_by_name('English').base_script
     char = script.characters.where(entry: 'h').first
     catalogue = { h: 1, e: 1, l: 2, o: 1 }
@@ -32,7 +32,7 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
     assert_equal(5, total, 'Incorrect total returned.')
   end
 
-  test 'create_cfs_scores should word as advertised' do
+  test 'create_cfs_scores' do
     script = lang_by_name('English').base_script
     char = script.characters.where(entry: 'h').first
     catalogue = { h: 1, e: 1, l: 2, o: 1 }
@@ -47,7 +47,7 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
     assert_raises(Invalid) { create_cfs_scores(catalogue, script, 5) }
   end
 
-  test 'derive_chars_catalogue should work as advertised' do
+  test 'derive_chars_catalogue' do
     script = lang_by_name('English').base_script
     script.words.each(&:destroy)
     script.words.create(entry: 'apple')
@@ -56,7 +56,7 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
     assert_equal(template, derive_chars_catalogue(script), 'objects not equal')
   end
 
-  test 'add_chars_to_catalogue should do what it says' do
+  test 'add_chars_to_catalogue' do
     script = lang_by_name('English').base_script
     word = script.word_by_entry('apple')
 

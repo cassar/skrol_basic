@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class WordTest < ActiveSupport::TestCase
-  test 'Word.create and destroy should satisfy integrity constraints' do
+  test 'Word.create and destroy' do
     script = lang_by_name('English').base_script
 
     script2 = lang_by_name('Spanish').base_script
@@ -30,7 +30,7 @@ class WordTest < ActiveSupport::TestCase
     assert_equal(0, score_count, 'Score did not destroy.')
   end
 
-  test '.phonetic and .create_phonetic methods should work.' do
+  test '.phonetic and .create_phonetic' do
     lang = Language.create(name: 'Chinese')
 
     b_script = lang.scripts.create(name: 'Hanzi')
@@ -47,16 +47,28 @@ class WordTest < ActiveSupport::TestCase
     assert_raises(Invalid, 'Invalid not raised') { p_word.phonetic }
   end
 
-  test 'phonetic_present? works as advertised' do
+  test 'phonetic_present?' do
     word = lang_by_name('English').base_script.word_by_entry('bottle')
     assert(word.phonetic_present?, 'Wrong bool returned')
     word = lang_by_name('English').base_script.word_by_entry('paper')
     assert_not(word.phonetic_present?, 'Wrong bool returned')
   end
 
-  test 'return_group works as advertised' do
+  test 'return_group' do
     word = lang_by_name('English').base_script.word_by_entry('car')
 
     assert_equal(4, word.return_group.count, 'return_group does not work')
+  end
+
+  test 'retrieve_wts' do
+    word = lang_by_name('Spanish').base_script.word_by_entry('botella')
+    base_script = lang_by_name('English').base_script
+    score = Score.where(name: 'WTS').first
+    result = word.retrieve_wts(base_script)
+    assert_equal(score, result, 'retrieve_wts failed')
+    word = lang_by_name('Spanish').base_script.word_by_entry('color')
+    assert_raises(Invalid, 'Invalid was not raised') do
+      word.retrieve_wts(base_script)
+    end
   end
 end

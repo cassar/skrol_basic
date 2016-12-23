@@ -1,17 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 wts-botella:
+  id: 1
   entriable_id: 26
   entriable_type: Word
   map_to_id: 1
   map_to_type: Script
-  name: 'WTS'
+  name: WTS
   entry: 0.6666
 
 sts-el-coche:
+  id: 2
   entriable_id: 3
-  entriable_type: Sentence
+  entriable_type: 'Sentence'
   map_to_id: 1
-  map_to_type: Script
+  map_to_type: 'Script'
   name: 'STS'
   entry: 0.6666

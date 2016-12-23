@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CalculateWLSTest < ActiveSupport::TestCase
-  test 'calculate_wls should work as advertised' do
+  test 'calculate_wls' do
     script = lang_by_name('English').base_script
     word = script.word_by_entry('bottle')
     script.words.create(entry: 'neighbor')

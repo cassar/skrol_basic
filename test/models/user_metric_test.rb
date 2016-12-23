@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UserMetricTest < ActiveSupport::TestCase
-  test 'user_metrics validations should work as expected' do
+  test 'user_metrics validations' do
     user = user_by_name('Luke')
     call = 'user.user_metrics.count'
     assert_difference(call, 1, 'wrong # of user_metrics saved') do
@@ -14,7 +14,7 @@ class UserMetricTest < ActiveSupport::TestCase
     end
   end
 
-  test 'user associatons work as expected' do
+  test 'user_metric associatons' do
     user = user_by_name('Luke')
     metric = user.user_metrics.create(target_word_id: 1, target_sentence_id: 1,
                                       speed: 20, pause: true, hover: false,

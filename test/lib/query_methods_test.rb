@@ -1,0 +1,34 @@
+require 'test_helper'
+
+class QueryMethodsTest < ActiveSupport::TestCase
+  test 'lang_by_name' do
+    assert_not_nil(lang_by_name('English'), 'Failed to retrieve English.')
+    assert_raises(Invalid, 'Did not raises Invalid') do
+      lang_by_name('Jibberish')
+    end
+  end
+
+  test 'user_by_name' do
+    assert_not_nil(user_by_name('Luke'), 'Failed to retrieve Luke')
+    assert_raises(Invalid, 'Did not raises Invalid') do
+      lang_by_name('No_name')
+    end
+  end
+
+  test 'lang_by_id' do
+    assert_equal(lang_by_name('English'), lang_by_id(1), 'method not working')
+    assert_raises(Invalid, 'Did not raise Invalid') { lang_by_id(50) }
+  end
+
+  test 'word_by_id' do
+    word = lang_by_name('English').base_script.word_by_entry('hello')
+    assert_equal(word, word_by_id(1), 'method not working properly')
+    assert_raises(Invalid, 'Did not raise Invalid') { word_by_id(-1) }
+  end
+
+  test 'sentence_by_id' do
+    sent = Sentence.first
+    assert_equal(sent, sentence_by_id(1), 'method did not work')
+    assert_raises(Invalid, 'Did not raise Invalid') { sentence_by_id(-1) }
+  end
+end

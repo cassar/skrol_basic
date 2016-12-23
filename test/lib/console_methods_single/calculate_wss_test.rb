@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CalculateWSSTest < ActiveSupport::TestCase
-  test 'compile_wss should work as advertised' do
+  test 'compile_wss' do
     script = lang_by_name('English').phonetic_script
     word = script.word_by_entry('həˈləʊ̯')
 
@@ -15,7 +15,7 @@ class CalculateWSSTest < ActiveSupport::TestCase
     assert_raises(Invalid, 'error not raised') { compile_wss(word, script) }
   end
 
-  test 'calculate_wss should work as advertised' do
+  test 'calculate_wss' do
     script = lang_by_name('English').phonetic_script
     word = script.word_by_entry('həˈləʊ̯')
 
@@ -27,7 +27,7 @@ class CalculateWSSTest < ActiveSupport::TestCase
     assert_equal(template, result, 'incorrect score saved')
   end
 
-  test 'return_score work as advertised' do
+  test 'return_score' do
     base_char_arr = %w(h e l l o)
     target_char_arr = %w(h a l o)
     result = return_score(base_char_arr, target_char_arr)
@@ -35,21 +35,21 @@ class CalculateWSSTest < ActiveSupport::TestCase
     assert_equal(3 / 4.5, result, 'wrong score returned')
   end
 
-  test 'return_base_candidate should work as advertised' do
+  test 'return_base_candidate' do
     template = [0, 1]
     result = return_base_candidate('l', 2, %w(h e l l o))
 
     assert_equal(template, result, 'wrong base_candidate')
   end
 
-  test 'compile_score_array should work as advertised' do
+  test 'compile_score_array' do
     candidate_arr = [[1, 2, 3], [1, 0], [2, 2]]
     template = [0.5, 1.0, 1.0 / 3]
     score_array = compile_score_array(candidate_arr)
     assert_equal(template, score_array, 'score_array did not compile correctly')
   end
 
-  test 'compile_wss_score should work as advertised' do
+  test 'compile_wss_score' do
     score_array = [0.25, 1]
     base_char_arr = %w(a b c)
     target_char_arr = %w(a b c)

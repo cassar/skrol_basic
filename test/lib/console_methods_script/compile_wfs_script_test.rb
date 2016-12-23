@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CompileWFSScriptTest < ActiveSupport::TestCase
-  test 'compile_wfs_script should work as advertised' do
+  test 'compile_wfs_script' do
     lang = Language.where(name: 'English').first
     script = lang.scripts.where(name: 'Latin').first
     word = script.words.where(entry: 'would').first
@@ -19,7 +19,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
     assert_raises(Invalid) { compile_wfs_script(script) }
   end
 
-  test 'derive_words_catalogue should work as advertised' do
+  test 'derive_words_catalogue' do
     script = lang_by_name('English').base_script
     script.sentences.each(&:destroy)
     sentence =
@@ -31,7 +31,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
     assert_equal(template, derive_words_catalogue(script), 'objects not equal')
   end
 
-  test 'add_words_to_catalogue should work as advertised' do
+  test 'add_words_to_catalogue' do
     script = lang_by_name('English').base_script
     sentence =
       script.sentences.where(entry: 'Would you like a apple a pear?').first
@@ -42,12 +42,12 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
     assert_equal(3, catalogue['apple'], 'apple should have 2 count')
   end
 
-  test 'return_word_total should work as advertised.' do
+  test 'return_word_total' do
     catalogue = { 'bottle' => 1, 'in' => 1, 'sydney' => 1 }
     assert_equal(3, return_word_total(catalogue), 'wrong total returned')
   end
 
-  test 'assign_wfs should work as advertised' do
+  test 'assign_wfs' do
     script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
     word2 = script.words.where(entry: 'Sydney').first
@@ -58,15 +58,5 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
     assert_equal(2, Score.where(name: 'WFS').count, 'WFS scores did not save')
     score = word.scores.first
     assert_equal(0.333333333333333, score.entry, 'wrong WFS score for bottle')
-  end
-
-  test 'return_word should work as advertised' do
-    script = lang_by_name('English').base_script
-    word = script.words.where(entry: 'bottle').first
-    word2 = script.words.where(entry: 'Sydney').first
-
-    assert_equal(word, return_word(script, 'bottle'), 'Did not find bottle')
-    assert_equal(word2, return_word(script, 'sydney'), 'Did not find Sydney')
-    assert_nil(return_word(script, 'soft'), 'error with none words')
   end
 end

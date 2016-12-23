@@ -18,7 +18,7 @@ class TranslateStringTest < ActiveSupport::TestCase
     assert_equal('bʊl [none] [none]', string, 'IPA translate not working')
   end
 
-  test 'retrieve_base_arr should work as advertised' do
+  test 'retrieve_base_arr' do
     b_script = lang_by_name('English').base_script
     b_script.create_phonetic('IPA')
 

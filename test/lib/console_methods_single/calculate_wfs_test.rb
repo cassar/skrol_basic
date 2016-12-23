@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CalculateWFSTest < ActiveSupport::TestCase
-  test 'calculate_wfs should work as advertised' do
+  test 'calculate_wfs' do
     script = lang_by_name('English').base_script
     word = script.word_by_entry('would')
 
@@ -9,7 +9,7 @@ class CalculateWFSTest < ActiveSupport::TestCase
     assert_equal(0.10344827586206896, result, 'incorrect wfs score returned')
   end
 
-  test 'count_sentence_words should work as advertised' do
+  test 'count_sentence_words' do
     script = lang_by_name('English').base_script
     sentence =
       script.sentences.where(entry: 'Would you like a apple a pear?').first

@@ -1,6 +1,8 @@
 class Invalid < StandardError
 end
 
+THRESHOLD = 0.9
+
 # Retrieves the max word length mapped to a particular script.
 def max_word_length(script)
   max_length = 0
@@ -9,20 +11,6 @@ def max_word_length(script)
     max_length = word_length if max_length < word_length
   end
   max_length
-end
-
-# Returns a language record given a name
-def lang_by_name(name)
-  lang = Language.where(name: name).first
-  raise Invalid, "No language with #{name} found!" if lang.nil?
-  lang
-end
-
-# Returns a User record given a name
-def user_by_name(name)
-  user = User.where(name: name).first
-  raise Invalid, "No user with #{name} found!" if user.nil?
-  user
 end
 
 # Translates all sentences under a particular base script to a given target
@@ -58,4 +46,13 @@ def create_update_sentence(entry, script, group_id)
   else
     sentence.update(entry: entry)
   end
+end
+
+# Returns word record associated with an entry.
+# Will search for capitalized version if it can't find first version.
+def return_word(script, entry)
+  word = script.words.where(entry: entry).first
+  word = script.words.where(entry: entry.capitalize).first if word.nil?
+  word = script.words.where(entry: entry.downcase).first if word.nil?
+  word
 end

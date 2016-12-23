@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CalculateSWOSTest < ActiveSupport::TestCase
-  test 'calculate_swos should work as advertised' do
+  test 'calculate_swos' do
     base_script = lang_by_name('English').base_script
 
     script = lang_by_name('Spanish').base_script
@@ -14,7 +14,7 @@ class CalculateSWOSTest < ActiveSupport::TestCase
     assert_equal(template, result, 'incorrect swos calculated')
   end
 
-  test 'return_swos_score should work as advertised' do
+  test 'return_swos_score' do
     script = lang_by_name('English').base_script
     word = script.word_by_entry('the')
     word2 = script.word_by_entry('car')
@@ -37,7 +37,7 @@ class CalculateSWOSTest < ActiveSupport::TestCase
     assert_equal(template, result, 'incorrect swos score returned')
   end
 
-  test 'return_candidate_arr should work as advertised' do
+  test 'return_candidate_arr' do
     script = lang_by_name('English').base_script
     word = script.word_by_entry('the')
     word2 = script.word_by_entry('car')
@@ -55,7 +55,7 @@ class CalculateSWOSTest < ActiveSupport::TestCase
     assert_equal(template, result, 'incorrect template returned.')
   end
 
-  test 'return_word_arr should work as advertised' do
+  test 'return_word_arr' do
     script = lang_by_name('English').base_script
     sentence = script.sentences.where(entry: 'Would paper thin!').first
     word = script.word_by_entry('would')
@@ -68,7 +68,7 @@ class CalculateSWOSTest < ActiveSupport::TestCase
     assert_equal(template, result, 'incorrect arr returned')
   end
 
-  test 'retrieve_word should work as advertised' do
+  test 'retrieve_word' do
     script = lang_by_name('English').base_script
     word = script.word_by_entry('would')
 

@@ -50,7 +50,7 @@ not-blue:
 
 no-azul:
   id: 9
-  entry: El coche es de color azul!
+  entry: El coche no es azul!
   script_id: 5
   group_id: 8
 
@@ -65,3 +65,27 @@ would-like:
   entry: I would like it.
   script_id: 1
   group_id: 11
+
+kɹʌmbə-ðə:
+  id: 12
+  entry: ˈkɹʌmbəl ðə ˈbɒ.təl
+  script_id: 2
+  group_id: 5
+
+veni-vidi:
+  id: 13
+  entry: 'veni vedi vinci'
+  script_id: 2
+  group_id:
+
+el-coche-ipa:
+  id: 14
+  entry: el ˈko.tʃe es de ko̞.'lo̞ɾ aˈsul
+  script_id: 6
+  group_id: 2
+
+el-coche-no-ipa:
+  id: 15
+  entry: el ˈko.tʃe no es aˈsul
+  script_id: 6
+  group_id: 8

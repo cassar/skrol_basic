@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CalculateWCFTSTest < ActiveSupport::TestCase
-  test 'compile_wcfts should work as advertised' do
+  test 'compile_wcfts' do
     script = lang_by_name('English').base_script
     word = script.word_by_entry('bottle')
     compile_chars_cfs(script)
@@ -13,7 +13,7 @@ class CalculateWCFTSTest < ActiveSupport::TestCase
     assert_equal(0.0857843137254902, wcfts_score.entry, 'Incorrect WCFTS score')
   end
 
-  test 'calculate_wcfts works as advertised' do
+  test 'calculate_wcfts' do
     script = lang_by_name('English').base_script
     word = script.word_by_entry('bottle')
     compile_chars_cfs(script)
@@ -23,7 +23,7 @@ class CalculateWCFTSTest < ActiveSupport::TestCase
     assert_equal(0.08578431372549022, score, 'Incorrect WCFTS score')
   end
 
-  test 'return_cfs_score need works as advertised' do
+  test 'return_cfs_score' do
     script = lang_by_name('English').base_script
     word = script.word_by_entry('bottle')
     compile_chars_cfs(script)

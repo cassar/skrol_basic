@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CharacterTest < ActiveSupport::TestCase
-  test 'Character.create and destroy should satisfy integrity constraints' do
+  test 'Character.create and destroy' do
     script = lang_by_name('English').base_script
     script.characters.create(entry: 'a')
     script.characters.create(entry: 'a')

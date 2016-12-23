@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CalculateWTSTest < ActiveSupport::TestCase
-  test 'compile_wts should work as advertised' do
+  test 'compile_wts' do
     script = lang_by_name('English').base_script
     compile_chars_cfs(script)
     compile_chars_cfs(script.phonetic)
@@ -18,7 +18,7 @@ class CalculateWTSTest < ActiveSupport::TestCase
     assert_equal(1, word2.scores.count, 'Old score did not delete')
   end
 
-  test 'calculate_wts should work as advertised' do
+  test 'calculate_wts' do
     script = lang_by_name('English').base_script
     compile_chars_cfs(script)
     compile_chars_cfs(script.phonetic)
@@ -33,7 +33,7 @@ class CalculateWTSTest < ActiveSupport::TestCase
     assert_equal(template, score, 'Incorrect WTS score saved')
   end
 
-  test 'return_word_scores should work as advertised' do
+  test 'return_word_scores' do
     script = lang_by_name('English').base_script
     compile_chars_cfs(script)
     compile_chars_cfs(script.phonetic)

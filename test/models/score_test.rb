@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ScoreTest < ActiveSupport::TestCase
-  test 'Score.create should only save whole records' do
+  test 'Score.create validations' do
     Score.all.each(&:destroy)
     script = lang_by_name('English').base_script
     word = script.word_by_entry('apple')

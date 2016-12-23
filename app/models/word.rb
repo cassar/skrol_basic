@@ -33,4 +33,12 @@ class Word < ApplicationRecord
   def return_group
     Word.where(group_id: group_id)
   end
+
+  # Retrieves the WTS for a Word record given a base_script
+  def retrieve_wts(base_script)
+    score = scores.where(name: 'WTS', map_to_id: base_script.id,
+                         map_to_type: 'Script').first
+    raise Invalid, "No WTS found for word: #{entry}" if score.nil?
+    score
+  end
 end

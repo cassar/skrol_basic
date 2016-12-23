@@ -2,20 +2,14 @@
 # to a give base_script. Will remove old score if present.
 def compile_sts(target_sentence, base_script)
   sts_score = calculate_sts(target_sentence, base_script)
-  target_sentence.scores.where(map_to_id: base_script.id,
-                               map_to_type: 'Script',
-                               name: 'STS').each(&:destroy)
-  target_sentence.scores.create(map_to_id: base_script.id,
-                                map_to_type: 'Script', name: 'STS',
-                                entry: sts_score)
+  target_sentence.create_update_sts(sts_score, base_script)
 end
 
 # Calculates the Sentence Total Score (STS) for a particular sentence and any
 # number of other languages.
 def calculate_sts(target_sentence, base_script)
   weights = [0.33, 0.33, 0.33]
-  sts_score = 0
-  counter = 0
+  sts_score = counter = 0
   scores = return_sentence_scores(target_sentence, base_script)
   scores.each do |score|
     sts_score += score * weights[counter]

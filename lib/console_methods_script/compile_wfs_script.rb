@@ -49,11 +49,3 @@ def assign_wfs(script, catalogue, total_words)
                        name: 'WFS', entry: value.to_f / total_words)
   end
 end
-
-# Returns word record associated with an entry.
-# Will search for capitalized version if it can't find first version.
-def return_word(script, entry)
-  word = script.words.where(entry: entry).first
-  word = script.words.where(entry: entry.capitalize).first if word.nil?
-  word
-end

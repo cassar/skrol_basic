@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class LanguageTest < ActiveSupport::TestCase
-  test 'Language.create should only accept complete entries.' do
+  test 'Language.create' do
     eval = 'Language.count'
 
     assert_difference(eval, difference = 0, 'Record should not have saved') do
@@ -17,7 +17,7 @@ class LanguageTest < ActiveSupport::TestCase
     end
   end
 
-  test 'Language.scripts.others.create creates a script.others' do
+  test 'Language.scripts.others.create' do
     lang = Language.create(name: 'Greek')
     script = lang.scripts.create(name: 'Greek')
     phonetic = script.create_phonetic('IPA')

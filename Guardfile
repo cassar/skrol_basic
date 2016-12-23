@@ -143,13 +143,23 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/console_methods_single/calculate_sts_test.rb'
   end
 
-  # retrieve_user_word_helper and its tests
-  watch('app/helpers/retrieve_user_word_helper.rb') do
-    'test/helpers/retrieve_user_word_helper_test.rb'
+  # retrieve_next_slide_helper and its tests
+  watch('lib/retrieve_next_slide.rb') do
+    'test/lib/retrieve_next_slide1_test.rb'
   end
-  watch('app/helpers/retrieve_user_word_helper_test.rb') do
-    'test/helpers/retrieve_user_word_helper_test.rb'
+  watch('lib/retrieve_next_slide.rb') do
+    'test/lib/retrieve_next_slide2_test.rb'
   end
+  watch('test/lib/retrieve_next_slide1_test.rb') do
+    'test/lib/retrieve_next_slide1_test.rb'
+  end
+  watch('test/lib/retrieve_next_slide2_test.rb') do
+    'test/lib/retrieve_next_slide2_test.rb'
+  end
+
+  # query_methods lib and its test
+  watch('lib/query_methods.rb') { 'test/lib/query_methods_test.rb' }
+  watch('test/lib/query_methods_test.rb') { 'test/lib/query_methods_test.rb' }
 
   # setup_map lib and its test
   watch('lib/setup_map.rb') { 'test/lib/setup_map_test.rb' }
