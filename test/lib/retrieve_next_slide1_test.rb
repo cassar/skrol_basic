@@ -16,7 +16,7 @@ class RetrieveNextSlide1Test < ActiveSupport::TestCase
     result = retrieve_next_slide(user, target_script)
     assert_equal(template, result, 'incorrect slide returned')
     assert_equal(1, UserScore.count, 'Score should have updated not created')
-    assert_equal(2, UserMetric.count, 'Metric should have been created')
+    assert_equal(3, UserMetric.count, 'Metric should have been created')
 
     assert_raises(Invalid, 'Invalid did not raise') do
       target_script.words.each { |word| word.destroy unless word.id == 14 }

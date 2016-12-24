@@ -206,6 +206,15 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   watch('test/models/user_metric_test.rb') do
     'test/models/user_metric_test.rb'
   end
+
+  # slide_controller and its test
+  watch('app/controllers/slide_controller.rb') do
+    'test/controllers/slide_controller_test.rb'
+  end
+  watch('test/controllers/slide_controller_test.rb') do
+    'test/controllers/slide_controller_test.rb'
+  end
+
 end
 
 guard :rubocop do

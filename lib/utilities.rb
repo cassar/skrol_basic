@@ -1,8 +1,3 @@
-class Invalid < StandardError
-end
-
-THRESHOLD = 0.9
-
 # Retrieves the max word length mapped to a particular script.
 def max_word_length(script)
   max_length = 0
@@ -55,4 +50,26 @@ def return_word(script, entry)
   word = script.words.where(entry: entry.capitalize).first if word.nil?
   word = script.words.where(entry: entry.downcase).first if word.nil?
   word
+end
+
+# Returs a new work score entry given the metric and score records
+def return_user_word_score(metric, score)
+  new_entry = score.entry
+  new_entry += NORMAL_BONUS * return_speed_adjustment(metric.speed)
+  new_entry -= PAUSE_PENALTY if metric.pause
+  new_entry -= HOVER_PENALTY if metric.hover
+  new_entry += HIDE_BONUS if metric.hide
+  new_entry = fix_new_entry(new_entry)
+end
+
+# Makes sure entry floor is 0.0 and ceiling is 1.0
+def fix_new_entry(new_entry)
+  new_entry = 0.0 if new_entry < 0.0
+  new_entry = 1.0 if new_entry > 1.0
+  new_entry
+end
+
+# Determine's how much of a speed adjustment to return
+def return_speed_adjustment(speed)
+  1 + (speed.to_f - NORMAL_SPEED) / NORMAL_SPEED
 end

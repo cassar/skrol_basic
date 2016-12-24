@@ -22,7 +22,7 @@ class User < ApplicationRecord
   def create_touch_score(target_word)
     score = user_scores.where(target_word_id: target_word.id).first
     if score.nil?
-      user_scores.create(target_word_id: target_word.id, entry: 0.5,
+      user_scores.create(target_word_id: target_word.id, entry: START_SCORE,
                          status: 'testing')
     else
       score.update(status: 'testing')

@@ -9,3 +9,13 @@ metric-1:
   pause: true
   hover: true
   hide: false
+
+metric-2:
+  id: 2
+  user_id: 1
+  target_word_id: 14
+  target_sentence_id: 3
+  speed: 20
+  pause: false
+  hover: true
+  hide: true

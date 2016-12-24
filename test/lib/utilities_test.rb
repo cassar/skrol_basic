@@ -52,4 +52,27 @@ class UtilitiesTest < ActiveSupport::TestCase
     assert_equal(word2, return_word(script, 'sydney'), 'Did not find Sydney')
     assert_nil(return_word(script, 'soft'), 'error with none words')
   end
+
+  test 'return_user_word_score' do
+    metric = UserMetric.second
+    score = UserScore.first
+    template = 0.49999999999999994
+    result = return_user_word_score(metric, score)
+    assert_equal(template, result, 'incorrect score returned')
+  end
+
+  test 'fix_new_entry' do
+    result = fix_new_entry(0.5)
+    assert_equal(0.5, result, 'incorrect value returned')
+    result = fix_new_entry(-1)
+    assert_equal(0.0, result, 'incorrect value returned')
+    result = fix_new_entry(2.0)
+    assert_equal(1.0, result, 'incorrect value returned')
+  end
+
+  test 'return_speed_adjustment' do
+    template = 0.6666666666666667
+    result = return_speed_adjustment(20)
+    assert_equal(template, result, 'incorrect score returned')
+  end
 end

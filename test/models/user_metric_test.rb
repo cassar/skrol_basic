@@ -21,4 +21,11 @@ class UserMetricTest < ActiveSupport::TestCase
                                       hide: true)
     assert_equal(user, metric.user, '.user does not work')
   end
+
+  test 'UserMetic.apply_user_score' do
+    metric = UserMetric.second
+    metric.update(speed: 30, pause: false, hover: false, hide: false)
+    score = UserScore.first
+    assert_equal(0.8, score.entry, 'incorrect score saved')
+  end
 end
