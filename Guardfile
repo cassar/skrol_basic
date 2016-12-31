@@ -214,7 +214,6 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   watch('test/controllers/slide_controller_test.rb') do
     'test/controllers/slide_controller_test.rb'
   end
-
 end
 
 guard :rubocop do

@@ -6,7 +6,7 @@ def retrieve_next_slide(user, target_script)
   raise Invalid, 'no more words!' if target_word.nil?
   # Search for matching target_sentence
   target_sentence = retrieve_next_sentence(user, target_word)
-  raise Invalid, 'no mone sentences!' if target_sentence.nil?
+  raise Invalid, 'no more sentences!' if target_sentence.nil?
   # Create or update word score
   user.create_touch_score(target_word)
   # Create new Metric stub
