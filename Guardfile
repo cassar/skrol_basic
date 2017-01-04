@@ -58,99 +58,91 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   end
 
   # calculate_wcfbs lib and its tests
-  watch('lib/console_methods_single/calculate_wcfbs.rb') do
-    'test/lib/console_methods_single/calculate_wcfbs_test.rb'
+  watch('lib/static_content_scores/calculate_wcfbs.rb') do
+    'test/lib/static_content_scores/calculate_wcfbs_test.rb'
   end
-  watch('test/lib/console_methods_single/calculate_wcfbs_test.rb') do
-    'test/lib/console_methods_single/calculate_wcfbs_test.rb'
+  watch('test/lib/static_content_scores/calculate_wcfbs_test.rb') do
+    'test/lib/static_content_scores/calculate_wcfbs_test.rb'
   end
 
   # calculate_wcfts lib and its tests
-  watch('lib/console_methods_single/calculate_wcfts.rb') do
-    'test/lib/console_methods_single/calculate_wcfts_test.rb'
+  watch('lib/static_content_scores/calculate_wcfts.rb') do
+    'test/lib/static_content_scores/calculate_wcfts_test.rb'
   end
-  watch('test/lib/console_methods_single/calculate_wcfts_test.rb') do
-    'test/lib/console_methods_single/calculate_wcfts_test.rb'
+  watch('test/lib/static_content_scores/calculate_wcfts_test.rb') do
+    'test/lib/static_content_scores/calculate_wcfts_test.rb'
   end
 
   # calculate_wfs lib and its tests
-  watch('lib/console_methods_single/calculate_wfs.rb') do
-    'test/lib/console_methods_single/calculate_wfs_test.rb'
+  watch('lib/static_content_scores/calculate_wfs.rb') do
+    'test/lib/static_content_scores/calculate_wfs_test.rb'
   end
-  watch('test/lib/console_methods_single/calculate_wfs_test.rb') do
-    'test/lib/console_methods_single/calculate_wfs_test.rb'
-  end
-
-  # compile_wfs_script lib and its tests
-  watch('lib/console_methods_script/compile_wfs_script.rb') do
-    'test/lib/console_methods_script/compile_wfs_script_test.rb'
-  end
-  watch('test/lib/console_methods_script/compile_wfs_script_test.rb') do
-    'test/lib/console_methods_script/compile_wfs_script_test.rb'
-  end
-
-  # compile_wls_script lib and its tests
-  watch('lib/console_methods_script/compile_wls_script.rb') do
-    'test/lib/console_methods_script/compile_wls_script_test.rb'
-  end
-  watch('test/lib/console_methods_script/compile_wls_script_test.rb') do
-    'test/lib/console_methods_script/compile_wls_script_test.rb'
+  watch('test/lib/static_content_scores/calculate_wfs_test.rb') do
+    'test/lib/static_content_scores/calculate_wfs_test.rb'
   end
 
   # calculate_wls lib and its tests
-  watch('lib/console_methods_single/calculate_wls.rb') do
-    'test/lib/console_methods_single/calculate_wls_test.rb'
+  watch('lib/static_content_scores/calculate_wls.rb') do
+    'test/lib/static_content_scores/calculate_wls_test.rb'
   end
-  watch('test/lib/console_methods_single/calculate_wls_test.rb') do
-    'test/lib/console_methods_single/calculate_wls_test.rb'
+  watch('test/lib/static_content_scores/calculate_wls_test.rb') do
+    'test/lib/static_content_scores/calculate_wls_test.rb'
   end
 
   # calculate_wss lib and its tests
-  watch('lib/console_methods_single/calculate_wss.rb') do
-    'test/lib/console_methods_single/calculate_wss_test.rb'
+  watch('lib/static_content_scores/calculate_wss.rb') do
+    'test/lib/static_content_scores/calculate_wss_test.rb'
   end
-  watch('test/lib/console_methods_single/calculate_wss_test.rb') do
-    'test/lib/console_methods_single/calculate_wss_test.rb'
+  watch('test/lib/static_content_scores/calculate_wss_test.rb') do
+    'test/lib/static_content_scores/calculate_wss_test.rb'
   end
 
   # calculate_wts lib and its tests
-  watch('lib/console_methods_single/calculate_wts.rb') do
-    'test/lib/console_methods_single/calculate_wts_test.rb'
+  watch('lib/static_content_scores/calculate_wts.rb') do
+    'test/lib/static_content_scores/calculate_wts_test.rb'
   end
-  watch('test/lib/console_methods_single/calculate_wts_test.rb') do
-    'test/lib/console_methods_single/calculate_wts_test.rb'
+  watch('test/lib/static_content_scores/calculate_wts_test.rb') do
+    'test/lib/static_content_scores/calculate_wts_test.rb'
   end
 
   # calculate_swls lib and its tests
-  watch('lib/console_methods_single/calculate_swls.rb') do
-    'test/lib/console_methods_single/calculate_swls_test.rb'
+  watch('lib/static_content_scores/calculate_swls.rb') do
+    'test/lib/static_content_scores/calculate_swls_test.rb'
   end
-  watch('test/lib/console_methods_single/calculate_swls_test.rb') do
-    'test/lib/console_methods_single/calculate_swls_test.rb'
+  watch('test/lib/static_content_scores/calculate_swls_test.rb') do
+    'test/lib/static_content_scores/calculate_swls_test.rb'
   end
 
   # calculate_scwts lib and its tests
-  watch('lib/console_methods_single/calculate_scwts.rb') do
-    'test/lib/console_methods_single/calculate_scwts_test.rb'
+  watch('lib/static_content_scores/calculate_scwts.rb') do
+    'test/lib/static_content_scores/calculate_scwts_test.rb'
   end
-  watch('test/lib/console_methods_single/calculate_scwts_test.rb') do
-    'test/lib/console_methods_single/calculate_scwts_test.rb'
+  watch('test/lib/static_content_scores/calculate_scwts_test.rb') do
+    'test/lib/static_content_scores/calculate_scwts_test.rb'
   end
 
   # calculate_swos lib and its tests
-  watch('lib/console_methods_single/calculate_swos.rb') do
-    'test/lib/console_methods_single/calculate_swos_test.rb'
+  watch('lib/static_content_scores/calculate_swos.rb') do
+    'test/lib/static_content_scores/calculate_swos_test.rb'
   end
-  watch('test/lib/console_methods_single/calculate_swos_test.rb') do
-    'test/lib/console_methods_single/calculate_swos_test.rb'
+  watch('test/lib/static_content_scores/calculate_swos_test.rb') do
+    'test/lib/static_content_scores/calculate_swos_test.rb'
   end
 
   # calculate_sts lib and its tests
-  watch('lib/console_methods_single/calculate_sts.rb') do
-    'test/lib/console_methods_single/calculate_sts_test.rb'
+  watch('lib/static_content_scores/calculate_sts.rb') do
+    'test/lib/static_content_scores/calculate_sts_test.rb'
   end
-  watch('test/lib/console_methods_single/calculate_sts_test.rb') do
-    'test/lib/console_methods_single/calculate_sts_test.rb'
+  watch('test/lib/static_content_scores/calculate_sts_test.rb') do
+    'test/lib/static_content_scores/calculate_sts_test.rb'
+  end
+
+  # setup_map lib and its test
+  watch('lib/static_content_scores/setup_map.rb') do
+    'test/lib/static_content_scores/setup_map_test.rb'
+  end
+  watch('test/lib/static_content_scores/setup_map_test.rb') do
+    'test/lib/static_content_scores/setup_map_test.rb'
   end
 
   # retrieve_next_slide_helper and its tests
@@ -176,12 +168,12 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   end
 
   # query_methods lib and its test
-  watch('lib/query_methods.rb') { 'test/lib/query_methods_test.rb' }
-  watch('test/lib/query_methods_test.rb') { 'test/lib/query_methods_test.rb' }
-
-  # setup_map lib and its test
-  watch('lib/setup_map.rb') { 'test/lib/setup_map_test.rb' }
-  watch('test/lib/setup_map_test.rb') { 'test/lib/setup_map_test.rb' }
+  watch('lib/content_management/query_methods.rb') do
+    'test/lib/content_management/query_methods_test.rb'
+  end
+  watch('test/lib/content_management/query_methods_test.rb') do
+    'test/lib/content_management/query_methods_test.rb'
+  end
 
   # utilities lib and its test
   watch('lib/utilities.rb') { 'test/lib/utilities_test.rb' }

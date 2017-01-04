@@ -3,8 +3,7 @@ require_relative 'boot'
 require 'rails/all'
 
 # Require all ruby files in ./lib directory.
-Dir["./lib/console_methods_single/*.rb"].each {|file| require file }
-Dir["./lib/console_methods_script/*.rb"].each {|file| require file }
+Dir["./lib/static_content_scores/*.rb"].each {|file| require file }
 Dir["./lib/user_management/*.rb"].each {|file| require file }
 Dir["./lib/content_management/*.rb"].each {|file| require file }
 Dir["./lib/*.rb"].each {|file| require file }
