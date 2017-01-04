@@ -144,18 +144,30 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   end
 
   # retrieve_next_slide_helper and its tests
-  watch('lib/retrieve_next_slide.rb') do
-    'test/lib/retrieve_next_slide1_test.rb'
+  watch('lib/user_management/retrieve_next_slide.rb') do
+    'test/lib/user_management/retrieve_next_slide1_test.rb'
   end
-  watch('lib/retrieve_next_slide.rb') do
-    'test/lib/retrieve_next_slide2_test.rb'
+  watch('lib/user_management/retrieve_next_slide.rb') do
+    'test/lib/user_management/retrieve_next_slide2_test.rb'
   end
-  watch('test/lib/retrieve_next_slide1_test.rb') do
-    'test/lib/retrieve_next_slide1_test.rb'
+  watch('test/lib/user_management/retrieve_next_slide1_test.rb') do
+    'test/lib/user_management/retrieve_next_slide1_test.rb'
   end
-  watch('test/lib/retrieve_next_slide2_test.rb') do
-    'test/lib/retrieve_next_slide2_test.rb'
+  watch('test/lib/user_management/retrieve_next_slide2_test.rb') do
+    'test/lib/user_management/retrieve_next_slide2_test.rb'
   end
+
+  # exhaust_methods.rb
+  watch('lib/user_management/exhaust_methods.rb') do
+    'test/lib/user_management/exhaust_methods_test.rb'
+  end
+  watch('test/lib/user_management/exhaust_methods_test.rb') do
+    'test/lib/user_management/exhaust_methods_test.rb'
+  end
+
+  # map_diagnostic lib and its test
+  watch('lib/map_diagnostic.rb') { 'test/lib/map_diagnostic_test.rb' }
+  watch('test/lib/map_diagnostic_test.rb') { 'test/lib/map_diagnostic_test.rb' }
 
   # query_methods lib and its test
   watch('lib/query_methods.rb') { 'test/lib/query_methods_test.rb' }

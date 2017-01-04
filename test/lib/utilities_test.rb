@@ -75,4 +75,14 @@ class UtilitiesTest < ActiveSupport::TestCase
     result = return_speed_adjustment(20)
     assert_equal(template, result, 'incorrect score returned')
   end
+
+  test 'word_in_sentence?' do
+    sentence = sentence_by_id(1)
+    word = word_by_id(3)
+    assert(word_in_sentence?(word, sentence), 'method returned wrong bool')
+    word = word_by_id(4)
+    assert(word_in_sentence?(word, sentence), 'method returned wrong bool')
+    word = word_by_id(1)
+    assert_not(word_in_sentence?(word, sentence), 'method returned wrong bool')
+  end
 end

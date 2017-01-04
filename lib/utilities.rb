@@ -73,3 +73,11 @@ end
 def return_speed_adjustment(speed)
   1 + (speed.to_f - NORMAL_SPEED) / NORMAL_SPEED
 end
+
+# Returns true if a word is reperesented in a sentence, false otherwise.
+def word_in_sentence?(word, sentence)
+  candidate = nil
+  return true if sentence.entry.include? word.entry
+  return true if sentence.entry.include? word.entry.capitalize
+  false
+end

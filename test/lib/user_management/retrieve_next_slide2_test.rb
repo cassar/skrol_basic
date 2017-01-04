@@ -82,16 +82,6 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
     assert_not(sentence_used?(sentence, user), 'incorrect bool returned')
   end
 
-  test 'word_in_sentence?' do
-    sentence = sentence_by_id(1)
-    word = word_by_id(3)
-    assert(word_in_sentence?(word, sentence), 'method returned wrong bool')
-    word = word_by_id(4)
-    assert(word_in_sentence?(word, sentence), 'method returned wrong bool')
-    word = word_by_id(1)
-    assert_not(word_in_sentence?(word, sentence), 'method returned wrong bool')
-  end
-
   test 'return_word_array' do
     template = [word_by_id(9), word_by_id(10), word_by_id(11), word_by_id(12)]
     result = return_word_array(sentence_by_id(2))

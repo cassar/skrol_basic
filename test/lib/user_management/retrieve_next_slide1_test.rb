@@ -66,8 +66,8 @@ class RetrieveNextSlide1Test < ActiveSupport::TestCase
     template = {
       representative: target_word,
       target_sentence: target_sentence,
-      base_sentence: base_sentence,
       phonetic_sentence: target_sentence.phonetic,
+      base_sentence: base_sentence,
       target_arr: [word_by_id(13), word_by_id(14), word_by_id(15),
                    word_by_id(16), word_by_id(17), word_by_id(18)],
       phonetic_arr: [word_by_id(31), word_by_id(32), word_by_id(33),

@@ -1,5 +1,11 @@
-
-# Retrieves the next slide object for use in the client.
+# Will retrieve an object containing...
+#   representative: (a target word record that the slide is meant to test)
+#   target_sentence: (a target sentence that has been chosen to test the user)
+#   phonetic_sentence: (a phonetic sentence equivalent of the target_sentence)
+#   base_sentence: (a base sentence equivalent of the target sentence)
+#   target_arr: (an array of word records used in the target sentence)
+#   phonetic_arr: (an array of word records used in the phonetic sentence)
+#   base_arr: (an array of word records used in the base sentence)
 def retrieve_next_slide(user, target_script)
   # Search for target_word
   target_word = retrieve_next_word(user, target_script)
@@ -93,14 +99,6 @@ def sentence_used?(sentence, user)
   metric = user.user_metrics.where(target_sentence_id: sentence.id).first
   return false if metric.nil?
   true
-end
-
-# Returns true if a word is reperesented in a sentence, false otherwise.
-def word_in_sentence?(word, sentence)
-  candidate = nil
-  return true if sentence.entry.include? word.entry
-  return true if sentence.entry.include? word.entry.capitalize
-  false
 end
 
 # Returns array of word records given a sentence record
