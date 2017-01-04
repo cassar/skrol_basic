@@ -26,18 +26,15 @@ def to_ipa(base_code, phonetic)
   str_arr = gsub(/(\.|\!|\?)/, '').split
   str_arr.each do |entry|
     base_arr = retrieve_base_arr(base_code, entry)
-    phonetic << if base_arr.first.nil? || !base_arr.first.phonetic_present?
-                  '[none] '
-                else
-                  base_arr.first.phonetic.entry + ' '
-                end
+    raise Invalid, "No base entry for #{entry}" if base_arr.first.nil?
+    phonetic << base_arr.first.phonetic.entry + ' '
   end
   phonetic[-1] = ''
 end
 
 # Retrieves an array of word records for use in to_ipa
 def retrieve_base_arr(base_code, entry)
-  b_script = Script.where(lang_code: base_code).first # What if this fails?
+  b_script = Script.where(lang_code: base_code).first
   base_arr = b_script.words.where(entry: entry)
   base_arr = b_script.words.where(entry: entry.downcase) if base_arr.first.nil?
   base_arr

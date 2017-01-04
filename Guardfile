@@ -34,17 +34,27 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   watch(%r{^test/test_helper\.rb$})      { 'test' }
 
   # compile_chars_cfs lib and its tests
-  watch('lib/console_methods_script/compile_chars_cfs.rb') do
-    'test/lib/console_methods_script/compile_chars_cfs_test.rb'
+  watch('lib/content_management/compile_chars_cfs.rb') do
+    'test/lib/content_management/compile_chars_cfs_test.rb'
   end
-  watch('test/lib/console_methods_script/compile_chars_cfs_test.rb') do
-    'test/lib/console_methods_script/compile_chars_cfs_test.rb'
+  watch('test/lib/content_management/compile_chars_cfs_test.rb') do
+    'test/lib/content_management/compile_chars_cfs_test.rb'
   end
 
   # translate_string lib and its tests
-  watch('lib/translate_string.rb') { 'test/lib/translate_string_test.rb' }
-  watch('test/lib/translate_string_test.rb') do
-    'test/lib/translate_string_test.rb'
+  watch('lib/content_management/translate_string.rb') do
+    'test/lib/content_management/translate_string_test.rb'
+  end
+  watch('test/lib/content_management/translate_string_test.rb') do
+    'test/lib/content_management/translate_string_test.rb'
+  end
+
+  # manage_content lib and its tests
+  watch('lib/content_management/manage_content.rb') do
+    'test/lib/content_management/manage_content_test.rb'
+  end
+  watch('test/lib/content_management/manage_content_test.rb') do
+    'test/lib/content_management/manage_content_test.rb'
   end
 
   # calculate_wcfbs lib and its tests
@@ -164,10 +174,6 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   watch('test/lib/user_management/exhaust_methods_test.rb') do
     'test/lib/user_management/exhaust_methods_test.rb'
   end
-
-  # map_diagnostic lib and its test
-  watch('lib/map_diagnostic.rb') { 'test/lib/map_diagnostic_test.rb' }
-  watch('test/lib/map_diagnostic_test.rb') { 'test/lib/map_diagnostic_test.rb' }
 
   # query_methods lib and its test
   watch('lib/query_methods.rb') { 'test/lib/query_methods_test.rb' }

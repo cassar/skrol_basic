@@ -14,7 +14,7 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_sts(target_sentence, base_script)
 
     result = target_sentence.retrieve_sts(base_script)
-    assert_equal(0.273637074505825, result.entry, 'incorrect score returned')
+    assert_equal(0.273631124986594, result.entry, 'incorrect score returned')
     assert_equal(1, target_sentence.scores.count, 'old score was not removed')
   end
 
@@ -31,7 +31,7 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_chars_cfs(script.phonetic)
 
     result = calculate_sts(target_sentence, base_script)
-    assert_equal(0.27363707450582453, result, 'incorrect sts score returned')
+    assert_equal(0.27363112498659375, result, 'incorrect sts score returned')
   end
 
   test 'return_sentence_scores' do
@@ -45,7 +45,7 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_chars_cfs(script)
     compile_chars_cfs(script.phonetic)
 
-    template = [0.1625365894115894, 0.0, 0.6666666666666667]
+    template = [0.1625185605654356, 0.0, 0.6666666666666667]
     result = return_sentence_scores(target_sentence, base_script)
     assert_equal(template, result, 'incorrect scores array returned')
   end

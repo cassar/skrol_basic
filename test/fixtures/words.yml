@@ -251,3 +251,15 @@ bo.ˈte.ʎa:
   entry: bo.ˈte.ʎa
   script_id: 6
   group_id: 7
+
+wʊd:
+  id: 43
+  entry: wʊd
+  script_id: 2
+  group_id: 3
+
+juː:
+  id: 44
+  entry: juː
+  script_id: 2
+  group_id: 4

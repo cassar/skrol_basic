@@ -19,14 +19,14 @@ class UtilitiesTest < ActiveSupport::TestCase
   #   assert_equal(base_count, target_count, 'Wrong # of sentences saved')
   # end
 
-  test 'derive_phonetics' do
-    lang = lang_by_name('English')
-    lang.phonetic_script.sentences.each(&:destroy)
-    derive_phonetics(lang)
-    base_count = lang.base_script.sentences.count
-    phonetic_count = lang.phonetic_script.sentences.count
-    assert_equal(base_count, phonetic_count, 'incorrect # of sentences saved')
-  end
+  # test 'derive_phonetics' do
+  #   lang = lang_by_name('English')
+  #   lang.phonetic_script.sentences.each(&:destroy)
+  #   derive_phonetics(lang)
+  #   base_count = lang.base_script.sentences.count
+  #   phonetic_count = lang.phonetic_script.sentences.count
+  #   assert_equal(base_count, phonetic_count, 'incorrect # of sentences saved')
+  # end
 
   test 'create_update_sentence' do
     base_script = lang_by_name('English').base_script
@@ -74,15 +74,5 @@ class UtilitiesTest < ActiveSupport::TestCase
     template = 0.6666666666666667
     result = return_speed_adjustment(20)
     assert_equal(template, result, 'incorrect score returned')
-  end
-
-  test 'word_in_sentence?' do
-    sentence = sentence_by_id(1)
-    word = word_by_id(3)
-    assert(word_in_sentence?(word, sentence), 'method returned wrong bool')
-    word = word_by_id(4)
-    assert(word_in_sentence?(word, sentence), 'method returned wrong bool')
-    word = word_by_id(1)
-    assert_not(word_in_sentence?(word, sentence), 'method returned wrong bool')
   end
 end

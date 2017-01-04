@@ -14,7 +14,7 @@ class CalculateWTSTest < ActiveSupport::TestCase
     compile_wts(word2, script)
     score = word2.scores.where(name: 'WTS').first
     assert_not_nil(score, 'score did not save!')
-    assert_equal(0.160840625423959, score.entry, 'incorrect score saved!')
+    assert_equal(0.160480048500882, score.entry, 'incorrect score saved!')
     assert_equal(1, word2.scores.count, 'Old score did not delete')
   end
 
@@ -29,7 +29,7 @@ class CalculateWTSTest < ActiveSupport::TestCase
     compile_chars_cfs(script2.phonetic)
 
     score = calculate_wts(word2, script)
-    template = 0.16084062542395874
+    template = 0.16048004850088182
     assert_equal(template, score, 'Incorrect WTS score saved')
   end
 
@@ -43,8 +43,7 @@ class CalculateWTSTest < ActiveSupport::TestCase
     compile_chars_cfs(script2)
     compile_chars_cfs(script2.phonetic)
 
-    template = [0.03846153846153843, 0.16049382716049362, 0.2857142857142857,
-                0.0, 0.1875]
+    template = [0.03125, 0.16049382716049362, 0.2857142857142857, 0.0, 0.1875]
     result = return_word_scores(word2, script)
     assert_equal(template, result, 'Incorrect score array calculated')
   end

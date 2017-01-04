@@ -24,6 +24,14 @@ class SentenceTest < ActiveSupport::TestCase
     end
   end
 
+  test 'create_phonetic' do
+    base_sentence = sentence_by_id(2)
+    call = 'Sentence.count'
+    assert_difference(call, 1, 'sentence did not save') do
+      base_sentence.create_phonetic
+    end
+  end
+
   test 'retrieve_sts' do
     sentence = sentence_by_id(3)
     base_script = lang_by_name('English').base_script

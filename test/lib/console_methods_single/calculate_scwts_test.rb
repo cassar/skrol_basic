@@ -13,7 +13,7 @@ class CalculateSCWTSTest < ActiveSupport::TestCase
     compile_chars_cfs(script.phonetic)
 
     result = calculate_scwts(target_sentence, base_script)
-    template = 0.1625365894115894
+    template = 0.1625185605654356
     assert_equal(template, result, 'incorrect scwts returned')
   end
 
@@ -27,7 +27,7 @@ class CalculateSCWTSTest < ActiveSupport::TestCase
     compile_chars_cfs(script2.phonetic)
 
     result = retrieve_wts_score('bottiglia', script2, script)
-    template = 0.16084062542395874
+    template = 0.16048004850088182
     assert_equal(template, result, 'incorrect wts score returned')
   end
 end

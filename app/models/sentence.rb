@@ -5,6 +5,14 @@ class Sentence < ApplicationRecord
   has_one :language, through: :script
   has_many :scores, as: :entriable, dependent: :destroy
 
+  # Creates a new phonetic entry for a particular sentence record.
+  def create_phonetic
+    p_script = script.phonetic
+    update(group_id: id) if group_id.nil?
+    phonetic_entry = entry.translate(script.lang_code, 'ipa')
+    p_script.sentences.create(entry: entry, group_id: group_id)
+  end
+
   # Will retrieve the STS for a sentence given a base_script
   def retrieve_sts(base_script)
     score = scores.where(name: 'STS', map_to_id: base_script.id,

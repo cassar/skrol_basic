@@ -21,16 +21,6 @@ def user_exhaust(user, word)
   return_user_exhaust(exhaust_cat)
 end
 
-# Returns an array containing all sentences whose entries containt the given
-# word record's entry.
-def sentences_found_in(word)
-  sentences = []
-  word.script.sentences.each do |sentence|
-    sentences << sentence if word_in_sentence?(word, sentence)
-  end
-  sentences
-end
-
 # Returns an array with all metrics related to all sentences in a given
 # sentences array related to a given user.
 def related_metrics(sentences, user)
