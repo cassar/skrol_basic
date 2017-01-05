@@ -44,4 +44,32 @@ class CreateContentTest < ActiveSupport::TestCase
     language = lang_by_name('English')
     language_stats(language)
   end
+
+  test 'content_add_helper' do
+    base_lang = lang_by_name('English')
+    target_lang = lang_by_name('Spanish')
+    establish_chars(base_lang, target_lang)
+    map_wts(base_lang, target_lang)
+
+    target_script = lang_by_name('Spanish').base_script
+    hurdle = 2
+    base_script = lang_by_name('English').base_script
+
+    content_add_helper(base_script, target_script, hurdle)
+  end
+
+  test 'next_word_below_hurdle' do
+    base_lang = lang_by_name('English')
+    target_lang = lang_by_name('Spanish')
+    establish_chars(base_lang, target_lang)
+    map_wts(base_lang, target_lang)
+
+    target_script = lang_by_name('Spanish').base_script
+    word_rep_counts = return_word_rep_counts(target_script)
+    hurdle = 2
+    base_script = lang_by_name('English').base_script
+    template = word_by_id(16)
+    result = next_word_below_hurdle(word_rep_counts, hurdle, base_script)
+    assert_equal(template, result, 'Incorrect word returned')
+  end
 end
