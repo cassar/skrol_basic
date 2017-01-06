@@ -10,7 +10,7 @@ class Sentence < ApplicationRecord
     p_script = script.phonetic
     update(group_id: id) if group_id.nil?
     phonetic_entry = entry.translate(script.lang_code, 'ipa')
-    p_script.sentences.create(entry: entry, group_id: group_id)
+    p_script.sentences.create(entry: phonetic_entry, group_id: group_id)
   end
 
   # Will retrieve the STS for a sentence given a base_script

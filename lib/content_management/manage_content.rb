@@ -11,9 +11,22 @@ end
 # versions of a word. Will throw an error if the base_entry cannot be translated
 # to phonetic and will save neither entry.
 def create_sentence(base_entry, base_script, group_id = nil)
+  base = nil
   ActiveRecord::Base.transaction do
     base = base_script.sentences.create(entry: base_entry, group_id: group_id)
     base.create_phonetic
+  end
+  base
+end
+
+# Creates 4 sentence entries given a base entry, a base_script and target_script
+# Will only save all or nothing if the sentences can be translated to phonetic.
+def create_slide(base_entry, base_script, target_script)
+  ActiveRecord::Base.transaction do
+    base = create_sentence(base_entry, base_script)
+    target_entry =
+      base_entry.translate(base_script.lang_code, target_script.lang_code)
+    create_sentence(target_entry, target_script, base.group_id)
   end
 end
 

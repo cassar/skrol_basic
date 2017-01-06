@@ -26,6 +26,16 @@ class CreateContentTest < ActiveSupport::TestCase
     end
   end
 
+  test 'create_slide' do
+    base_entry = 'the car'
+    base_script = lang_by_name('English').base_script
+    target_script = lang_by_name('Spanish').base_script
+    call = 'Sentence.count'
+    assert_difference(call, 4, 'incorrect # of sents saved') do
+      create_slide(base_entry, base_script, target_script)
+    end
+  end
+
   test 'sentences_found_in' do
     word = word_by_id(10)
     sentence1 = sentence_by_id(2)
