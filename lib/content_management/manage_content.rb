@@ -48,6 +48,7 @@ def content_add_helper(base_script, target_script, hurdle)
   word_rep_counts = return_word_rep_counts(target_script)
   total_reached = return_total_reached(word_rep_counts, hurdle)
   next_word = next_word_below_hurdle(word_rep_counts, hurdle, base_script)
+  raise Invalid, 'No next_word found!' if next_word.nil?
   count = word_rep_counts[next_word.id]
   puts "#{total_reached} word records at #{hurdle} reps or more."
   puts "Add sentences for word_entry: #{next_word.entry} (#{count} reps)"

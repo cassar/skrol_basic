@@ -19,6 +19,11 @@ class CreateContentTest < ActiveSupport::TestCase
     assert_difference(call, 2, 'incorrect # of sents saved') do
       create_sentence(base_entry, base_script)
     end
+    assert_difference(call, 0, 'incorrect # of sents saved') do
+      assert_raises(Invalid, 'Invalid not raised') do
+        create_sentence('test this', base_script)
+      end
+    end
   end
 
   test 'sentences_found_in' do

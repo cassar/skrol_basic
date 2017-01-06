@@ -8,6 +8,7 @@ def calculate_wfs(word)
     word_count += inc_word_count
     total_words += inc_total_words
   end
+  return 0 if total_words.zero?
   word_count.to_f / total_words
 end
 

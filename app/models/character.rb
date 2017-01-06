@@ -1,5 +1,6 @@
 class Character < ApplicationRecord
-  validates :entry, presence: true
+  # validates presence removed because I need to save a ' '
+  # validates :entry, presence: true
   validates :entry, uniqueness: { scope: :script_id }
   belongs_to :script
   has_one :language, through: :script

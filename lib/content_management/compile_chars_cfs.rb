@@ -25,6 +25,7 @@ end
 def create_cfs_scores(catalogue, script, total)
   catalogue.each do |key, value|
     char = Character.where(entry: key, script_id: script.id).first
+    puts catalogue if char.nil?
     raise Invalid, "No char '#{key}' for that script on record!" if char.nil?
     score = value.to_f / total
     score = char.scores.create(map_to_id: script.id, map_to_type: 'scripts',
@@ -36,9 +37,7 @@ end
 # used in the word records of that script along with its corresponding count.
 def derive_chars_catalogue(script)
   catalogue = {}
-  Word.where(script_id: script.id).each do |word|
-    add_chars_to_catalogue(word, catalogue)
-  end
+  script.words.each { |word| add_chars_to_catalogue(word, catalogue) }
   catalogue
 end
 

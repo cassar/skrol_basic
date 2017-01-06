@@ -3,10 +3,12 @@ require 'test_helper'
 class CharacterTest < ActiveSupport::TestCase
   test 'Character.create and destroy' do
     script = lang_by_name('English').base_script
-    script.characters.create(entry: 'a')
-    script.characters.create(entry: 'a')
-    script.characters.create
-
+    call = 'script.characters.count'
+    assert_difference(call, 2, 'wrong number of chars saved') do
+      script.characters.create(entry: 'a')
+      script.characters.create(entry: 'a')
+      script.characters.create(entry: ' ')
+    end
     script = lang_by_name('Spanish').base_script
     char = script.characters.create(entry: 'a')
     score = char.scores.create(map_to_id: 2, map_to_type: 'Character',
@@ -16,7 +18,6 @@ class CharacterTest < ActiveSupport::TestCase
     score_count = Score.where(name: 'CFS').count
     assert_equal(1, score_count, 'No scores saved')
 
-    assert_equal(6, Character.count, 'Wrong number of characters saved!')
     assert_not_nil(char.script, '.script method does not work.')
     assert_not_nil(char.language, '.language method does not work.')
 

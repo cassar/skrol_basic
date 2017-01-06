@@ -49,10 +49,10 @@ class PopulateCharsCFSTest < ActiveSupport::TestCase
 
   test 'derive_chars_catalogue' do
     script = lang_by_name('English').base_script
-    script.words.each(&:destroy)
-    script.words.create(entry: 'apple')
 
-    template = { 'a' => 1, 'p' => 2, 'l' => 1, 'e' => 1 }
+    template = { 'h' => 3, 'e' => 9, 'l' => 7, 'o' => 6, 'c' => 3, 'w' => 2, 'u' => 4, 'd' => 2,
+                 'y' => 3, 'a' => 4, 'p' => 5, 'r' => 4, 'b' => 3, 't' => 5, 'S' => 1, 'n' => 3,
+                 'i' => 2, 's' => 1, 'm' => 1 }
     assert_equal(template, derive_chars_catalogue(script), 'objects not equal')
   end
 
