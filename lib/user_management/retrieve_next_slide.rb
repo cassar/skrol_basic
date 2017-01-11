@@ -104,7 +104,7 @@ end
 # Returns array of word records given a sentence record
 def return_word_array(sentence)
   word_arr = []
-  entry_arr = sentence.entry.gsub(/(\.|\!|\?)/, '').split
+  entry_arr = sentence.entry.split_sentence
   entry_arr.each do |entry|
     word = return_word(sentence.script, entry)
     raise Invalid, "No word entry found for entry: #{entry}" if word.nil?

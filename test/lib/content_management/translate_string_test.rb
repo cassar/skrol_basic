@@ -6,7 +6,7 @@ class TranslateStringTest < ActiveSupport::TestCase
   #   assert_equal('Hola', string, 'bing translate not working')
   # end
 
-  test 'String.translate should convert to IPA' do
+  test 'String.translate should word for ipa' do
     b_script = lang_by_name('English').base_script
 
     string = 'would you'.translate('en', 'ipa')
@@ -14,6 +14,15 @@ class TranslateStringTest < ActiveSupport::TestCase
 
     assert_raises(Invalid, 'Invalid should have raised') do
       'bull test'.translate('en', 'ipa')
+    end
+  end
+
+  test 'String.split_paragraph' do
+    string = 'Hello you. I think, that you great! and you?'
+    arr = []
+    call = 'arr.count'
+    assert_difference(call, 4, 'incorrrectt split') do
+      arr = string.split_paragraph
     end
   end
 

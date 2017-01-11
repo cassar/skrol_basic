@@ -33,6 +33,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   watch(%r{^lib/(.*/)?([^/]+)\.rb$})     { |m| "test/#{m[1]}test_#{m[2]}.rb" }
   watch(%r{^test/test_helper\.rb$})      { 'test' }
 
+  # add_paragraphs lib and its tests
+  watch('lib/content_management/add_paragraphs.rb') do
+    'test/lib/content_management/add_paragraphs_test.rb'
+  end
+  watch('test/lib/content_management/add_paragraphs_test.rb') do
+    'test/lib/content_management/add_paragraphs_test.rb'
+  end
+
   # compile_chars_cfs lib and its tests
   watch('lib/content_management/compile_chars_cfs.rb') do
     'test/lib/content_management/compile_chars_cfs_test.rb'
@@ -49,12 +57,28 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/content_management/translate_string_test.rb'
   end
 
-  # manage_content lib and its tests
-  watch('lib/content_management/manage_content.rb') do
-    'test/lib/content_management/manage_content_test.rb'
+  # create_content lib and its tests
+  watch('lib/content_management/create_content.rb') do
+    'test/lib/content_management/create_content_test.rb'
   end
-  watch('test/lib/content_management/manage_content_test.rb') do
-    'test/lib/content_management/manage_content_test.rb'
+  watch('test/lib/content_management/create_content_test.rb') do
+    'test/lib/content_management/create_content_test.rb'
+  end
+
+  # content_helper lib and its tests
+  watch('lib/content_management/content_helper.rb') do
+    'test/lib/content_management/content_helper_test.rb'
+  end
+  watch('test/lib/content_management/content_helper_test.rb') do
+    'test/lib/content_management/content_helper_test.rb'
+  end
+
+  # content_reports lib and its tests
+  watch('lib/content_management/content_reports.rb') do
+    'test/lib/content_management/content_reports_test.rb'
+  end
+  watch('test/lib/content_management/content_reports_test.rb') do
+    'test/lib/content_management/content_reports_test.rb'
   end
 
   # calculate_wcfbs lib and its tests

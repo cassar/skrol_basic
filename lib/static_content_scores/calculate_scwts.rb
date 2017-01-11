@@ -2,7 +2,7 @@
 # particular sentence.
 def calculate_scwts(target_sentence, base_script)
   total_scores = 0
-  sentence_arr = target_sentence.entry.gsub(/(\.|\!|\?)/, '').split
+  sentence_arr = target_sentence.entry.split_sentence
   target_script = target_sentence.script
   sentence_arr.each do |entry|
     total_scores += retrieve_wts_score(entry, target_script, base_script)

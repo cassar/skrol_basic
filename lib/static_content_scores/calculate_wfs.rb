@@ -14,7 +14,7 @@ end
 
 def count_sentence_words(word, sentence)
   word_count = 0
-  word_arr = sentence.entry.gsub(/(\.|\!|\?)/, '').split
+  word_arr = sentence.entry.split_sentence
   word_arr.each do |entry|
     word_count += 1 if entry == word.entry || entry.downcase == word.entry
   end

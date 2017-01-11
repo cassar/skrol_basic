@@ -20,10 +20,24 @@ class String
   end
 end
 
+# Will split up a paragraph of text up based on delimiters '.', ',', '!', '?'
+class String
+  def split_paragraph
+    scan(/[^\.,!?]+[\.,!?]/).map(&:strip)
+  end
+end
+
+# Split sentence into words removing any punctuation
+class String
+  def split_sentence
+    gsub(/(\.|\!|\?)/, '').split
+  end
+end
+
 # Modifies phonetic to return the ipa equivalent of a sting (self) by refering
 # to the base_code, and looking through the word table in the DB.
 def to_ipa(base_code, phonetic)
-  str_arr = gsub(/(\.|\!|\?)/, '').split
+  str_arr = split_sentence
   str_arr.each do |entry|
     base_arr = retrieve_base_arr(base_code, entry)
     raise Invalid, "No base entry for #{entry}" if base_arr.first.nil?

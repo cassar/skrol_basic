@@ -37,7 +37,7 @@ end
 
 # Returns array of word records for a given sentence record.
 def return_word_arr(sentence)
-  entry_arr = sentence.entry.gsub(/(\.|\!|\?)/, '').split
+  entry_arr = sentence.entry.split_sentence
   word_arr = []
   entry_arr.each do |entry|
     word_arr << retrieve_word(entry, sentence.script)
