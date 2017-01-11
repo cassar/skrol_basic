@@ -41,6 +41,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/content_management/add_paragraphs_test.rb'
   end
 
+  # content_cleanup lib and its tests
+  watch('lib/content_management/content_cleanup.rb') do
+    'test/lib/content_management/content_cleanup_test.rb'
+  end
+  watch('test/lib/content_management/content_cleanup_test.rb') do
+    'test/lib/content_management/content_cleanup_test.rb'
+  end
+
   # compile_chars_cfs lib and its tests
   watch('lib/content_management/compile_chars_cfs.rb') do
     'test/lib/content_management/compile_chars_cfs_test.rb'

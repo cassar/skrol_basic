@@ -6,7 +6,7 @@ class WordTest < ActiveSupport::TestCase
 
     script2 = lang_by_name('Spanish').base_script
 
-    assert_difference('Word.count', 2, 'Wrong number of words saved!') do
+    assert_difference('Word.count', 3, 'Wrong number of words saved!') do
       script.words.create(entry: 'unique')
       script.words.create(entry: 'unique')
       script.words.create

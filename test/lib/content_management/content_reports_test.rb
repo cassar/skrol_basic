@@ -7,7 +7,8 @@ class ContentReportsTest < ActiveSupport::TestCase
   end
 
   test 'missing_words_report' do
-    missing_words_report
+    script = lang_by_name('English').base_script
+    missing_words_report(script)
   end
 
   test 'word_present?' do

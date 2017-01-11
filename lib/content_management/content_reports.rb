@@ -36,16 +36,14 @@ end
 
 # Loops through all sentences and identifies any words in the sentence that are
 # not in the words table.
-def missing_words_report
-  Language.all.each do |language|
-    language.base_script.sentences.each do |sentence|
-      sentence.entry.split_sentence.each do |entry|
-        unless word_present?(entry, sentence.script)
-          puts "entry: #{entry} missing from #{sentence.language.name}"
-        end
-      end
+def missing_words_report(script)
+  entries = []
+  script.sentences.each do |sentence|
+    sentence.entry.split_sentence.each do |entry|
+      entries << entry unless word_present?(entry, sentence.script)
     end
   end
+  entries.uniq.each { |entry| puts "'#{entry}' missing!" }
 end
 
 # Returns true if a word entry is present in the words db false other wise.

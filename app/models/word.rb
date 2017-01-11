@@ -1,6 +1,6 @@
 class Word < ApplicationRecord
   validates :entry, :script_id, presence: true
-  validates :entry, uniqueness: { scope: :script_id }
+  # validates :entry, uniqueness: { scope: :script_id } want phonetic to dbl up
   belongs_to :script
   has_one :language, through: :script
   has_many :scores, as: :entriable, dependent: :destroy

@@ -30,7 +30,7 @@ end
 # Split sentence into words removing any punctuation
 class String
   def split_sentence
-    gsub(/(\.|\!|\?)/, '').split
+    gsub(/(\.|\!|\?|\-|\:|\,)/, '').split
   end
 end
 
