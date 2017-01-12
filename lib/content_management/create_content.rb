@@ -34,11 +34,22 @@ def create_slide(base_entry, base_script, target_script)
   end
 end
 
-#
+# Retrieves the english group id of a foreign word if available.
 def retrieve_english_id(base_entry, base_script)
   english = lang_by_name('English').base_script
   english_entry =
     base_entry.translate(base_script.lang_code, english.lang_code)
   english_word = return_word(english, english_entry)
   english_word.group_id unless english_word.nil?
+end
+
+# Fills in Spanish phonetic words.
+def fill_in_spanish_ipa
+  script = lang_by_name('Spanish').base_script
+  entries = missing_words_report(script)
+  entries.each do |base_entry|
+    ipa_entry = retrieve_ipa_word_from_wiktionary(base_entry)
+    next if ipa_entry.nil?
+    create_word(base_entry, ipa_entry, script)
+  end
 end

@@ -33,6 +33,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   watch(%r{^lib/(.*/)?([^/]+)\.rb$})     { |m| "test/#{m[1]}test_#{m[2]}.rb" }
   watch(%r{^test/test_helper\.rb$})      { 'test' }
 
+  # retrieve_ipa lib and its tests
+  watch('lib/content_management/retrieve_ipa.rb') do
+    'test/lib/content_management/retrieve_ipa_test.rb'
+  end
+  watch('test/lib/content_management/retrieve_ipa_test.rb') do
+    'test/lib/content_management/retrieve_ipa_test.rb'
+  end
+
   # add_paragraphs lib and its tests
   watch('lib/content_management/add_paragraphs.rb') do
     'test/lib/content_management/add_paragraphs_test.rb'
@@ -57,12 +65,12 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/content_management/compile_chars_cfs_test.rb'
   end
 
-  # translate_string lib and its tests
-  watch('lib/content_management/translate_string.rb') do
-    'test/lib/content_management/translate_string_test.rb'
+  # string_extension lib and its tests
+  watch('lib/content_management/string_extension.rb') do
+    'test/lib/content_management/string_extension_test.rb'
   end
-  watch('test/lib/content_management/translate_string_test.rb') do
-    'test/lib/content_management/translate_string_test.rb'
+  watch('test/lib/content_management/string_extension_test.rb') do
+    'test/lib/content_management/string_extension_test.rb'
   end
 
   # create_content lib and its tests
