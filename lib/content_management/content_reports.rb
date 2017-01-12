@@ -34,6 +34,13 @@ def puts_histogram(word_rep_counts, average)
   puts "Average representations: #{average}"
 end
 
+def puts_sentence_groups
+  english = lang_by_name('English').base_script
+  english.sentences.each do |sentence|
+    Sentence.where(group_id: sentence.group_id).each { |sent| puts sent.entry }
+  end
+end
+
 # Loops through all sentences and identifies any words in the sentence that are
 # not in the words table.
 def missing_words_report(script)

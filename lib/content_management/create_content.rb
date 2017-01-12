@@ -49,7 +49,20 @@ def fill_in_spanish_ipa
   entries = missing_words_report(script)
   entries.each do |base_entry|
     ipa_entry = retrieve_ipa_word_from_wiktionary(base_entry)
+    if ipa_entry.nil? && base_entry.downcase != base_entry
+      ipa_entry = retrieve_ipa_word_from_wiktionary(base_entry.downcase)
+    end
     next if ipa_entry.nil?
     create_word(base_entry, ipa_entry, script)
+  end
+end
+
+def fill_in_missing_ipa_sents
+  english = lang_by_name('English').base_script
+  english.sentences.each do |sentence|
+    next if Sentence.where(group_id: sentence.group_id).count > 2
+    Sentence.where(group_id: sentence.group_id).each do |sent|
+      sent.create_phonetic
+    end
   end
 end
