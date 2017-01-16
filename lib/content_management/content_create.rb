@@ -40,37 +40,27 @@ def retrieve_english_id(base_entry, base_script)
   english_entry =
     base_entry.translate(base_script.lang_code, english.lang_code)
   english_word = return_word(english, english_entry)
-  english_word.group_id unless english_word.nil?
+  return english_word.group_id unless english_word.nil?
+  nil
 end
 
-# Fills in any ipa entries that have '[new]' as their phonetic entry give a
-# base_script record.
-def prepare_ipa_entries(base_script)
-  entries = []
-  base_script.phonetic.words.where(entry: '[new]').each do |phons|
-    entries << phons.base.entry
-  end
-  fill_in_ipa_entries(entries)
-end
-
-# Fills in IPA entries of word record given an array of base words records.
-def fill_in_ipa_entries(entries)
-  entries.each do |base_word|
-    base_entry = base_word.entry
-    ipa_entry, entry = retrieve_ipa_word_from_wiktionary(base_entry)
-    if ipa_entry.nil? && base_entry.downcase != base_entry
-      ipa_entry, entry = retrieve_ipa_word_from_wiktionary(base_entry.downcase)
-    end
-    ipa_entry = '[none]' if ipa_entry.nil?
+# Fills in IPA entries of word record given an array of base word records.
+def fill_in_ipa_entries(base_script)
+  base_script.phonetic.words.where(entry: '[new]').each do |phon_word|
+    base_entry = phon_word.base.entry
+    ipa_entry, entry = search_for_ipa_entry(base_entry)
     base_word.update(entry: entry)
     base_word.phonetic.update(entry: ipa_entry)
   end
 end
 
-def fill_in_missing_ipa_sents
-  english = lang_by_name('English').base_script
-  english.sentences.each do |sentence|
-    next if Sentence.where(group_id: sentence.group_id).count > 2
-    Sentence.where(group_id: sentence.group_id).each(&:create_phonetic)
+# Searches for an IPA entry given a base entry, will try capitalize and
+# downcase, will return '[none]' for IPA entry if it can't find anything.
+def search_for_ipa_entry(base_entry)
+  ipa_entry, entry = retrieve_ipa_word_wiktionary(base_entry)
+  if ipa_entry.nil? && base_entry.downcase != base_entry
+    ipa_entry, entry = retrieve_ipa_word_wiktionary(base_entry.downcase)
   end
+  ipa_entry = '[none]' if ipa_entry.nil?
+  [ipa_entry, entry]
 end

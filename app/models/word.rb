@@ -1,6 +1,5 @@
 class Word < ApplicationRecord
   validates :entry, :script_id, presence: true
-  # validates :entry, uniqueness: { scope: :script_id } want phonetic to dbl up
   belongs_to :script
   has_one :language, through: :script
   has_many :scores, as: :entriable, dependent: :destroy
@@ -9,14 +8,14 @@ class Word < ApplicationRecord
   def create_phonetic(entry)
     p_script = script.phonetic
     update(group_id: id) if group_id.nil?
-    p_script.words.create(entry: entry, group_id: group_id)
+    p_script.words.create(entry: entry, assoc_id: id, group_id: group_id)
   end
 
   # Returns phonetic word of given word.
   # The method currently assumes a word only has one phonetic entry.
   def phonetic
     p_script = script.phonetic
-    phonetic = p_script.words.where(group_id: group_id)
+    phonetic = p_script.words.where(assoc_id: id)
     raise Invalid, "No phonetic for '#{entry}' found!" if phonetic.first.nil?
     raise Invalid, "More than one phon found for #{entry}" if phonetic.count > 1
     phonetic.first
@@ -25,7 +24,7 @@ class Word < ApplicationRecord
   # Returns true if a phoneic word is attached to word record
   def phonetic_present?
     p_script = script.phonetic
-    phonetic = p_script.words.where(group_id: group_id).first
+    phonetic = p_script.words.where(assoc_id: id).first
     return false if phonetic.nil?
     true
   end
@@ -33,7 +32,9 @@ class Word < ApplicationRecord
   # Returs the base entry of a phonetic word record.
   def base
     b_script = script.base
-    base = b_script
+    base = b_script.words.where(id: assoc_id).first
+    raise Invalid, "No base entry for '#{entry}' found" if base.nil?
+    base
   end
 
   # Returns all word records in the same group

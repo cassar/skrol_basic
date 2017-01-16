@@ -6,9 +6,12 @@ class ContentReportsTest < ActiveSupport::TestCase
     language_stats(language)
   end
 
-  test 'missing_words_report' do
+  test 'missing_words_filler' do
     script = lang_by_name('English').base_script
-    missing_words_report(script)
+    assert_difference('Word.count', 10, 'incorrect # of words saved') do
+      missing_words_filler(script)
+    end
+    assert_equal(5, Word.where(entry: '[new]').count, 'incorrect news saved')
   end
 
   test 'word_present?' do
