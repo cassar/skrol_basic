@@ -3,7 +3,6 @@ require 'test_helper'
 class WordTest < ActiveSupport::TestCase
   test 'Word.create and destroy' do
     script = lang_by_name('English').base_script
-
     script2 = lang_by_name('Spanish').base_script
 
     assert_difference('Word.count', 3, 'Wrong number of words saved!') do
@@ -45,6 +44,9 @@ class WordTest < ActiveSupport::TestCase
     assert_equal(b_word.group_id, p_word.group_id, 'group_id mismatch!')
     assert_equal(p_word, b_word.phonetic, ".phonetic doesn't work")
     assert_raises(Invalid, 'Invalid not raised') { p_word.phonetic }
+
+    b_word.create_phonetic('[none]')
+    assert_raises(Invalid, 'Invalid not raised') { b_word.phonetic }
   end
 
   test 'phonetic_present?' do

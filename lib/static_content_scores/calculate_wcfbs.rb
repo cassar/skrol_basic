@@ -2,7 +2,7 @@
 # base_script
 def compile_wcfbs(target_word, base_script)
   score = calculate_wcfbs(target_word, base_script)
-  target_word.scores.create(map_to_id: base_script.id, map_to_type: 'scripts',
+  target_word.scores.create(map_to_id: base_script.id, map_to_type: 'Script',
                             name: 'WCFBS', entry: score)
 end
 
@@ -25,7 +25,7 @@ def return_cfils_score(char_entry, base_script)
   char = base_script.characters.where(entry: char_entry).first
   return 0.0 if char.nil?
   cfils_score = char.scores.where(map_to_id: base_script.id,
-                                  map_to_type: 'scripts',
+                                  map_to_type: 'Script',
                                   name: 'CFS').first
   raise Invalid, "No CFS score for '#{char_entry}'!" if cfils_score.nil?
   cfils_score.entry

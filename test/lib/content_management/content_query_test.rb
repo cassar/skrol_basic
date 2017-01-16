@@ -32,32 +32,12 @@ class QueryMethodsTest < ActiveSupport::TestCase
     assert_raises(Invalid, 'Did not raise Invalid') { sentence_by_id(-1) }
   end
 
-  test 'user_by_id' do
-    user = User.first
-    assert_equal(user, user_by_id(1), 'incorrect user record returned')
-    assert_raises(Invalid, 'invalid not raised') { user_by_id(-1) }
-  end
-
-  test 'user_score_by_metric' do
-    metric = UserMetric.second
-    score = UserScore.first
-    result = user_score_by_metric(metric)
-    assert_equal(score, result, 'incorrect score returned')
-    metric = UserMetric.first
-    assert_raises(Invalid, 'Invalid Failed to raise') do
-      user_score_by_metric(metric)
-    end
-  end
-
-  test 'retrieve_wts' do
-    word_id = 26
-    base_script = lang_by_name('English').base_script
-    template = Score.first
-    result = retrieve_wts(word_id, base_script)
-    assert_equal(template, result, 'incorrect score retrieved')
-    assert_raises(Invalid, 'Invalid not raised') do
-      word_id = 1
-      retrieve_wts(word_id, base_script)
-    end
+  test 'retrieve_char' do
+    entry = 'h'
+    script = lang_by_name('English').base_script
+    template = Character.where(entry: 'h').first
+    result = retrieve_char(entry, script)
+    assert_equal(template, result, 'incorrect score record returned')
+    assert_raises(Invalid, 'Invalid not raised') { retrieve_char('a', script) }
   end
 end

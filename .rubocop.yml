@@ -13,6 +13,8 @@ AllCops:
     - 'db/schema.rb'
     - 'Rakefile'
     - 'db/seeds.rb'
+    - 'lib/content_management/transfer_totoeba_sents.rb'
+    - 'lib/content_management/string_extension.rb'
 
 Style/Documentation:
   Enabled: false

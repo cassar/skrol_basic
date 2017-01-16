@@ -43,17 +43,27 @@ def retrieve_english_id(base_entry, base_script)
   english_word.group_id unless english_word.nil?
 end
 
-# Fills in Spanish phonetic words.
-def fill_in_spanish_ipa
-  script = lang_by_name('Spanish').base_script
-  entries = missing_words_report(script)
-  entries.each do |base_entry|
-    ipa_entry = retrieve_ipa_word_from_wiktionary(base_entry)
+# Fills in any ipa entries that have '[new]' as their phonetic entry give a
+# base_script record.
+def prepare_ipa_entries(base_script)
+  entries = []
+  base_script.phonetic.words.where(entry: '[new]').each do |phons|
+    entries << phons.base.entry
+  end
+  fill_in_ipa_entries(entries)
+end
+
+# Fills in IPA entries of word record given an array of base words records.
+def fill_in_ipa_entries(entries)
+  entries.each do |base_word|
+    base_entry = base_word.entry
+    ipa_entry, entry = retrieve_ipa_word_from_wiktionary(base_entry)
     if ipa_entry.nil? && base_entry.downcase != base_entry
-      ipa_entry = retrieve_ipa_word_from_wiktionary(base_entry.downcase)
+      ipa_entry, entry = retrieve_ipa_word_from_wiktionary(base_entry.downcase)
     end
-    next if ipa_entry.nil?
-    create_word(base_entry, ipa_entry, script)
+    ipa_entry = '[none]' if ipa_entry.nil?
+    base_word.update(entry: entry)
+    base_word.phonetic.update(entry: ipa_entry)
   end
 end
 
@@ -61,8 +71,6 @@ def fill_in_missing_ipa_sents
   english = lang_by_name('English').base_script
   english.sentences.each do |sentence|
     next if Sentence.where(group_id: sentence.group_id).count > 2
-    Sentence.where(group_id: sentence.group_id).each do |sent|
-      sent.create_phonetic
-    end
+    Sentence.where(group_id: sentence.group_id).each(&:create_phonetic)
   end
 end

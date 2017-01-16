@@ -6,6 +6,7 @@ require 'rails/all'
 Dir["./lib/static_content_scores/*.rb"].each {|file| require file }
 Dir["./lib/user_management/*.rb"].each {|file| require file }
 Dir["./lib/content_management/*.rb"].each {|file| require file }
+Dir["./lib/old_scripts/*.rb"].each {|file| require file }
 Dir["./lib/*.rb"].each {|file| require file }
 
 # Require the gems listed in Gemfile, including any gems

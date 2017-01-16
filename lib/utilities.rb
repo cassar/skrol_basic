@@ -45,10 +45,11 @@ end
 
 # Returns word record associated with an entry.
 # Will search for capitalized version if it can't find first version.
+# Same as retrieve_word in calculate_swos
 def return_word(script, entry)
   word = script.words.where(entry: entry).first
-  word = script.words.where(entry: entry.capitalize).first if word.nil?
   word = script.words.where(entry: entry.downcase).first if word.nil?
+  word = script.words.where(entry: entry.capitalize).first if word.nil?
   word
 end
 

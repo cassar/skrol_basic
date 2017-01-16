@@ -11,7 +11,7 @@ end
 # Then creates new ones given catalogue and script.
 # Will return total characters in sample for use in CFS computation.
 def create_chars_return_total(catalogue, script)
-  Character.where(script_id: script.id).each(&:destroy)
+  script.characters.each(&:destroy)
   total = 0
   catalogue.each do |key, value|
     script.characters.create(entry: key)
@@ -24,12 +24,9 @@ end
 # language_key, script string, integer total characters in catalogue.
 def create_cfs_scores(catalogue, script, total)
   catalogue.each do |key, value|
-    char = Character.where(entry: key, script_id: script.id).first
-    puts catalogue if char.nil?
-    raise Invalid, "No char '#{key}' for that script on record!" if char.nil?
+    char = retrieve_char(key, script)
     score = value.to_f / total
-    score = char.scores.create(map_to_id: script.id, map_to_type: 'scripts',
-                               name: 'CFS', entry: score)
+    char.create_cfs(score)
   end
 end
 

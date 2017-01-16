@@ -16,9 +16,10 @@ class Word < ApplicationRecord
   # The method currently assumes a word only has one phonetic entry.
   def phonetic
     p_script = script.phonetic
-    phonetic = p_script.words.where(group_id: group_id).first
-    raise Invalid, "No phonetic for '#{entry}' found!" if phonetic.nil?
-    phonetic
+    phonetic = p_script.words.where(group_id: group_id)
+    raise Invalid, "No phonetic for '#{entry}' found!" if phonetic.first.nil?
+    raise Invalid, "More than one phon found for #{entry}" if phonetic.count > 1
+    phonetic.first
   end
 
   # Returns true if a phoneic word is attached to word record
@@ -27,6 +28,12 @@ class Word < ApplicationRecord
     phonetic = p_script.words.where(group_id: group_id).first
     return false if phonetic.nil?
     true
+  end
+
+  # Returs the base entry of a phonetic word record.
+  def base
+    b_script = script.base
+    base = b_script
   end
 
   # Returns all word records in the same group

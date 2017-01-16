@@ -47,15 +47,19 @@ def missing_words_report(script)
   entries = []
   script.sentences.each do |sentence|
     sentence.entry.split_sentence.each do |entry|
-      entries << entry unless word_present?(entry, sentence.script)
+      entries << entry unless word_present?(entry, script)
     end
   end
-  entries.uniq.each { |entry| puts "'#{entry}' missing!" }
+  entries.uniq.each do |entry|
+    word = script.words.create(entry: entry)
+    word.create_phonetic('[new]')
+  end
 end
 
 # Returns true if a word entry is present in the words db false other wise.
 def word_present?(entry, script)
   return true if script.words.where(entry: entry).first.present?
   return true if script.words.where(entry: entry.downcase).first.present?
+  return true if script.words.where(entry: entry.capitalize).first.present?
   false
 end

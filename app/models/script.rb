@@ -5,6 +5,7 @@ class Script < ApplicationRecord
   has_many :characters
   has_many :words
   has_many :sentences
+  has_many :regexes
 
   # Returns the phonetic script of a particular base script.
   def phonetic
@@ -16,6 +17,13 @@ class Script < ApplicationRecord
   # Creates a new phonetic script for a base script.
   def create_phonetic(name)
     language.scripts.create(name: name, parent_script_id: id)
+  end
+
+  # Returns the base script of a phonetic script
+  def base
+    base = Script.where(id: parent_script_id).first
+    raise Invalid, 'No base script found' if base.nil?
+    base
   end
 
   # Retrieves a word record from a script given an entry

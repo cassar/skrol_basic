@@ -25,4 +25,11 @@ class CharacterTest < ActiveSupport::TestCase
     score_count = Score.where(name: 'CFS').count
     assert_equal(0, score_count, 'Score did not destroy.')
   end
+
+  test 'Character.create_cfs' do
+    char = Character.first
+    score = 0.94
+    call = "Score.where(name: 'CFS').count"
+    assert_difference(call, 1, 'cfs did not save') { char.create_cfs(score) }
+  end
 end

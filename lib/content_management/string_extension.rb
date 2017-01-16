@@ -12,11 +12,11 @@ class String
     if target_code != 'ipa'
       key = 'wQHWbTTe+glxEd5J16lkSgTSNz9C8M5Ca2z98HHG0sg='
       translator = BingTranslator.new('SkrollApp', key)
-      phonetic << translator.translate(self, from: base_code, to: target_code)
+      phonetic = translator.translate(self, from: base_code, to: target_code)
     else
       to_ipa(base_code, phonetic)
     end
-    phonetic
+    phonetic.to_s
   end
 end
 
@@ -30,7 +30,7 @@ end
 # Split sentence into words removing any punctuation
 class String
   def split_sentence
-    gsub(/(\.|\!|\?|\-|\:|\,|\;|\')/, '').split
+    gsub(/(\.|\!|\?|\-|\:|\,|\;|\'|\¿|\¡|\(|\)|\")/, '').split
   end
 end
 
@@ -51,5 +51,8 @@ def retrieve_base_arr(base_code, entry)
   b_script = Script.where(lang_code: base_code).first
   base_arr = b_script.words.where(entry: entry)
   base_arr = b_script.words.where(entry: entry.downcase) if base_arr.first.nil?
+  if base_arr.first.nil?
+    base_arr = b_script.words.where(entry: entry.capitalize)
+  end
   base_arr
 end

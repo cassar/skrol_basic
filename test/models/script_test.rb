@@ -31,12 +31,19 @@ class ScriptTest < ActiveSupport::TestCase
     assert_raises(Invalid, 'Invalid not raised') { p_script.phonetic }
   end
 
-  test 'word_by_entry' do
+  test 'Script.base' do
+    phon = Script.where(id: 2).first
+    base = Script.where(id: 1).first
+    assert_equal(base, phon.base, 'incorrect script returnd')
+    assert_raises(Invalid, 'Invalid should have been raised') { base.base }
+  end
+
+  test 'Script.word_by_entry' do
     script = lang_by_name('English').base_script
     assert_not_nil(script.word_by_entry('hello'), 'word_by_entry does not work')
   end
 
-  test 'retrieve_all_wts' do
+  test 'Script.retrieve_all_wts' do
     base_script = lang_by_name('English').base_script
     compile_chars_cfs(base_script)
     compile_chars_cfs(base_script.phonetic)

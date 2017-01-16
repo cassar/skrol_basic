@@ -73,12 +73,12 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/content_management/string_extension_test.rb'
   end
 
-  # create_content lib and its tests
-  watch('lib/content_management/create_content.rb') do
-    'test/lib/content_management/create_content_test.rb'
+  # content_create lib and its tests
+  watch('lib/content_management/content_create.rb') do
+    'test/lib/content_management/content_create_test.rb'
   end
-  watch('test/lib/content_management/create_content_test.rb') do
-    'test/lib/content_management/create_content_test.rb'
+  watch('test/lib/content_management/content_create_test.rb') do
+    'test/lib/content_management/content_create_test.rb'
   end
 
   # content_helper lib and its tests
@@ -207,12 +207,12 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/user_management/exhaust_methods_test.rb'
   end
 
-  # query_methods lib and its test
-  watch('lib/content_management/query_methods.rb') do
-    'test/lib/content_management/query_methods_test.rb'
+  # content_query lib and its test
+  watch('lib/content_management/content_query.rb') do
+    'test/lib/content_management/content_query_test.rb'
   end
-  watch('test/lib/content_management/query_methods_test.rb') do
-    'test/lib/content_management/query_methods_test.rb'
+  watch('test/lib/content_management/content_query_test.rb') do
+    'test/lib/content_management/content_query_test.rb'
   end
 
   # utilities lib and its test
@@ -256,6 +256,10 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   watch('test/models/user_metric_test.rb') do
     'test/models/user_metric_test.rb'
   end
+
+  # Regex model and its tests
+  watch('app/models/regex.rb') { 'test/models/regex_test.rb' }
+  watch('test/models/regex_test.rb') { 'test/models/regex_test.rb' }
 
   # slide_controller and its test
   watch('app/controllers/slide_controller.rb') do
