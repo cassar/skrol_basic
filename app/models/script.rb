@@ -28,7 +28,7 @@ class Script < ApplicationRecord
 
   # Retrieves a word record from a script given an entry
   def word_by_entry(entry)
-    word = words.where(entry: entry).first
+    word = words.where(entry: entry.downcase).first
     raise Invalid, "No entry: #{entry} found" if word.nil?
     word
   end
@@ -44,7 +44,7 @@ class Script < ApplicationRecord
     word_count = words.count
     raise Invalid, "No words in #{language.name}:#{name}" if word_count < 1
     scores = []
-    words.each { |word| scores << word.retrieve_wts(base_script) }
+    words.each { |word| scores << word.retrieve_score('WTS', base_script) }
     scores
   end
 end

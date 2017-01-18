@@ -4,7 +4,12 @@ class ContentHelperTest < ActiveSupport::TestCase
   test 'content_add_helper' do
     base_lang = lang_by_name('English')
     target_lang = lang_by_name('Spanish')
+
     establish_chars(base_lang, target_lang)
+    target_script = target_lang.base_script
+    compile_wfs_script(target_script)
+    compile_wls_script(target_script)
+
     map_wts(base_lang, target_lang)
 
     target_script = lang_by_name('Spanish').base_script
@@ -36,7 +41,12 @@ class ContentHelperTest < ActiveSupport::TestCase
   test 'next_word_below_hurdle' do
     base_lang = lang_by_name('English')
     target_lang = lang_by_name('Spanish')
+
     establish_chars(base_lang, target_lang)
+    target_script = target_lang.base_script
+    compile_wfs_script(target_script)
+    compile_wls_script(target_script)
+
     map_wts(base_lang, target_lang)
 
     target_script = lang_by_name('Spanish').base_script

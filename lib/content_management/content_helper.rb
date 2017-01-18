@@ -60,7 +60,7 @@ def next_word_below_hurdle(word_rep_counts, hurdle, base_script)
   next_score = template = { entry: -1 }
   word_rep_counts.each do |key, value|
     next if value >= hurdle
-    candidate = retrieve_wts(key, base_script)
+    candidate = word_by_id(key).retrieve_score('WTS', base_script)
     next_score = candidate if candidate.entry > next_score[:entry]
   end
   return nil if next_score == template

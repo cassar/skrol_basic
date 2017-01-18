@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class QueryMethodsTest < ActiveSupport::TestCase
+class ContentQueryTest < ActiveSupport::TestCase
   test 'lang_by_name' do
     assert_not_nil(lang_by_name('English'), 'Failed to retrieve English.')
     assert_raises(Invalid, 'Did not raises Invalid') do
@@ -44,7 +44,7 @@ class QueryMethodsTest < ActiveSupport::TestCase
   test 'return_word' do
     script = lang_by_name('English').base_script
     word = script.words.where(entry: 'bottle').first
-    word2 = script.words.where(entry: 'Sydney').first
+    word2 = script.words.where(entry: 'sydney').first
 
     assert_equal(word, return_word('bottle', script), 'Did not find bottle')
     assert_equal(word2, return_word('sydney', script), 'Did not find Sydney')

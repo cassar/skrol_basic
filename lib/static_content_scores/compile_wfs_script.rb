@@ -20,12 +20,13 @@ end
 # Adds chars to catalogue object, increments existing entry by 1 if already
 # present.
 def add_words_to_catalogue(sentence, catalogue)
-  word_arr = sentence.entry.gsub(/(\.|\!|\?)/, '').split
-  word_arr.each do |word|
-    if catalogue[word.downcase].nil?
-      catalogue[word.downcase] = 1
+  entry_arr = sentence.entry.split_sentence
+  entry_arr.each do |entry|
+    entry_down = entry.downcase
+    if catalogue[entry_down].nil?
+      catalogue[entry_down] = 1
     else
-      catalogue[word] += 1 unless word.nil?
+      catalogue[entry_down] += 1 unless entry_down.nil?
     end
   end
 end
@@ -42,13 +43,10 @@ end
 # Creates new WFS score record for all matching word records belonging to a
 # script
 def assign_wfs(script, catalogue, total_words)
-  catalogue.each do |key, value|
-    word = return_word(key, script)
-    next if word.nil?
-    # Make a create or update method here!
-    word.scores.where(map_to_id: script.id, map_to_type: 'Script',
-                      name: 'WFS').each(&:destroy)
-    word.scores.create(map_to_id: script.id, map_to_type: 'Script',
-                       name: 'WFS', entry: value.to_f / total_words)
+  script.words.each do |word|
+    numerator = catalogue[word.entry]
+    numerator = 0 if numerator.nil?
+    score = numerator.to_f / total_words
+    word.create_update_score('WFS', script, score)
   end
 end

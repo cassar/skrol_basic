@@ -61,7 +61,7 @@ def fill_in_ipa_entries(base_script)
 end
 
 # Converts a sentence entry into the international phonetic alphabet and saves
-# it as a new entry.
+# it as a new phonetic entry.
 def derive_phonetics(lang)
   base_script = lang.base_script
   phonetic_script = lang.phonetic_script

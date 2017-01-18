@@ -3,13 +3,12 @@ require 'httparty'
 # Searches for an IPA entry given a base entry, will try capitalize and
 # downcase, will return '[none]' for IPA entry if it can't find anything.
 def search_for_ipa_entry(base_entry, base_script)
-  ipa_entry, entry = retrieve_ipa_from_wiktionary(base_entry, base_script)
+  ipa_entry = retrieve_ipa_from_wiktionary(base_entry, base_script)
   if ipa_entry.nil? && base_entry.downcase != base_entry
-    ipa_entry, entry =
-      retrieve_ipa_from_wiktionary(base_entry.downcase, base_script)
+    ipa_entry = retrieve_ipa_from_wiktionary(base_entry.downcase, base_script)
   end
   ipa_entry = NONE if ipa_entry.nil?
-  [ipa_entry, entry]
+  ipa_entry
 end
 
 # Attemps to retrieve an ipa entry from wiktionary, given a base_entry and

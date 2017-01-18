@@ -43,10 +43,7 @@ end
 # Will search for capitalized version if it can't find first version.
 # Same as retrieve_word in calculate_swos
 def return_word(entry, script)
-  word = script.words.where(entry: entry).first
-  word = script.words.where(entry: entry.downcase).first if word.nil?
-  word = script.words.where(entry: entry.capitalize).first if word.nil?
-  word
+  script.words.where(entry: entry.downcase).first
 end
 
 # Retrieves the english group id of a foreign word if available.

@@ -42,10 +42,22 @@ class Word < ApplicationRecord
   end
 
   # Retrieves the WTS for a Word record given a base_script
-  def retrieve_wts(base_script)
-    score = scores.where(name: 'WTS', map_to_id: base_script.id,
+  def retrieve_score(name, script)
+    score = scores.where(name: name, map_to_id: script.id,
                          map_to_type: 'Script').first
-    raise Invalid, "No WTS found for word: #{entry}" if score.nil?
+    raise Invalid, "No #{name} found for word: #{entry}" if score.nil?
     score
+  end
+
+  # Creates or updates an existing score given a name, script, entry
+  def create_update_score(name, script, entry)
+    score = scores.where(name: name, map_to_id: script.id,
+                         map_to_type: 'Script').first
+    if score.nil?
+      scores.create(name: name, map_to_id: script.id,
+                    map_to_type: 'Script', entry: entry)
+    else
+      score.update(entry: entry)
+    end
   end
 end

@@ -71,3 +71,11 @@ def report_valid_sentences(lang)
   valid = sents_count - counter
   puts "#{counter}/#{sents_count} not valid. #{valid} are valid"
 end
+
+# Outputs any entries of word's and their ID thar are over 50 chars long.
+def puts_longs
+  Word.all.each do |word|
+    puts "id: #{word.id}, entry: #{word.entry}" if word.entry.length > 50
+  end
+  nil
+end

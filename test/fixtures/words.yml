@@ -51,7 +51,7 @@ bottle:
 
 Sydney:
   id: 8
-  entry: Sydney
+  entry: sydney
   script_id: 1
   group_id: 8
   assoc_id:

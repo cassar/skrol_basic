@@ -66,15 +66,19 @@ class WordTest < ActiveSupport::TestCase
     assert_equal(4, word.return_group.count, 'return_group does not work')
   end
 
-  test 'Word.retrieve_wts' do
+  test 'Word.retrieve_score' do
     word = lang_by_name('Spanish').base_script.word_by_entry('botella')
     base_script = lang_by_name('English').base_script
     score = Score.where(name: 'WTS').first
-    result = word.retrieve_wts(base_script)
+    name = 'WTS'
+    result = word.retrieve_score(name, base_script)
     assert_equal(score, result, 'retrieve_wts failed')
     word = lang_by_name('Spanish').base_script.word_by_entry('color')
     assert_raises(Invalid, 'Invalid was not raised') do
-      word.retrieve_wts(base_script)
+      word.retrieve_score(name, base_script)
     end
+  end
+
+  test 'create_update_score' do
   end
 end
