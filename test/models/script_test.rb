@@ -43,6 +43,9 @@ class ScriptTest < ActiveSupport::TestCase
     assert_not_nil(script.word_by_entry('hello'), 'word_by_entry does not work')
   end
 
+  test 'Script.corresponding' do
+  end
+
   test 'Script.retrieve_all_wts' do
     base_script = lang_by_name('English').base_script
     compile_chars_cfs(base_script)

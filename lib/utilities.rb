@@ -21,38 +21,6 @@ def translate_all_sentences(base_lang, target_lang)
   end
 end
 
-# Converts a sentence entry into the international phonetic alphabet and save
-# it as a new entry.
-def derive_phonetics(lang)
-  base_script = lang.base_script
-  phonetic_script = lang.phonetic_script
-  base_script.sentences.each do |sentence|
-    phonetic = sentence.entry.translate(base_script.lang_code, 'ipa')
-    sentence.update(group_id: sentence.id) if sentence.group_id.nil?
-    create_update_sentence(phonetic, phonetic_script, sentence.group_id)
-  end
-end
-
-# Creates or updates a new sentence given an entry, script and group_id
-def create_update_sentence(entry, script, group_id)
-  sentence = script.sentences.where(group_id: group_id).first
-  if sentence.nil?
-    new_s = script.sentences.create(entry: entry, group_id: group_id)
-  else
-    sentence.update(entry: entry)
-  end
-end
-
-# Returns word record associated with an entry.
-# Will search for capitalized version if it can't find first version.
-# Same as retrieve_word in calculate_swos
-def return_word(script, entry)
-  word = script.words.where(entry: entry).first
-  word = script.words.where(entry: entry.downcase).first if word.nil?
-  word = script.words.where(entry: entry.capitalize).first if word.nil?
-  word
-end
-
 # Returs a new work score entry given the metric and score records
 def return_user_word_score(metric, score)
   new_entry = score.entry

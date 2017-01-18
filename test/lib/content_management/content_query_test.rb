@@ -40,4 +40,14 @@ class QueryMethodsTest < ActiveSupport::TestCase
     assert_equal(template, result, 'incorrect score record returned')
     assert_raises(Invalid, 'Invalid not raised') { retrieve_char('a', script) }
   end
+
+  test 'return_word' do
+    script = lang_by_name('English').base_script
+    word = script.words.where(entry: 'bottle').first
+    word2 = script.words.where(entry: 'Sydney').first
+
+    assert_equal(word, return_word('bottle', script), 'Did not find bottle')
+    assert_equal(word2, return_word('sydney', script), 'Did not find Sydney')
+    assert_nil(return_word('soft', script), 'error with none words')
+  end
 end

@@ -11,6 +11,14 @@ def create_word(base_entry, phonetic_entry, base_script, group_id = nil)
   end
 end
 
+# Updates both the phonetic and base entries of a given base_word
+def update_word(base_entry, ipa_entry, base_word)
+  ActiveRecord::Base.transaction do
+    base_word.update(entry: base_entry)
+    base_word.phonetic.update(entry: ipa_entry)
+  end
+end
+
 # Creates two new sentence records, one for the base and one for the phonetic
 # versions of a word. Will throw an error if the base_entry cannot be translated
 # to phonetic and will save neither entry.
@@ -34,33 +42,63 @@ def create_slide(base_entry, base_script, target_script)
   end
 end
 
-# Retrieves the english group id of a foreign word if available.
-def retrieve_english_id(base_entry, base_script)
-  english = lang_by_name('English').base_script
-  english_entry =
-    base_entry.translate(base_script.lang_code, english.lang_code)
-  english_word = return_word(english, english_entry)
-  return english_word.group_id unless english_word.nil?
-  nil
+def thread_fill_ipa(base_script)
+  10.times do
+    Thread.new { fill_in_ipa_entries(base_script) }
+  end
 end
 
 # Fills in IPA entries of word record given an array of base word records.
 def fill_in_ipa_entries(base_script)
-  base_script.phonetic.words.where(entry: '[new]').each do |phon_word|
+  loop do
+    phon_word = base_script.phonetic.words.where(entry: NEW).first
+    break if phon_word.nil?
+    phon_word.update(entry: CHECK)
     base_entry = phon_word.base.entry
-    ipa_entry, entry = search_for_ipa_entry(base_entry)
-    base_word.update(entry: entry)
-    base_word.phonetic.update(entry: ipa_entry)
+    ipa_entry, entry = search_for_ipa_entry(base_entry, base_script)
+    update_word(entry, ipa_entry, phon_word.base)
   end
 end
 
-# Searches for an IPA entry given a base entry, will try capitalize and
-# downcase, will return '[none]' for IPA entry if it can't find anything.
-def search_for_ipa_entry(base_entry)
-  ipa_entry, entry = retrieve_ipa_word_wiktionary(base_entry)
-  if ipa_entry.nil? && base_entry.downcase != base_entry
-    ipa_entry, entry = retrieve_ipa_word_wiktionary(base_entry.downcase)
+# Converts a sentence entry into the international phonetic alphabet and saves
+# it as a new entry.
+def derive_phonetics(lang)
+  base_script = lang.base_script
+  phonetic_script = lang.phonetic_script
+  base_script.sentences.each do |sentence|
+    phonetic = sentence.entry.translate(base_script.lang_code, 'ipa')
+    sentence.update(group_id: sentence.id) if sentence.group_id.nil?
+    create_update_sentence(phonetic, phonetic_script, sentence.group_id)
   end
-  ipa_entry = '[none]' if ipa_entry.nil?
-  [ipa_entry, entry]
+end
+
+# Creates or updates a new sentence given an entry, script and group_id
+def create_update_sentence(entry, script, group_id)
+  sentence = script.sentences.where(group_id: group_id).first
+  if sentence.nil?
+    new_s = script.sentences.create(entry: entry, group_id: group_id)
+  else
+    sentence.update(entry: entry)
+  end
+end
+
+# Goes through all base words and checks if there in a phonetic word accosiated
+# with it, if not it will attempt to create one.
+def fill_in_phonetics
+  Language.all.each do |lang|
+    base_script = lang.base_script
+    phon_script = base_script.phonetic
+    base_script.words.each do |base_word|
+      phon = phon_script.words.where(assoc_id: base_word.id).first
+      next unless phon.nil?
+      fill_single_phonetic(base_word, base_script)
+    end
+  end
+end
+
+# Searches for and creates a new phonetic entry.
+def fill_single_phonetic(base_word)
+  ipa_entry, entry = search_for_ipa_entry(base_word.entry, base_script)
+  base_word.update(entry: entry)
+  base_word.create_phonetic(ipa_entry)
 end

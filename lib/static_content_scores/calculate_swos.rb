@@ -40,16 +40,7 @@ def return_word_arr(sentence)
   entry_arr = sentence.entry.split_sentence
   word_arr = []
   entry_arr.each do |entry|
-    word_arr << retrieve_word(entry, sentence.script)
+    word_arr << return_word(entry, sentence.script)
   end
   word_arr
-end
-
-# retrieves a word record given an entry and a script.
-# Same as return_word in utilities.rb
-def retrieve_word(entry, script)
-  word = script.words.where(entry: entry).first
-  word = script.words.where(entry: entry.downcase).first if word.nil?
-  word = script.words.where(entry: entry.capitalize).first if word.nil?
-  word
 end

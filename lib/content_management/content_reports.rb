@@ -51,7 +51,7 @@ def missing_words_filler(script)
       entries << entry unless word_present?(entry, script)
     end
   end
-  entries.uniq.each { |entry| create_word(entry, '[new]', script) }
+  entries.uniq.each { |entry| create_word(entry, NEW, script) }
 end
 
 # Returns true if a word entry is present in the words db false other wise.
@@ -60,4 +60,14 @@ def word_present?(entry, script)
   return true if script.words.where(entry: entry.downcase).first.present?
   return true if script.words.where(entry: entry.capitalize).first.present?
   false
+end
+
+# reports the number of sentences attached to a phonetic script that are 'valid'
+def report_valid_sentences(lang)
+  phon_sents = lang.phonetic_script.sentences
+  counter = 0
+  phon_sents.each { |sent| counter += 1 if sent.entry.include? NONE }
+  sents_count = phon_sents.count
+  valid = sents_count - counter
+  puts "#{counter}/#{sents_count} not valid. #{valid} are valid"
 end

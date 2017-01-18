@@ -39,4 +39,10 @@ class Sentence < ApplicationRecord
       score.update(entry: entry)
     end
   end
+
+  # Retrieves the SVS (Sentence Validates Score) if one exists, nil otherwise.
+  def retrieve_svs(corr_sentence)
+    scores.where(name: 'SVS', map_to_id: corr_sentence.id,
+                 map_to_type: 'Sentence').first
+  end
 end

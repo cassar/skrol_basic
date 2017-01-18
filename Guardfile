@@ -215,6 +215,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/content_management/content_query_test.rb'
   end
 
+  # content_validate lib and its test
+  watch('lib/content_management/content_validate.rb') do
+    'test/lib/content_management/content_validate_test.rb'
+  end
+  watch('test/lib/content_management/content_validate_test.rb') do
+    'test/lib/content_management/content_validate_test.rb'
+  end
+
   # utilities lib and its test
   watch('lib/utilities.rb') { 'test/lib/utilities_test.rb' }
   watch('test/lib/utilities_test.rb') { 'test/lib/utilities_test.rb' }

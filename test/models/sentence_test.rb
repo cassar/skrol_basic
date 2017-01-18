@@ -63,4 +63,7 @@ class SentenceTest < ActiveSupport::TestCase
       target_sentence.create_update_sts(0.54, base_script)
     end
   end
+
+  test 'Word.retrieve_svs' do
+  end
 end

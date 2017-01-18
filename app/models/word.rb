@@ -17,7 +17,6 @@ class Word < ApplicationRecord
     p_script = script.phonetic
     phonetic = p_script.words.where(assoc_id: id)
     raise Invalid, "No phonetic for '#{entry}' found!" if phonetic.first.nil?
-    raise Invalid, "More than one phon found for #{entry}" if phonetic.count > 1
     phonetic.first
   end
 

@@ -33,6 +33,11 @@ class Script < ApplicationRecord
     word
   end
 
+  # returns a
+  def corresponding(corr_script)
+    corr_script.sentences.where(group_id: group_id).first
+  end
+
   # Retrieves the WTS records for a particular script mapped to a given
   # base_script
   def retrieve_all_wts(base_script)

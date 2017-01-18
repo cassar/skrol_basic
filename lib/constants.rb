@@ -12,3 +12,8 @@ NORMAL_SPEED = 30
 PAUSE_PENALTY = 0.1
 HOVER_PENALTY = 0.5
 HIDE_BONUS = 0.3
+
+# Place Holders
+NONE = '[none]'.freeze
+CHECK = '[check]'.freeze
+NEW = '[new]'.freeze

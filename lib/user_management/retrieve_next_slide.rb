@@ -105,8 +105,9 @@ end
 def return_word_array(sentence)
   word_arr = []
   entry_arr = sentence.entry.split_sentence
+  script = sentence.script
   entry_arr.each do |entry|
-    word = return_word(sentence.script, entry)
+    word = return_word(entry, script)
     raise Invalid, "No word entry found for entry: #{entry}" if word.nil?
     word_arr << word
   end

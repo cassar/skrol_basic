@@ -67,12 +67,4 @@ class CalculateSWOSTest < ActiveSupport::TestCase
     result = return_word_arr(sentence)
     assert_equal(template, result, 'incorrect arr returned')
   end
-
-  test 'retrieve_word' do
-    script = lang_by_name('English').base_script
-    word = script.word_by_entry('would')
-
-    result = retrieve_word('Would', script)
-    assert_equal(word, result, 'incorrect record retrieved')
-  end
 end

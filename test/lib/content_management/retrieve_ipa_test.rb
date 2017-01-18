@@ -6,16 +6,16 @@ class RetrieveIPATest < ActiveSupport::TestCase
 
     word = base_script.words.create(entry: 'perro')
     template = 'ˈpe.ro'
-    result = retrieve_ipa_from_wiktionary(word)
+    result = retrieve_ipa_from_wiktionary(word.entry, base_script)
     assert_equal(template, result, 'incorrect ipa returned')
 
     word = base_script.words.create(entry: 'algún')
-    result = retrieve_ipa_from_wiktionary(word)
+    result = retrieve_ipa_from_wiktionary(word.entry, base_script)
     assert_nil(result, 'should have returned nil')
 
     word = base_script.words.create(entry: 'intención')
     template = 'in.ten.ˈθjon'
-    result = retrieve_ipa_from_wiktionary(word)
+    result = retrieve_ipa_from_wiktionary(word.entry, base_script)
     assert_equal(template, result, 'incorrect ipa returned')
   end
 end

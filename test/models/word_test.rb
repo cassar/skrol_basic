@@ -44,32 +44,29 @@ class WordTest < ActiveSupport::TestCase
     assert_equal(b_word.group_id, p_word.group_id, 'assoc_id mismatch!')
     assert_equal(p_word, b_word.phonetic, ".phonetic doesn't work")
     assert_raises(Invalid, 'Invalid not raised') { p_word.phonetic }
-
-    b_word.create_phonetic('[none]')
-    assert_raises(Invalid, 'Invalid not raised') { b_word.phonetic }
   end
 
-  test 'phonetic_present?' do
+  test 'Word.phonetic_present?' do
     word = lang_by_name('English').base_script.word_by_entry('bottle')
     assert(word.phonetic_present?, 'Wrong bool returned')
     word = lang_by_name('English').base_script.word_by_entry('paper')
     assert_not(word.phonetic_present?, 'Wrong bool returned')
   end
 
-  test 'base' do
+  test 'Word.base' do
     phon = word_by_id(30)
     template = word_by_id(7)
     result = phon.base
     assert_equal(template, result, 'incorrect word record returned')
   end
 
-  test 'return_group' do
+  test 'Word.return_group' do
     word = lang_by_name('English').base_script.word_by_entry('car')
 
     assert_equal(4, word.return_group.count, 'return_group does not work')
   end
 
-  test 'retrieve_wts' do
+  test 'Word.retrieve_wts' do
     word = lang_by_name('Spanish').base_script.word_by_entry('botella')
     base_script = lang_by_name('English').base_script
     score = Score.where(name: 'WTS').first

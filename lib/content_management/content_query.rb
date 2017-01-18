@@ -38,3 +38,23 @@ def retrieve_char(entry, script)
   raise Invalid, "No char: '#{entry}' for that script on record!" if char.nil?
   char
 end
+
+# Returns word record associated with an entry.
+# Will search for capitalized version if it can't find first version.
+# Same as retrieve_word in calculate_swos
+def return_word(entry, script)
+  word = script.words.where(entry: entry).first
+  word = script.words.where(entry: entry.downcase).first if word.nil?
+  word = script.words.where(entry: entry.capitalize).first if word.nil?
+  word
+end
+
+# Retrieves the english group id of a foreign word if available.
+def retrieve_english_id(base_entry, base_script)
+  english = lang_by_name('English').base_script
+  english_entry =
+    base_entry.translate(base_script.lang_code, english.lang_code)
+  english_word = return_word(english_entry, english)
+  return english_word.group_id unless english_word.nil?
+  nil
+end
