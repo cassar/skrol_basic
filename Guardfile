@@ -185,6 +185,22 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/static_content_scores/setup_map_test.rb'
   end
 
+  # compile_wfs_script lib and its test
+  watch('lib/static_content_scores/compile_wfs_script.rb') do
+    'test/lib/static_content_scores/compile_wfs_script_test.rb'
+  end
+  watch('test/lib/static_content_scores/compile_wfs_script_test.rb') do
+    'test/lib/static_content_scores/compile_wfs_script_test.rb'
+  end
+
+  # compile_wls_script lib and its test
+  watch('lib/static_content_scores/compile_wls_script.rb') do
+    'test/lib/static_content_scores/compile_wls_script_test.rb'
+  end
+  watch('test/lib/static_content_scores/compile_wls_script_test.rb') do
+    'test/lib/static_content_scores/compile_wls_script_test.rb'
+  end
+
   # retrieve_next_slide_helper and its tests
   watch('lib/user_management/retrieve_next_slide.rb') do
     'test/lib/user_management/retrieve_next_slide1_test.rb'
