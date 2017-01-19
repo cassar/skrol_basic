@@ -297,3 +297,10 @@ juː:
   script_id: 2
   group_id: 4
   assoc_id: 4
+
+crollare-phon:
+  id: 45
+  entry: [none]
+  script_id: 4
+  group_id: 19
+  assoc_id: 21

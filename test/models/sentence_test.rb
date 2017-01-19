@@ -24,7 +24,7 @@ class SentenceTest < ActiveSupport::TestCase
     end
   end
 
-  test 'create_phonetic' do
+  test 'Sentence.create_phonetic' do
     base_sentence = sentence_by_id(2)
     call = 'Sentence.count'
     assert_difference(call, 1, 'sentence did not save') do
@@ -32,38 +32,35 @@ class SentenceTest < ActiveSupport::TestCase
     end
   end
 
-  test 'retrieve_sts' do
+  test 'Sentence.retrieve_score' do
     sentence = sentence_by_id(3)
     base_script = lang_by_name('English').base_script
     score = Score.where(entriable_id: 3).first
 
-    retrieved = sentence.retrieve_sts(base_script)
+    retrieved = sentence.retrieve_score('STS', base_script)
     assert_equal(score, retrieved, 'retrieve_sts did not work')
     sentence = Sentence.first
     assert_raises(Invalid, 'Invalid failed to raise') do
-      sentence. retrieve_sts(base_script)
+      sentence. retrieve_score('STS', base_script)
     end
   end
 
-  test '.phonetic' do
+  test 'Sentence.phonetic' do
     sentence = sentence_by_id(5)
     template = sentence_by_id(12)
     assert_equal(template, sentence.phonetic, '.phonetic did not work')
   end
 
-  test 'create_update_sts' do
+  test 'Sentence.create_update_score' do
     target_sentence = sentence_by_id(3)
     base_script = lang_by_name('English').base_script
     call = "Score.where(name: 'STS').count"
     assert_difference(call, 0, 'incorrect scores saved') do
-      target_sentence.create_update_sts(0.09, base_script)
+      target_sentence.create_update_score('STS', base_script, 0.09)
     end
     target_sentence = sentence_by_id(9)
     assert_difference(call, 1, 'incorrect scores saved') do
-      target_sentence.create_update_sts(0.54, base_script)
+      target_sentence.create_update_score('STS', base_script, 0.54)
     end
-  end
-
-  test 'Word.retrieve_svs' do
   end
 end

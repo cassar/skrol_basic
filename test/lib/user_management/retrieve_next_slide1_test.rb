@@ -30,6 +30,9 @@ class RetrieveNextSlide1Test < ActiveSupport::TestCase
     end
   end
 
+  test 'return_next_available_entries' do
+  end
+
   test 'retrieve_next_word' do
     base_lang = lang_by_name('English')
     target_lang = lang_by_name('Spanish')

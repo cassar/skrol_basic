@@ -14,10 +14,10 @@ class Sentence < ApplicationRecord
   end
 
   # Will retrieve the STS for a sentence given a base_script
-  def retrieve_sts(base_script)
-    score = scores.where(name: 'STS', map_to_id: base_script.id,
+  def retrieve_score(name, base_script)
+    score = scores.where(name: name, map_to_id: base_script.id,
                          map_to_type: 'Script')
-    raise Invalid, "No STS for sentence.id: #{id} found!" if score.count < 1
+    raise Invalid, "No #{name} for sentence.id: #{id} found!" if score.count < 1
     score.first
   end
 
@@ -28,21 +28,15 @@ class Sentence < ApplicationRecord
     phonetic
   end
 
-  # Either updates or creates a new sts score given an entry and base script.
-  def create_update_sts(entry, base_script)
-    score = scores.where(map_to_id: base_script.id, map_to_type: 'Script',
-                         name: 'STS').first
+  # Creates or updates an existing score given a name, script, entry
+  def create_update_score(name, script, entry)
+    score = scores.where(name: name, map_to_id: script.id,
+                         map_to_type: 'Script').first
     if score.nil?
-      scores.create(map_to_id: base_script.id, map_to_type: 'Script',
-                    name: 'STS', entry: entry)
+      scores.create(name: name, map_to_id: script.id,
+                    map_to_type: 'Script', entry: entry)
     else
       score.update(entry: entry)
     end
-  end
-
-  # Retrieves the SVS (Sentence Validates Score) if one exists, nil otherwise.
-  def retrieve_svs(corr_sentence)
-    scores.where(name: 'SVS', map_to_id: corr_sentence.id,
-                 map_to_type: 'Sentence').first
   end
 end

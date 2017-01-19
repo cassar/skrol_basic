@@ -70,4 +70,7 @@ class UserTest < ActiveSupport::TestCase
       user.create_metric_stub(target_word, target_sentence)
     end
   end
+
+  test 'User.raise_to_threshold' do
+  end
 end

@@ -7,17 +7,28 @@
 #   phonetic_arr: (an array of word records used in the phonetic sentence)
 #   base_arr: (an array of word records used in the base sentence)
 def retrieve_next_slide(user, target_script)
-  # Search for target_word
-  target_word = retrieve_next_word(user, target_script)
-  raise Invalid, 'no more words!' if target_word.nil?
-  # Search for matching target_sentence
-  target_sentence = retrieve_next_sentence(user, target_word)
-  raise Invalid, 'no more sentences!' if target_sentence.nil?
+  target_word, target_sentence =
+    return_next_available_entries(user, target_script)
   # Create or update word score
   user.create_touch_score(target_word)
   # Create new Metric stub
   user.create_metric_stub(target_word, target_sentence)
   return_slide(target_word, target_sentence, user)
+end
+
+# Retrieves the next available sentence and word entries that a user will view.
+def return_next_available_entries(user, target_script)
+  loop do
+    # Search for target_word
+    target_word = retrieve_next_word(user, target_script)
+    raise Invalid, 'no more words!' if target_word.nil?
+    # Search for matching target_sentence
+    target_sentence = retrieve_next_sentence(user, target_word)
+    # Break if one found
+    return [target_word, target_sentence] if target_sentence.present?
+    # Push user word score up to THRESHOLD so next word will be retrieved.
+    user.raise_to_threshold(target_word)
+  end
 end
 
 # Retrieves the next word a user will view given user and target_script record
@@ -33,7 +44,7 @@ def retrieve_next_sentence(user, target_word)
   target_word.script.sentences.each do |sentence|
     next if sentence_used?(sentence, user)
     next unless word_in_sentence?(target_word, sentence)
-    score = sentence.retrieve_sts(user.base_script)
+    score = sentence.retrieve_score('STS', user.base_script)
     max_score = score if score.entry > max_score[:entry]
   end
   return nil if max_score == template

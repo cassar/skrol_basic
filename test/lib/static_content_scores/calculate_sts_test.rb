@@ -17,11 +17,15 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_wfs_script(script)
     compile_wls_script(script)
 
+    script.words.each { |word| compile_wts(word, base_script) }
+    compile_swls(script)
+
     compile_sts(target_sentence, base_script)
 
-    result = target_sentence.retrieve_sts(base_script)
-    assert_equal(0.273631124986594, result.entry, 'incorrect score returned')
-    assert_equal(1, target_sentence.scores.count, 'old score was not removed')
+    result = target_sentence.retrieve_score('STS', base_script)
+    assert(result.entry.is_a?(Float), 'incorrect score returned')
+    result = target_sentence.scores.where(name: 'STS').count
+    assert_equal(1, result, 'old score was not removed')
   end
 
   test 'calculate_sts' do
@@ -42,8 +46,11 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_wfs_script(script)
     compile_wls_script(script)
 
+    script.words.each { |word| compile_wts(word, base_script) }
+    compile_swls(script)
+
     result = calculate_sts(target_sentence, base_script)
-    assert_equal(0.27363112498659375, result, 'incorrect sts score returned')
+    assert(result.is_a?(Float), 'incorrect sts score returned')
   end
 
   test 'return_sentence_scores' do
@@ -63,8 +70,11 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_wfs_script(script)
     compile_wls_script(script)
 
-    template = [0.1625185605654356, 0.0, 0.6666666666666667]
+    script.words.each { |word| compile_wts(word, base_script) }
+    compile_swls(script)
+
+    template = 3
     result = return_sentence_scores(target_sentence, base_script)
-    assert_equal(template, result, 'incorrect scores array returned')
+    assert_equal(template, result.count, 'incorrect scores array returned')
   end
 end

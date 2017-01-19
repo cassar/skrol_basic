@@ -9,7 +9,7 @@ class SetupMapTest < ActiveSupport::TestCase
     char_count = base_lang.characters.count + target_lang.characters.count
     word_count = target_lang.base_script.words.count
     sentence_count = target_lang.base_script.sentences.count
-    total_count = char_count + word_count * 3 + sentence_count
+    total_count = char_count + word_count * 3 + sentence_count * 2
     assert_equal(total_count, Score.count, 'incorrect # of scores saved')
   end
 
@@ -44,8 +44,12 @@ class SetupMapTest < ActiveSupport::TestCase
 
     establish_chars(base_lang, target_lang)
     target_script = target_lang.base_script
+    base_script = base_lang.base_script
     compile_wfs_script(target_script)
     compile_wls_script(target_script)
+
+    target_script.words.each { |word| compile_wts(word, base_script) }
+    compile_swls(target_script)
 
     map_sts(base_lang, target_lang)
 

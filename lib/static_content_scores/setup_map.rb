@@ -12,6 +12,9 @@ def setup_map(base_lang, target_lang)
   # Compile Word Total Scores (WTS)
   map_wts(base_lang, target_lang)
 
+  # Compile Sentence Word Length Scores (SWLS)
+  compile_swls(target_script)
+
   # Compile Sentence Total Scores (STS)
   map_sts(base_lang, target_lang)
 end
