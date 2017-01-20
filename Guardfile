@@ -285,9 +285,13 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   watch('app/models/user_map.rb') { 'test/models/user_map_test.rb' }
   watch('test/models/user_map_test.rb') { 'test/models/user_map_test.rb' }
 
-  # Regex model and its tests
+  # regex model and its tests
   watch('app/models/regex.rb') { 'test/models/regex_test.rb' }
   watch('test/models/regex_test.rb') { 'test/models/regex_test.rb' }
+
+  # map model and its tests
+  watch('app/models/map.rb') { 'test/models/map_test.rb' }
+  watch('test/models/map_test.rb') { 'test/models/map_test.rb' }
 
   # slide_controller and its test
   watch('app/controllers/slide_controller.rb') do

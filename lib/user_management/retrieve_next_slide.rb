@@ -6,24 +6,24 @@
 #   target_arr: (an array of word records used in the target sentence)
 #   phonetic_arr: (an array of word records used in the phonetic sentence)
 #   base_arr: (an array of word records used in the base sentence)
-def retrieve_next_slide(user, target_script)
+def retrieve_next_slide(user, base_script, target_script)
   target_word, target_sentence =
-    return_next_available_entries(user, target_script)
+    return_next_available_entries(user, base_script, target_script)
   # Create or update word score
   user.create_touch_score(target_word)
   # Create new Metric stub
   user.create_metric_stub(target_word, target_sentence)
-  return_slide(target_word, target_sentence, user)
+  return_slide(target_word, target_sentence, base_script)
 end
 
 # Retrieves the next available sentence and word entries that a user will view.
-def return_next_available_entries(user, target_script)
+def return_next_available_entries(user, base_script, target_script)
   loop do
     # Search for target_word
-    target_word = retrieve_next_word(user, target_script)
+    target_word = retrieve_next_word(user, base_script, target_script)
     raise Invalid, 'no more words!' if target_word.nil?
     # Search for matching target_sentence
-    target_sentence = retrieve_next_sentence(user, target_word)
+    target_sentence = retrieve_next_sentence(user, target_word, base_script)
     # Break if one found
     return [target_word, target_sentence] if target_sentence.present?
     # Push user word score up to THRESHOLD so next word will be retrieved.
@@ -32,19 +32,19 @@ def return_next_available_entries(user, target_script)
 end
 
 # Retrieves the next word a user will view given user and target_script record
-def retrieve_next_word(user, target_script)
+def retrieve_next_word(user, base_script, target_script)
   word = word_from_scores(user, target_script)
-  word = word_from_words(user, target_script) if word.nil?
+  word = word_from_words(user, base_script, target_script) if word.nil?
   word
 end
 
 # Retrieves the next sentence a user will view given a word object
-def retrieve_next_sentence(user, target_word)
+def retrieve_next_sentence(user, target_word, base_script)
   max_score = template = { entry: -1 }
   target_word.script.sentences.each do |sentence|
     next if sentence_used?(sentence, user)
     next unless word_in_sentence?(target_word, sentence)
-    score = sentence.retrieve_score('STS', user.base_script)
+    score = sentence.retrieve_score('STS', base_script)
     max_score = score if score.entry > max_score[:entry]
   end
   return nil if max_score == template
@@ -52,18 +52,18 @@ def retrieve_next_sentence(user, target_word)
 end
 
 # Returs slide object given a target_word, target_sentence, and user records
-def return_slide(target_word, target_sentence, user)
+def return_slide(target_word, target_sentence, base_script)
   slide = {}
   slide[:representative] = target_word
-  assign_sentences(slide, target_sentence, user)
+  assign_sentences(slide, target_sentence, base_script)
   assign_arrays(slide, target_sentence)
   slide
 end
 
 # assigns the sentences to the slide object given a target_sentence
-def assign_sentences(slide, target_sentence, user)
+def assign_sentences(slide, target_sentence, base_script)
   slide[:target_sentence] = target_sentence
-  slide[:base_sentence] = user.base_sentence(target_sentence)
+  slide[:base_sentence] = target_sentence.corresponding(base_script)
   slide[:phonetic_sentence] = target_sentence.phonetic
 end
 
@@ -87,9 +87,9 @@ def word_from_scores(user, target_script)
 end
 
 # Retrieves the next Word record from a the Word table for a User
-def word_from_words(user, target_script)
+def word_from_words(user, base_script, target_script)
   max_score = template = { entry: -1 }
-  target_script.retrieve_all_wts(user.base_script).each do |score|
+  target_script.retrieve_all_wts(base_script).each do |score|
     word = word_by_id(score.entriable_id)
     next if word_used?(word, user)
     max_score = score if score.entry > max_score[:entry]

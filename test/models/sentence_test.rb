@@ -63,4 +63,7 @@ class SentenceTest < ActiveSupport::TestCase
       target_sentence.create_update_score('STS', base_script, 0.54)
     end
   end
+
+  test 'Sentence.corresponding' do
+  end
 end

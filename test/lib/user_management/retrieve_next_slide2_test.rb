@@ -5,6 +5,7 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
     slide = {}
     target_sentence = sentence_by_id(3)
     base_sentence = sentence_by_id(2)
+    base_script = base_sentence.script
     user = user_by_name('Luke')
 
     template = {
@@ -13,7 +14,7 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
       phonetic_sentence: target_sentence.phonetic
     }
 
-    assign_sentences(slide, target_sentence, user)
+    assign_sentences(slide, target_sentence, base_script)
     assert_equal(template, slide, 'Slide does not match template')
   end
 
@@ -53,16 +54,17 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
     setup_map(base_lang, target_lang)
 
     target_script = target_lang.base_script
+    base_script = base_lang.base_script
     user = user_by_name('Luke')
     template = word_by_id(18)
-    result = word_from_words(user, target_script)
+    result = word_from_words(user, base_script, target_script)
     assert_equal(template, result, 'incorrect word record returned')
 
     target_script.words.each do |word|
       user.user_scores.create(target_word_id: word.id, entry: 0.9,
                               status: 'tested')
     end
-    result = word_from_words(user, target_script)
+    result = word_from_words(user, base_script, target_script)
     assert_nil(result, 'should have returned nil')
   end
 

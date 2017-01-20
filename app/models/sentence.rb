@@ -39,4 +39,11 @@ class Sentence < ApplicationRecord
       score.update(entry: entry)
     end
   end
+
+  # returns a corresponding sentence given a corresponding_script.
+  def corresponding(corr_script)
+    sent = corr_script.sentences.where(group_id: group_id).first
+    raise Invalid, "No corresponding found for sent_id: #{id}" if sent.nil?
+    sent
+  end
 end

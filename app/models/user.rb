@@ -5,19 +5,6 @@ class User < ApplicationRecord
   has_many :user_metrics
   has_many :user_maps
 
-  # Returns a base_script of the user record
-  def base_script
-    lang_by_id(base_lang).base_script
-  end
-
-  # Returns a base_sentence given for a user given a target sentence
-  def base_sentence(target_sentence)
-    sent = base_script.sentences.where(group_id: target_sentence.group_id).first
-    message = "No base_sentence found for target.id: #{target_sentence.id}"
-    raise Invalid, message if sent.nil?
-    sent
-  end
-
   # Either creates or a new user_score record or updates an existing one with
   # status 'testing'.
   def create_touch_score(target_word)
