@@ -1,8 +1,9 @@
 class User < ApplicationRecord
-  validates :name, :base_lang, presence: true
+  validates :name, presence: true
   validates :name, uniqueness: true
   has_many :user_scores
   has_many :user_metrics
+  has_many :user_maps
 
   # Returns a base_script of the user record
   def base_script

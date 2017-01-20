@@ -6,11 +6,10 @@ class UserTest < ActiveSupport::TestCase
     assert_difference(call, 0, 'should not have saved') do
       User.create
       User.create(name: 'Kyle')
-      User.create(base_lang: 1)
     end
     assert_difference(call, 1, 'should have saved') do
-      User.create(name: 'Kyle', base_lang: 1)
-      User.create(name: 'Kyle', base_lang: 1)
+      User.create(name: 'Kyle')
+      User.create(name: 'Kyle')
     end
   end
 

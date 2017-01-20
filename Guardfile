@@ -281,6 +281,10 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/models/user_metric_test.rb'
   end
 
+  # user_map model and its tests
+  watch('app/models/user_map.rb') { 'test/models/user_map_test.rb' }
+  watch('test/models/user_map_test.rb') { 'test/models/user_map_test.rb' }
+
   # Regex model and its tests
   watch('app/models/regex.rb') { 'test/models/regex_test.rb' }
   watch('test/models/regex_test.rb') { 'test/models/regex_test.rb' }
