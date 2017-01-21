@@ -68,17 +68,20 @@ class WordTest < ActiveSupport::TestCase
 
   test 'Word.retrieve_score' do
     word = lang_by_name('Spanish').base_script.word_by_entry('botella')
-    base_script = lang_by_name('English').base_script
+    lang_map = LangMap.first
     score = Score.where(name: 'WTS').first
     name = 'WTS'
-    result = word.retrieve_score(name, base_script)
+    result = word.retrieve_score(name, lang_map)
     assert_equal(score, result, 'retrieve_wts failed')
     word = lang_by_name('Spanish').base_script.word_by_entry('color')
     assert_raises(Invalid, 'Invalid was not raised') do
-      word.retrieve_score(name, base_script)
+      word.retrieve_score(name, lang_map)
     end
   end
 
   test 'create_update_score' do
+  end
+
+  test 'reps' do
   end
 end

@@ -36,12 +36,13 @@ class SentenceTest < ActiveSupport::TestCase
     sentence = sentence_by_id(3)
     base_script = lang_by_name('English').base_script
     score = Score.where(entriable_id: 3).first
+    lang_map = LangMap.first
 
-    retrieved = sentence.retrieve_score('STS', base_script)
+    retrieved = sentence.retrieve_score('STS', lang_map)
     assert_equal(score, retrieved, 'retrieve_sts did not work')
     sentence = Sentence.first
     assert_raises(Invalid, 'Invalid failed to raise') do
-      sentence. retrieve_score('STS', base_script)
+      sentence.retrieve_score('STS', lang_map)
     end
   end
 
@@ -53,14 +54,14 @@ class SentenceTest < ActiveSupport::TestCase
 
   test 'Sentence.create_update_score' do
     target_sentence = sentence_by_id(3)
-    base_script = lang_by_name('English').base_script
+    lang_map = LangMap.first
     call = "Score.where(name: 'STS').count"
     assert_difference(call, 0, 'incorrect scores saved') do
-      target_sentence.create_update_score('STS', base_script, 0.09)
+      target_sentence.create_update_score('STS', lang_map, 0.09)
     end
     target_sentence = sentence_by_id(9)
     assert_difference(call, 1, 'incorrect scores saved') do
-      target_sentence.create_update_score('STS', base_script, 0.54)
+      target_sentence.create_update_score('STS', lang_map, 0.54)
     end
   end
 

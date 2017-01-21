@@ -26,6 +26,9 @@ class ContentQueryTest < ActiveSupport::TestCase
     assert_raises(Invalid, 'Did not raise Invalid') { word_by_id(-1) }
   end
 
+  test 'word_by_rank' do
+  end
+
   test 'sentence_by_id' do
     sent = Sentence.first
     assert_equal(sent, sentence_by_id(1), 'method did not work')

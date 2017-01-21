@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class CalculateSCWTSTest < ActiveSupport::TestCase
+  test 'compile_scwts' do
+  end
+
   test 'calculate_scwts' do
     base_script = lang_by_name('English').base_script
 
@@ -18,10 +21,12 @@ class CalculateSCWTSTest < ActiveSupport::TestCase
     compile_wfs_script(script)
     compile_wls_script(script)
 
-    script.words.each { |word| compile_wts(word, base_script) }
+    lang_map = LangMap.first
+
+    script.words.each { |word| compile_wts(word, lang_map) }
     compile_swls(script)
 
-    result = calculate_scwts(target_sentence, base_script)
+    result = calculate_scwts(target_sentence, lang_map)
     assert(result.is_a?(Float), 'incorrect scwts returned')
   end
 
@@ -40,10 +45,12 @@ class CalculateSCWTSTest < ActiveSupport::TestCase
     compile_wfs_script(script2)
     compile_wls_script(script2)
 
-    script2.words.each { |word| compile_wts(word, script) }
+    lang_map = LangMap.first
+
+    script2.words.each { |word| compile_wts(word, lang_map) }
     compile_swls(script2)
 
-    result = retrieve_wts_score('bottiglia', script2, script)
+    result = retrieve_wts_score('bottiglia', lang_map)
     assert(result.is_a?(Float), 'incorrect wts score returned')
   end
 end

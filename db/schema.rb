@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170120030624) do
+ActiveRecord::Schema.define(version: 20170121113456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,13 +20,21 @@ ActiveRecord::Schema.define(version: 20170120030624) do
     t.integer "script_id"
   end
 
+  create_table "lang_maps", force: :cascade do |t|
+    t.integer "base_lang"
+    t.integer "target_lang"
+  end
+
   create_table "languages", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "maps", force: :cascade do |t|
-    t.integer "base_lang"
-    t.integer "target_lang"
+  create_table "ranks", force: :cascade do |t|
+    t.integer  "word_id"
+    t.float    "lang_map_id"
+    t.integer  "rank_num"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "regexes", force: :cascade do |t|
@@ -59,11 +67,10 @@ ActiveRecord::Schema.define(version: 20170120030624) do
 
   create_table "user_maps", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "base_lang"
-    t.integer  "target_lang"
     t.integer  "rank_num"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "lang_map_id"
   end
 
   create_table "user_metrics", force: :cascade do |t|

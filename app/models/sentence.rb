@@ -14,9 +14,9 @@ class Sentence < ApplicationRecord
   end
 
   # Will retrieve the STS for a sentence given a base_script
-  def retrieve_score(name, base_script)
-    score = scores.where(name: name, map_to_id: base_script.id,
-                         map_to_type: 'Script')
+  def retrieve_score(name, map_to)
+    score = scores.where(name: name, map_to_id: map_to.id,
+                         map_to_type: map_to.class.to_s)
     raise Invalid, "No #{name} for sentence.id: #{id} found!" if score.count < 1
     score.first
   end
@@ -29,12 +29,12 @@ class Sentence < ApplicationRecord
   end
 
   # Creates or updates an existing score given a name, script, entry
-  def create_update_score(name, script, entry)
-    score = scores.where(name: name, map_to_id: script.id,
-                         map_to_type: 'Script').first
+  def create_update_score(name, map_to, entry)
+    score = scores.where(name: name, map_to_id: map_to.id,
+                         map_to_type: map_to.class.to_s).first
     if score.nil?
-      scores.create(name: name, map_to_id: script.id,
-                    map_to_type: 'Script', entry: entry)
+      scores.create(name: name, map_to_id: map_to.id,
+                    map_to_type: map_to.class.to_s, entry: entry)
     else
       score.update(entry: entry)
     end

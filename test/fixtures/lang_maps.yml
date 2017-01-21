@@ -1,9 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+en-es:
+  id: 1
   base_lang: 1
-  target_lang: 1
-
-two:
-  base_lang: 1
-  target_lang: 1
+  target_lang: 3

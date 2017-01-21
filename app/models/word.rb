@@ -3,6 +3,7 @@ class Word < ApplicationRecord
   belongs_to :script
   has_one :language, through: :script
   has_many :scores, as: :entriable, dependent: :destroy
+  has_many :ranks
 
   # Creates a new phonetic entry for a particular word record.
   def create_phonetic(entry)
@@ -42,22 +43,38 @@ class Word < ApplicationRecord
   end
 
   # Retrieves the WTS for a Word record given a base_script
-  def retrieve_score(name, script)
-    score = scores.where(name: name, map_to_id: script.id,
-                         map_to_type: 'Script').first
+  def retrieve_score(name, map_to)
+    score = scores.where(name: name, map_to_id: map_to.id,
+                         map_to_type: map_to.class.to_s).first
     raise Invalid, "No #{name} found for word: #{entry}" if score.nil?
     score
   end
 
   # Creates or updates an existing score given a name, script, entry
-  def create_update_score(name, script, entry)
-    score = scores.where(name: name, map_to_id: script.id,
-                         map_to_type: 'Script').first
+  def create_update_score(name, map_to, entry)
+    score = scores.where(name: name, map_to_id: map_to.id,
+                         map_to_type: map_to.class.to_s).first
     if score.nil?
-      scores.create(name: name, map_to_id: script.id,
-                    map_to_type: 'Script', entry: entry)
+      scores.create(name: name, map_to_id: map_to.id,
+                    map_to_type: map_to.class.to_s, entry: entry)
     else
       score.update(entry: entry)
     end
+  end
+
+  # Creates a REP score in order to be able to retrive sentences associated
+  # with the word.
+  def create_rep(sentence)
+    scores.create(name: 'REP', map_to_id: sentence.id, map_to_type: 'Sentence',
+                  entry: 0)
+  end
+
+  # Returns all the representative sentence_ids related to a word.
+  def reps
+    ids = []
+    scores.where(name: 'REP').each do |score|
+      ids << score.map_to_id
+    end
+    ids
   end
 end

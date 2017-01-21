@@ -97,6 +97,22 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/content_management/content_reports_test.rb'
   end
 
+  # compile_reps lib and its tests
+  watch('lib/static_content_scores/compile_reps.rb') do
+    'test/lib/static_content_scores/compile_reps_test.rb'
+  end
+  watch('test/lib/static_content_scores/compile_reps_test.rb') do
+    'test/lib/static_content_scores/compile_reps_test.rb'
+  end
+
+  # compile_ranks lib and its tests
+  watch('lib/static_content_scores/compile_ranks.rb') do
+    'test/lib/static_content_scores/compile_ranks_test.rb'
+  end
+  watch('test/lib/static_content_scores/compile_ranks_test.rb') do
+    'test/lib/static_content_scores/compile_ranks_test.rb'
+  end
+
   # calculate_wcfbs lib and its tests
   watch('lib/static_content_scores/calculate_wcfbs.rb') do
     'test/lib/static_content_scores/calculate_wcfbs_test.rb'
@@ -289,9 +305,13 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   watch('app/models/regex.rb') { 'test/models/regex_test.rb' }
   watch('test/models/regex_test.rb') { 'test/models/regex_test.rb' }
 
-  # map model and its tests
-  watch('app/models/map.rb') { 'test/models/map_test.rb' }
-  watch('test/models/map_test.rb') { 'test/models/map_test.rb' }
+  # lang_map model and its tests
+  watch('app/models/lang_map.rb') { 'test/models/lang_map_test.rb' }
+  watch('test/models/lang_map_test.rb') { 'test/models/lang_map_test.rb' }
+
+  # rank model and its tests
+  watch('app/models/rank.rb') { 'test/models/rank_test.rb' }
+  watch('test/models/rank_test.rb') { 'test/models/rank_test.rb' }
 
   # slide_controller and its test
   watch('app/controllers/slide_controller.rb') do

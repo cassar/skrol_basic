@@ -51,21 +51,15 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
   test 'word_from_words' do
     base_lang = lang_by_name('English')
     target_lang = lang_by_name('Spanish')
-    setup_map(base_lang, target_lang)
+    user_map = user_by_name('Luke').user_maps.first
+    setup_map(user_map.lang_map)
 
     target_script = target_lang.base_script
     base_script = base_lang.base_script
     user = user_by_name('Luke')
     template = word_by_id(18)
-    result = word_from_words(user, base_script, target_script)
+    result = word_from_words(user_map)
     assert_equal(template, result, 'incorrect word record returned')
-
-    target_script.words.each do |word|
-      user.user_scores.create(target_word_id: word.id, entry: 0.9,
-                              status: 'tested')
-    end
-    result = word_from_words(user, base_script, target_script)
-    assert_nil(result, 'should have returned nil')
   end
 
   test 'word_used?' do
@@ -96,5 +90,8 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
 
     result = phonetic_arr_from_base_arr(base_arr)
     assert_equal(template, result, 'incorrect array returned')
+  end
+
+  test 'retrieve_sts' do
   end
 end

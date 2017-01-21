@@ -17,12 +17,14 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_wfs_script(script)
     compile_wls_script(script)
 
-    script.words.each { |word| compile_wts(word, base_script) }
+    lang_map = LangMap.first
+
+    script.words.each { |word| compile_wts(word, lang_map) }
     compile_swls(script)
 
-    compile_sts(target_sentence, base_script)
+    compile_sts(target_sentence, lang_map)
 
-    result = target_sentence.retrieve_score('STS', base_script)
+    result = target_sentence.retrieve_score('STS', lang_map)
     assert(result.entry.is_a?(Float), 'incorrect score returned')
     result = target_sentence.scores.where(name: 'STS').count
     assert_equal(1, result, 'old score was not removed')
@@ -46,10 +48,12 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_wfs_script(script)
     compile_wls_script(script)
 
-    script.words.each { |word| compile_wts(word, base_script) }
+    lang_map = LangMap.first
+
+    script.words.each { |word| compile_wts(word, lang_map) }
     compile_swls(script)
 
-    result = calculate_sts(target_sentence, base_script)
+    result = calculate_sts(target_sentence, lang_map)
     assert(result.is_a?(Float), 'incorrect sts score returned')
   end
 
@@ -70,11 +74,13 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_wfs_script(script)
     compile_wls_script(script)
 
-    script.words.each { |word| compile_wts(word, base_script) }
+    lang_map = LangMap.first
+
+    script.words.each { |word| compile_wts(word, lang_map) }
     compile_swls(script)
 
     template = 3
-    result = return_sentence_scores(target_sentence, base_script)
+    result = return_sentence_scores(target_sentence, lang_map)
     assert_equal(template, result.count, 'incorrect scores array returned')
   end
 end

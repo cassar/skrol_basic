@@ -1,10 +1,10 @@
 # Will report how many words are above the given hurdle of sentences represented
 # in and will suggest the next word to add sentences to raise it above the
 # hurdle based on the WTS.
-def content_add_helper(base_script, target_script, hurdle)
-  word_rep_counts = return_word_rep_counts(target_script)
+def content_add_helper(lang_map, hurdle)
+  word_rep_counts = return_word_rep_counts(lang_map.target_script)
   total_reached = return_total_reached(word_rep_counts, hurdle)
-  next_word = next_word_below_hurdle(word_rep_counts, hurdle, base_script)
+  next_word = next_word_below_hurdle(word_rep_counts, hurdle, lang_map)
   raise Invalid, 'No next_word found!' if next_word.nil?
   count = word_rep_counts[next_word.id]
   puts "#{total_reached} word records at #{hurdle} reps or more."
@@ -56,11 +56,11 @@ end
 
 # Returns the next word record whose number of representations is under a given
 # hurdle and mapped to a base_language
-def next_word_below_hurdle(word_rep_counts, hurdle, base_script)
+def next_word_below_hurdle(word_rep_counts, hurdle, lang_map)
   next_score = template = { entry: -1 }
   word_rep_counts.each do |key, value|
     next if value >= hurdle
-    candidate = word_by_id(key).retrieve_score('WTS', base_script)
+    candidate = word_by_id(key).retrieve_score('WTS', lang_map)
     next_score = candidate if candidate.entry > next_score[:entry]
   end
   return nil if next_score == template

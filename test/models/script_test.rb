@@ -45,30 +45,4 @@ class ScriptTest < ActiveSupport::TestCase
 
   test 'Script.corresponding' do
   end
-
-  test 'Script.retrieve_all_wts' do
-    base_script = lang_by_name('English').base_script
-
-    compile_chars_cfs(base_script)
-    compile_chars_cfs(base_script.phonetic)
-    compile_wfs_script(base_script)
-    compile_wls_script(base_script)
-
-    target_script = lang_by_name('Spanish').base_script
-
-    compile_chars_cfs(target_script)
-    compile_chars_cfs(target_script.phonetic)
-    compile_wfs_script(target_script)
-    compile_wls_script(target_script)
-
-    target_script.words.each { |word| compile_wts(word, base_script) }
-    scores = Score.where(name: 'WTS', map_to_id: base_script.id).count
-    result = target_script.retrieve_all_wts(base_script).count
-    assert_equal(scores, result, 'retrieve did not work')
-
-    target_script = lang_by_name('German').base_script
-    assert_raises(Invalid, 'Invalid not raised') do
-      target_script.retrieve_all_wts(base_script)
-    end
-  end
 end

@@ -6,45 +6,44 @@
 #   target_arr: (an array of word records used in the target sentence)
 #   phonetic_arr: (an array of word records used in the phonetic sentence)
 #   base_arr: (an array of word records used in the base sentence)
-def retrieve_next_slide(user, base_script, target_script)
+def retrieve_next_slide(user_map)
   target_word, target_sentence =
-    return_next_available_entries(user, base_script, target_script)
+    return_next_available_entries(user_map)
   # Create or update word score
-  user.create_touch_score(target_word)
+  user_map.user.create_touch_score(target_word)
   # Create new Metric stub
-  user.create_metric_stub(target_word, target_sentence)
-  return_slide(target_word, target_sentence, base_script)
+  user_map.user.create_metric_stub(target_word, target_sentence)
+  return_slide(target_word, target_sentence, user_map.base_script)
 end
 
 # Retrieves the next available sentence and word entries that a user will view.
-def return_next_available_entries(user, base_script, target_script)
+def return_next_available_entries(user_map)
   loop do
     # Search for target_word
-    target_word = retrieve_next_word(user, base_script, target_script)
+    target_word = retrieve_next_word(user_map)
     raise Invalid, 'no more words!' if target_word.nil?
     # Search for matching target_sentence
-    target_sentence = retrieve_next_sentence(user, target_word, base_script)
+    target_sentence = retrieve_next_sentence(target_word, user_map)
     # Break if one found
     return [target_word, target_sentence] if target_sentence.present?
     # Push user word score up to THRESHOLD so next word will be retrieved.
-    user.raise_to_threshold(target_word)
+    user_map.user.raise_to_threshold(target_word)
   end
 end
 
 # Retrieves the next word a user will view given user and target_script record
-def retrieve_next_word(user, base_script, target_script)
-  word = word_from_scores(user, target_script)
-  word = word_from_words(user, base_script, target_script) if word.nil?
+def retrieve_next_word(user_map)
+  word = word_from_scores(user_map.user, user_map.target_script)
+  word = word_from_words(user_map) if word.nil?
   word
 end
 
 # Retrieves the next sentence a user will view given a word object
-def retrieve_next_sentence(user, target_word, base_script)
+def retrieve_next_sentence(target_word, user_map)
   max_score = template = { entry: -1 }
-  target_word.script.sentences.each do |sentence|
-    next if sentence_used?(sentence, user)
-    next unless word_in_sentence?(target_word, sentence)
-    score = sentence.retrieve_score('STS', base_script)
+  target_word.reps.each do |sentence_id|
+    next if sentence_used?(sentence_id, user_map.user)
+    score = retrieve_sts(sentence_id, user_map.lang_map)
     max_score = score if score.entry > max_score[:entry]
   end
   return nil if max_score == template
@@ -87,15 +86,16 @@ def word_from_scores(user, target_script)
 end
 
 # Retrieves the next Word record from a the Word table for a User
-def word_from_words(user, base_script, target_script)
-  max_score = template = { entry: -1 }
-  target_script.retrieve_all_wts(base_script).each do |score|
-    word = word_by_id(score.entriable_id)
-    next if word_used?(word, user)
-    max_score = score if score.entry > max_score[:entry]
+def word_from_words(user_map)
+  rank_num = user_map.rank_num
+  word = nil
+  loop do
+    word = word_by_rank(user_map, rank_num)
+    break unless word_used?(word, user_map.user)
+    rank_num += 1
   end
-  return nil if max_score == template
-  word_by_id(max_score.entriable_id)
+  user_map.update(rank_num: rank_num)
+  word
 end
 
 # Returns true if a word has (already) been viewed by a user, false otherwise
@@ -106,8 +106,8 @@ def word_used?(word, user)
 end
 
 # Returns true if a sentence has already been viewed by a user, false otherwise
-def sentence_used?(sentence, user)
-  metric = user.user_metrics.where(target_sentence_id: sentence.id).first
+def sentence_used?(sentence_id, user)
+  metric = user.user_metrics.where(target_sentence_id: sentence_id).first
   return false if metric.nil?
   true
 end
@@ -130,4 +130,13 @@ def phonetic_arr_from_base_arr(base_arr)
   word_arr = []
   base_arr.each { |word| word_arr << word.phonetic }
   word_arr
+end
+
+# Returs an STS given a sentence ID and a base script.
+def retrieve_sts(sentence_id, lang_map)
+  score = Score.where(entriable_id: sentence_id, entriable_type: 'Sentence',
+                      name: 'STS', map_to_id: lang_map.id,
+                      map_to_type: 'LangMap').first
+  raise Invalid, "No STS found for sentence_id: #{sentence_id}" if score.nil?
+  score
 end

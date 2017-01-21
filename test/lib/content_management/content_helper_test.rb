@@ -2,21 +2,19 @@ require 'test_helper'
 
 class ContentHelperTest < ActiveSupport::TestCase
   test 'content_add_helper' do
-    base_lang = lang_by_name('English')
-    target_lang = lang_by_name('Spanish')
+    lang_map = LangMap.first
 
-    establish_chars(base_lang, target_lang)
-    target_script = target_lang.base_script
+    establish_chars(lang_map)
+    target_script = lang_map.target_script
     compile_wfs_script(target_script)
     compile_wls_script(target_script)
 
-    map_wts(base_lang, target_lang)
+    map_wts(lang_map)
 
-    target_script = lang_by_name('Spanish').base_script
     hurdle = 2
-    base_script = lang_by_name('English').base_script
+    base_script = lang_map.base_script
 
-    content_add_helper(base_script, target_script, hurdle)
+    content_add_helper(lang_map, hurdle)
   end
 
   test 'sentences_found_in' do
@@ -42,19 +40,20 @@ class ContentHelperTest < ActiveSupport::TestCase
     base_lang = lang_by_name('English')
     target_lang = lang_by_name('Spanish')
 
-    establish_chars(base_lang, target_lang)
+    lang_map = LangMap.first
+    establish_chars(lang_map)
     target_script = target_lang.base_script
     compile_wfs_script(target_script)
     compile_wls_script(target_script)
 
-    map_wts(base_lang, target_lang)
+    map_wts(lang_map)
 
     target_script = lang_by_name('Spanish').base_script
     word_rep_counts = return_word_rep_counts(target_script)
     hurdle = 2
     base_script = lang_by_name('English').base_script
     template = word_by_id(16)
-    result = next_word_below_hurdle(word_rep_counts, hurdle, base_script)
+    result = next_word_below_hurdle(word_rep_counts, hurdle, lang_map)
     assert_equal(template, result, 'Incorrect word returned')
   end
 end

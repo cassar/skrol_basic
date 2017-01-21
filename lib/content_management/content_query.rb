@@ -26,6 +26,17 @@ def word_by_id(id)
   word
 end
 
+# Returns a Word Record given a user may and a rank_num
+# Note rank_num is entered seperately so difference ranks can be checked
+# without having to update the DB.
+def word_by_rank(user_map, rank_num)
+  rank = Rank.where(rank_num: rank_num, lang_map_id: user_map.lang_map.id).first
+  raise Invalid, "Rank with rank_num: #{rank_num} not found" if rank.nil?
+  word = rank.word
+  raise Invalid, "word_id: #{rank.word_id} not found" if word.nil?
+  word
+end
+
 # Returns a Sentence record given an id
 def sentence_by_id(id)
   sent = Sentence.where(id: id).first
