@@ -13,7 +13,7 @@ def retrieve_next_slide(user_map)
   user_map.user.create_touch_score(target_word)
   # Create new Metric stub
   user_map.user.create_metric_stub(target_word, target_sentence)
-  return_slide(target_word, target_sentence, user_map.base_script)
+  return_html_slide(target_word, target_sentence, user_map)
 end
 
 # Retrieves the next available sentence and word entries that a user will view.
@@ -50,28 +50,49 @@ def retrieve_next_sentence(target_word, user_map)
   sentence_by_id(max_score.entriable_id)
 end
 
-# Returs slide object given a target_word, target_sentence, and user records
-def return_slide(target_word, target_sentence, base_script)
-  slide = {}
-  slide[:representative] = target_word
-  assign_sentences(slide, target_sentence, base_script)
-  assign_arrays(slide, target_sentence)
-  slide
+# Returns the HTML slide to be sent to the client.
+def return_html_slide(target_word, target_sentence, user_map)
+  content = return_div_content(target_sentence, user_map)
+  group_label = "data-group=\"#{target_sentence.group_id}\""
+  rep_label = "data-word=\"#{target_word.id}\""
+  data_attr = group_label + ' ' + rep_label
+  entry = "<div class=\"sentences\"  #{data_attr}>#{content}</div>"
+  { entry: entry }
 end
 
-# assigns the sentences to the slide object given a target_sentence
-def assign_sentences(slide, target_sentence, base_script)
-  slide[:target_sentence] = target_sentence
-  slide[:base_sentence] = target_sentence.corresponding(base_script)
-  slide[:phonetic_sentence] = target_sentence.phonetic
+# Returns the base_sentence, target_sentence, phonetic_sentence in html divs.
+def return_div_content(target_sentence, user_map)
+  sentences = [target_sentence, target_sentence.phonetic,
+               target_sentence.corresponding(user_map.base_script)]
+  content = ''
+  sentences.each do |sentence|
+    content << '<div>' + sentence.entry + '</div>'
+  end
+  content
 end
 
-# assigns the array's to the slide object given a target_sentence
-def assign_arrays(slide, target_sentence)
-  slide[:target_arr] = return_word_array(target_sentence)
-  slide[:phonetic_arr] = phonetic_arr_from_base_arr(slide[:target_arr])
-  slide[:base_arr] = return_word_array(slide[:base_sentence])
-end
+# # Returs slide object given a target_word, target_sentence, and user records
+# def return_slide(target_word, target_sentence, base_script)
+#   slide = {}
+#   slide[:representative] = target_word
+#   assign_sentences(slide, target_sentence, base_script)
+#   assign_arrays(slide, target_sentence)
+#   slide
+# end
+
+# # assigns the sentences to the slide object given a target_sentence
+# def assign_sentences(slide, target_sentence, base_script)
+#   slide[:target_sentence] = target_sentence
+#   slide[:base_sentence] = target_sentence.corresponding(base_script)
+#   slide[:phonetic_sentence] = target_sentence.phonetic
+# end
+
+# # assigns the array's to the slide object given a target_sentence
+# def assign_arrays(slide, target_sentence)
+#   slide[:target_arr] = return_word_array(target_sentence)
+#   slide[:phonetic_arr] = phonetic_arr_from_base_arr(slide[:target_arr])
+#   slide[:base_arr] = return_word_array(slide[:base_sentence])
+# end
 
 # returns a word record if one is suitable in the user's scores section.
 def word_from_scores(user, target_script)
