@@ -1,0 +1,43 @@
+/* Marquee Styling */
+
+#frame {
+  width: 75%;
+  margin: auto;
+  margin-top: 2em;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 15px;
+  cursor: grab;
+}
+
+#frame:active {
+  cursor: grabbing;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+#marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#slide {
+  display: inline;
+}
+
+#controls {
+  width: 75%;
+  margin: auto;
+  margin-top: 1em;
+}
+
+.sentences {
+  display: inline-block;
+  margin-right: .5em;
+}
