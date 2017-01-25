@@ -4,7 +4,6 @@ function request_string(){
   $.ajax( "/slides/1" )
     .done(function(json) {
       stringArray.push(json.entry);
-      requests_outstanding--;
       request_pending = false;
       console.log( json.entry );
       console.log( "Success" );

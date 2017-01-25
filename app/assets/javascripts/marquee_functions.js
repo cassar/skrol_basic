@@ -25,8 +25,7 @@ function increment_marquee() {
 
 // Makes sure the strings array has a minimum of MIN_ELEMENTS of elements in it.
 function fill_string_arr() {
-  if (((stringArray.length + requests_outstanding) < MIN_ELEMENTS) && !request_pending) {
-    requests_outstanding++;
+  if ((stringArray.length < MIN_ELEMENTS) && !request_pending) {
     request_pending = true;
     request_string();
   }

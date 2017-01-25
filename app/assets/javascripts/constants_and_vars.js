@@ -6,7 +6,6 @@ var MIN_ELEMENTS = 2;
 // The array that sentence objects will be loaded into.
 var stringArray = [];
 // Ajax Variables
-var requests_outstanding = 0;
 var request_pending = false;
 
 // Speed Settings
