@@ -42,12 +42,21 @@ end
 def retrieve_next_sentence(target_word, user_map)
   max_score = template = { entry: -1 }
   target_word.reps.each do |sentence_id|
-    next if sentence_used?(sentence_id, user_map.user)
+    next unless sentence_valid?(sentence_id, user_map)
     score = retrieve_sts(sentence_id, user_map.lang_map)
     max_score = score if score.entry > max_score[:entry]
   end
   return nil if max_score == template
   sentence_by_id(max_score.entriable_id)
+end
+
+# Determines weather a sentence is valid for presentation in the view.
+def sentence_valid?(sentence_id, user_map)
+  return false if sentence_used?(sentence_id, user_map.user)
+  phonetic_entry = sentence_by_id(sentence_id).phonetic.entry
+  return false if phonetic_entry.include? NONE
+  return false if phonetic_entry.length > 40
+  true
 end
 
 # Returns the HTML slide to be sent to the client.

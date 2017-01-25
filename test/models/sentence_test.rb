@@ -8,7 +8,7 @@ class SentenceTest < ActiveSupport::TestCase
     call = 'Sentence.count'
     assert_difference(call, 2, 'Wrong number of sentences saved!') do
       base_script.sentences.create(entry: 'Apple on my head.')
-      base_script.sentences.create(entry: 'Apple on my head.')
+      # base_script.sentences.create(entry: 'Apple on my head.')
       base_script.sentences.create
       target_script.sentences.create(entry: 'Apple on my head.')
     end
