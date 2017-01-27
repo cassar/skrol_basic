@@ -59,4 +59,16 @@ class CreateContentTest < ActiveSupport::TestCase
       create_update_sentence('whatever', phonetic_script, 8)
     end
   end
+
+  # test 'translate_all_sentences' do
+  #   base_lang = lang_by_name('English')
+  #   target_lang = lang_by_name('Spanish')
+  #
+  #   translate_all_sentences(base_lang, target_lang)
+  #
+  #   base_count = base_lang.base_script.sentences.count
+  #   target_count = target_lang.base_script.sentences.count
+  #
+  #   assert_equal(base_count, target_count, 'Wrong # of sentences saved')
+  # end
 end

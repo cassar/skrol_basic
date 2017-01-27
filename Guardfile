@@ -239,6 +239,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/user_management/exhaust_methods_test.rb'
   end
 
+  # update_user_metric.rb
+  watch('lib/user_management/update_user_metric.rb') do
+    'test/lib/user_management/update_user_metric_test.rb'
+  end
+  watch('test/lib/user_management/update_user_metric_test.rb') do
+    'test/lib/user_management/update_user_metric_test.rb'
+  end
+
   # content_query lib and its test
   watch('lib/content_management/content_query.rb') do
     'test/lib/content_management/content_query_test.rb'

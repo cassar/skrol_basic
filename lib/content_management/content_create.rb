@@ -102,3 +102,16 @@ def fill_single_phonetic(base_word)
   base_word.update(entry: entry)
   base_word.create_phonetic(ipa_entry)
 end
+
+# Translates all sentences under a particular base script to a given target
+# script and creates a new record.
+def translate_all_sentences(base_lang, target_lang)
+  base_script = base_lang.base_script
+  target_script = target_lang.base_script
+  base_script.sentences.each do |sentence|
+    translated = sentence.entry.translate(base_script.lang_code,
+                                          target_script.lang_code)
+    sentence.update(group_id: sentence.id) if sentence.group_id.nil?
+    create_update_sentence(translated, target_script, sentence.group_id)
+  end
+end

@@ -29,3 +29,6 @@ var frame;
 var marqueeWidth;
 var marginLeft;
 var slideWidth;
+
+// User settings.
+var user_map_id = 1;

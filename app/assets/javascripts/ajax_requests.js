@@ -15,3 +15,14 @@ function request_string(){
       console.log( "Request Finished" );
     });
 }
+
+function send_metrics(json){
+  $.ajax({
+    method: "POST",
+    url: "/metrics",
+    data: json
+  })
+    .done(function( msg ) {
+      console.log( "Complete: " + msg["message"] );
+    });
+}

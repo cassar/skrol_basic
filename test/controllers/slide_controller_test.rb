@@ -8,4 +8,7 @@ class SlideControllerTest < ActionDispatch::IntegrationTest
     get '/slides/1'
     assert_equal(@response.body, @response.body, 'incorrect object returned')
   end
+
+  test 'recieve_metrics' do
+  end
 end

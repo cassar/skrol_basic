@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root 'static_pages#marquee'
 
   get 'slides/:id', to: 'slide#show'
+  post 'metrics', to: 'slide#recieve_metrics'
 end

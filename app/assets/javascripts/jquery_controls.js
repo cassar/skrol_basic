@@ -72,4 +72,33 @@ function init_jquery_controls() {
     }
     oldX = event.pageX;
   });
+
+  $('#frame').hover(function(e) {
+    var x = e.clientX,
+        y = e.clientY,
+        stack = [],
+        elementMouseIsOver = document.elementFromPoint(x, y);
+
+    stack.push(elementMouseIsOver);
+
+    while (elementMouseIsOver.tagName !== 'HTML'){
+
+        elementMouseIsOver.style.pointerEvents = 'none';
+        elementMouseIsOver = document.elementFromPoint(x, y);
+
+        stack.push(elementMouseIsOver);
+    }
+
+    var i  = 0,
+        il = stack.length;
+
+    for (; i < il; i++) {
+      stack[i].style.pointerEvents = '';
+      if (stack[i].tagName === 'DIV' && stack[i].className === 'sentences') {
+        var data_word = stack[i].getAttribute('data-group');
+        var data_group = stack[i].getAttribute('data-word');
+        report(data_word, data_group);
+      }
+    }
+  });
 }
