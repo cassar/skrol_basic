@@ -73,6 +73,7 @@ function init_jquery_controls() {
     oldX = event.pageX;
   });
 
+  // Retrieves the sentence the pointer is over
   $('#frame').hover(function(e) {
     var x = e.clientX,
         y = e.clientY,
@@ -97,7 +98,7 @@ function init_jquery_controls() {
       if (stack[i].tagName === 'DIV' && stack[i].className === 'sentences') {
         var data_word = stack[i].getAttribute('data-group');
         var data_group = stack[i].getAttribute('data-word');
-        report(data_word, data_group);
+        hover_report(data_word, data_group);
       }
     }
   });

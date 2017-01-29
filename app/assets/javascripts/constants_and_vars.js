@@ -5,8 +5,10 @@ var MIN_ELEMENTS = 2;
 
 // The array that sentence objects will be loaded into.
 var stringArray = [];
+var attrArray = [];
 // Ajax Variables
 var request_pending = false;
+var sentMetricsArray = [];
 
 // Speed Settings
 var step = NORMAL_SPEED;
@@ -29,6 +31,7 @@ var frame;
 var marqueeWidth;
 var marginLeft;
 var slideWidth;
+var buffer = 1;
 
 // User settings.
 var user_map_id = 1;

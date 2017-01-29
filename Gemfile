@@ -39,6 +39,7 @@ group :development, :test do
   gem 'minitest-reporters'
 
   gem 'rubocop'
+  gem 'jasmine'
   gem 'guard'
 
   gem 'guard-rubocop'

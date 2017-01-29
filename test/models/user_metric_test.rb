@@ -26,6 +26,6 @@ class UserMetricTest < ActiveSupport::TestCase
     metric = UserMetric.second
     metric.update(speed: 30, pause: false, hover: false, hide: false)
     score = UserScore.first
-    assert_equal(0.8, score.entry, 'incorrect score saved')
+    assert_equal(1.0, score.entry, 'incorrect score saved')
   end
 end
