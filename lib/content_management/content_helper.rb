@@ -66,3 +66,18 @@ def next_word_below_hurdle(word_rep_counts, hurdle, lang_map)
   return nil if next_score == template
   word_by_id(next_score.entriable_id)
 end
+
+# Removes phonetic word's that do not have a base_word.
+def clean_stray_phonetics
+  counter = 0
+  Language.all.each do |lang|
+    phon_script = lang.phonetic_script
+    phon_script.words.each do |phon_word|
+      if Word.where(id: phon_word.assoc_id).first.nil?
+        phon_word.destroy
+        counter += 1
+      end
+    end
+  end
+  puts "#{counter} words deleted."
+end
