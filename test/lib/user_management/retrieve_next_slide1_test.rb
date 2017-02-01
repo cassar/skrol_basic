@@ -21,7 +21,7 @@ class RetrieveNextSlide1Test < ActiveSupport::TestCase
 
     assert_raises(Invalid, 'Invalid did not raise') do
       target_script.words.each { |word| word.destroy unless word.id == 14 }
-      user_map.user.user_scores.first.update(entry: 0.95)
+      user_map.user_scores.first.update(entry: 0.95)
       retrieve_next_slide(user_map)
     end
   end

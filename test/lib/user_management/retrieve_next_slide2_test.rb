@@ -37,26 +37,25 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
 
   test 'word_from_scores' do
     target_script = lang_by_name('Spanish').base_script
-    user = user_by_name('Luke')
+    user_map = UserMap.first
     template = word_by_id(14)
 
-    result = word_from_scores(user, target_script)
+    result = word_from_scores(user_map, target_script)
     assert_equal(template, result, 'incorrect word returned')
 
     UserScore.first.update(entry: 0.95)
-    result = word_from_scores(user, target_script)
+    result = word_from_scores(user_map, target_script)
     assert_nil(result, 'did not return nil')
   end
 
   test 'word_from_words' do
     base_lang = lang_by_name('English')
     target_lang = lang_by_name('Spanish')
-    user_map = user_by_name('Luke').user_maps.first
+    user_map = UserMap.first
     setup_map(user_map.lang_map)
 
     target_script = target_lang.base_script
     base_script = base_lang.base_script
-    user = user_by_name('Luke')
     template = word_by_id(18)
     result = word_from_words(user_map)
     assert_equal(template, result, 'incorrect word record returned')
@@ -64,18 +63,18 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
 
   test 'word_used?' do
     word = word_by_id(14)
-    user = user_by_name('Luke')
-    assert(word_used?(word, user), 'incorrect bool returned')
+    user_map = UserMap.first
+    assert(word_used?(word, user_map), 'incorrect bool returned')
     word = word_by_id(13)
-    assert_not(word_used?(word, user), 'incorrect bool returned')
+    assert_not(word_used?(word, user_map), 'incorrect bool returned')
   end
 
   test 'sentence_used?' do
     sentence = sentence_by_id(1)
-    user = user_by_name('Luke')
-    assert(sentence_used?(sentence, user), 'incorrect bool returned')
+    user_map = UserMap.first
+    assert(sentence_used?(sentence, user_map), 'incorrect bool returned')
     sentence = sentence_by_id(2)
-    assert_not(sentence_used?(sentence, user), 'incorrect bool returned')
+    assert_not(sentence_used?(sentence, user_map), 'incorrect bool returned')
   end
 
   test 'return_word_array' do

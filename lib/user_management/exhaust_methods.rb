@@ -2,19 +2,19 @@
 # users.
 def average_exhaust(word)
   total_exhaust = 0
-  raise Invalid, 'No users! cannot run average_exhaust!' if User.count.zero?
-  User.all.each { |user| total_exhaust += user_exhaust(user, word) }
+  raise Invalid, 'No users_maps!' if UserMap.count.zero?
+  UserMap.all.each { |user_map| total_exhaust += user_exhaust(user_map, word) }
   return 0 if total_exhaust.zero?
-  total_exhaust / User.count
+  total_exhaust / UserMap.count
 end
 
 # Returns the percentage of sentences that have been viewed (exhausted) for a
 # given word by a given user.
-def user_exhaust(user, word)
+def user_exhaust(user_map, word)
   # Retrieve all sentences related to a word.
   sentences = sentences_found_in(word)
   # Retrieve all metrics related to the sentences (could be more than one per)
-  metrics = related_metrics(sentences, user)
+  metrics = related_metrics(sentences, user_map)
   # Populate Catalogue
   exhaust_cat = populate_exhaust_catalouge(sentences, metrics)
   # Return Percentage Exhausted (as decimal)
@@ -23,10 +23,10 @@ end
 
 # Returns an array with all metrics related to all sentences in a given
 # sentences array related to a given user.
-def related_metrics(sentences, user)
+def related_metrics(sentences, user_map)
   metrics = []
-  sentences.each do |sentence|
-    user.user_metrics.where(target_sentence_id: sentence.id).each do |metric|
+  sentences.each do |sent|
+    user_map.user_metrics.where(target_sentence_id: sent.id).each do |metric|
       metrics << metric
     end
   end

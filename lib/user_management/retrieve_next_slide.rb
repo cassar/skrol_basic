@@ -10,9 +10,9 @@ def retrieve_next_slide(user_map)
   target_word, target_sentence =
     return_next_available_entries(user_map)
   # Create or update word score
-  user_map.user.create_touch_score(target_word)
+  user_map.create_touch_score(target_word)
   # Create new Metric stub
-  user_map.user.create_metric_stub(target_word, target_sentence)
+  user_map.create_metric_stub(target_word, target_sentence)
   return_html_slide(target_word, target_sentence, user_map)
 end
 
@@ -27,13 +27,13 @@ def return_next_available_entries(user_map)
     # Break if one found
     return [target_word, target_sentence] if target_sentence.present?
     # Push user word score up to THRESHOLD so next word will be retrieved.
-    user_map.user.raise_to_threshold(target_word)
+    user_map.raise_to_threshold(target_word)
   end
 end
 
 # Retrieves the next word a user will view given user and target_script record
 def retrieve_next_word(user_map)
-  word = word_from_scores(user_map.user, user_map.target_script)
+  word = word_from_scores(user_map, user_map.target_script)
   word = word_from_words(user_map) if word.nil?
   word
 end
@@ -52,7 +52,7 @@ end
 
 # Determines weather a sentence is valid for presentation in the view.
 def sentence_valid?(sentence_id, user_map)
-  return false if sentence_used?(sentence_id, user_map.user)
+  return false if sentence_used?(sentence_id, user_map)
   phonetic_entry = sentence_by_id(sentence_id).phonetic.entry
   return false if phonetic_entry.include? NONE
   return false if phonetic_entry.length > 40
@@ -104,9 +104,9 @@ end
 # end
 
 # returns a word record if one is suitable in the user's scores section.
-def word_from_scores(user, target_script)
+def word_from_scores(user_map, target_script)
   max_score = template = { entry: -1 }
-  user.user_scores.where(status: 'tested').each do |score|
+  user_map.user_scores.where(status: 'tested').each do |score|
     next if score.entry > THRESHOLD
     next if score.target_script != target_script
     max_score = score if score.entry > max_score[:entry]
@@ -121,7 +121,7 @@ def word_from_words(user_map)
   word = nil
   loop do
     word = word_by_rank(user_map, rank_num)
-    break unless word_used?(word, user_map.user)
+    break unless word_used?(word, user_map)
     rank_num += 1
   end
   user_map.update(rank_num: rank_num)
@@ -129,15 +129,15 @@ def word_from_words(user_map)
 end
 
 # Returns true if a word has (already) been viewed by a user, false otherwise
-def word_used?(word, user)
-  score = user.user_scores.where(target_word_id: word.id).first
+def word_used?(word, user_map)
+  score = user_map.user_scores.where(target_word_id: word.id).first
   return false if score.nil?
   true
 end
 
 # Returns true if a sentence has already been viewed by a user, false otherwise
-def sentence_used?(sentence_id, user)
-  metric = user.user_metrics.where(target_sentence_id: sentence_id).first
+def sentence_used?(sentence_id, user_map)
+  metric = user_map.user_metrics.where(target_sentence_id: sentence_id).first
   return false if metric.nil?
   true
 end
