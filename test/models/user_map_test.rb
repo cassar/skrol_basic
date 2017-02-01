@@ -6,10 +6,10 @@ class UserMapTest < ActiveSupport::TestCase
     lang_map = LangMap.first
     call = 'UserMap.count'
     assert_difference(call, 2, 'incorrect # of user maps saved') do
-      luke.user_maps.create(lang_map_id: 2, rank_num: 1)
-      luke.user_maps.create(lang_map_id: lang_map.id, rank_num: 1)
+      luke.user_maps.create(lang_map_id: 2, word_rank: 1)
+      luke.user_maps.create(lang_map_id: lang_map.id, word_rank: 1)
       luke.user_maps.create(lang_map_id: lang_map.id)
-      luke.user_maps.create(lang_map_id: 3, rank_num: 1)
+      luke.user_maps.create(lang_map_id: 3, word_rank: 1)
     end
     user_map = UserMap.first
     assert_equal(luke, user_map.user, 'User record did not return')

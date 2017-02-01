@@ -29,10 +29,11 @@ end
 # Returns a Word Record given a user may and a rank_num
 # Note rank_num is entered seperately so difference ranks can be checked
 # without having to update the DB.
-def word_by_rank(user_map, rank_num)
-  rank = Rank.where(rank_num: rank_num, lang_map_id: user_map.lang_map.id).first
-  raise Invalid, "Rank with rank_num: #{rank_num} not found" if rank.nil?
-  word = rank.word
+def word_by_rank(user_map, word_rank)
+  rank = Rank.where(entry: word_rank, entriable_type: 'Word',
+                    lang_map_id: user_map.lang_map.id).first
+  raise Invalid, "Rank with word_rank: #{word_rank} not found" if rank.nil?
+  word = rank.entriable
   raise Invalid, "word_id: #{rank.word_id} not found" if word.nil?
   word
 end

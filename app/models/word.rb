@@ -3,7 +3,7 @@ class Word < ApplicationRecord
   belongs_to :script
   has_one :language, through: :script
   has_many :scores, as: :entriable, dependent: :destroy
-  has_many :ranks
+  has_many :ranks, as: :entriable, dependent: :destroy
 
   # Creates a new phonetic entry for a particular word record.
   def create_phonetic(entry)

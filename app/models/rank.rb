@@ -1,6 +1,6 @@
 class Rank < ApplicationRecord
-  validates :word_id, :lang_map_id, :rank_num, presence: true
-  validates :word_id, uniqueness: { scope: :lang_map_id }
-
-  belongs_to :word
+  validates :entriable_id, :entriable_type, :lang_map_id, :entry, presence: true
+  validates :entriable_id, uniqueness: { scope: [:lang_map_id,
+                                                 :entriable_type] }
+  belongs_to :entriable, polymorphic: true
 end

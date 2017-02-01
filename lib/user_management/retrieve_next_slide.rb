@@ -80,29 +80,6 @@ def return_div_content(target_sentence, user_map)
   content
 end
 
-# # Returs slide object given a target_word, target_sentence, and user records
-# def return_slide(target_word, target_sentence, base_script)
-#   slide = {}
-#   slide[:representative] = target_word
-#   assign_sentences(slide, target_sentence, base_script)
-#   assign_arrays(slide, target_sentence)
-#   slide
-# end
-
-# # assigns the sentences to the slide object given a target_sentence
-# def assign_sentences(slide, target_sentence, base_script)
-#   slide[:target_sentence] = target_sentence
-#   slide[:base_sentence] = target_sentence.corresponding(base_script)
-#   slide[:phonetic_sentence] = target_sentence.phonetic
-# end
-
-# # assigns the array's to the slide object given a target_sentence
-# def assign_arrays(slide, target_sentence)
-#   slide[:target_arr] = return_word_array(target_sentence)
-#   slide[:phonetic_arr] = phonetic_arr_from_base_arr(slide[:target_arr])
-#   slide[:base_arr] = return_word_array(slide[:base_sentence])
-# end
-
 # returns a word record if one is suitable in the user's scores section.
 def word_from_scores(user_map, target_script)
   max_score = template = { entry: -1 }
@@ -117,14 +94,14 @@ end
 
 # Retrieves the next Word record from a the Word table for a User
 def word_from_words(user_map)
-  rank_num = user_map.rank_num
+  word_rank = user_map.word_rank
   word = nil
   loop do
-    word = word_by_rank(user_map, rank_num)
+    word = word_by_rank(user_map, word_rank)
     break unless word_used?(word, user_map)
-    rank_num += 1
+    word_rank += 1
   end
-  user_map.update(rank_num: rank_num)
+  user_map.update(word_rank: word_rank)
   word
 end
 

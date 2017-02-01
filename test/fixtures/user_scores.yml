@@ -6,3 +6,4 @@ user-score-1:
   target_word_id: 14
   entry: 0.5
   status: 'tested'
+  sentence_rank: 1

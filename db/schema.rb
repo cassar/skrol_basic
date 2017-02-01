@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170131235019) do
+ActiveRecord::Schema.define(version: 20170201094109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(version: 20170131235019) do
   end
 
   create_table "ranks", force: :cascade do |t|
-    t.integer  "word_id"
-    t.float    "lang_map_id"
-    t.integer  "rank_num"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer "entriable_id"
+    t.string  "entriable_type"
+    t.integer "lang_map_id"
+    t.integer "entry"
+    t.index ["entriable_type", "entriable_id"], name: "index_ranks_on_entriable_type_and_entriable_id", using: :btree
   end
 
   create_table "regexes", force: :cascade do |t|
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20170131235019) do
 
   create_table "user_maps", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "rank_num"
+    t.integer  "word_rank"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "lang_map_id"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20170131235019) do
     t.string   "status"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "sentence_rank"
   end
 
   create_table "users", force: :cascade do |t|

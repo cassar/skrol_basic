@@ -18,7 +18,7 @@ def assign_ranks(scores_arr, scores_obj, lang_map)
   counter = 1
   scores_arr.sort.reverse.each do |score_entry|
     word = word_by_id(scores_obj[score_entry])
-    word.ranks.create(lang_map_id: lang_map.id, rank_num: counter)
+    word.ranks.create(lang_map_id: lang_map.id, entry: counter)
     counter += 1
   end
 end

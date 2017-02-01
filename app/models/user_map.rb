@@ -1,5 +1,5 @@
 class UserMap < ApplicationRecord
-  validates :user_id, :lang_map_id, :rank_num, presence: true
+  validates :user_id, :lang_map_id, :word_rank, presence: true
   validates :user_id, uniqueness: { scope: :lang_map_id }
   has_many :user_scores
   has_many :user_metrics

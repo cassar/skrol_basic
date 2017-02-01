@@ -14,7 +14,7 @@ class UserTest < ActiveSupport::TestCase
     call = 'user.user_maps.count'
     UserMap.first.destroy
     assert_difference(call, 1, 'map did not save') do
-      user.user_maps.create(rank_num: 1, lang_map_id: 1)
+      user.user_maps.create(word_rank: 1, lang_map_id: 1)
     end
   end
 end

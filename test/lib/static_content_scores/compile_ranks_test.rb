@@ -2,6 +2,7 @@ require 'test_helper'
 
 class CompileRanksTest < ActiveSupport::TestCase
   test 'compile_ranks' do
+    Rank.all.each(&:destroy)
     lang_map = LangMap.first
     base_lang = lang_by_name('English')
     target_lang = lang_by_name('Spanish')
