@@ -37,7 +37,7 @@
   margin-top: 1em;
 }
 
-.sentences {
+.sentences, #placeholder {
   display: inline-block;
   margin-right: .5em;
 }

@@ -39,19 +39,22 @@ function check_for_insert() {
   if ((marginLeft + slideWidth + buffer) <= marqueeWidth) {
     $('#slide').append(stringArray.shift());
     slideWidth = parseInt($('#slide').css('width'));
+    reinit_sentence();
+    add_sentence();
     monitor_sents();
   }
 }
 
-// Adds newly inserted tags into attrArray and sends requisite one to
-// clear_report
-function monitor_sents() {
-  // Add Sentence label to attrArray
+// Add latest sentence label to attrArray
+function add_sentence() {
   var sent = $('.sentences:last-of-type')[0]
   var grp = sent.getAttribute('data-group');
   var wrd = sent.getAttribute('data-word');
   attrArray.push([grp, wrd]);
-  // if label array greater than 3 send through complete metric.
+}
+
+// Will send 3rd last sentence to clear_report 
+function monitor_sents() {
   attrLength = attrArray.length;
   if (attrLength >= 3) {
     sent = attrArray[attrLength - 3];
