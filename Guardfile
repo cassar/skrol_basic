@@ -105,12 +105,12 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/static_content_scores/compile_reps_test.rb'
   end
 
-  # compile_ranks lib and its tests
-  watch('lib/static_content_scores/compile_ranks.rb') do
-    'test/lib/static_content_scores/compile_ranks_test.rb'
+  # compile_word_ranks lib and its tests
+  watch('lib/static_content_scores/compile_word_ranks.rb') do
+    'test/lib/static_content_scores/compile_word_ranks_test.rb'
   end
-  watch('test/lib/static_content_scores/compile_ranks_test.rb') do
-    'test/lib/static_content_scores/compile_ranks_test.rb'
+  watch('test/lib/static_content_scores/compile_word_ranks_test.rb') do
+    'test/lib/static_content_scores/compile_word_ranks_test.rb'
   end
 
   # calculate_wcfbs lib and its tests
@@ -320,6 +320,10 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
   # rank model and its tests
   watch('app/models/rank.rb') { 'test/models/rank_test.rb' }
   watch('test/models/rank_test.rb') { 'test/models/rank_test.rb' }
+
+  # rep_sent model and its tests
+  watch('app/models/rep_sent.rb') { 'test/models/rep_sent_test.rb' }
+  watch('test/models/rep_sent_test.rb') { 'test/models/rep_sent_test.rb' }
 
   # slide_controller and its test
   watch('app/controllers/slide_controller.rb') do
