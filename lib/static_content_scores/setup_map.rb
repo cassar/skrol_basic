@@ -12,13 +12,16 @@ def setup_map(lang_map)
 
   # Compile Word Total Scores (WTS)
   map_wts(lang_map)
-  compile_ranks(lang_map)
+  # Compile Word Ranks to aid search
+  compile_word_ranks(lang_map)
 
   # Compile Sentence Word Length Scores (SWLS)
   compile_swls(target_script)
 
   # Compile Sentence Total Scores (STS)
   map_sts(lang_map)
+  # Compile Sentence Ranks to aid search
+  compile_sentence_ranks(lang_map)
 end
 
 # Complies the CFS for all scripts under a given lang_map

@@ -82,6 +82,13 @@ class WordTest < ActiveSupport::TestCase
   test 'create_update_score' do
   end
 
-  test 'reps' do
+  test 'create_rep' do
+    RepSent.destroy_all
+    sentence = Sentence.first
+    word = Word.first
+    call = 'RepSent.count'
+    assert_difference(call, 1, 'repsent did not save') do
+      word.create_rep(sentence)
+    end
   end
 end

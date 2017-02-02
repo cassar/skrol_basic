@@ -105,6 +105,14 @@ guard "minitest", spring: "bin/rails test", all_on_start: false do
     'test/lib/static_content_scores/compile_reps_test.rb'
   end
 
+  # compile_ranks lib and its tests
+  watch('lib/static_content_scores/compile_ranks.rb') do
+    'test/lib/static_content_scores/compile_ranks_test.rb'
+  end
+  watch('test/lib/static_content_scores/compile_ranks_test.rb') do
+    'test/lib/static_content_scores/compile_ranks_test.rb'
+  end
+
   # compile_word_ranks lib and its tests
   watch('lib/static_content_scores/compile_word_ranks.rb') do
     'test/lib/static_content_scores/compile_word_ranks_test.rb'

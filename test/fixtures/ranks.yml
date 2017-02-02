@@ -11,3 +11,9 @@ two:
   entriable_type: Word
   lang_map_id: 2
   entry: 1
+
+three:
+  entriable_id: 1
+  entriable_type: RepSent
+  lang_map_id: 1
+  entry: 1

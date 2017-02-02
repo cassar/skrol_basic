@@ -9,8 +9,6 @@
 def retrieve_next_slide(user_map)
   target_word, target_sentence =
     return_next_available_entries(user_map)
-  # Create or update word score
-  user_map.create_touch_score(target_word)
   # Create new Metric stub
   user_map.create_metric_stub(target_word, target_sentence)
   return_html_slide(target_word, target_sentence, user_map)
@@ -21,7 +19,6 @@ def return_next_available_entries(user_map)
   loop do
     # Search for target_word
     target_word = retrieve_next_word(user_map)
-    raise Invalid, 'no more words!' if target_word.nil?
     # Search for matching target_sentence
     target_sentence = retrieve_next_sentence(target_word, user_map)
     # Break if one found
@@ -35,19 +32,23 @@ end
 def retrieve_next_word(user_map)
   word = word_from_scores(user_map, user_map.target_script)
   word = word_from_words(user_map) if word.nil?
+  raise Invalid, 'no more words!' if word.nil?
+  # Create or update word score
+  user_map.create_touch_score(word)
   word
 end
 
 # Retrieves the next sentence a user will view given a word object
 def retrieve_next_sentence(target_word, user_map)
-  max_score = template = { entry: -1 }
-  target_word.reps.each do |sentence_id|
-    next unless sentence_valid?(sentence_id, user_map)
-    score = retrieve_sts(sentence_id, user_map.lang_map)
-    max_score = score if score.entry > max_score[:entry]
+  user_score = user_map.retrieve_user_score(target_word)
+  target_word.rep_sents.each do |rep_sent|
+    rank = rep_sent.retrieve_rank(user_map)
+    if rank.entry == user_score.sentence_rank
+      user_score.increment_sentence_rank
+      return sentence_by_id(rep_sent.rep_sent_id)
+    end
   end
-  return nil if max_score == template
-  sentence_by_id(max_score.entriable_id)
+  nil
 end
 
 # Determines weather a sentence is valid for presentation in the view.

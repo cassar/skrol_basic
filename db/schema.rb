@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170202000937) do
+ActiveRecord::Schema.define(version: 20170202060644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20170202000937) do
   create_table "rep_sents", force: :cascade do |t|
     t.integer "word_id"
     t.integer "rep_sent_id"
-    t.integer "sentence_rank"
   end
 
   create_table "scores", force: :cascade do |t|

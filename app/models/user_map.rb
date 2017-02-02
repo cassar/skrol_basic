@@ -28,7 +28,7 @@ class UserMap < ApplicationRecord
     score = user_scores.where(target_word_id: target_word.id).first
     if score.nil?
       user_scores.create(target_word_id: target_word.id, entry: START_SCORE,
-                         status: TESTING)
+                         status: TESTING, sentence_rank: 1)
     else
       score.update(status: TESTING)
     end
@@ -40,6 +40,8 @@ class UserMap < ApplicationRecord
                         target_sentence_id: target_sentence.id)
   end
 
+  # Raises a target_word's score to the THRESHOLD value so that it will not
+  # be tested any time soon.
   def raise_to_threshold(target_word)
     score = user_scores.where(target_word_id: target_word.id).first
     if score.nil?
@@ -48,5 +50,12 @@ class UserMap < ApplicationRecord
     else
       score.update(status: TESTED, entry: THRESHOLD)
     end
+  end
+
+  # Retrieves a user_score given a target_word.
+  def retrieve_user_score(target_word)
+    user_score = user_scores.where(target_word_id: target_word.id).first
+    raise Invalid, "No user_score word.id: #{target_word.id}" if user_score.nil?
+    user_score
   end
 end

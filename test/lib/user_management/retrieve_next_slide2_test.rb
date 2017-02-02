@@ -4,12 +4,12 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
   test 'word_from_scores' do
     target_script = lang_by_name('Spanish').base_script
     user_map = UserMap.first
-    template = word_by_id(14)
+    template = word_by_id(13)
 
     result = word_from_scores(user_map, target_script)
     assert_equal(template, result, 'incorrect word returned')
 
-    UserScore.first.update(entry: 0.95)
+    UserScore.destroy_all
     result = word_from_scores(user_map, target_script)
     assert_nil(result, 'did not return nil')
   end
@@ -29,7 +29,7 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
     word = word_by_id(14)
     user_map = UserMap.first
     assert(word_used?(word, user_map), 'incorrect bool returned')
-    word = word_by_id(13)
+    word = word_by_id(15)
     assert_not(word_used?(word, user_map), 'incorrect bool returned')
   end
 

@@ -15,11 +15,14 @@ class UserScoreTest < ActiveSupport::TestCase
     assert_equal(user_map, score.user_map, '.user_map association does not work')
   end
 
-  test 'User.target_script' do
+  test 'UserScore.target_script' do
     user_score = UserScore.first
 
     template = lang_by_name('Spanish').base_script
     result = user_score.target_script
     assert_equal(template, result, 'target_script did not work')
+  end
+
+  test 'UserScore.increment_sentence_rank' do
   end
 end

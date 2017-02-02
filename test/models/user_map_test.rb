@@ -38,7 +38,7 @@ class UserMapTest < ActiveSupport::TestCase
     assert_difference(call, 0, 'score did not update') do
       user_map.create_touch_score(target_word)
     end
-    target_word = word_by_id(13)
+    target_word = word_by_id(15)
     assert_difference(call, 1, 'score did not update') do
       user_map.create_touch_score(target_word)
     end
@@ -55,5 +55,8 @@ class UserMapTest < ActiveSupport::TestCase
   end
 
   test 'UserMap.raise_to_threshold' do
+  end
+
+  test 'retrieve_user_score' do
   end
 end

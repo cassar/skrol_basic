@@ -7,3 +7,11 @@ user-score-1:
   entry: 0.5
   status: 'tested'
   sentence_rank: 1
+
+user-score-2:
+  id: 2
+  user_map_id: 1
+  target_word_id: 13
+  entry: 0.6
+  status: 'tested'
+  sentence_rank: 1

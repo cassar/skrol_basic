@@ -53,4 +53,7 @@ class ContentQueryTest < ActiveSupport::TestCase
     assert_equal(word2, return_word('sydney', script), 'Did not find Sydney')
     assert_nil(return_word('soft', script), 'error with none words')
   end
+
+  test 'retrieve_word_ranks' do
+  end
 end

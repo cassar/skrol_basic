@@ -66,16 +66,6 @@ class Word < ApplicationRecord
   # Creates a REP score in order to be able to retrive sentences associated
   # with the word.
   def create_rep(sentence)
-    scores.create(name: 'REP', map_to_id: sentence.id, map_to_type: 'Sentence',
-                  entry: 0)
-  end
-
-  # Returns all the representative sentence_ids related to a word.
-  def reps
-    ids = []
-    scores.where(name: 'REP').each do |score|
-      ids << score.map_to_id
-    end
-    ids
+    rep_sents.create(rep_sent_id: sentence.id)
   end
 end

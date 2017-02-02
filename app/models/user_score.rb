@@ -7,4 +7,9 @@ class UserScore < ApplicationRecord
   def target_script
     word_by_id(target_word_id).script
   end
+
+  def increment_sentence_rank
+    new_rank = sentence_rank + 1
+    update(sentence_rank: new_rank)
+  end
 end
