@@ -12,8 +12,17 @@ wts-botella:
 sts-el-coche:
   id: 2
   entriable_id: 3
-  entriable_type: 'Sentence'
+  entriable_type: Sentence
   map_to_id: 1
-  map_to_type: 'LangMap'
+  map_to_type: LangMap
   name: 'STS'
   entry: 0.6666
+
+sts-el-azul:
+  id: 3
+  entriable_id: 9
+  entriable_type: Sentence
+  map_to_id: 1
+  map_to_type: LangMap
+  name: 'STS'
+  entry: 0.345
