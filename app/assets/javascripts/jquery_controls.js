@@ -4,14 +4,14 @@ function init_jquery_controls() {
   // That it will pause whene over and resume when it leaves.
   if (frame.addEventListener) {
       frame.addEventListener('mouseenter', function () {
-        if (skroling) {
+        if (skroling && !disabled) {
           prePause = step;
           step = 0;
           change_to_paused();
         }
       }, false);
       frame.addEventListener('mouseleave', function () {
-        if (skroling) {
+        if (skroling && !disabled) {
           step = prePause
           change_to_skroling();
         }
@@ -63,7 +63,7 @@ function init_jquery_controls() {
   // Sets the action of the mouse pointer to grab and drag the marquee.
   $('#frame').mousemove(function(event){
     cursor = $('#frame').css('cursor');
-    if (cursor == 'grabbing') {
+    if ((cursor == 'grabbing') && !disabled) {
       newX = event.pageX;
       diff = newX - oldX;
       marginLeft += diff;
