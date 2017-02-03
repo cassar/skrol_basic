@@ -14,8 +14,6 @@ class RetrieveNextSlide1Test < ActiveSupport::TestCase
     template = return_html_slide(target_word, target_sentence, user_map)
     result = retrieve_next_slide(user_map)
     assert_equal(template, result, 'incorrect slide returned')
-    assert_equal(2, UserScore.count, 'Score should have updated not created')
-    assert_equal(3, UserMetric.count, 'Metric should have been created')
 
     target_script = user_map.lang_map.target_script
 

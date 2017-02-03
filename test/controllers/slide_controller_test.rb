@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SlideControllerTest < ActionDispatch::IntegrationTest
-  test 'show' do
+  test 'send_slide' do
     lang_map = LangMap.first
     setup_map(lang_map)
 
@@ -10,5 +10,8 @@ class SlideControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'recieve_metrics' do
+  end
+
+  test 'reset_user_session' do
   end
 end

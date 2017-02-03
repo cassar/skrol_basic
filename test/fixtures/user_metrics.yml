@@ -19,3 +19,9 @@ metric-2:
   pause: false
   hover: true
   hide: true
+
+metric-3:
+  id: 3
+  user_map_id: 1
+  target_word_id: 20
+  target_sentence_id: 4
