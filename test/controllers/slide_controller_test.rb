@@ -5,8 +5,8 @@ class SlideControllerTest < ActionDispatch::IntegrationTest
     lang_map = LangMap.first
     setup_map(lang_map)
 
-    get '/slides/1'
-    assert_equal(@response.body, @response.body, 'incorrect object returned')
+    # get '/slides'
+    # assert_equal(@response.body, @response.body, 'incorrect object returned')
   end
 
   test 'recieve_metrics' do

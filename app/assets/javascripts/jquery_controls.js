@@ -80,4 +80,14 @@ function reinit_sentence() {
     var data_word = $(this)[0].getAttribute('data-word');
     send_report(data_group, data_word, true);
   });
+  $('.word').hover(
+    function() {
+      var data_group = $(this)[0].getAttribute('data-group');
+      $('*[data-group="' + data_group + '"]').css('color', 'green');
+    },
+    function() {
+      var data_group = $(this)[0].getAttribute('data-group');
+      $('*[data-group="' + data_group + '"]').css('color', 'black');
+    }
+  );
 }

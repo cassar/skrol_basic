@@ -1,11 +1,4 @@
-# Will retrieve an object containing...
-#   representative: (a target word record that the slide is meant to test)
-#   target_sentence: (a target sentence that has been chosen to test the user)
-#   phonetic_sentence: (a phonetic sentence equivalent of the target_sentence)
-#   base_sentence: (a base sentence equivalent of the target sentence)
-#   target_arr: (an array of word records used in the target sentence)
-#   phonetic_arr: (an array of word records used in the phonetic sentence)
-#   base_arr: (an array of word records used in the base sentence)
+# Will retrieve an object containing the html representation of the slide.
 def retrieve_next_slide(user_map)
   target_word, target_sentence =
     return_next_available_entries(user_map)
@@ -53,13 +46,13 @@ def retrieve_next_sentence(target_word, user_map)
 end
 
 # Determines weather a sentence is valid for presentation in the view.
-def sentence_valid?(sentence_id, user_map)
-  return false if sentence_used?(sentence_id, user_map)
-  phonetic_entry = sentence_by_id(sentence_id).phonetic.entry
-  return false if phonetic_entry.include? NONE
-  return false if phonetic_entry.length > 40
-  true
-end
+# def sentence_valid?(sentence_id, user_map)
+#   return false if sentence_used?(sentence_id, user_map)
+#   phonetic_entry = sentence_by_id(sentence_id).phonetic.entry
+#   return false if phonetic_entry.include? NONE
+#   return false if phonetic_entry.length > 40
+#   true
+# end
 
 # Returns the HTML slide to be sent to the client.
 def return_html_slide(target_word, target_sentence, user_map)
@@ -71,13 +64,28 @@ def return_html_slide(target_word, target_sentence, user_map)
   { entry: entry }
 end
 
-# Returns the base_sentence, target_sentence, phonetic_sentence in html divs.
 def return_div_content(target_sentence, user_map)
   sentences = [target_sentence, target_sentence.phonetic,
                target_sentence.corresponding(user_map.base_script)]
   content = ''
+  sent_num = 1
+  record_arr = nil
   sentences.each do |sentence|
-    content << '<div>' + sentence.entry + '</div>'
+    record_arr = if sent_num == 2
+                   phonetic_arr_from_base_arr(record_arr)
+                 else
+                   return_word_array(sentence)
+                 end
+    entry_arr = sentence.entry.split
+    counter = 0
+    html_sent = ''
+    entry_arr.each do |entry|
+      group_id = record_arr[counter].group_id
+      html_sent << "<div class=\"word\" data-group=\"#{group_id}\">" + entry + '</div>&nbsp'
+      counter += 1
+    end
+    content << "<div class=\"sentence\">" + html_sent + '</div>'
+    sent_num += 1
   end
   content
 end

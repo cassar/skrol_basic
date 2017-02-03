@@ -42,6 +42,10 @@
   margin-right: .5em;
 }
 
+.sentence {
+  display: flex;
+}
+
 #placeholder {
   color: white;
 }

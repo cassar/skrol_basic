@@ -54,12 +54,12 @@ class RetrieveNextSlide1Test < ActiveSupport::TestCase
     assert_equal(template, result, 'incorrect sentence retrieved')
   end
 
-  test 'sentence_valid?' do
-    sentence_id = 3
-    user_map = UserMap.first
-    result = sentence_valid?(sentence_id, user_map)
-    assert_not(result, 'result should have been true!')
-  end
+  # test 'sentence_valid?' do
+  #   sentence_id = 3
+  #   user_map = UserMap.first
+  #   result = sentence_valid?(sentence_id, user_map)
+  #   assert_not(result, 'result should have been true!')
+  # end
 
   test 'return_html_slide' do
   end
