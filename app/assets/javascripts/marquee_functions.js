@@ -119,7 +119,7 @@ function monitor_sents() {
   attrLength = attrArray.length;
   if (attrLength >= 3) {
     sent = attrArray[attrLength - 3];
-    clear_report(sent[0], sent[1]);
+    send_report(sent[0], sent[1], false);
   }
 }
 

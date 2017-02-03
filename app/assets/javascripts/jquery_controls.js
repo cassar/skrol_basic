@@ -78,6 +78,6 @@ function reinit_sentence() {
   $('.sentences').hover(function(){
     var data_group = $(this)[0].getAttribute('data-group');
     var data_word = $(this)[0].getAttribute('data-word');
-    hover_report(data_group, data_word);
+    send_report(data_group, data_word, true);
   });
 }
