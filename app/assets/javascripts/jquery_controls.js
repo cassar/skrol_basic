@@ -4,16 +4,16 @@ function init_jquery_controls() {
   // That it will pause whene over and resume when it leaves.
   if (frame.addEventListener) {
       frame.addEventListener('mouseenter', function () {
-          if (skrolling) {
-            prePause = step;
-            step = 0;
-            $('#stop-start').html('Stopped');
-          }
+        if (skroling) {
+          prePause = step;
+          step = 0;
+          change_to_paused();
+        }
       }, false);
       frame.addEventListener('mouseleave', function () {
-        if (skrolling) {
+        if (skroling) {
           step = prePause
-          $('#stop-start').html('Scrolling');
+          change_to_skroling();
         }
       }, false);
   }
@@ -48,15 +48,15 @@ function init_jquery_controls() {
 
   // Sets action of Stopped and Scrolling buttons to pause and resume actions.
   $('#stop-start').click(function(){
-    if (skrolling) {
+    if (skroling) {
       prePause = step;
       step = 0;
-      skrolling = false;
-      $('#stop-start').html('Stopped');
+      skroling = false;
+      change_to_paused();
     } else {
       step = prePause
-      $('#stop-start').html('Scrolling');
-      skrolling = true;
+      change_to_skroling();
+      skroling = true;
     }
   });
 

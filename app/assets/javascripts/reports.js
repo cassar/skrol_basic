@@ -12,7 +12,7 @@ function hover_report(data_group, data_word) {
   report['word_id'] = parseInt(data_word, 10);
   report['user_map_id'] = user_map_id;
   report['speed'] = step;
-  report['pause'] = !skrolling;
+  report['pause'] = !skroling;
   report['hover'] = true;
   report['hide'] = false;
   console.log(report);
@@ -35,7 +35,7 @@ function clear_report(data_group, data_word) {
   report['word_id'] = parseInt(data_word, 10);
   report['user_map_id'] = user_map_id;
   report['speed'] = step;
-  report['pause'] = !skrolling;
+  report['pause'] = !skroling;
   report['hover'] = false;
   report['hide'] = false;
   console.log(report);

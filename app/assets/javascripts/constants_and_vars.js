@@ -1,7 +1,7 @@
 // Constants
 var STANDARD_FONT_SIZE = 4;
 var NORMAL_SPEED = 3;
-var MIN_ELEMENTS = 2;
+var MIN_ELEMENTS = 3;
 
 // The array that sentence objects will be loaded into.
 var stringArray = [];
@@ -13,7 +13,8 @@ var sentMetricsArray = [];
 // Speed Settings
 var step = NORMAL_SPEED;
 var prePause = step;
-var skrolling = true;
+var skroling = true;
+var disabled = true;
 
 // Font Size Settings
 var fontSize = STANDARD_FONT_SIZE;
