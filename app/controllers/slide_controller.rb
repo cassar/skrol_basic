@@ -1,7 +1,7 @@
 class SlideController < ApplicationController
   # Sends a new slide to the client.
   def send_slide
-    user_map = UserMap.where(id: params[:id]).first
+    user_map = UserMap.where(id: params[:user_map_id]).first
     render json: retrieve_next_slide(user_map)
   end
 

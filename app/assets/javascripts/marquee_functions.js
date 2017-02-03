@@ -90,7 +90,8 @@ function change_to_loading() {
 function fill_string_arr() {
   if ((stringArray.length < MIN_ELEMENTS) && !request_pending) {
     request_pending = true;
-    request_string();
+    var json = {'user_map_id': user_map_id};
+    request_string(json);
   }
 }
 
