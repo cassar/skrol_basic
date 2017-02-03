@@ -43,6 +43,7 @@ def retrieve_next_sentence(target_word, user_map)
   user_score = user_map.retrieve_user_score(target_word)
   target_word.rep_sents.each do |rep_sent|
     rank = rep_sent.retrieve_rank(user_map)
+    next if rank.nil?
     if rank.entry == user_score.sentence_rank
       user_score.increment_sentence_rank
       return sentence_by_id(rep_sent.rep_sent_id)

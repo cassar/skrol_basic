@@ -25,7 +25,6 @@ end
 
 # Applies sentence_ranks to all word_ranks given a lang map
 def compile_sentence_ranks(lang_map)
-  # Move the below into the model please.
   word_ranks = retrieve_word_ranks(lang_map)
   word_ranks.each do |word_rank|
     scores_arr = []

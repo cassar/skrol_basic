@@ -17,8 +17,6 @@ class RepSent < ApplicationRecord
   # Returns the rank attached mapped to particular lang_map through given
   # user_map
   def retrieve_rank(user_map)
-    rank = ranks.where(lang_map_id: user_map.lang_map.id).first
-    raise Invalid, "rep_sent.id: #{id} user_map.id: #{user_map.id}" if rank.nil?
-    rank
+    ranks.where(lang_map_id: user_map.lang_map.id).first
   end
 end
