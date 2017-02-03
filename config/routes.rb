@@ -4,5 +4,5 @@ Rails.application.routes.draw do
 
   get 'slides/:id', to: 'slide#send_slide'
   post 'metrics', to: 'slide#recieve_metrics'
-  post 'reset_user_session', to: 'slide#reset_user_session'
+  post 'reset-user-session', to: 'slide#reset_user_session'
 end

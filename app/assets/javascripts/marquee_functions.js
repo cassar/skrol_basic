@@ -7,6 +7,9 @@ function setup_marquee() {
   $('#frame').css('font-size', fontSize + 'em');
   $('#fontLabel').html(fontSize);
 
+  // Cleans up Legacy Scores and Metrics
+  reset_user_session();
+
   // Marquee setup
   marquee = document.getElementById('marquee');
   slide = document.getElementById('slide');
@@ -15,6 +18,13 @@ function setup_marquee() {
   marginLeft = marqueeWidth;
   slideWidth = parseInt($('#slide').css('width'));
   marquee.style.marginLeft = marqueeWidth + 'px';
+}
+
+// Resets the user session so words can be freshly retested
+function reset_user_session() {
+  json = {};
+  json['user_map_id'] = user_map_id;
+  request_session_reset(json);
 }
 
 // Checks if the marquee is able to be incremented and then executes.

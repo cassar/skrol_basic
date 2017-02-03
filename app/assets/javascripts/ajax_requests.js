@@ -16,10 +16,23 @@ function request_string(){
     });
 }
 
+// Sends metrics back to the server
 function send_metrics(json){
   $.ajax({
     method: "POST",
     url: "/metrics",
+    data: json
+  })
+    .done(function( msg ) {
+      console.log( "Complete: " + msg["message"] );
+    });
+}
+
+// Requests user scores and metrics be reset for new session
+function request_session_reset(json){
+  $.ajax({
+    method: "POST",
+    url: "/reset-user-session",
     data: json
   })
     .done(function( msg ) {
