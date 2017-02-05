@@ -72,3 +72,12 @@ end
 def retrieve_word_ranks(lang_map)
   Rank.where(entriable_type: 'Word', lang_map_id: lang_map.id)
 end
+
+# Returns an STS given a sentence ID and a base script.
+def retrieve_sts(sentence_id, lang_map)
+  score = Score.where(entriable_id: sentence_id, entriable_type: 'Sentence',
+                      name: 'STS', map_to_id: lang_map.id,
+                      map_to_type: 'LangMap').first
+  raise Invalid, "No STS found for sentence_id: #{sentence_id}" if score.nil?
+  score
+end

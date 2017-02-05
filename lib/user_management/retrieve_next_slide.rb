@@ -23,7 +23,7 @@ end
 
 # Retrieves the next word a user will view given user and target_script record
 def retrieve_next_word(user_map)
-  word = word_from_scores(user_map, user_map.target_script)
+  word = word_from_scores(user_map)
   word = word_from_words(user_map) if word.nil?
   raise Invalid, 'no more words!' if word.nil?
   # Create or update word score
@@ -34,25 +34,29 @@ end
 # Retrieves the next sentence a user will view given a word object
 def retrieve_next_sentence(target_word, user_map)
   user_score = user_map.retrieve_user_score(target_word)
+  sentence = nil
+  loop do
+    correct_rank_found = false
+    sentence =
+      search_rep_sents(target_word, user_map, user_score, correct_rank_found)
+    break if sentence.present? || !correct_rank_found
+  end
+  sentence
+end
+
+# Searches through a group of rep sents to see if a next sentence can be found
+def search_rep_sents(target_word, user_map, user_score, _correct_rank_found)
   target_word.rep_sents.each do |rep_sent|
     rank = rep_sent.retrieve_rank(user_map)
     next if rank.nil?
-    if rank.entry == user_score.sentence_rank
-      user_score.increment_sentence_rank
-      return sentence_by_id(rep_sent.rep_sent_id)
-    end
+    next unless rank.entry == user_score.sentence_rank
+    correct_rank_found = true
+    user_score.increment_sentence_rank
+    break if sentence_used?(rep_sent.rep_sent_id, user_map)
+    return sentence_by_id(rep_sent.rep_sent_id)
   end
   nil
 end
-
-# Determines weather a sentence is valid for presentation in the view.
-# def sentence_valid?(sentence_id, user_map)
-#   return false if sentence_used?(sentence_id, user_map)
-#   phonetic_entry = sentence_by_id(sentence_id).phonetic.entry
-#   return false if phonetic_entry.include? NONE
-#   return false if phonetic_entry.length > 40
-#   true
-# end
 
 # Returns the HTML slide to be sent to the client.
 def return_html_slide(target_word, target_sentence, user_map)
@@ -65,37 +69,41 @@ def return_html_slide(target_word, target_sentence, user_map)
 end
 
 def return_div_content(target_sentence, user_map)
-  sentences = [target_sentence, target_sentence.phonetic,
-               target_sentence.corresponding(user_map.base_script)]
+  sentences_info = [[target_sentence], [target_sentence.phonetic],
+                    [target_sentence.corresponding(user_map.base_script)]]
+  add_record_entry_arrs(sentences_info)
   content = ''
-  sent_num = 1
-  record_arr = nil
-  sentences.each do |sentence|
-    record_arr = if sent_num == 2
-                   phonetic_arr_from_base_arr(record_arr)
-                 else
-                   return_word_array(sentence)
-                 end
-    entry_arr = sentence.entry.split
-    counter = 0
-    html_sent = ''
-    entry_arr.each do |entry|
-      group_id = record_arr[counter].group_id
-      html_sent << "<div class=\"word\" data-group=\"#{group_id}\">" + entry + '</div>&nbsp'
-      counter += 1
-    end
-    content << "<div class=\"sentence\">" + html_sent + '</div>'
-    sent_num += 1
+  sentences_info.each do |element|
+    element << element[0].entry.split
+    compile_sentence_html(element, content)
   end
   content
 end
 
+def compile_sentence_html(element, content)
+  html_sent = ''
+  counter = 0
+  element[2].each do |entry|
+    group_id = element[1][counter].group_id
+    html_sent <<
+      "<div class=\"word\" data-group=\"#{group_id}\"> #{entry}</div>&nbsp"
+    counter += 1
+  end
+  content << "<div class=\"sentence\">#{html_sent}</div>"
+end
+
+def add_record_entry_arrs(sentences_info)
+  target_arr = return_word_array(sentences_info[0][0])
+  sentences_info[0] << target_arr
+  sentences_info[1] << phonetic_arr_from_base_arr(target_arr)
+  sentences_info[2] << return_word_array(sentences_info[2][0])
+end
+
 # returns a word record if one is suitable in the user's scores section.
-def word_from_scores(user_map, target_script)
+def word_from_scores(user_map)
   max_score = template = { entry: -1 }
-  user_map.user_scores.where(status: 'tested').each do |score|
+  user_map.user_scores.where(status: TESTED).each do |score|
     next if score.entry > THRESHOLD
-    next if score.target_script != target_script
     max_score = score if score.entry > max_score[:entry]
   end
   return nil if max_score == template
@@ -113,20 +121,6 @@ def word_from_words(user_map)
   end
   user_map.update(word_rank: word_rank)
   word
-end
-
-# Returns true if a word has (already) been viewed by a user, false otherwise
-def word_used?(word, user_map)
-  score = user_map.user_scores.where(target_word_id: word.id).first
-  return false if score.nil?
-  true
-end
-
-# Returns true if a sentence has already been viewed by a user, false otherwise
-def sentence_used?(sentence_id, user_map)
-  metric = user_map.user_metrics.where(target_sentence_id: sentence_id).first
-  return false if metric.nil?
-  true
 end
 
 # Returns array of word records given a sentence record
@@ -147,13 +141,4 @@ def phonetic_arr_from_base_arr(base_arr)
   word_arr = []
   base_arr.each { |word| word_arr << word.phonetic }
   word_arr
-end
-
-# Returs an STS given a sentence ID and a base script.
-def retrieve_sts(sentence_id, lang_map)
-  score = Score.where(entriable_id: sentence_id, entriable_type: 'Sentence',
-                      name: 'STS', map_to_id: lang_map.id,
-                      map_to_type: 'LangMap').first
-  raise Invalid, "No STS found for sentence_id: #{sentence_id}" if score.nil?
-  score
 end

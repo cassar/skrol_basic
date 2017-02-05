@@ -2,15 +2,14 @@ require 'test_helper'
 
 class RetrieveNextSlide2Test < ActiveSupport::TestCase
   test 'word_from_scores' do
-    target_script = lang_by_name('Spanish').base_script
     user_map = UserMap.first
-    template = word_by_id(13)
 
-    result = word_from_scores(user_map, target_script)
+    template = word_by_id(13)
+    result = word_from_scores(user_map)
     assert_equal(template, result, 'incorrect word returned')
 
     UserScore.destroy_all
-    result = word_from_scores(user_map, target_script)
+    result = word_from_scores(user_map)
     assert_nil(result, 'did not return nil')
   end
 
@@ -25,22 +24,6 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
     assert_equal(template, result, 'incorrect word record returned')
   end
 
-  test 'word_used?' do
-    word = word_by_id(14)
-    user_map = UserMap.first
-    assert(word_used?(word, user_map), 'incorrect bool returned')
-    word = word_by_id(15)
-    assert_not(word_used?(word, user_map), 'incorrect bool returned')
-  end
-
-  test 'sentence_used?' do
-    sentence = sentence_by_id(1)
-    user_map = UserMap.first
-    assert(sentence_used?(sentence, user_map), 'incorrect bool returned')
-    sentence = sentence_by_id(2)
-    assert_not(sentence_used?(sentence, user_map), 'incorrect bool returned')
-  end
-
   test 'return_word_array' do
     template = [word_by_id(9), word_by_id(10), word_by_id(11), word_by_id(12)]
     result = return_word_array(sentence_by_id(2))
@@ -53,8 +36,5 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
 
     result = phonetic_arr_from_base_arr(base_arr)
     assert_equal(template, result, 'incorrect array returned')
-  end
-
-  test 'retrieve_sts' do
   end
 end

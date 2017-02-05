@@ -8,5 +8,7 @@ class ResetOutstandingTest < ActiveSupport::TestCase
     end
     result = UserScore.where(status: TESTING).count
     assert_equal(0, result, 'user score not reset')
+    sentence_rank = UserScore.where(id: 3).first.sentence_rank
+    assert_equal(1, sentence_rank, 'sentence_rank did not decrement')
   end
 end

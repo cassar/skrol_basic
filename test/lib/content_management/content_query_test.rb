@@ -56,4 +56,7 @@ class ContentQueryTest < ActiveSupport::TestCase
 
   test 'retrieve_word_ranks' do
   end
+
+  test 'retrieve_sts' do
+  end
 end
