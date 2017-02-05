@@ -2,21 +2,21 @@
 function init_jquery_controls() {
   // Creates a lister for whene the mouse hover's over the marquee
   // That it will pause whene over and resume when it leaves.
-  if (frame.addEventListener) {
-      frame.addEventListener('mouseenter', function () {
-        if (skroling && !disabled) {
-          prePause = step;
-          step = 0;
-          change_to_paused();
-        }
-      }, false);
-      frame.addEventListener('mouseleave', function () {
-        if (skroling && !disabled) {
-          step = prePause
-          change_to_skroling();
-        }
-      }, false);
-  }
+  $('#frame').hover(
+    function () {
+      if (skroling && !disabled) {
+        prePause = step;
+        step = 0;
+        change_to_paused();
+      }
+    },
+    function () {
+      if (skroling && !disabled) {
+        step = prePause
+        change_to_skroling();
+      }
+    }
+  );
 
   // Decrements step to slow marquee down.
   $('#lessSpeed').click(function(){
@@ -80,10 +80,12 @@ function reinit_sentence() {
     var data_word = $(this)[0].getAttribute('data-word');
     send_report(data_group, data_word, true);
   });
+  // Switches word elements to bootstrap primary color
+  // @brand-primary: darken(#428bca, 6.5%); #337ab7
   $('.word').hover(
     function() {
       var data_group = $(this)[0].getAttribute('data-group');
-      $('*[data-group="' + data_group + '"]').css('color', 'green');
+      $('*[data-group="' + data_group + '"]').css('color', '#337ab7');
     },
     function() {
       var data_group = $(this)[0].getAttribute('data-group');
