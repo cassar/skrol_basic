@@ -38,7 +38,7 @@ class CreateContentTest < ActiveSupport::TestCase
 
   # test 'derive_phonetics' do
   #   lang = lang_by_name('English')
-  #   lang.phonetic_script.sentences.each(&:destroy)
+  #   lang.phonetic_script.sentences.destroy_all
   #   derive_phonetics(lang)
   #   base_count = lang.base_script.sentences.count
   #   phonetic_count = lang.phonetic_script.sentences.count

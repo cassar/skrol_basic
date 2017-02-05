@@ -6,7 +6,7 @@ class Character < ApplicationRecord
 
   def create_cfs(score)
     scores.where(map_to_id: script.id, map_to_type: 'Script',
-                 name: 'CFS').each(&:destroy)
+                 name: 'CFS').destroy_all
     scores.create(map_to_id: script.id, map_to_type: 'Script',
                   name: 'CFS', entry: score)
   end

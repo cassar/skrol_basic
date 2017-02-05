@@ -5,7 +5,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
     lang = Language.where(name: 'English').first
     script = lang.scripts.where(name: 'Latin').first
     word = script.words.where(entry: 'would').first
-    script.sentences.each(&:destroy)
+    script.sentences.destroy_all
     sentence =
       script.sentences.create(entry: 'Would you like a apple a pear?')
 
@@ -22,7 +22,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
 
   test 'derive_words_catalogue' do
     script = lang_by_name('English').base_script
-    script.sentences.each(&:destroy)
+    script.sentences.destroy_all
     sentence =
       script.sentences.create(entry: 'Would you like a apple a pear?')
 

@@ -3,7 +3,7 @@
 def compile_wcfbs(target_word, base_script)
   score = calculate_wcfbs(target_word, base_script)
   target_word.scores.where(map_to_id: base_script.id, map_to_type: 'Script',
-                           name: 'WCFBS').each(&:destroy)
+                           name: 'WCFBS').destroy_all
   target_word.scores.create(map_to_id: base_script.id, map_to_type: 'Script',
                             name: 'WCFBS', entry: score)
 end

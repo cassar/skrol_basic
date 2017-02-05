@@ -5,7 +5,7 @@ def compile_wss(target_word, base_script)
   raise Invalid, "No base_word found for '#{target_word}'" if base_word.nil?
   score = calculate_wss(target_word, base_script)
   target_word.scores.where(map_to_id: base_word.id, map_to_type: 'Word',
-                           name: 'WSS').each(&:destroy)
+                           name: 'WSS').destroy_all
   target_word.scores.create(map_to_id: base_word.id, map_to_type: 'Word',
                             name: 'WSS', entry: score)
 end

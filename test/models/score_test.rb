@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ScoreTest < ActiveSupport::TestCase
   test 'Score.create validations' do
-    Score.all.each(&:destroy)
+    Score.destroy_all
     script = lang_by_name('English').base_script
     word = script.word_by_entry('apple')
     score = word.scores.create(map_to_id: 2, map_to_type: 'Word',

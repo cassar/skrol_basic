@@ -11,7 +11,7 @@ end
 # Then creates new ones given catalogue and script.
 # Will return total characters in sample for use in CFS computation.
 def create_chars_return_total(catalogue, script)
-  script.characters.each(&:destroy)
+  script.characters.destroy_all
   total = 0
   catalogue.each do |key, value|
     script.characters.create(entry: key)

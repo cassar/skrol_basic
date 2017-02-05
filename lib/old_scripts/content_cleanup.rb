@@ -5,7 +5,7 @@ def cleanup_sentences!(script)
     sentence.entry.split_sentence.each do |entry|
       next if word_present?(entry, sentence.script)
       d_group_id = sentence.group_id
-      Sentence.where(group_id: d_group_id).each(&:destroy)
+      Sentence.where(group_id: d_group_id).destroy_all
       break
     end
   end
