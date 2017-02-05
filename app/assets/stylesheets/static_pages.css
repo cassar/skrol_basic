@@ -31,21 +31,23 @@
   display: inline;
 }
 
-#controls {
-  width: 75%;
-  margin: auto;
-  margin-top: 1em;
-}
-
 .sentences, #placeholder {
   display: inline-block;
   margin-right: .5em;
 }
 
-.sentence {
+.sentence, #innerholder {
   display: flex;
 }
 
 #placeholder {
   color: white;
+}
+
+/* Control Styling */
+
+#controls {
+  width: 75%;
+  margin: auto;
+  margin-top: 1em;
 }
