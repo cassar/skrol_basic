@@ -31,20 +31,20 @@ function init_jquery_controls() {
   });
 
   // Decrements fontSize variable and pushes change to DOM.
-  $('#smallerFont').click(function(){
-    fontSize--;
-    $('#frame').css('font-size', fontSize + 'em');
-    $('#fontLabel').html(fontSize);
-    slideWidth = parseInt($('#slide').css('width'));
-  });
+  // $('#smallerFont').click(function(){
+  //   fontSize--;
+  //   $('#frame').css('font-size', fontSize + 'em');
+  //   $('#fontLabel').html(fontSize);
+  //   slideWidth = parseInt($('#slide').css('width'));
+  // });
 
   // Increments fontSize variable and pushes change to DOM.
-  $('#largerFont').click(function(){
-    fontSize++;
-    $('#frame').css('font-size', fontSize + 'em');
-    $('#fontLabel').html(fontSize);
-    slideWidth = parseInt($('#slide').css('width'));
-  });
+  // $('#largerFont').click(function(){
+  //   fontSize++;
+  //   $('#frame').css('font-size', fontSize + 'em');
+  //   $('#fontLabel').html(fontSize);
+  //   slideWidth = parseInt($('#slide').css('width'));
+  // });
 
   // Sets action of Stopped and Scrolling buttons to pause and resume actions.
   $('#stop-start').click(function(){

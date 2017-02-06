@@ -1,5 +1,5 @@
 // Constants
-var STANDARD_FONT_SIZE = 4;
+// var STANDARD_FONT_SIZE = 4;
 var NORMAL_SPEED = 3;
 var MIN_ELEMENTS = 3;
 var HOVER_WAIT = 1000;
@@ -26,7 +26,7 @@ var baseHidden = false;
 var baseColour = 'black';
 
 // Font Size Settings
-var fontSize = STANDARD_FONT_SIZE;
+// var fontSize = STANDARD_FONT_SIZE;
 
 // Marquee vars
 var oldX = 0;

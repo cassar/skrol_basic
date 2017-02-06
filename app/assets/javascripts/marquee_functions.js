@@ -4,8 +4,8 @@ function setup_marquee() {
   $('#speedLabel').html(step);
 
   // Inject Initial Font Settings
-  $('#frame').css('font-size', fontSize + 'em');
-  $('#fontLabel').html(fontSize);
+  // $('#frame').css('font-size', fontSize + 'em');
+  // $('#fontLabel').html(fontSize);
 
   // Cleans up Legacy Scores and Metrics
   reset_user_session();
