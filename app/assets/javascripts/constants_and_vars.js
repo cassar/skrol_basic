@@ -2,6 +2,7 @@
 var STANDARD_FONT_SIZE = 4;
 var NORMAL_SPEED = 3;
 var MIN_ELEMENTS = 3;
+var HOVER_WAIT = 1000;
 
 // The array that sentence objects will be loaded into.
 var stringArray = [];
@@ -15,6 +16,10 @@ var step = NORMAL_SPEED;
 var prePause = step;
 var skroling = true;
 var disabled = true;
+
+// Word Hover Reporting
+var start;
+var end;
 
 // Base Hide Settings
 var baseHidden = false;

@@ -94,13 +94,20 @@ function init_jquery_controls() {
 
 // Reinitiates events on sentence elements.
 function reinit_sentence() {
-  $('.word').hover(function(){
-    if ($(this).parent().hasClass('target')) {
-      var data_group = $(this).parent().parent().attr('data-group');
-      var data_word = $(this).attr('data-word');
-      send_report(data_group, data_word, true);
+  $('.word').hover(
+    function() {
+      start = Date.now();
+    },
+    function() {
+      end = Date.now();
+      var diff = end - start
+      if ($(this).parent().hasClass('target') && diff > HOVER_WAIT) {
+        var data_group = $(this).parent().parent().attr('data-group');
+        var data_word = $(this).attr('data-word');
+        send_report(data_group, data_word, true);
+      }
     }
-  });
+);
   // Switches word elements to bootstrap primary color
   // @brand-primary: darken(#428bca, 6.5%); #337ab7
   $('.word').hover(
@@ -111,7 +118,7 @@ function reinit_sentence() {
         $('*[data-group="' + data_group + '"]').css('color', '#337ab7');
       }
     },
-    function() {
+    function(event) {
       var data_group = $(this).attr('data-group');
       $('*[data-group="' + data_group + '"]').css('color', '');
     }
