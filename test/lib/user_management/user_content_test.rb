@@ -19,18 +19,18 @@ class UserContentTest < ActiveSupport::TestCase
   end
 
   test 'word_used?' do
-    word = word_by_id(14)
+    word = Word.find(14)
     user_map = UserMap.first
     assert(word_used?(word, user_map), 'incorrect bool returned')
-    word = word_by_id(15)
+    word = Word.find(15)
     assert_not(word_used?(word, user_map), 'incorrect bool returned')
   end
 
   test 'sentence_used?' do
-    sentence = sentence_by_id(1)
+    sentence = Sentence.find(1)
     user_map = UserMap.first
     assert(sentence_used?(sentence, user_map), 'incorrect bool returned')
-    sentence = sentence_by_id(2)
+    sentence = Sentence.find(2)
     assert_not(sentence_used?(sentence, user_map), 'incorrect bool returned')
   end
 end

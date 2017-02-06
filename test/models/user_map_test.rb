@@ -33,12 +33,12 @@ class UserMapTest < ActiveSupport::TestCase
 
   test 'UserMap.create_touch_score' do
     user_map = UserMap.first
-    target_word = word_by_id(14)
+    target_word = Word.find(14)
     call = 'UserScore.count'
     assert_difference(call, 0, 'score did not update') do
       user_map.create_touch_score(target_word)
     end
-    target_word = word_by_id(15)
+    target_word = Word.find(15)
     assert_difference(call, 1, 'score did not update') do
       user_map.create_touch_score(target_word)
     end
@@ -46,8 +46,8 @@ class UserMapTest < ActiveSupport::TestCase
 
   test 'UserMap.create_metric_stub' do
     user_map = UserMap.first
-    target_sentence = sentence_by_id(3)
-    target_word = word_by_id(1)
+    target_sentence = Sentence.find(3)
+    target_word = Word.find(1)
     call = 'UserMetric.count'
     assert_difference(call, 1, 'metric failed to save') do
       user_map.create_metric_stub(target_word, target_sentence)

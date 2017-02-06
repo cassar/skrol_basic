@@ -25,7 +25,7 @@ class SentenceTest < ActiveSupport::TestCase
   end
 
   test 'Sentence.create_phonetic' do
-    base_sentence = sentence_by_id(2)
+    base_sentence = Sentence.find(2)
     call = 'Sentence.count'
     assert_difference(call, 1, 'sentence did not save') do
       base_sentence.create_phonetic
@@ -34,7 +34,7 @@ class SentenceTest < ActiveSupport::TestCase
 
   test 'Sentence.retrieve_score' do
     puts Score.where(name: 'STS', entriable_id: 3).count
-    sentence = sentence_by_id(3)
+    sentence = Sentence.find(3)
     base_script = lang_by_name('English').base_script
     score = Score.where(entriable_id: 3).first
     lang_map = LangMap.first
@@ -48,8 +48,8 @@ class SentenceTest < ActiveSupport::TestCase
   end
 
   test 'Sentence.phonetic' do
-    sentence = sentence_by_id(5)
-    template = sentence_by_id(12)
+    sentence = Sentence.find(5)
+    template = Sentence.find(12)
     assert_equal(template, sentence.phonetic, '.phonetic did not work')
   end
 
@@ -57,13 +57,13 @@ class SentenceTest < ActiveSupport::TestCase
     lang_map = LangMap.first
 
     call = "Score.where(name: 'STS', entriable_id: 3).count"
-    target_sentence = sentence_by_id(3)
+    target_sentence = Sentence.find(3)
     assert_difference(call, 0, 'incorrect scores saved') do
       target_sentence.create_update_score('STS', lang_map, 0.09)
     end
 
     call = "Score.where(name: 'STS', entriable_id: 9).count"
-    target_sentence = sentence_by_id(9)
+    target_sentence = Sentence.find(9)
     Score.destroy_all
     assert_difference(call, 1, 'incorrect scores saved') do
       target_sentence.create_update_score('STS', lang_map, 0.54)

@@ -8,8 +8,8 @@ class RetrieveNextSlide1Test < ActiveSupport::TestCase
     user_map = UserMap.first
     setup_map(user_map.lang_map)
 
-    target_word = word_by_id(13)
-    target_sentence = sentence_by_id(9)
+    target_word = Word.find(13)
+    target_sentence = Sentence.find(9)
 
     template = return_html_slide(target_word, target_sentence, user_map)
     result = retrieve_next_slide(user_map)
@@ -35,7 +35,7 @@ class RetrieveNextSlide1Test < ActiveSupport::TestCase
     setup_map(user_map.lang_map)
 
     result = retrieve_next_word(user_map)
-    template = word_by_id(13)
+    template = Word.find(13)
 
     assert_equal(template, result, 'incorrect word returned')
   end
@@ -47,9 +47,9 @@ class RetrieveNextSlide1Test < ActiveSupport::TestCase
     user_map = UserMap.first
     setup_map(user_map.lang_map)
 
-    target_word = word_by_id(13)
+    target_word = Word.find(13)
 
-    template = sentence_by_id(9)
+    template = Sentence.find(9)
     result = retrieve_next_sentence(target_word, user_map)
     assert_equal(template, result, 'incorrect sentence retrieved')
   end

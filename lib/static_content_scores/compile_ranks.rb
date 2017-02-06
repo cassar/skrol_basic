@@ -17,7 +17,7 @@ end
 def assign_word_ranks(scores_arr, scores_obj, lang_map)
   counter = 1
   scores_arr.sort.reverse.each do |score_entry|
-    word = word_by_id(scores_obj[score_entry])
+    word = Word.find(scores_obj[score_entry])
     word.ranks.create(lang_map_id: lang_map.id, entry: counter)
     counter += 1
   end
@@ -39,7 +39,7 @@ end
 # Determines whether a given rep_sent's sentence is suitable and then adds it to
 # the scores_arr and scores_obj
 def process_sent_id(rep_sent, lang_map, scores_arr, scores_obj)
-  phonetic_entry = sentence_by_id(rep_sent.rep_sent_id).phonetic.entry
+  phonetic_entry = Sentence.find(rep_sent.rep_sent_id).phonetic.entry
   return if (phonetic_entry.include? NONE) || (phonetic_entry.length > 40)
   score_entry = retrieve_sts(rep_sent.rep_sent_id, lang_map).entry
   scores_arr << score_entry

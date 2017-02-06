@@ -18,21 +18,21 @@ class ContentHelperTest < ActiveSupport::TestCase
   end
 
   test 'sentences_found_in' do
-    word = word_by_id(10)
-    sentence1 = sentence_by_id(2)
-    sentence2 = sentence_by_id(8)
+    word = Word.find(10)
+    sentence1 = Sentence.find(2)
+    sentence2 = Sentence.find(8)
     template = [sentence1, sentence2]
     result = sentences_found_in(word)
     assert_equal(template, result, 'incorrect array returned')
   end
 
   test 'word_in_sentence?' do
-    sentence = sentence_by_id(1)
-    word = word_by_id(3)
+    sentence = Sentence.find(1)
+    word = Word.find(3)
     assert(word_in_sentence?(word, sentence), 'method returned wrong bool')
-    word = word_by_id(4)
+    word = Word.find(4)
     assert(word_in_sentence?(word, sentence), 'method returned wrong bool')
-    word = word_by_id(1)
+    word = Word.find(1)
     assert_not(word_in_sentence?(word, sentence), 'method returned wrong bool')
   end
 
@@ -52,7 +52,7 @@ class ContentHelperTest < ActiveSupport::TestCase
     word_rep_counts = return_word_rep_counts(target_script)
     hurdle = 2
     base_script = lang_by_name('English').base_script
-    template = word_by_id(16)
+    template = Word.find(16)
     result = next_word_below_hurdle(word_rep_counts, hurdle, lang_map)
     assert_equal(template, result, 'Incorrect word returned')
   end

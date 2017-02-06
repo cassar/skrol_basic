@@ -54,8 +54,8 @@ class WordTest < ActiveSupport::TestCase
   end
 
   test 'Word.base' do
-    phon = word_by_id(30)
-    template = word_by_id(7)
+    phon = Word.find(30)
+    template = Word.find(7)
     result = phon.base
     assert_equal(template, result, 'incorrect word record returned')
   end

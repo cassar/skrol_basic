@@ -10,7 +10,7 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_wls_script(base_script)
 
     script = lang_by_name('Spanish').base_script
-    target_sentence = sentence_by_id(3)
+    target_sentence = Sentence.find(3)
 
     compile_chars_cfs(script)
     compile_chars_cfs(script.phonetic)

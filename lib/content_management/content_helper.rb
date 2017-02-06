@@ -60,11 +60,11 @@ def next_word_below_hurdle(word_rep_counts, hurdle, lang_map)
   next_score = template = { entry: -1 }
   word_rep_counts.each do |key, value|
     next if value >= hurdle
-    candidate = word_by_id(key).retrieve_score('WTS', lang_map)
+    candidate = Word.find(key).retrieve_score('WTS', lang_map)
     next_score = candidate if candidate.entry > next_score[:entry]
   end
   return nil if next_score == template
-  word_by_id(next_score.entriable_id)
+  Word.find(next_score.entriable_id)
 end
 
 # Removes phonetic word's that do not have a base_word.

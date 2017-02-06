@@ -4,7 +4,7 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
   test 'word_from_scores' do
     user_map = UserMap.first
 
-    template = word_by_id(13)
+    template = Word.find(13)
     result = word_from_scores(user_map)
     assert_equal(template, result, 'incorrect word returned')
 
@@ -19,20 +19,20 @@ class RetrieveNextSlide2Test < ActiveSupport::TestCase
     user_map = UserMap.first
     setup_map(user_map.lang_map)
 
-    template = word_by_id(18)
+    template = Word.find(18)
     result = word_from_words(user_map)
     assert_equal(template, result, 'incorrect word record returned')
   end
 
   test 'return_word_array' do
-    template = [word_by_id(9), word_by_id(10), word_by_id(11), word_by_id(12)]
-    result = return_word_array(sentence_by_id(2))
+    template = [Word.find(9), Word.find(10), Word.find(11), Word.find(12)]
+    result = return_word_array(Sentence.find(2))
     assert_equal(template, result, 'incorrect word array returned')
   end
 
   test 'phonetic_arr_from_base_arr' do
-    base_arr = [word_by_id(1), word_by_id(7)]
-    template = [word_by_id(1).phonetic, word_by_id(7).phonetic]
+    base_arr = [Word.find(1), Word.find(7)]
+    template = [Word.find(1).phonetic, Word.find(7).phonetic]
 
     result = phonetic_arr_from_base_arr(base_arr)
     assert_equal(template, result, 'incorrect array returned')

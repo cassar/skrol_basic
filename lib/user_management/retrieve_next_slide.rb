@@ -52,7 +52,7 @@ def search_rep_sents(target_word, user_map, user_score)
   return [nil, false] if rep_sent.nil?
   user_score.increment_sentence_rank
   return [nil, true] if sentence_used?(rep_sent.rep_sent_id, user_map)
-  [sentence_by_id(rep_sent.rep_sent_id), true]
+  [Sentence.find(rep_sent.rep_sent_id), true]
 end
 
 # Returns the HTML slide to be sent to the client.
@@ -115,7 +115,7 @@ def word_from_scores(user_map)
     max_score = score if score.entry > max_score[:entry]
   end
   return nil if max_score == template
-  word_by_id(max_score.target_word_id)
+  Word.find(max_score.target_word_id)
 end
 
 # Retrieves the next Word record from a the Word table for a User

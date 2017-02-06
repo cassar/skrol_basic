@@ -12,20 +12,6 @@ def user_by_name(name)
   user
 end
 
-# Returns a Language record given an id
-def lang_by_id(id)
-  lang = Language.where(id: id).first
-  raise Invalid, "No language with id: #{id} found!" if lang.nil?
-  lang
-end
-
-# Returns a Word record given an an id
-def word_by_id(id)
-  word = Word.where(id: id).first
-  raise Invalid, "No word with id: #{id} found!" if word.nil?
-  word
-end
-
 # Returns a Word Record given a user may and a rank_num
 # Note rank_num is entered seperately so difference ranks can be checked
 # without having to update the DB.
@@ -36,13 +22,6 @@ def word_by_rank(user_map, word_rank)
   word = rank.entriable
   raise Invalid, "word_id: #{rank.word_id} not found" if word.nil?
   word
-end
-
-# Returns a Sentence record given an id
-def sentence_by_id(id)
-  sent = Sentence.where(id: id).first
-  raise Invalid, "No sentence with id: #{id} found!" if sent.nil?
-  sent
 end
 
 def retrieve_char(entry, script)

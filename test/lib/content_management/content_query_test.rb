@@ -15,24 +15,7 @@ class ContentQueryTest < ActiveSupport::TestCase
     end
   end
 
-  test 'lang_by_id' do
-    assert_equal(lang_by_name('English'), lang_by_id(1), 'method not working')
-    assert_raises(Invalid, 'Did not raise Invalid') { lang_by_id(50) }
-  end
-
-  test 'word_by_id' do
-    word = lang_by_name('English').base_script.word_by_entry('hello')
-    assert_equal(word, word_by_id(1), 'method not working properly')
-    assert_raises(Invalid, 'Did not raise Invalid') { word_by_id(-1) }
-  end
-
   test 'word_by_rank' do
-  end
-
-  test 'sentence_by_id' do
-    sent = Sentence.first
-    assert_equal(sent, sentence_by_id(1), 'method did not work')
-    assert_raises(Invalid, 'Did not raise Invalid') { sentence_by_id(-1) }
   end
 
   test 'retrieve_char' do

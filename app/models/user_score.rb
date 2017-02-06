@@ -5,7 +5,7 @@ class UserScore < ApplicationRecord
 
   # Returns the target script of a user_score record
   def target_script
-    word_by_id(target_word_id).script
+    Word.find(target_word_id).script
   end
 
   def increment_sentence_rank
