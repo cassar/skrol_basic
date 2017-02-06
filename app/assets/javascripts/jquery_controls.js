@@ -60,6 +60,25 @@ function init_jquery_controls() {
     }
   });
 
+  // Toggles the base script color between black and white
+  $('#hide-base').click(function(){
+    if (baseHidden) {
+      baseColour = 'black';
+      $('.base').css('color', baseColour);
+      $('#hide-base').html('Showing');
+      $('#hide-base').removeClass('btn-default');
+      $('#hide-base').addClass('btn-primary');
+      baseHidden = false;
+    } else {
+      baseColour = 'white';
+      $('.base').css('color', baseColour);
+      $('#hide-base').html('Hidden');
+      $('#hide-base').removeClass('btn-primary');
+      $('#hide-base').addClass('btn-default');
+      baseHidden = true;
+    }
+  });
+
   // Sets the action of the mouse pointer to grab and drag the marquee.
   $('#frame').mousemove(function(event){
     cursor = $('#frame').css('cursor');
@@ -84,12 +103,17 @@ function reinit_sentence() {
   // @brand-primary: darken(#428bca, 6.5%); #337ab7
   $('.word').hover(
     function() {
-      var data_group = $(this)[0].getAttribute('data-group');
-      $('*[data-group="' + data_group + '"]').css('color', '#337ab7');
+      // Don't do this if the base sentence is hovered over but hidden.
+      if (!$( this ).parent().hasClass('base') || !baseHidden) {
+        var data_group = $(this)[0].getAttribute('data-group');
+        $('*[data-group="' + data_group + '"]').css('color', '#337ab7');
+      }
     },
     function() {
       var data_group = $(this)[0].getAttribute('data-group');
-      $('*[data-group="' + data_group + '"]').css('color', 'black');
+      $('*[data-group="' + data_group + '"]').css('color', '');
     }
   );
+  // Sets the base sentence color to its current setting
+  $('.base').css('color', baseColour);
 }

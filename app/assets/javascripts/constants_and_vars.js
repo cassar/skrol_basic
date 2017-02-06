@@ -16,6 +16,10 @@ var prePause = step;
 var skroling = true;
 var disabled = true;
 
+// Base Hide Settings
+var baseHidden = false;
+var baseColour = 'black';
+
 // Font Size Settings
 var fontSize = STANDARD_FONT_SIZE;
 
