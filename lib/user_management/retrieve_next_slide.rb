@@ -1,7 +1,6 @@
 # Will retrieve an object containing the html representation of the slide.
 def retrieve_next_slide(user_map)
-  target_word, target_sentence =
-    return_next_available_entries(user_map)
+  target_word, target_sentence = return_next_available_entries(user_map)
   # Create new Metric stub
   user_map.create_metric_stub(target_word, target_sentence)
   return_html_slide(target_word, target_sentence, user_map)
@@ -12,6 +11,7 @@ def return_next_available_entries(user_map)
   loop do
     # Search for target_word
     target_word = retrieve_next_word(user_map)
+
     # Search for matching target_sentence
     target_sentence = retrieve_next_sentence(target_word, user_map)
     # Break if one found
@@ -34,28 +34,25 @@ end
 # Retrieves the next sentence a user will view given a word object
 def retrieve_next_sentence(target_word, user_map)
   user_score = user_map.retrieve_user_score(target_word)
-  sentence = nil
   loop do
-    correct_rank_found = false
-    sentence =
-      search_rep_sents(target_word, user_map, user_score, correct_rank_found)
-    break if sentence.present? || !correct_rank_found
+    sentence, correct_rank_found =
+      search_rep_sents(target_word, user_map, user_score)
+    return sentence if sentence.present?
+    return nil unless correct_rank_found
   end
-  sentence
 end
 
 # Searches through a group of rep sents to see if a next sentence can be found
-def search_rep_sents(target_word, user_map, user_score, _correct_rank_found)
-  target_word.rep_sents.each do |rep_sent|
-    rank = rep_sent.retrieve_rank(user_map)
-    next if rank.nil?
-    next unless rank.entry == user_score.sentence_rank
-    correct_rank_found = true
-    user_score.increment_sentence_rank
-    break if sentence_used?(rep_sent.rep_sent_id, user_map)
-    return sentence_by_id(rep_sent.rep_sent_id)
-  end
-  nil
+def search_rep_sents(target_word, user_map, user_score)
+  rep_sent = RepSent.find_by_sql("SELECT * FROM ranks AS r, rep_sents AS rs
+    WHERE entriable_id = rs.id AND entriable_type = 'RepSent'
+    AND lang_map_id = #{user_map.lang_map.id}
+    AND entry = #{user_score.sentence_rank}
+    AND word_id = #{target_word.id}").first
+  return [nil, false] if rep_sent.nil?
+  user_score.increment_sentence_rank
+  return [nil, true] if sentence_used?(rep_sent.rep_sent_id, user_map)
+  [sentence_by_id(rep_sent.rep_sent_id), true]
 end
 
 # Returns the HTML slide to be sent to the client.
@@ -103,7 +100,7 @@ end
 def word_from_scores(user_map)
   max_score = template = { entry: -1 }
   user_map.user_scores.where(status: TESTED).each do |score|
-    next if score.entry > THRESHOLD
+    next if score.entry >= THRESHOLD
     max_score = score if score.entry > max_score[:entry]
   end
   return nil if max_score == template

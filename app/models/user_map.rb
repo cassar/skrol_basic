@@ -23,7 +23,7 @@ class UserMap < ApplicationRecord
   end
 
   # Either creates or a new user_score record or updates an existing one with
-  # status 'testing'.
+  # status TESTING.
   def create_touch_score(target_word)
     score = user_scores.where(target_word_id: target_word.id).first
     if score.nil?

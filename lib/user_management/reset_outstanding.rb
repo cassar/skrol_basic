@@ -3,7 +3,9 @@
 def reset_outstanding(user_map)
   scores = user_map.user_scores.where(status: TESTING)
   scores.each do |score|
-    score.update(status: TESTED, sentence_rank: score.sentence_rank - 1)
+    score.update(status: TESTED)
+    next unless score.sentence_rank > 1
+    score.update(sentence_rank: score.sentence_rank - 1)
   end
   user_map.user_metrics.where(speed: nil).destroy_all
 end
