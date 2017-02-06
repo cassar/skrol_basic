@@ -35,3 +35,15 @@ NEW = '[new]'.freeze
 # User Score placeholder
 TESTING = '[testing]'.freeze
 TESTED = '[tested]'.freeze
+
+# Sentences Info Index Label Names
+# sentences_info[_]
+TARGET = 0
+PHONETIC = 1
+BASE = 2
+
+# sentences_info[_][_]
+SENTENCE = 0
+NAME = 1
+RECORD_ARR = 2
+ENTRY_ARR = 3

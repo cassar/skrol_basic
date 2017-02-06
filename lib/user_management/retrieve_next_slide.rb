@@ -65,35 +65,45 @@ def return_html_slide(target_word, target_sentence, user_map)
   { entry: entry }
 end
 
+# Returns slide divided into its html elements
 def return_div_content(target_sentence, user_map)
-  sentences_info = [[target_sentence], [target_sentence.phonetic],
-                    [target_sentence.corresponding(user_map.base_script)]]
-  add_record_entry_arrs(sentences_info)
+  sentences_info = compile_sentences_info(target_sentence, user_map)
   content = ''
   sentences_info.each do |element|
-    element << element[0].entry.split
     compile_sentence_html(element, content)
   end
   content
 end
 
+# Compiles the array that will be used to convert to html
+def compile_sentences_info(target_sentence, user_map)
+  sentences_info =
+    [[target_sentence, 'target'], [target_sentence.phonetic, 'phonetic'],
+     [target_sentence.corresponding(user_map.base_script), 'base']]
+  add_record_arrs(sentences_info)
+  sentences_info.each { |element| element << element[SENTENCE].entry.split }
+  sentences_info
+end
+
+# Add the record arrs to the sentences_info obeject
+def add_record_arrs(sentences_info)
+  target_arr = return_word_array(sentences_info[TARGET][SENTENCE])
+  sentences_info[TARGET] << target_arr
+  sentences_info[PHONETIC] << phonetic_arr_from_base_arr(target_arr)
+  sentences_info[BASE] << return_word_array(sentences_info[BASE][SENTENCE])
+end
+
+# Compiles sentence info into html content
 def compile_sentence_html(element, content)
   html_sent = ''
   counter = 0
-  element[2].each do |entry|
-    group_id = element[1][counter].group_id
+  element[ENTRY_ARR].each do |entry|
+    group_id = element[RECORD_ARR][counter].group_id
     html_sent <<
       "<div class=\"word\" data-group=\"#{group_id}\"> #{entry}</div>&nbsp"
     counter += 1
   end
-  content << "<div class=\"sentence\">#{html_sent}</div>"
-end
-
-def add_record_entry_arrs(sentences_info)
-  target_arr = return_word_array(sentences_info[0][0])
-  sentences_info[0] << target_arr
-  sentences_info[1] << phonetic_arr_from_base_arr(target_arr)
-  sentences_info[2] << return_word_array(sentences_info[2][0])
+  content << "<div class=\"sentence #{element[NAME]}\">#{html_sent}</div>"
 end
 
 # returns a word record if one is suitable in the user's scores section.

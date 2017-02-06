@@ -63,9 +63,12 @@ class RetrieveNextSlide1Test < ActiveSupport::TestCase
   test 'return_div_content' do
   end
 
-  test 'compile_sentence_html' do
+  test 'compile_sentences_info' do
   end
 
-  test 'add_record_entry_arrs' do
+  test 'add_record_arrs' do
+  end
+
+  test 'compile_sentence_html' do
   end
 end
