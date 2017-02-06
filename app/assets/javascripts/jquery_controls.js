@@ -20,14 +20,18 @@ function init_jquery_controls() {
 
   // Decrements step to slow marquee down.
   $('#lessSpeed').click(function(){
-    step--;
-    $('#speedLabel').html(step);
+    if (step > MIN_SPEED) {
+      step--;
+      $('#speedLabel').html(step);
+    }
   });
 
   // Increments step to speed up marquee.
   $('#moreSpeed').click(function(){
-    step++;
-    $('#speedLabel').html(step);
+    if (step < MAX_SPEED) {
+      step++;
+      $('#speedLabel').html(step);
+    }
   });
 
   // Decrements fontSize variable and pushes change to DOM.

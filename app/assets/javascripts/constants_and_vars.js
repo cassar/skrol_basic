@@ -1,6 +1,8 @@
 // Constants
 // var STANDARD_FONT_SIZE = 4;
+var MIN_SPEED = 1;
 var NORMAL_SPEED = 3;
+var MAX_SPEED = 5;
 var MIN_ELEMENTS = 3;
 var HOVER_WAIT = 1000;
 
