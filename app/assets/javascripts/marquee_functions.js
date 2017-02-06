@@ -109,9 +109,9 @@ function check_for_insert() {
 
 // Add latest sentence label to attrArray
 function add_sentence() {
-  var sent = $('.sentences:last-of-type')[0];
-  var grp = sent.getAttribute('data-group');
-  var wrd = sent.getAttribute('data-word');
+  var sent = $('.sentences:last-of-type');
+  var grp = sent.attr('data-group');
+  var wrd = sent.attr('data-word');
   attrArray.push([grp, wrd]);
 }
 

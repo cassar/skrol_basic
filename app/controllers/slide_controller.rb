@@ -7,8 +7,8 @@ class SlideController < ApplicationController
 
   # Recieves metrics from the user and returns confirmation.
   def recieve_metrics
-    update_user_metric(params)
-    render json: { message: 'metric saved' }
+    new_score, entry = update_user_metric(params)
+    render json: { message: "'#{entry}' new score = #{new_score}" }
   end
 
   # Will reset user metrics and scores and send back confirmation

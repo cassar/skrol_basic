@@ -4,6 +4,7 @@ def update_user_metric(obj)
   metric = return_user_metric(search_fields)
   metric_results = return_metric_results(obj)
   update_metric(metric, metric_results)
+  [metric.apply_user_score, Word.find(metric.target_word_id).entry]
 end
 
 # Returns search fields array given a json object.
@@ -29,8 +30,16 @@ def return_user_metric(search_fields)
   metric =
     user_map.user_metrics.where(target_word_id: target_word_id,
                                 target_sentence_id: target_sentence_id).first
-  raise Invalid, 'Could not find metric!' if metric.nil?
+  metric = create_metric_and_score(search_fields) if metric.nil?
   metric
+end
+
+# Creates new user_metric and user_score given search fields
+def create_metric_and_score(search_fields)
+  user_map, target_word_id, target_sentence_id = search_fields
+  user_map.create_touch_score(Word.find(target_word_id))
+  user_map.user_metrics.create(target_word_id: target_word_id,
+                               target_sentence_id: target_sentence_id)
 end
 
 # Returns metric results in an array given a json object

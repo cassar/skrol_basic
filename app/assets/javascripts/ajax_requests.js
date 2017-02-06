@@ -28,7 +28,7 @@ function send_metrics(json){
     data: json
   })
   .done(function( msg ) {
-    console.log( "Complete: " + msg["message"] );
+    console.log( "Complete: metric saved " + msg["message"] );
   });
 }
 

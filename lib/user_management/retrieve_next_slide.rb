@@ -99,8 +99,9 @@ def compile_sentence_html(element, content)
   counter = 0
   element[ENTRY_ARR].each do |entry|
     group_id = element[RECORD_ARR][counter].group_id
+    word_id = element[RECORD_ARR][counter].id
     html_sent <<
-      "<div class=\"word\" data-group=\"#{group_id}\"> #{entry}</div>&nbsp"
+      "<div class=\"word\" data-group=\"#{group_id}\" data-word=\"#{word_id}\"> #{entry}</div>&nbsp"
     counter += 1
   end
   content << "<div class=\"sentence #{element[NAME]}\">#{html_sent}</div>"

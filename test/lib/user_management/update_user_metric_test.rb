@@ -20,6 +20,9 @@ class UpdateUserMetricTest < ActiveSupport::TestCase
   test 'return_user_metric' do
   end
 
+  test 'create_metric_and_score' do
+  end
+
   test 'return_metric_results' do
   end
 

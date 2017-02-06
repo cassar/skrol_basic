@@ -94,23 +94,25 @@ function init_jquery_controls() {
 
 // Reinitiates events on sentence elements.
 function reinit_sentence() {
-  $('.sentences').hover(function(){
-    var data_group = $(this)[0].getAttribute('data-group');
-    var data_word = $(this)[0].getAttribute('data-word');
-    send_report(data_group, data_word, true);
+  $('.word').hover(function(){
+    if ($(this).parent().hasClass('target')) {
+      var data_group = $(this).parent().parent().attr('data-group');
+      var data_word = $(this).attr('data-word');
+      send_report(data_group, data_word, true);
+    }
   });
   // Switches word elements to bootstrap primary color
   // @brand-primary: darken(#428bca, 6.5%); #337ab7
   $('.word').hover(
     function() {
       // Don't do this if the base sentence is hovered over but hidden.
-      if (!$( this ).parent().hasClass('base') || !baseHidden) {
-        var data_group = $(this)[0].getAttribute('data-group');
+      if (!$(this).parent().hasClass('base') || !baseHidden) {
+        var data_group = $(this).attr('data-group');
         $('*[data-group="' + data_group + '"]').css('color', '#337ab7');
       }
     },
     function() {
-      var data_group = $(this)[0].getAttribute('data-group');
+      var data_group = $(this).attr('data-group');
       $('*[data-group="' + data_group + '"]').css('color', '');
     }
   );
