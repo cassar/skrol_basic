@@ -15,6 +15,7 @@ AllCops:
     - 'db/seeds.rb'
     - 'lib/content_management/transfer_totoeba_sents.rb'
     - 'lib/content_management/string_extension.rb'
+    - 'test/lib/content_management/retrieve_ipa_test.rb'
 
 Style/Documentation:
   Enabled: false
