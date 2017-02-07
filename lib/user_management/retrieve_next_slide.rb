@@ -1,9 +1,7 @@
 # Will retrieve an object containing the html representation of the slide.
 def retrieve_next_slide(user_map)
   target_word, target_sentence = return_next_available_entries(user_map)
-  # Create new Metric stub
-  user_map.create_metric_stub(target_word, target_sentence)
-  return_html_slide(target_word, target_sentence, user_map)
+  return_html_slide(target_sentence, user_map)
 end
 
 # Retrieves the next available sentence and word entries that a user will view.
@@ -56,12 +54,10 @@ def search_rep_sents(target_word, user_map, user_score)
 end
 
 # Returns the HTML slide to be sent to the client.
-def return_html_slide(target_word, target_sentence, user_map)
+def return_html_slide(target_sentence, user_map)
   content = return_div_content(target_sentence, user_map)
-  group_label = "data-group=\"#{target_sentence.group_id}\""
-  rep_label = "data-word=\"#{target_word.id}\""
-  data_attr = group_label + ' ' + rep_label
-  entry = "<div class=\"sentences\"  #{data_attr}>#{content}</div>"
+  group_label = "data-sentence-group=\"#{target_sentence.group_id}\""
+  entry = "<div class=\"sentences\" #{group_label}>#{content}</div>"
   { entry: entry }
 end
 
@@ -101,7 +97,7 @@ def compile_sentence_html(element, content)
     group_id = element[RECORD_ARR][counter].group_id
     word_id = element[RECORD_ARR][counter].id
     html_sent <<
-      "<div class=\"word\" data-group=\"#{group_id}\" data-word=\"#{word_id}\"> #{entry}</div>&nbsp"
+      "<div class=\"word\" data-word-group=\"#{group_id}\" data-word-id=\"#{word_id}\"> #{entry}</div>&nbsp"
     counter += 1
   end
   content << "<div class=\"sentence #{element[NAME]}\">#{html_sent}</div>"

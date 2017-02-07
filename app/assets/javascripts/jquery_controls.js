@@ -110,26 +110,27 @@ function reinit_sentence() {
     function() {
       end = Date.now();
       var diff = end - start
-      if ($(this).parent().hasClass('target') && diff > HOVER_WAIT) {
-        var data_group = $(this).parent().parent().attr('data-group');
-        var data_word = $(this).attr('data-word');
+      if (!$(this).parent().hasClass('base') && diff > HOVER_WAIT) {
+        var data_group = $(this).parent().parent().attr('data-sentence-group');
+        var data_word = $(this).attr('data-word-id');
         send_report(data_group, data_word, true);
       }
     }
-);
+  );
+
   // Switches word elements to bootstrap primary color
   // @brand-primary: darken(#428bca, 6.5%); #337ab7
   $('.word').hover(
     function() {
       // Don't do this if the base sentence is hovered over but hidden.
-      if (!$(this).parent().hasClass('base') || !baseHidden) {
-        var data_group = $(this).attr('data-group');
-        $('*[data-group="' + data_group + '"]').css('color', '#337ab7');
+      if ($(this).parent().hasClass('target') || !baseHidden) {
+        var data_word_group = $(this).attr('data-word-group');
+        $('*[data-word-group="' + data_word_group + '"]').css('color', '#337ab7');
       }
     },
     function(event) {
-      var data_group = $(this).attr('data-group');
-      $('*[data-group="' + data_group + '"]').css('color', '');
+      var data_word_group = $(this).attr('data-word-group');
+      $('*[data-word-group="' + data_word_group + '"]').css('color', '');
     }
   );
   // Sets the base sentence color to its current setting

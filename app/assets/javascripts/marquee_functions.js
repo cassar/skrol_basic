@@ -116,17 +116,22 @@ function check_for_insert() {
 // Add latest sentence label to attrArray
 function add_sentence() {
   var sent = $('.sentences:last-of-type');
-  var grp = sent.attr('data-group');
-  var wrd = sent.attr('data-word');
-  attrArray.push([grp, wrd]);
+  var grp = sent.attr('data-sentence-group');
+  attrArray.push(grp);
 }
 
 // Will send 3rd last sentence to clear_report
 function monitor_sents() {
   attrLength = attrArray.length;
   if (attrLength >= 3) {
-    sent = attrArray[attrLength - 3];
-    send_report(sent[0], sent[1], false);
+    var sentGroup = attrArray[attrLength - 3];
+    var targetSent = $('*[data-sentence-group="' + sentGroup + '"]').children()[0];
+    var words = targetSent.children;
+    var length = words.length
+    for (var i = 0; i < length; i++) {
+      wordId = words[i].getAttribute('data-word-id');
+      send_report(sentGroup, wordId, false);
+    }
   }
 }
 
