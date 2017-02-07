@@ -1,7 +1,7 @@
 // Injects initial values into the DOM
 function setup_marquee() {
   // Speed Inject
-  $('#speedLabel').html(step);
+  $('#speedLabel').html(speed_level());
 
   // Inject Initial Font Settings
   // $('#frame').css('font-size', fontSize + 'em');
@@ -14,7 +14,7 @@ function setup_marquee() {
   marquee = document.getElementById('marquee');
   slide = document.getElementById('slide');
   frame = document.getElementById('frame');
-  marqueeWidth = marquee.clientWidth + buffer;
+  marqueeWidth = marquee.clientWidth + BUFFER;
   marginLeft = marqueeWidth;
   slideWidth = parseInt($('#slide').css('width'));
   marquee.style.marginLeft = marqueeWidth + 'px';
@@ -27,23 +27,29 @@ function reset_user_session() {
   request_session_reset(json);
 }
 
+// Returns the current speed level
+function speed_level() {
+  return (NORMAL_INTERVAL * 2) - interval;
+}
+
 // Checks if the marquee is able to be incremented and then executes.
 function check_for_increment() {
   if (stringArray.length > 1) {
     if (disabled) {
       set_from_disabled();
+      start_front_end();
     }
-    increment_marquee();
   } else {
     if (!disabled) {
       set_to_disabled();
+      stop_front_end();
     }
   }
 }
 
 // Moves the marquee based on the size of the step variable.
 function increment_marquee() {
-  marginLeft -= step;
+  marginLeft -= STEP;
   marquee.style.marginLeft = marginLeft + 'px';
 }
 
@@ -98,7 +104,7 @@ function fill_string_arr() {
 // Checks to see if a new slide needs to be added into the marquee, and inserts
 // a new one from stringArray if needs be.
 function check_for_insert() {
-  if ((marginLeft + slideWidth + buffer) <= marqueeWidth) {
+  if ((marginLeft + slideWidth + BUFFER) <= marqueeWidth) {
     $('#slide').append(stringArray.shift());
     slideWidth = parseInt($('#slide').css('width'));
     reinit_sentence();
@@ -128,11 +134,27 @@ function monitor_sents() {
 function back_end() {
   check_for_insert();
   fill_string_arr();
+  check_for_increment();
+}
+
+// stops the setInterval set for the frontend
+function stop_front_end() {
+  clearInterval(frontTimeOutId);
+}
+
+// starts the setInterval set for the frontend
+function start_front_end() {
+  frontTimeOutId = setInterval(increment_marquee, interval);
+}
+
+// restarts frontend
+function restart_front_end() {
+  stop_front_end();
+  start_front_end();
 }
 
 // Will run marquee and backend on 50 milisecond intervals
 function start_marquee() {
   // Set the Go function to run every 50 miliseconds.
   setInterval(back_end, 50);
-  setInterval(check_for_increment, 50);
 }

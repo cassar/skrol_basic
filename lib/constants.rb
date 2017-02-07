@@ -22,7 +22,7 @@ SWOSW = 0.33
 # View Metric Constants, used to determine how much a user will be penalised or
 # rewarded.
 NORMAL_BONUS = 0.3
-NORMAL_SPEED = 3
+NORMAL_SPEED = 15
 PAUSE_PENALTY = 0.1
 HOVER_PENALTY = 0.5
 HIDE_BONUS = 0.3

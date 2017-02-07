@@ -5,14 +5,13 @@ function init_jquery_controls() {
   $('#frame').hover(
     function () {
       if (skroling && !disabled) {
-        prePause = step;
-        step = 0;
+        stop_front_end();
         change_to_paused();
       }
     },
     function () {
       if (skroling && !disabled) {
-        step = prePause
+        start_front_end();
         change_to_skroling();
       }
     }
@@ -20,17 +19,24 @@ function init_jquery_controls() {
 
   // Decrements step to slow marquee down.
   $('#lessSpeed').click(function(){
-    if (step > MIN_SPEED) {
-      step--;
-      $('#speedLabel').html(step);
+    if (interval < MAX_INTERVAL) {
+      interval += INTERVAL_INCREMENT;
+      if (skroling && !disabled) {
+        restart_front_end();
+      }
+      $('#speedLabel').html(speed_level());
     }
   });
 
   // Increments step to speed up marquee.
   $('#moreSpeed').click(function(){
-    if (step < MAX_SPEED) {
-      step++;
-      $('#speedLabel').html(step);
+    if (interval > MIN_INTERVAL) {
+      interval -= INTERVAL_INCREMENT;
+      if (skroling && !disabled) {
+        stop_front_end();
+        start_front_end();
+      }
+      $('#speedLabel').html(speed_level());
     }
   });
 
@@ -53,12 +59,11 @@ function init_jquery_controls() {
   // Sets action of Stopped and Scrolling buttons to pause and resume actions.
   $('#stop-start').click(function(){
     if (skroling) {
-      prePause = step;
-      step = 0;
+      stop_front_end();
       skroling = false;
       change_to_paused();
     } else {
-      step = prePause
+      start_front_end();
       change_to_skroling();
       skroling = true;
     }
