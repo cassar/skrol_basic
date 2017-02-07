@@ -19,7 +19,7 @@ require 'pg'
 #     next if spanish.words.where(entry: word['base']).count > 0
 #     en_equiv = nil
 #     unless word['en_equiv'].nil? || word['en_equiv'] == '[none]'
-#       en_word = Word.where(entry: word['en_equiv']).first
+#       en_word = Word.find_by entry: word['en_equiv']
 #       en_equiv = en_word.id unless en_word.nil?
 #     end
 #

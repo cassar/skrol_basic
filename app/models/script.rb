@@ -9,9 +9,7 @@ class Script < ApplicationRecord
 
   # Returns the phonetic script of a particular base script.
   def phonetic
-    phonetic = Script.where(parent_script_id: id).first
-    raise Invalid, 'No phonetic script found' if phonetic.nil?
-    phonetic
+    Script.find_by! parent_script_id: id
   end
 
   # Creates a new phonetic script for a base script.
@@ -21,15 +19,11 @@ class Script < ApplicationRecord
 
   # Returns the base script of a phonetic script
   def base
-    base = Script.where(id: parent_script_id).first
-    raise Invalid, 'No base script found' if base.nil?
-    base
+    Script.find(parent_script_id)
   end
 
   # Retrieves a word record from a script given an entry
   def word_by_entry(entry)
-    word = words.where(entry: entry.downcase).first
-    raise Invalid, "No entry: #{entry} found" if word.nil?
-    word
+    words.find_by! entry: entry.downcase
   end
 end

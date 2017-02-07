@@ -16,7 +16,7 @@ class RetrieveNextSlideTest < ActiveSupport::TestCase
 
     target_script = user_map.lang_map.target_script
 
-    assert_raises(Invalid, 'Invalid did not raise') do
+    assert_raises(ActiveRecord::RecordNotFound, 'Invalid did not raise') do
       target_script.words.each { |word| word.destroy unless word.id == 14 }
       user_map.user_scores.first.update(entry: 0.95)
       retrieve_next_slide(user_map)

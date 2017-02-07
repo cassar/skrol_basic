@@ -7,9 +7,7 @@ class UserMap < ApplicationRecord
 
   # Returns the lang_map of a give user_map
   def lang_map
-    lang_map = LangMap.where(id: lang_map_id).first
-    raise Invalid, "No lang_map with id #{lang_map_id} found" if lang_map.nil?
-    lang_map
+    LangMap.find(lang_map_id)
   end
 
   # Returns the base_script of a given user_map
@@ -25,7 +23,7 @@ class UserMap < ApplicationRecord
   # Either creates or a new user_score record or updates an existing one with
   # status TESTING.
   def create_touch_score(target_word)
-    score = user_scores.where(target_word_id: target_word.id).first
+    score = user_scores.find_by target_word_id: target_word.id
     if score.nil?
       user_scores.create(target_word_id: target_word.id, entry: START_SCORE,
                          status: TESTING, sentence_rank: 1)
@@ -43,7 +41,7 @@ class UserMap < ApplicationRecord
   # Raises a target_word's score to the THRESHOLD value so that it will not
   # be tested any time soon.
   def raise_to_threshold(target_word)
-    score = user_scores.where(target_word_id: target_word.id).first
+    score = user_scores.find_by target_word_id: target_word.id
     if score.nil?
       user_scores.create(target_word_id: target_word.id, entry: THRESHOLD,
                          status: TESTED)
@@ -54,8 +52,6 @@ class UserMap < ApplicationRecord
 
   # Retrieves a user_score given a target_word.
   def retrieve_user_score(target_word)
-    user_score = user_scores.where(target_word_id: target_word.id).first
-    raise Invalid, "No user_score word.id: #{target_word.id}" if user_score.nil?
-    user_score
+    user_scores.find_by! target_word_id: target_word.id
   end
 end

@@ -31,9 +31,5 @@ class LanguageTest < ActiveSupport::TestCase
     assert_equal(0, lang.characters.count, "lang.characters doesn't work")
     assert_equal(0, lang.words.count, "lang.words doesn't work")
     assert_equal(0, lang.sentences.count, "lang.sentences doesn't work")
-
-    lang = Language.create(name: 'Jibberish')
-    assert_raises(Invalid) { lang.base_script }
-    assert_raises(Invalid) { lang.phonetic_script }
   end
 end

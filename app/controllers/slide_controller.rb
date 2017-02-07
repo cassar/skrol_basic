@@ -1,7 +1,7 @@
 class SlideController < ApplicationController
   # Sends a new slide to the client.
   def send_slide
-    user_map = UserMap.where(id: params[:user_map_id]).first
+    user_map = UserMap.find(params[:user_map_id])
     render json: retrieve_next_slide(user_map)
   end
 
@@ -13,7 +13,7 @@ class SlideController < ApplicationController
 
   # Will reset user metrics and scores and send back confirmation
   def reset_user_session
-    user_map = UserMap.where(id: params[:user_map_id]).first
+    user_map = UserMap.find(params[:user_map_id])
     reset_outstanding(user_map)
     render json: { message: 'User scores and metrics reset.' }
   end

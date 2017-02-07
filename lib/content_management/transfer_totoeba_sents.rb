@@ -7,7 +7,7 @@ def transfer_totoeba_sents
   conn.exec('SELECT * FROM sentences;').each do |record|
     next if record['lang'] != 'eng'
 
-    same = base_script.sentences.where(entry: record['text']).first
+    same = base_script.sentences.find_by entry: record['text']
     next unless same.nil?
 
     group = conn.exec("SELECT * FROM links WHERE sent_id = #{record['id']};")

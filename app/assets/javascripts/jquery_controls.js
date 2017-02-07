@@ -110,7 +110,7 @@ function reinit_sentence() {
     function() {
       end = Date.now();
       var diff = end - start
-      if (!$(this).parent().hasClass('base') && diff > HOVER_WAIT) {
+      if ($(this).parent().hasClass('target') && diff > HOVER_WAIT) {
         var data_group = $(this).parent().parent().attr('data-sentence-group');
         var data_word = $(this).attr('data-word-id');
         send_report(data_group, data_word, true);

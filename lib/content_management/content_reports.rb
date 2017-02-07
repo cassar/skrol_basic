@@ -56,9 +56,9 @@ end
 
 # Returns true if a word entry is present in the words db false other wise.
 def word_present?(entry, script)
-  return true if script.words.where(entry: entry).first.present?
-  return true if script.words.where(entry: entry.downcase).first.present?
-  return true if script.words.where(entry: entry.capitalize).first.present?
+  return true if script.words.where(entry: entry).take.present?
+  return true if script.words.where(entry: entry.downcase).take.present?
+  return true if script.words.where(entry: entry.capitalize).take.present?
   false
 end
 

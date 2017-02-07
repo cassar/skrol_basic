@@ -24,11 +24,9 @@ end
 # particular base_script.
 # This is the CFS of the charcter in a target script.
 def return_cfils_score(char_entry, base_script)
-  char = base_script.characters.where(entry: char_entry).first
+  char = base_script.characters.find_by entry: char_entry
   return 0.0 if char.nil?
-  cfils_score = char.scores.where(map_to_id: base_script.id,
-                                  map_to_type: 'Script',
-                                  name: 'CFS').first
-  raise Invalid, "No CFS score for '#{char_entry}'!" if cfils_score.nil?
+  cfils_score = char.scores.find_by! map_to_id: base_script.id,
+                                     map_to_type: 'Script', name: 'CFS'
   cfils_score.entry
 end

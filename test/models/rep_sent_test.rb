@@ -14,8 +14,10 @@ class RepSentTest < ActiveSupport::TestCase
   end
 
   test 'create_update_rank' do
-  end
-
-  test 'retrieve_rank' do
+    rep_sent = RepSent.first
+    lang_map = LangMap.first
+    entry = 2
+    rep_sent.create_update_rank(lang_map, entry)
+    assert_equal(2, Rank.first.entry, 'incorrect entry saved')
   end
 end

@@ -3,14 +3,14 @@ require 'test_helper'
 class ContentQueryTest < ActiveSupport::TestCase
   test 'lang_by_name' do
     assert_not_nil(lang_by_name('English'), 'Failed to retrieve English.')
-    assert_raises(Invalid, 'Did not raises Invalid') do
+    assert_raises(ActiveRecord::RecordNotFound, 'Did not raises Invalid') do
       lang_by_name('Jibberish')
     end
   end
 
   test 'user_by_name' do
     assert_not_nil(user_by_name('Luke'), 'Failed to retrieve Luke')
-    assert_raises(Invalid, 'Did not raises Invalid') do
+    assert_raises(ActiveRecord::RecordNotFound, 'Did not raises Invalid') do
       lang_by_name('No_name')
     end
   end
@@ -24,7 +24,9 @@ class ContentQueryTest < ActiveSupport::TestCase
     template = Character.where(entry: 'h').first
     result = retrieve_char(entry, script)
     assert_equal(template, result, 'incorrect score record returned')
-    assert_raises(Invalid, 'Invalid not raised') { retrieve_char('a', script) }
+    assert_raises(ActiveRecord::RecordNotFound, 'Invalid not raised') do
+      retrieve_char('a', script)
+    end
   end
 
   test 'return_word' do

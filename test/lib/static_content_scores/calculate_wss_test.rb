@@ -12,7 +12,9 @@ class CalculateWSSTest < ActiveSupport::TestCase
     assert_equal(0.6666, Score.first.entry, 'incorrect score saved')
 
     word = lang_by_name('Spanish').base_script.word_by_entry('color')
-    assert_raises(Invalid, 'error not raised') { compile_wss(word, script) }
+    assert_raises(ActiveRecord::RecordNotFound, 'error not raised') do
+      compile_wss(word, script)
+    end
   end
 
   test 'calculate_wss' do

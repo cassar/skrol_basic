@@ -42,7 +42,7 @@ class SentenceTest < ActiveSupport::TestCase
     retrieved = sentence.retrieve_score('STS', lang_map)
     assert_equal(score, retrieved, 'retrieve_sts did not work')
     sentence = Sentence.first
-    assert_raises(Invalid, 'Invalid failed to raise') do
+    assert_raises(ActiveRecord::RecordNotFound, 'Invalid failed to raise') do
       sentence.retrieve_score('STS', lang_map)
     end
   end
@@ -51,6 +51,11 @@ class SentenceTest < ActiveSupport::TestCase
     sentence = Sentence.find(5)
     template = Sentence.find(12)
     assert_equal(template, sentence.phonetic, '.phonetic did not work')
+
+    sentence.phonetic.destroy
+    assert_raises(ActiveRecord::RecordNotFound, 'error not raised') do
+      sentence.phonetic
+    end
   end
 
   test 'Sentence.create_update_score' do

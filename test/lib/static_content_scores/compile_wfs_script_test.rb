@@ -2,9 +2,9 @@ require 'test_helper'
 
 class CompileWFSScriptTest < ActiveSupport::TestCase
   test 'compile_wfs_script' do
-    lang = Language.where(name: 'English').first
-    script = lang.scripts.where(name: 'Latin').first
-    word = script.words.where(entry: 'would').first
+    lang = lang_by_name('English')
+    script = lang.scripts.find_by name: 'Latin'
+    word = script.words.find_by entry: 'would'
     script.sentences.destroy_all
     sentence =
       script.sentences.create(entry: 'Would you like a apple a pear?')

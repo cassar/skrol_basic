@@ -21,7 +21,7 @@ end
 
 # Retrieves the WTS score for a word record given an entry and a lang_map.
 def retrieve_wts_score(target_entry, lang_map)
-  target_word = lang_map.target_script.words.where(entry: target_entry).first
+  target_word = lang_map.target_script.words.find_by entry: target_entry
   return 0.0 if target_word.nil?
   target_word.retrieve_score('WTS', lang_map).entry
 end

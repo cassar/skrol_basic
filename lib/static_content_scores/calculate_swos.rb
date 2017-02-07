@@ -1,8 +1,8 @@
 # Calculates the Sentence Word Order Score (SWOS) for a particular sentence and
 # its counterpart in another script.
 def calculate_swos(target_sentence, base_script)
-  base_sentence =
-    base_script.sentences.where(group_id: target_sentence.group_id).first
+  group_id = target_sentence.group_id
+  base_sentence = base_script.sentences.find_by group_id: group_id
   target_word_arr = return_word_arr(target_sentence)
   base_word_arr = return_word_arr(base_sentence)
   return_swos_score(target_word_arr, base_word_arr)

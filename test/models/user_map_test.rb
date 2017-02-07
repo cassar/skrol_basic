@@ -31,6 +31,18 @@ class UserMapTest < ActiveSupport::TestCase
     end
   end
 
+  test 'lang_map' do
+  end
+
+  test 'base_script' do
+  end
+
+  test 'target_script' do
+  end
+
+  test 'create_touch_score' do
+  end
+
   test 'UserMap.create_touch_score' do
     user_map = UserMap.first
     target_word = Word.find(14)

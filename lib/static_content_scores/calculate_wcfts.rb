@@ -20,9 +20,7 @@ end
 # Retrieves a CFS score for a particular char entry and script mapped to a
 # particular target_script.
 def return_cfs_score(char_entry, target_script)
-  char = target_script.characters.where(entry: char_entry).first
-  raise Invalid, "No chars matching '#{char_entry}'!" if char.nil?
-  cfs_score = char.scores.where(name: 'CFS').first
-  raise Invalid, "No CFS score for '#{char_entry}'!" if cfs_score.nil?
+  char = target_script.characters.find_by! entry: char_entry
+  cfs_score = char.scores.find_by! name: 'CFS'
   cfs_score.entry
 end

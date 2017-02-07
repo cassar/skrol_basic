@@ -72,7 +72,7 @@ def clean_stray_phonetics
   counter = 0
   Language.all.each do |lang|
     lang.phonetic_script.words.each do |phon_word|
-      if Word.where(id: phon_word.assoc_id).first.nil?
+      if Word.where(id: phon_word.assoc_id).take.nil?
         phon_word.destroy
         counter += 1
       end

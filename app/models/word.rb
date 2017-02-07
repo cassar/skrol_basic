@@ -16,26 +16,19 @@ class Word < ApplicationRecord
   # Returns phonetic word of given word.
   # The method currently assumes a word only has one phonetic entry.
   def phonetic
-    p_script = script.phonetic
-    phonetic = p_script.words.where(assoc_id: id)
-    raise Invalid, "No phonetic for '#{entry}' found!" if phonetic.first.nil?
-    phonetic.first
+    script.phonetic.words.find_by! assoc_id: id
   end
 
   # Returns true if a phoneic word is attached to word record
   def phonetic_present?
-    p_script = script.phonetic
-    phonetic = p_script.words.where(assoc_id: id).first
+    phonetic = script.phonetic.words.find_by assoc_id: id
     return false if phonetic.nil?
     true
   end
 
   # Returs the base entry of a phonetic word record.
   def base
-    b_script = script.base
-    base = b_script.words.where(id: assoc_id).first
-    raise Invalid, "No base entry for '#{entry}' found" if base.nil?
-    base
+    script.base.words.find_by! id: assoc_id
   end
 
   # Returns all word records in the same group
@@ -45,16 +38,14 @@ class Word < ApplicationRecord
 
   # Retrieves the WTS for a Word record given a base_script
   def retrieve_score(name, map_to)
-    score = scores.where(name: name, map_to_id: map_to.id,
-                         map_to_type: map_to.class.to_s).first
-    raise Invalid, "No #{name} found for word: #{entry}" if score.nil?
-    score
+    scores.find_by! name: name, map_to_id: map_to.id,
+                    map_to_type: map_to.class.to_s
   end
 
   # Creates or updates an existing score given a name, script, entry
   def create_update_score(name, map_to, entry)
-    score = scores.where(name: name, map_to_id: map_to.id,
-                         map_to_type: map_to.class.to_s).first
+    score = scores.find_by name: name, map_to_id: map_to.id,
+                           map_to_type: map_to.class.to_s
     if score.nil?
       scores.create(name: name, map_to_id: map_to.id,
                     map_to_type: map_to.class.to_s, entry: entry)

@@ -44,7 +44,9 @@ class CompileCharsCFSTest < ActiveSupport::TestCase
     assert_equal('CFS', score.name, 'score name should be CFS')
 
     char.destroy
-    assert_raises(Invalid) { create_cfs_scores(catalogue, script, 5) }
+    assert_raises(ActiveRecord::RecordNotFound, 'error not raised') do
+      create_cfs_scores(catalogue, script, 5)
+    end
   end
 
   test 'derive_chars_catalogue' do

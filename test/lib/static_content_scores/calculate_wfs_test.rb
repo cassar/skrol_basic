@@ -12,7 +12,7 @@ class CalculateWFSTest < ActiveSupport::TestCase
   test 'count_sentence_words' do
     script = lang_by_name('English').base_script
     sentence =
-      script.sentences.where(entry: 'Would you like a apple a pear?').first
+      script.sentences.find_by entry: 'Would you like a apple a pear?'
     word = script.word_by_entry('would')
 
     result = count_sentence_words(word, sentence)

@@ -51,7 +51,7 @@ end
 # Fills in IPA entries of word record given an array of base word records.
 def fill_in_ipa_entries(base_script)
   loop do
-    phon_word = base_script.phonetic.words.where(entry: NEW).first
+    phon_word = base_script.phonetic.words.where(entry: NEW).take
     break if phon_word.nil?
     phon_word.update(entry: CHECK)
     base_entry = phon_word.base.entry
@@ -59,6 +59,35 @@ def fill_in_ipa_entries(base_script)
     update_word(entry, ipa_entry, phon_word.base)
   end
 end
+
+# Checks each word in a target script where the id = group_id to see if there
+# is an english equivalent.
+# def thread_recheck_word_group(target_script)
+#   english = lang_by_name('English').base_script
+#   words = target_script.words.where('id = group_id')
+#   count = words.count
+#   counter = 0
+#
+#   while counter < count - 1
+#     threads = []
+#     while threads.count < 10 && counter < count - 1
+#       word = words[counter]
+#       counter += 1
+#       thread = Thread.new { recheck_word_group(word, target_script, english) }
+#       threads << thread
+#     end
+#     threads.each(&:join)
+#   end
+# end
+#
+# def recheck_word_group(word, target_script, english)
+#   english_entry =
+#     word.entry.translate(target_script.lang_code, english.lang_code)
+#   english_word = return_word(english_entry, english)
+#   return unless english_word.present?
+#   word.update(group_id: english_word.group_id)
+#   word.phonetic.update(group_id: english_word.group_id)
+# end
 
 # Converts a sentence entry into the international phonetic alphabet and saves
 # it as a new phonetic entry.
@@ -74,7 +103,7 @@ end
 
 # Creates or updates a new sentence given an entry, script and group_id
 def create_update_sentence(entry, script, group_id)
-  sentence = script.sentences.where(group_id: group_id).first
+  sentence = script.sentences.find_by group_id: group_id
   if sentence.nil?
     new_s = script.sentences.create(entry: entry, group_id: group_id)
   else
@@ -89,7 +118,7 @@ def fill_in_phonetics
     base_script = lang.base_script
     phon_script = base_script.phonetic
     base_script.words.each do |base_word|
-      phon = phon_script.words.where(assoc_id: base_word.id).first
+      phon = phon_script.words.find_by assoc_id: base_word.id
       next unless phon.nil?
       fill_single_phonetic(base_word, base_script)
     end

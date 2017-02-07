@@ -16,23 +16,19 @@ class Sentence < ApplicationRecord
 
   # Will retrieve the STS for a sentence given a base_script
   def retrieve_score(name, map_to)
-    score = scores.where(name: name, map_to_id: map_to.id,
-                         map_to_type: map_to.class.to_s)
-    raise Invalid, "No #{name} for sentence.id: #{id} found!" if score.count < 1
-    score.first
+    scores.find_by! name: name, map_to_id: map_to.id,
+                    map_to_type: map_to.class.to_s
   end
 
   # Returns the phonetic version of a sentence record
   def phonetic
-    phonetic = script.phonetic.sentences.where(group_id: group_id).first
-    raise Invalid, "No phonetic for sentence.id: #{id} found." if phonetic.nil?
-    phonetic
+    script.phonetic.sentences.find_by! group_id: group_id
   end
 
   # Creates or updates an existing score given a name, script, entry
   def create_update_score(name, map_to, entry)
-    score = scores.where(name: name, map_to_id: map_to.id,
-                         map_to_type: map_to.class.to_s).first
+    score = scores.find_by name: name, map_to_id: map_to.id,
+                           map_to_type: map_to.class.to_s
     if score.nil?
       scores.create(name: name, map_to_id: map_to.id,
                     map_to_type: map_to.class.to_s, entry: entry)
@@ -43,8 +39,6 @@ class Sentence < ApplicationRecord
 
   # returns a corresponding sentence given a corresponding_script.
   def corresponding(corr_script)
-    sent = corr_script.sentences.where(group_id: group_id).first
-    raise Invalid, "No corresponding found for sent_id: #{id}" if sent.nil?
-    sent
+    corr_script.sentences.find_by! group_id: group_id
   end
 end

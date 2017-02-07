@@ -43,7 +43,9 @@ class WordTest < ActiveSupport::TestCase
 
     assert_equal(b_word.group_id, p_word.group_id, 'assoc_id mismatch!')
     assert_equal(p_word, b_word.phonetic, ".phonetic doesn't work")
-    assert_raises(Invalid, 'Invalid not raised') { p_word.phonetic }
+    assert_raises(ActiveRecord::RecordNotFound, 'Invalid not raised') do
+      p_word.phonetic
+    end
   end
 
   test 'Word.phonetic_present?' do
@@ -74,7 +76,7 @@ class WordTest < ActiveSupport::TestCase
     result = word.retrieve_score(name, lang_map)
     assert_equal(score, result, 'retrieve_wts failed')
     word = lang_by_name('Spanish').base_script.word_by_entry('color')
-    assert_raises(Invalid, 'Invalid was not raised') do
+    assert_raises(ActiveRecord::RecordNotFound, 'Invalid was not raised') do
       word.retrieve_score(name, lang_map)
     end
   end

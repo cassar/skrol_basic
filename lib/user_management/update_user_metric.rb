@@ -9,7 +9,7 @@ end
 
 # Returns search fields array given a json object.
 def return_search_fields(obj)
-  user_map = UserMap.where(id: obj['user_map_id'].to_i).first
+  user_map = UserMap.find(obj['user_map_id'].to_i)
   target_word_id = obj['word_id'].to_i
   target_sentence_id = return_target_sentence_id(user_map, obj)
   [user_map, target_word_id, target_sentence_id]
@@ -19,17 +19,15 @@ end
 def return_target_sentence_id(user_map, obj)
   target_script = user_map.target_script
   group_id = obj['group_id'].to_i
-  sent = target_script.sentences.where(group_id: group_id).first
-  raise Invalid, "No sentence.group_id: #{group_id} found." if sent.nil?
+  sent = target_script.sentences.find_by! group_id: group_id
   sent.id
 end
 
 # Returns a UserMetric record given a search field array
 def return_user_metric(search_fields)
   user_map, target_word_id, target_sentence_id = search_fields
-  metric =
-    user_map.user_metrics.where(target_word_id: target_word_id,
-                                target_sentence_id: target_sentence_id).first
+  metric = user_map.user_metrics.find_by target_word_id: target_word_id,
+                                         target_sentence_id: target_sentence_id
   metric = create_metric_and_score(search_fields) if metric.nil?
   metric
 end
