@@ -56,6 +56,7 @@ class Word < ApplicationRecord
 
   # Creates a REP score in order to be able to retrive sentences associated
   # with the word.
+  # Duplicates prevented because of active record associations.
   def create_rep(sentence)
     rep_sents.create(rep_sent_id: sentence.id)
   end

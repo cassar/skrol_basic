@@ -71,6 +71,9 @@ class RetrieveNextSlideTest < ActiveSupport::TestCase
   test 'compile_sentence_html' do
   end
 
+  test 'return_html_sent' do
+  end
+
   test 'word_from_scores' do
     user_map = UserMap.first
 

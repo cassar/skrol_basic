@@ -94,13 +94,20 @@ def compile_sentence_html(element, content)
   html_sent = ''
   counter = 0
   element[ENTRY_ARR].each do |entry|
-    group_id = element[RECORD_ARR][counter].group_id
-    word_id = element[RECORD_ARR][counter].id
-    html_sent <<
-      "<div class=\"word\" data-word-group=\"#{group_id}\" data-word-id=\"#{word_id}\"> #{entry}</div>&nbsp"
+    html_sent << return_html_sent(element, counter, entry)
     counter += 1
   end
   content << "<div class=\"sentence #{element[NAME]}\">#{html_sent}</div>"
+end
+
+# Returns the HTML representation of a sentence
+def return_html_sent(element, counter, entry)
+  group_id = element[RECORD_ARR][counter].group_id
+  word_id = element[RECORD_ARR][counter].id
+  assoc_id = element[RECORD_ARR][counter].assoc_id
+  "<div class=\"word\"data-word-group=\"#{group_id}\""\
+  "data-word-id=\"#{word_id}\" data-word-assoc=\"#{assoc_id}\""\
+  "> #{entry}</div>&nbsp"
 end
 
 # returns a word record if one is suitable in the user's scores section.
