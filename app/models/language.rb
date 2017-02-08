@@ -8,12 +8,11 @@ class Language < ApplicationRecord
 
   # Retrieves the base script of a language (assumes only one)
   def base_script
-    scripts.where(parent_script_id: nil).take!
+    scripts.find_by! parent_script_id: nil
   end
 
   # Retrieves the phonetic script of a language (assumes only one)
   def phonetic_script
-    base = base_script
-    scripts.where(parent_script_id: base.id).take!
+    scripts.find_by! parent_script_id: base_script.id
   end
 end

@@ -51,7 +51,7 @@ end
 # Fills in IPA entries of word record given an array of base word records.
 def fill_in_ipa_entries(base_script)
   loop do
-    phon_word = base_script.phonetic.words.where(entry: NEW).take
+    phon_word = base_script.phonetic.words.find_by entry: NEW
     break if phon_word.nil?
     phon_word.update(entry: CHECK)
     base_entry = phon_word.base.entry

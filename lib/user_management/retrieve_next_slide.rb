@@ -42,11 +42,11 @@ end
 
 # Searches through a group of rep sents to see if a next sentence can be found
 def search_rep_sents(target_word, user_map, user_score)
-  rep_sent = RepSent.find_by_sql("SELECT * FROM ranks AS r, rep_sents AS rs
-    WHERE entriable_id = rs.id AND entriable_type = 'RepSent'
-    AND lang_map_id = #{user_map.lang_map.id}
-    AND entry = #{user_score.sentence_rank}
-    AND word_id = #{target_word.id}").first
+  lang_map_id = user_map.lang_map.id
+  entry = user_score.sentence_rank
+  rep_sent = RepSent.joins(:ranks).find_by ranks: { lang_map_id: lang_map_id,
+                                                    entry: entry },
+                                           word_id: target_word.id
   return [nil, false] if rep_sent.nil?
   user_score.increment_sentence_rank
   return [nil, true] if sentence_used?(rep_sent.rep_sent_id, user_map)
@@ -132,11 +132,7 @@ def return_word_array(sentence)
   word_arr = []
   entry_arr = sentence.entry.split_sentence
   script = sentence.script
-  entry_arr.each do |entry|
-    word = return_word(entry, script)
-    raise Invalid, "No word entry found for entry: #{entry}" if word.nil?
-    word_arr << word
-  end
+  entry_arr.each { |entry| word_arr << script.word_by_entry(entry) }
   word_arr
 end
 

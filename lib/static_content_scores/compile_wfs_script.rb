@@ -11,7 +11,8 @@ end
 # used in the sentence records of that script along with its corresponding count
 def derive_words_catalogue(script)
   catalogue = {}
-  Sentence.where(script_id: script.id).each do |sentence|
+  script.sentences.each do |sentence|
+    # Sentence.where(script_id: script.id).each do |sentence|
     add_words_to_catalogue(sentence, catalogue)
   end
   catalogue

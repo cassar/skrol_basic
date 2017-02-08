@@ -48,7 +48,7 @@ end
 
 # Retrieves an array of word records for use in to_ipa
 def retrieve_base_arr(base_code, entry)
-  b_script = Script.where(lang_code: base_code).first
+  b_script = Script.find_by lang_code: base_code
   base_arr = b_script.words.where(entry: entry)
   base_arr = b_script.words.where(entry: entry.downcase) if base_arr.first.nil?
   if base_arr.first.nil?
