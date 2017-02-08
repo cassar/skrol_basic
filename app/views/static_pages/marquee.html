@@ -14,18 +14,28 @@
     <button type='button' class='btn btn-default'>Marquee:</button>
     <button type='button' class='btn btn-warning' id='stop-start' disabled="true">Loading</button>
   </div>
+
   <div class='btn-group' role='group' aria-label='...'>
     <button type='button' class='btn btn-primary' id='lessSpeed'>Slower</button>
     <button type='button' class='btn btn-default' id='speedLabel'>(Font Speed)</button>
     <button type='button' class='btn btn-primary' id='moreSpeed'>Faster</button>
   </div>
-  <!-- <div class='btn-group' role='group' aria-label='...'>
-    <button type='button' class='btn btn-primary' id='smallerFont'>Smaller</button>
-    <button type='button' class='btn btn-default' id='fontLabel'>(Font Size)</button>
-    <button type='button' class='btn btn-primary' id='largerFont'>Larger</button>
-  </div> -->
+
   <div class='btn-group' role='group' aria-label='...'>
     <button type='button' class='btn btn-default'>English:</button>
     <button type='button' class='btn btn-primary' id='hide-base'>Showing</button>
+  </div>
+
+  <div class='btn-group' role='group' aria-label='...'>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Languages <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li role="separator" class="divider"></li>
+        <li><a>IPA English</a></li>
+      </ul>
+    </div>
+    <button type='button' class='btn btn-default' id="lang-label">(language)</button>
   </div>
 </div>

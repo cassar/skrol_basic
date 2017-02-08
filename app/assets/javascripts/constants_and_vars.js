@@ -13,7 +13,7 @@ var STEP = 1;
 var stringArray = [];
 var attrArray = [];
 // Ajax Variables
-var request_pending = false;
+var requestPending = false;
 var sentMetricsArray = [];
 
 // Timer vars
@@ -52,4 +52,8 @@ var marginLeft;
 var slideWidth;
 
 // User settings.
-var user_map_id = 1;
+var userMapId = 0;
+var userId = 1;
+var userLangArr;
+var LANG_NAME = 0;
+var USER_MAP_ID = 1;

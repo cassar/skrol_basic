@@ -1,6 +1,6 @@
 // Request next string from the Server.
 // Note User 1 currently hot coded.
-function request_string(json){
+function request_string(json) {
   $.ajax({
     method: "GET",
     url: "/next-slide",
@@ -8,9 +8,8 @@ function request_string(json){
   })
   .done(function(json) {
     stringArray.push(json.entry);
-    request_pending = false;
+    requestPending = false;
     console.log( json.entry );
-    console.log( "Success" );
   })
   .fail(function() {
     console.log( "Error" );
@@ -20,8 +19,21 @@ function request_string(json){
   });
 }
 
+// Retrievs information on what informion is available from the server
+function request_lang_info(json) {
+  $.ajax({
+    method: "GET",
+    url: "/lang-info",
+    data: json
+  })
+  .done(function(json) {
+    process_lang_info(json);
+    console.log( json );
+  })
+}
+
 // Sends metrics back to the server
-function send_metrics(json){
+function send_metrics(json) {
   $.ajax({
     method: "POST",
     url: "/metrics",
@@ -33,7 +45,7 @@ function send_metrics(json){
 }
 
 // Requests user scores and metrics be reset for new session
-function request_session_reset(json){
+function request_session_reset(json) {
   $.ajax({
     method: "POST",
     url: "/reset-user-session",

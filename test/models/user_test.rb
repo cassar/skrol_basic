@@ -17,4 +17,7 @@ class UserTest < ActiveSupport::TestCase
       user.user_maps.create(word_rank: 1, lang_map_id: 1)
     end
   end
+
+  test 'User.current_name' do
+  end
 end

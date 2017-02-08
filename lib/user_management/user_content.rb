@@ -17,3 +17,13 @@ def sentence_used?(sentence_id, user_map)
   return false if metric.nil?
   true
 end
+
+# Returns an object with user_map id's and Language name's for a user
+def lang_info(user)
+  lang_arr = []
+  user.user_maps.each do |user_map|
+    lang_name = user_map.target_script.language.name
+    lang_arr << [lang_name, user_map.id]
+  end
+  lang_arr
+end

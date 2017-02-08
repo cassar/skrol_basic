@@ -3,12 +3,11 @@ function setup_marquee() {
   // Speed Inject
   $('#speedLabel').html(speed_level());
 
-  // Inject Initial Font Settings
-  // $('#frame').css('font-size', fontSize + 'em');
-  // $('#fontLabel').html(fontSize);
-
   // Cleans up Legacy Scores and Metrics
   reset_user_session();
+
+  // Requests languages available to the user be retrieved from the server
+  request_lang_info({ user_id: userId });
 
   // Marquee setup
   marquee = document.getElementById('marquee');
@@ -23,8 +22,22 @@ function setup_marquee() {
 // Resets the user session so words can be freshly retested
 function reset_user_session() {
   json = {};
-  json['user_map_id'] = user_map_id;
-  request_session_reset(json);
+  request_session_reset({ 'user_id': userId });
+}
+
+// Sets information in dom and variables.
+function process_lang_info(json) {
+  userLangArr = json['info'];
+  var length = userLangArr.length;
+  for(var i = 0; i < length; i++) {
+    var lang_name = userLangArr[i][LANG_NAME];
+    if (json['current'] == lang_name) {
+      userMapId = userLangArr[i][USER_MAP_ID];
+      $('#lang-label').html(lang_name);
+    }
+    var element = '<li><a>'+ lang_name +'</a></li>';
+    $('.dropdown-menu').prepend(element);
+  }
 }
 
 // Returns the current speed level
@@ -94,10 +107,10 @@ function change_to_loading() {
 
 // Makes sure the strings array has a minimum of MIN_ELEMENTS of elements in it.
 function fill_string_arr() {
-  if ((stringArray.length < MIN_ELEMENTS) && !request_pending) {
-    request_pending = true;
-    var json = {'user_map_id': user_map_id};
-    request_string(json);
+  if ((stringArray.length < MIN_ELEMENTS) && !requestPending
+      && userMapId != 0) {
+    requestPending = true;
+    request_string({ 'user_map_id': userMapId });
   }
 }
 
