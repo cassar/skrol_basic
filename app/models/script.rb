@@ -24,6 +24,8 @@ class Script < ApplicationRecord
 
   # Retrieves a word record from a script given an entry
   def word_by_entry(entry)
-    words.find_by! entry: entry.downcase
+    word = words.find_by entry: entry.downcase
+    raise Invalid, "Could not find word #{entry}!" if word.nil?
+    word
   end
 end

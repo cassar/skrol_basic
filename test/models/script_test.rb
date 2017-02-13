@@ -46,7 +46,7 @@ class ScriptTest < ActiveSupport::TestCase
     script = lang_by_name('English').base_script
     assert_not_nil(script.word_by_entry('hello'), 'word_by_entry does not work')
 
-    assert_raises(ActiveRecord::RecordNotFound, 'Invalid should have raised') do
+    assert_raises(Invalid, 'Invalid should have raised') do
       script.word_by_entry('test')
     end
   end

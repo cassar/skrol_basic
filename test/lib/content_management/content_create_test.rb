@@ -26,14 +26,21 @@ class CreateContentTest < ActiveSupport::TestCase
     end
   end
 
-  test 'create_slide' do
-    base_entry = 'the car'
-    base_script = lang_by_name('English').base_script
-    target_script = lang_by_name('Spanish').base_script
-    call = 'Sentence.count'
-    assert_difference(call, 4, 'incorrect # of sents saved') do
-      create_slide(base_entry, base_script, target_script)
+  test 'missing_words_filler' do
+    script = lang_by_name('English').base_script
+    assert_difference('Word.count', 10, 'incorrect # of words saved') do
+      missing_words_filler(script)
     end
+    assert_equal(5, Word.where(entry: '[new]').count, 'incorrect news saved')
+  end
+
+  test 'remove_duplicates' do
+  end
+
+  test 'thread_fill_ipa' do
+  end
+
+  test 'fill_in_ipa_entries' do
   end
 
   # test 'derive_phonetics' do
@@ -58,6 +65,12 @@ class CreateContentTest < ActiveSupport::TestCase
     assert_difference(count, 1, 'Sentence object should have saved') do
       create_update_sentence('whatever', phonetic_script, 8)
     end
+  end
+
+  test 'fill_in_phonetics' do
+  end
+
+  test 'fill_single_phonetic' do
   end
 
   # test 'translate_all_sentences' do

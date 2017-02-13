@@ -42,23 +42,9 @@ def puts_sentence_groups
   end
 end
 
-# Loops through all sentences and identifies any words in the sentence that are
-# not in the words table.
-def missing_words_filler(script)
-  entries = []
-  script.sentences.each do |sentence|
-    sentence.entry.split_sentence.each do |entry|
-      entries << entry unless word_present?(entry, script)
-    end
-  end
-  entries.uniq.each { |entry| create_word(entry, NEW, script) }
-end
-
 # Returns true if a word entry is present in the words db false other wise.
 def word_present?(entry, script)
-  return true if script.words.where(entry: entry).take.present?
   return true if script.words.where(entry: entry.downcase).take.present?
-  return true if script.words.where(entry: entry.capitalize).take.present?
   false
 end
 

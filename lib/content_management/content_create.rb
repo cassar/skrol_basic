@@ -1,3 +1,12 @@
+# Validates a language to make sure it is ready to map_to another language.
+def pre_map_validate(language)
+  base_script = language.base_script
+  missing_words_filler(base_script)
+  remove_duplicates(base_script)
+  thread_fill_ipa(base_script)
+  derive_phonetics(base_script)
+end
+
 # Creates two new word records, one for the base and one for the phonetic
 # versions of a word. A group_id will also be set if supplied.
 def create_word(base_entry, phonetic_entry, base_script, group_id = nil)
@@ -31,17 +40,40 @@ def create_sentence(base_entry, base_script, group_id = nil)
   base
 end
 
-# Creates 4 sentence entries given a base entry, a base_script and target_script
-# Will only save all or nothing if the sentences can be translated to phonetic.
-def create_slide(base_entry, base_script, target_script)
-  ActiveRecord::Base.transaction do
-    base = create_sentence(base_entry, base_script)
-    target_entry =
-      base_entry.translate(base_script.lang_code, target_script.lang_code)
-    create_sentence(target_entry, target_script, base.group_id)
+# Removes word and its phonetic equivalent
+def remove_word(word)
+  phon = Word.find_by assoc_id: word.id
+  phon.destroy unless phon.nil?
+  word.destroy
+end
+
+# Loops through all sentences and identifies any words in the sentence that are
+# not in the words table.
+def missing_words_filler(script)
+  entries = []
+  script.sentences.each do |sentence|
+    sentence.entry.split_sentence.each { |entry| entries << entry }
+  end
+  entries.uniq.each do |entry|
+    create_word(entry, NEW, script, 0) unless word_present?(entry, script)
   end
 end
 
+# Goes through the base_script words, check for duplicates and removes them
+def remove_duplicates(base_script)
+  entries = derive_words_catalogue(base_script)
+  entries.each do |_key, value|
+    next if value < 2
+    words = base_script.words.where(entry: key)
+    word = words.first
+    words.each do |w|
+      next if w == word
+      remove_word(w)
+    end
+  end
+end
+
+# Starts 10 threads to fill in IPA equivalent words in a given base script.
 def thread_fill_ipa(base_script)
   10.times do
     Thread.new { fill_in_ipa_entries(base_script) }
@@ -60,40 +92,57 @@ def fill_in_ipa_entries(base_script)
   end
 end
 
-# Checks each word in a target script where the id = group_id to see if there
-# is an english equivalent.
-# def thread_recheck_word_group(target_script)
-#   english = lang_by_name('English').base_script
-#   words = target_script.words.where('id = group_id')
-#   count = words.count
-#   counter = 0
-#
-#   while counter < count - 1
-#     threads = []
-#     while threads.count < 10 && counter < count - 1
-#       word = words[counter]
-#       counter += 1
-#       thread = Thread.new { recheck_word_group(word, target_script, english) }
-#       threads << thread
-#     end
-#     threads.each(&:join)
-#   end
-# end
-#
-# def recheck_word_group(word, target_script, english)
-#   english_entry =
-#     word.entry.translate(target_script.lang_code, english.lang_code)
-#   english_word = return_word(english_entry, english)
-#   return unless english_word.present?
-#   word.update(group_id: english_word.group_id)
-#   word.phonetic.update(group_id: english_word.group_id)
-# end
+# Starts 10 threads to begin filling in the group_id of all words who have a
+# group_id of zero.
+def thread_fill_word_group(target_script)
+  english = lang_by_name('English').base_script
+  10.times do
+    Thread.new { fill_in_group_ids(target_script, english) }
+  end
+end
+
+# Takes a word whose word.group_id is 0 and finds a suitable group_id if one
+# is available
+def fill_in_group_ids(target_script, english)
+  loop do
+    word = target_script.words.where(group_id: 0).take
+    break if word.nil?
+    word.update(group_id: -1)
+    find_assign_group_id(word, english)
+  end
+end
+
+# Searches for an existing english group_id if one is there and assignes it to
+# given word, if non group_id is found, the group_id is just set to its own id
+def find_assign_group_id(word, english)
+  english_entry = word.entry.translate(target_script.lang_code, 'en')
+  english_word = english.words.where(entry: english_entry).take
+  if english_word.nil?
+    update_group_id(word, word.id)
+  else
+    update_group_id(word, english_word.id)
+  end
+end
+
+# Updates the group_id of a given word and its phonetic equivalent.
+def update_group_id(word, group_id)
+  word.update(group_id: group_id)
+  word.phonetic.update(group_id: group_id)
+end
+
+# Checks to see if any phonetic words have mistakingly pulled html.
+def check_for_html(phonetic_script)
+  errors = ''
+  phonetic_script.words.each do |word|
+    errors << "id: #{word.id} has html\n" if word.entry.include? '>'
+  end
+  puts errors
+end
 
 # Converts a sentence entry into the international phonetic alphabet and saves
 # it as a new phonetic entry.
-def derive_phonetics(lang)
-  base_script = lang.base_script
-  phonetic_script = lang.phonetic_script
+def derive_phonetics(base_script)
+  phonetic_script = base_script.phonetic
   base_script.sentences.each do |sentence|
     phonetic = sentence.entry.translate(base_script.lang_code, 'ipa')
     sentence.update(group_id: sentence.id) if sentence.group_id.nil?
@@ -111,17 +160,15 @@ def create_update_sentence(entry, script, group_id)
   end
 end
 
-# Goes through all base words and checks if there in a phonetic word accosiated
+# Goes through all base words and checks if there is a phonetic word associated
 # with it, if not it will attempt to create one.
-def fill_in_phonetics
-  Language.all.each do |lang|
-    base_script = lang.base_script
-    phon_script = base_script.phonetic
-    base_script.words.each do |base_word|
-      phon = phon_script.words.find_by assoc_id: base_word.id
-      next unless phon.nil?
-      fill_single_phonetic(base_word, base_script)
-    end
+def fill_in_phonetics(language)
+  base_script = language.base_script
+  phon_script = base_script.phonetic
+  base_script.words.each do |base_word|
+    phon = phon_script.words.find_by assoc_id: base_word.id
+    next unless phon.nil?
+    fill_single_phonetic(base_word, base_script)
   end
 end
 
@@ -130,17 +177,4 @@ def fill_single_phonetic(base_word)
   ipa_entry, entry = search_for_ipa_entry(base_word.entry, base_script)
   base_word.update(entry: entry)
   base_word.create_phonetic(ipa_entry)
-end
-
-# Translates all sentences under a particular base script to a given target
-# script and creates a new record.
-def translate_all_sentences(base_lang, target_lang)
-  base_script = base_lang.base_script
-  target_script = target_lang.base_script
-  base_script.sentences.each do |sentence|
-    translated = sentence.entry.translate(base_script.lang_code,
-                                          target_script.lang_code)
-    sentence.update(group_id: sentence.id) if sentence.group_id.nil?
-    create_update_sentence(translated, target_script, sentence.group_id)
-  end
 end

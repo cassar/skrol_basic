@@ -23,11 +23,10 @@ end
 def add_words_to_catalogue(sentence, catalogue)
   entry_arr = sentence.entry.split_sentence
   entry_arr.each do |entry|
-    entry_down = entry.downcase
-    if catalogue[entry_down].nil?
-      catalogue[entry_down] = 1
+    if catalogue[entry].nil?
+      catalogue[entry] = 1
     else
-      catalogue[entry_down] += 1 unless catalogue[entry_down].nil?
+      catalogue[entry] += 1 unless catalogue[entry].nil?
     end
   end
 end

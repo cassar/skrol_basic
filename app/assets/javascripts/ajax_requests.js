@@ -12,10 +12,7 @@ function request_string(json) {
     console.log( json.entry );
   })
   .fail(function() {
-    console.log( "Error" );
-  })
-  .always(function() {
-    console.log( "Request Finished" );
+    console.log( "Error: Could not retrieve next slide." );
   });
 }
 
@@ -30,6 +27,9 @@ function request_lang_info(json) {
     process_lang_info(json);
     console.log( json );
   })
+  .fail(function() {
+    console.log( "Error: Could not retrieve lang_info." );
+  });
 }
 
 // Sends metrics back to the server
@@ -41,6 +41,9 @@ function send_metrics(json) {
   })
   .done(function( msg ) {
     console.log( "Complete: metric saved " + msg["message"] );
+  })
+  .fail(function() {
+    console.log( "Error: Could not save metric." );
   });
 }
 
@@ -53,5 +56,8 @@ function request_session_reset(json) {
   })
   .done(function( msg ) {
     console.log( "Complete: " + msg["message"] );
+  })
+  .fail(function() {
+    console.log( "Error: Could not reset user session." );
   });
 }

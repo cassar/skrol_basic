@@ -37,10 +37,10 @@ end
 
 # Returns array of word records for a given sentence record.
 def return_word_arr(sentence)
-  entry_arr = sentence.entry.split_sentence
   word_arr = []
-  entry_arr.each do |entry|
-    word_arr << return_word(entry, sentence.script)
+  script = sentence.script
+  sentence.entry.split_sentence.each do |entry|
+    word_arr << script.word_by_entry(entry)
   end
   word_arr
 end
