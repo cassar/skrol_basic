@@ -54,7 +54,7 @@ class SetupMapTest < ActiveSupport::TestCase
     compile_wfs_script(target_script)
     compile_wls_script(target_script)
 
-    target_script.words.each { |word| compile_wts(word, lang_map) }
+    target_script.words.each { |word| compile_wts(word, base_script, lang_map) }
     compile_swls(target_script)
 
     map_sts(lang_map)

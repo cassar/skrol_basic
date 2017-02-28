@@ -2,33 +2,11 @@
 # script.
 def compile_wfs_script(script)
   raise Invalid, 'No words attached to script!' if script.words.count < 1
+  Score.where(name: 'WFS', map_to_id: script.id,
+              map_to_type: 'Script').destroy_all
   catalogue = derive_words_catalogue(script)
   total_words = return_word_total(catalogue)
   assign_wfs(script, catalogue, total_words)
-end
-
-# Takes a script record and return a catalogue object with all the words
-# used in the sentence records of that script along with its corresponding count
-def derive_words_catalogue(script)
-  catalogue = {}
-  script.sentences.each do |sentence|
-    # Sentence.where(script_id: script.id).each do |sentence|
-    add_words_to_catalogue(sentence, catalogue)
-  end
-  catalogue
-end
-
-# Adds chars to catalogue object, increments existing entry by 1 if already
-# present.
-def add_words_to_catalogue(sentence, catalogue)
-  entry_arr = sentence.entry.split_sentence
-  entry_arr.each do |entry|
-    if catalogue[entry].nil?
-      catalogue[entry] = 1
-    else
-      catalogue[entry] += 1 unless catalogue[entry].nil?
-    end
-  end
 end
 
 # Returns the total of all values in an object called catalogue

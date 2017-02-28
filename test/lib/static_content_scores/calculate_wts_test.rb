@@ -4,6 +4,7 @@ class CalculateWTSTest < ActiveSupport::TestCase
   test 'compile_wts' do
     script = lang_by_name('English').base_script
     lang_map = LangMap.first
+    base_script = lang_map.base_script
     compile_chars_cfs(script)
     compile_chars_cfs(script.phonetic)
     compile_wfs_script(script)
@@ -17,7 +18,7 @@ class CalculateWTSTest < ActiveSupport::TestCase
     compile_wfs_script(script2)
     compile_wls_script(script2)
 
-    compile_wts(word2, lang_map)
+    compile_wts(word2, base_script, lang_map)
     score = word2.scores.where(name: 'WTS').first
     assert_not_nil(score, 'score did not save!')
     assert(score.entry.is_a?(Float), 'incorrect score saved!')

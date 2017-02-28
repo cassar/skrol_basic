@@ -2,8 +2,8 @@
 # desired target (base) script and saves it in a new record.
 # Note: Both records are in the base rather than the phonetic form.
 # Will remove old record if one exists
-def compile_wts(target_word, lang_map)
-  wts_score = calculate_wts(target_word, lang_map.base_script)
+def compile_wts(target_word, base_script, lang_map)
+  wts_score = calculate_wts(target_word, base_script)
   target_word.create_update_score('WTS', lang_map, wts_score)
 end
 

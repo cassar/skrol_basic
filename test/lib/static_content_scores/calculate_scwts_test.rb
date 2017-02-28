@@ -22,8 +22,9 @@ class CalculateSCWTSTest < ActiveSupport::TestCase
     compile_wls_script(script)
 
     lang_map = LangMap.first
+    base_script = lang_map.base_script
 
-    script.words.each { |word| compile_wts(word, lang_map) }
+    script.words.each { |word| compile_wts(word, base_script, lang_map) }
     compile_swls(script)
 
     result = calculate_scwts(target_sentence, lang_map)
@@ -46,8 +47,9 @@ class CalculateSCWTSTest < ActiveSupport::TestCase
     compile_wls_script(script2)
 
     lang_map = LangMap.first
+    base_script = lang_map.base_script
 
-    script2.words.each { |word| compile_wts(word, lang_map) }
+    script2.words.each { |word| compile_wts(word, base_script, lang_map) }
     compile_swls(script2)
 
     result = retrieve_wts_score('bottiglia', lang_map)

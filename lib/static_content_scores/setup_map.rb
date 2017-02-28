@@ -33,7 +33,10 @@ end
 
 # Compiles the WTSs for a given lang_map
 def map_wts(lang_map)
-  lang_map.target_script.words.each { |word| compile_wts(word, lang_map) }
+  base_script = lang_map.base_script
+  lang_map.target_script.words.each do |word|
+    compile_wts(word, base_script, lang_map)
+  end
 end
 
 # Compiles the STSs for a given lang_map

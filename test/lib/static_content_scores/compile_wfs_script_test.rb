@@ -20,29 +20,6 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
     assert_raises(Invalid) { compile_wfs_script(script) }
   end
 
-  test 'derive_words_catalogue' do
-    script = lang_by_name('English').base_script
-    script.sentences.destroy_all
-    sentence =
-      script.sentences.create(entry: 'Would you like a apple a pear?')
-
-    template = { 'would' => 1, 'you' => 1, 'like' => 1,
-                 'a' => 2, 'apple' => 1, 'pear' => 1 }
-
-    assert_equal(template, derive_words_catalogue(script), 'objects not equal')
-  end
-
-  test 'add_words_to_catalogue' do
-    script = lang_by_name('English').base_script
-    sentence =
-      script.sentences.where(entry: 'Would you like a apple a pear?').first
-
-    catalogue = { 'apple' => 2, 'pear' => 1 }
-    add_words_to_catalogue(sentence, catalogue)
-    assert_equal(1, catalogue['would'], 'would should have 1 count')
-    assert_equal(3, catalogue['apple'], 'apple should have 2 count')
-  end
-
   test 'return_word_total' do
     catalogue = { 'bottle' => 1, 'in' => 1, 'sydney' => 1 }
     assert_equal(3, return_word_total(catalogue), 'wrong total returned')

@@ -18,8 +18,9 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_wls_script(script)
 
     lang_map = LangMap.first
+    base_script = lang_map.base_script
 
-    script.words.each { |word| compile_wts(word, lang_map) }
+    script.words.each { |word| compile_wts(word, base_script, lang_map) }
     compile_swls(script)
 
     compile_sts(target_sentence, lang_map)
@@ -49,8 +50,9 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_wls_script(script)
 
     lang_map = LangMap.first
+    base_script = lang_map.base_script
 
-    script.words.each { |word| compile_wts(word, lang_map) }
+    script.words.each { |word| compile_wts(word, base_script, lang_map) }
     compile_swls(script)
 
     result = calculate_sts(target_sentence, lang_map)
@@ -75,8 +77,9 @@ class CalculateSTSTest < ActiveSupport::TestCase
     compile_wls_script(script)
 
     lang_map = LangMap.first
+    base_script = lang_map.base_script
 
-    script.words.each { |word| compile_wts(word, lang_map) }
+    script.words.each { |word| compile_wts(word, base_script, lang_map) }
     compile_swls(script)
 
     template = 3
