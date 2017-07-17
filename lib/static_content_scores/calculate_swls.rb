@@ -1,9 +1,9 @@
 # Compiles all SWLS attached to a target_script mapped back to that target script
-def compile_swls(target_script)
+def compile_swls(target_script, swl_scores_obj)
   max_length = max_sentence_word_length(target_script)
   target_script.sentences.each do |target_sentence|
     score_entry = calculate_swls(target_sentence, max_length)
-    target_sentence.create_update_score('SWLS', target_script, score_entry)
+    swl_scores_obj[target_sentence.id] = score_entry
   end
 end
 

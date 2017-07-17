@@ -1,4 +1,4 @@
-# comiles all Rep scores from a word to all available sentences
+# Compiles all representative sentences for a each word
 def compile_reps(base_script)
   word_entry_cat = derive_word_entry_catalogue(base_script)
   base_script.sentences.each do |sentence|

@@ -1,8 +1,9 @@
-def compile_wls_script(script)
+def compile_wls_script(script, word_scores_obj)
   max_length = max_word_length(script)
   script.words.each do |word|
     score = compute_wls(word, max_length)
-    word.create_update_score('WLS', script, score)
+    # word.create_update_score('WLS', script, score)
+    word_scores_obj[word.id]['WLS'] = score
   end
 end
 

@@ -1,16 +1,9 @@
-# Will compile and save a new score record for STS from a given target_sentence
-# to a give base_script. Will remove old score if present.
-def compile_sts(target_sentence, lang_map)
-  sts_score = calculate_sts(target_sentence, lang_map)
-  target_sentence.create_update_score('STS', lang_map, sts_score)
-end
-
 # Calculates the Sentence Total Score (STS) for a particular sentence and any
 # number of other languages.
-def calculate_sts(target_sentence, lang_map)
+def calculate_sts(target_sentence, base_script, swls_score, wts_entry_obj, target_entry_group_obj, base_entry_group_obj)
   weights = [SCWTSW, SWLSW, SWOSW]
   sts_score = counter = 0
-  scores = return_sentence_scores(target_sentence, lang_map)
+  scores = return_sentence_scores(target_sentence, base_script, swls_score, wts_entry_obj, target_entry_group_obj, base_entry_group_obj)
   scores.each do |score|
     sts_score += score * weights[counter]
     counter += 1
@@ -19,10 +12,10 @@ def calculate_sts(target_sentence, lang_map)
 end
 
 # Returns array of sentence scores given a target sentence and a base script
-def return_sentence_scores(target_sentence, lang_map)
+def return_sentence_scores(target_sentence, base_script, swls_score, wts_entry_obj, target_entry_group_obj, base_entry_group_obj)
   target_script = target_sentence.script
   scores = []
-  scores << calculate_scwts(target_sentence, lang_map)
-  scores << target_sentence.retrieve_score('SWLS', target_script).entry
-  scores << calculate_swos(target_sentence, lang_map.base_script)
+  scores << calculate_scwts(target_sentence, wts_entry_obj)
+  scores << swls_score
+  scores << calculate_swos(target_sentence, base_script, target_entry_group_obj, base_entry_group_obj)
 end

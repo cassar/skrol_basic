@@ -3,7 +3,6 @@
 def derive_words_catalogue(script)
   catalogue = {}
   script.sentences.each do |sentence|
-    # Sentence.where(script_id: script.id).each do |sentence|
     add_words_to_catalogue(sentence, catalogue)
   end
   catalogue
@@ -67,4 +66,10 @@ def analyse_count_catalogue(count_catalogue)
     end
   end
   duplicates_found
+end
+
+def compile_base_to_group_catalogue(base_script)
+  base_entries = {}
+  base_script.words.each { |word| base_entries[word.group_id] = word.entry }
+  base_entries
 end

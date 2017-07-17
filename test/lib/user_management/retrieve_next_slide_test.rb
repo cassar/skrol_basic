@@ -92,7 +92,7 @@ class RetrieveNextSlideTest < ActiveSupport::TestCase
     user_map = UserMap.first
     setup_map(user_map.lang_map)
 
-    template = Word.find(18)
+    template = Word.find(23)
     result = word_from_words(user_map)
     assert_equal(template, result, 'incorrect word record returned')
   end

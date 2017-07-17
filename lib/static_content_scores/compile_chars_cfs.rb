@@ -13,8 +13,8 @@ end
 def create_chars_return_total(catalogue, script)
   script.characters.destroy_all
   total = 0
-  catalogue.each do |key, value|
-    script.characters.create(entry: key)
+  catalogue.each do |_key, value|
+    # script.characters.create(entry: key)
     total += value
   end
   total
@@ -22,10 +22,13 @@ end
 
 # creates new CFS scores for all keys value pairs in a catalogue object given
 # language_key, script string, integer total characters in catalogue.
-def create_cfs_scores(catalogue, script, total)
+def create_cfs_scores(catalogue, _script, total)
+  char_score_obj = {}
   catalogue.each do |key, value|
-    char = retrieve_char(key, script)
+    # char = retrieve_char(key, script)
     score = value.to_f / total
-    char.create_cfs(score)
+    # char.create_cfs(score)
+    char_score_obj[key] = score
   end
+  char_score_obj
 end
