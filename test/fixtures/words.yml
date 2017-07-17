@@ -300,7 +300,7 @@ juː:
 
 crollare-phon:
   id: 45
-  entry: [none]
+  entry: '[none]'
   script_id: 4
   group_id: 19
   assoc_id: 21

@@ -49,7 +49,7 @@ def search_rep_sents(target_word, user_map, user_score)
                                            word_id: target_word.id
   return [nil, false] if rep_sent.nil?
   user_score.increment_sentence_rank
-  return [nil, true] if sentence_used?(rep_sent.rep_sent_id, user_map)
+  return [nil, true] if sentence_used?(rep_sent.rep_sent_id, user_map) || !sent_good?(Sentence.find(rep_sent.rep_sent_id))
   [Sentence.find(rep_sent.rep_sent_id), true]
 end
 
@@ -127,7 +127,7 @@ def word_from_words(user_map)
   word = nil
   loop do
     word = word_by_rank(user_map, word_rank)
-    break unless word_used?(word, user_map)
+    break unless word_used?(word, user_map) || !word_good?(word)
     word_rank += 1
   end
   user_map.update(word_rank: word_rank)
