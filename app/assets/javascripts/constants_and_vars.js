@@ -1,5 +1,4 @@
 // Constants
-// var STANDARD_FONT_SIZE = 4;
 var NORMAL_INTERVAL = 15;
 var MIN_INTERVAL = 10;
 var MAX_INTERVAL = 20;
@@ -12,6 +11,7 @@ var STEP = 1;
 // The array that sentence objects will be loaded into.
 var stringArray = [];
 var attrArray = [];
+
 // Ajax Variables
 var requestPending = false;
 var sentMetricsArray = [];
@@ -21,8 +21,6 @@ var frontTimeOutId;
 var interval = NORMAL_INTERVAL;
 
 // Speed Settings
-// var step = NORMAL_SPEED;
-// var prePause = step;
 var skroling = true;
 var disabled = true;
 
@@ -33,9 +31,6 @@ var end;
 // Base Hide Settings
 var baseHidden = false;
 var baseColour = 'black';
-
-// Font Size Settings
-// var fontSize = STANDARD_FONT_SIZE;
 
 // Marquee vars
 var oldX = 0;

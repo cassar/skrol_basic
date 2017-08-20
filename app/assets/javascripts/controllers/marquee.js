@@ -1,5 +1,5 @@
-$(document).ready(function(){
-
+$(document).ready(function() {
+  // Load DOM and global variables with values
   setup_marquee();
   init_jquery_controls();
 

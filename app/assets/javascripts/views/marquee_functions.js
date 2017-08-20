@@ -1,15 +1,17 @@
 // Injects initial values into the DOM
 function setup_marquee() {
-  // Speed Inject
-  $('#speedLabel').html(speed_level());
-
   // Cleans up Legacy Scores and Metrics
-  reset_user_session();
+  request_session_reset({ 'user_id': userId });
 
   // Requests languages available to the user be retrieved from the server
-  request_lang_info({ user_id: userId });
+  retrieve_set_lang_info({ user_id: userId });
 
-  // Marquee setup
+  // Sets dom variables to global vars
+  load_dom_vars()
+}
+
+function load_dom_vars() {
+  $('#speedLabel').html(speed_level());
   marquee = document.getElementById('marquee');
   slide = document.getElementById('slide');
   frame = document.getElementById('frame');
@@ -19,15 +21,8 @@ function setup_marquee() {
   marquee.style.marginLeft = marqueeWidth + 'px';
 }
 
-// Resets the user session so words can be freshly retested
-function reset_user_session() {
-  json = {};
-  request_session_reset({ 'user_id': userId });
-}
-
-// Sets information in dom and variables.
+// Loads the languages available into languages dropdown
 function process_lang_info(json) {
-  userLangArr = json['info'];
   var length = userLangArr.length;
   for(var i = 0; i < length; i++) {
     var lang_name = userLangArr[i][LANG_NAME];
