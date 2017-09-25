@@ -54,4 +54,11 @@ class UserMap < ApplicationRecord
   def retrieve_user_score(target_word)
     user_scores.find_by! target_word_id: target_word.id
   end
+
+  # Prints out useful information about the record.
+  def info
+    name = user.name
+    LangMap.find(lang_map_id).info
+    puts "User Name: #{name}"
+  end
 end

@@ -13,8 +13,8 @@ function reinit_sentence() {
   reinit_word_highlight();
 }
 
-// Creates a lister for whene the mouse hover's over the marquee
-// That it will pause whene over and resume when it leaves.
+// Creates a lister for when the mouse hover's over the marquee
+// That it will pause when over and resume when it leaves.
 function init_pause_frame_hover() {
   $('#frame').hover(
     function () {
@@ -33,7 +33,7 @@ function init_pause_frame_hover() {
 }
 
 function init_speed_buttons() {
-  // Decrements step to slow marquee down.
+  // Increases interval to slow down marquee
   $('#lessSpeed').click(function(){
     if (interval < MAX_INTERVAL) {
       interval += INTERVAL_INCREMENT;
@@ -44,7 +44,7 @@ function init_speed_buttons() {
     }
   });
 
-  // Increments step to speed up marquee.
+  // Decreases interval to speed up marquee.
   $('#moreSpeed').click(function(){
     if (interval > MIN_INTERVAL) {
       interval -= INTERVAL_INCREMENT;
@@ -62,8 +62,8 @@ function init_pause_button() {
   $('#stop-start').click(function(){
     if (skroling) {
       stop_front_end();
-      skroling = false;
       change_to_paused();
+      skroling = false;
     } else {
       start_front_end();
       change_to_skroling();
@@ -93,7 +93,7 @@ function init_hide_base() {
   });
 }
 
-  // Sets the action of the mouse pointer to grab and drag the marquee.
+// Sets the action of the mouse pointer to grab and drag the marquee.
 function init_mouse_move_slide() {
   $('#frame').mousemove(function(event){
     cursor = $('#frame').css('cursor');

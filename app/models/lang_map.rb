@@ -11,4 +11,12 @@ class LangMap < ApplicationRecord
   def target_script
     Language.find(target_lang).base_script
   end
+
+  # Print out useful information about the instance
+  def info
+    base_name = Language.find(base_lang).name
+    target_name = Language.find(target_lang).name
+    puts "Base Language: #{base_name}"
+    puts "Target Language: #{target_name}"
+  end
 end

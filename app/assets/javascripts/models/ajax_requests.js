@@ -17,15 +17,13 @@ function request_string(json) {
 }
 
 // Retrievs information on what informion is available from the server
-function retrieve_set_lang_info(json) {
+function request_lang_info(json) {
   $.ajax({
     method: "GET",
     url: "/lang-info",
     data: json
   })
   .done(function(json) {
-    // Sets language info to userLangArr global variable
-    userLangArr = json['info'];
     process_lang_info(json);
     console.log( json );
   })
