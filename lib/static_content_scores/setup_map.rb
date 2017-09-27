@@ -8,7 +8,7 @@ def setup_map(lang_map)
   # Create an object that contains the constituent scores of all words
   word_scores_obj = compile_word_scores(lang_map, target_script, base_script)
 
-  # Find and store all Reperesentative Sentences
+  # Finds and stores all Representative Sentences
   compile_reps(target_script)
 
   # Compile Word Total Scores (WTS)

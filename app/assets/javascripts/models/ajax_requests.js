@@ -24,6 +24,7 @@ function request_lang_info(json) {
     data: json
   })
   .done(function(json) {
+    userLangArr = json['info'];
     process_lang_info(json);
     console.log( json );
   })

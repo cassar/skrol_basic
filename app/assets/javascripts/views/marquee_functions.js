@@ -4,7 +4,7 @@ function setup_marquee() {
   request_session_reset({ 'user_id': userId });
 
   // Requests languages available to the user be retrieved from the server
-  retrieve_set_lang_info({ user_id: userId });
+  request_lang_info({ user_id: userId });
 
   // Sets dom variables to global vars
   load_dom_vars()
