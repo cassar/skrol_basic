@@ -57,8 +57,25 @@ class UserMap < ApplicationRecord
 
   # Prints out useful information about the record.
   def info
+    logger_off
     name = user.name
-    LangMap.find(lang_map_id).info
-    puts "User Name: #{name}"
+    map = LangMap.find(lang_map_id)
+    base_name = Language.find(map.base_lang).name
+    target_name = Language.find(map.target_lang).name
+    metric_count = user_metrics.count
+    score_count = user_scores.count
+    logger_on
+    puts "Stats for user '#{name}' studying #{target_name} from #{base_name}"
+    puts "Metric Count: #{metric_count}"
+    puts "Score Count: #{score_count}"
+  end
+
+  # Clears all user_metrics and all user_scores from the language maps
+  def reset
+    logger_off
+    user_metrics.destroy_all
+    user_scores.destroy_all
+    logger_on
+    puts "All metrics and scores from user_map id: #{id} destroyed"
   end
 end

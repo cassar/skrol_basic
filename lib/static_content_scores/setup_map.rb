@@ -1,6 +1,8 @@
 # Sets up map for use in web app, from base_lang to target_lang
 # (will delete old scores)
 def setup_map(lang_map)
+  logger_off
+
   # Retrieve scripts
   target_script = lang_map.target_script
   base_script = lang_map.base_script
@@ -28,6 +30,8 @@ def setup_map(lang_map)
 
   # Compile Sentence Ranks to aid search
   compile_sentence_ranks(lang_map, sent_scores_obj)
+  
+  logger_on
 end
 
 # Compiles all word scores and return an object with

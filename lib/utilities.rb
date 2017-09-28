@@ -7,3 +7,14 @@ def max_word_length(script)
   end
   max_length
 end
+
+# Turns the logger off
+def logger_off
+  $old_logger = ActiveRecord::Base.logger
+  ActiveRecord::Base.logger = nil
+end
+
+# Turns the logger on
+def logger_on
+  ActiveRecord::Base.logger = $old_logger
+end

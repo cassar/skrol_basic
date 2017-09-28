@@ -15,4 +15,19 @@ class Language < ApplicationRecord
   def phonetic_script
     scripts.find_by! parent_script_id: base_script.id
   end
+
+  # Prints out useful info about a particular language
+  def info
+    logger_off
+    base_words = base_script.words.count
+    base_sents = base_script.sentences.count
+    phon_words = phonetic_script.words.count
+    phon_sents = phonetic_script.sentences.count
+    logger_on
+    puts "Name: #{name}"
+    puts "Base Word Count: #{base_words}"
+    puts "Phonetic Word Count: #{phon_words}"
+    puts "Base Sentence Count: #{base_sents}"
+    puts "Phonetic Sentence Count: #{phon_sents}"
+  end
 end

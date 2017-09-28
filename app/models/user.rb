@@ -7,4 +7,15 @@ class User < ApplicationRecord
   def current_name
     Language.find(current_lang).name
   end
+
+  def info
+    user_maps.each {|user_map| user_map.info }
+    return nil
+  end
+
+  # Wipes all user data from all languages attempted
+  def reset
+    user_maps.each { |user_map| user_map.reset }
+    puts "All metrics and scores from user '#{name}' destroyed"
+  end
 end

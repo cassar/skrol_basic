@@ -13,7 +13,7 @@ end
 # without having to update the DB.
 def word_by_rank(user_map, word_rank)
   rank = Rank.find_by! entry: word_rank, entriable_type: 'Word',
-                       lang_map_id: user_map.lang_map.id
+                       lang_map_id: user_map.lang_map_id
   rank.entriable
 end
 

@@ -14,9 +14,15 @@ class LangMap < ApplicationRecord
 
   # Print out useful information about the instance
   def info
+    logger_off
     base_name = Language.find(base_lang).name
     target_name = Language.find(target_lang).name
+    wr_count = Rank.where(lang_map_id: id, entriable_type: "Word").count
+    rs_count = Rank.where(lang_map_id: id, entriable_type: "RepSent").count
+    logger_on
     puts "Base Language: #{base_name}"
     puts "Target Language: #{target_name}"
+    puts "Word Rank Count: #{wr_count}"
+    puts "RepSent Rank Count: #{rs_count}"
   end
 end

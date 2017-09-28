@@ -47,3 +47,6 @@ SENTENCE = 0
 NAME = 1
 RECORD_ARR = 2
 ENTRY_ARR = 3
+
+# # Logger Var
+# $old_logger = nil
