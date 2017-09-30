@@ -1,6 +1,7 @@
 // Request next string from the Server.
 // Note User 1 currently hot coded.
 function request_string(json) {
+  console.log("Requesting for user_map_id: " + json['user_map_id']);
   $.ajax({
     method: "GET",
     url: "/next-slide",
@@ -9,7 +10,7 @@ function request_string(json) {
   .done(function(json) {
     stringArray.push(json.entry);
     requestPending = false;
-    console.log( json.entry );
+    console.log( "Slide successfully retrieved." );
   })
   .fail(function() {
     console.log( "Error: Could not retrieve next slide." );

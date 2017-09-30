@@ -56,8 +56,9 @@ end
 # Returns the HTML slide to be sent to the client.
 def return_html_slide(target_sentence, user_map)
   content = return_div_content(target_sentence, user_map)
-  group_label = "data-sentence-group=\"#{target_sentence.group_id}\""
-  entry = "<div class=\"sentences\" #{group_label}>#{content}</div>"
+  group = "data-sentence-group=\"#{target_sentence.group_id}\""
+  map = "data-usermap-id=\"#{user_map.id}\""
+  entry = "<div class=\"sentences\" #{group} #{map}>#{content}</div>"
   { entry: entry }
 end
 

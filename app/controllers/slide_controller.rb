@@ -14,7 +14,7 @@ class SlideController < ApplicationController
   # Will reset user metrics and scores and send back confirmation
   def reset_user_session
     user = User.find(params[:user_id])
-    reset_outstanding(user)
+    user.reset_outstanding
     render json: { message: "User scores and metrics for #{user.name} reset." }
   end
 

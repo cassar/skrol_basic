@@ -1,12 +1,3 @@
-// Sets all jquery listeners for the DOM
-function init_jquery_controls() {
-  init_pause_frame_hover();
-  init_speed_buttons();
-  init_pause_button();
-  init_hide_base();
-  init_mouse_move_slide();
-}
-
 // Reinitiates events on sentence elements.
 function reinit_sentence() {
   reinit_word_report();
@@ -125,7 +116,8 @@ function reinit_word_report() {
           data_word = $(this).attr('data-word-assoc');
         }
         var data_group = $(this).parent().parent().attr('data-sentence-group');
-        send_report(data_group, data_word, true);
+        var data_map = $(this).parent().parent().attr('data-usermap-id');
+        send_report(data_group, data_word, data_map, true);
       }
     }
   );

@@ -1,15 +1,4 @@
-// Injects initial values into the DOM
-function setup_marquee() {
-  // Cleans up Legacy Scores and Metrics
-  request_session_reset({ 'user_id': userId });
-
-  // Requests languages available to the user be retrieved from the server
-  request_lang_info({ user_id: userId });
-
-  // Sets dom variables to global vars
-  load_dom_vars()
-}
-
+// Loads DOM with initial values
 function load_dom_vars() {
   $('#speedLabel').html(speed_level());
   marquee = document.getElementById('marquee');
@@ -23,16 +12,23 @@ function load_dom_vars() {
 
 // Loads the languages available into languages dropdown
 function process_lang_info(json) {
-  var length = userLangArr.length;
-  for(var i = 0; i < length; i++) {
+  for(var i = 0; i < userLangArr.length; i++) {
     var lang_name = userLangArr[i][LANG_NAME];
+    var map_id = userLangArr[i][USER_MAP_ID];
     if (json['current'] == lang_name) {
-      userMapId = userLangArr[i][USER_MAP_ID];
+      userMapId = map_id;
       $('#lang-label').html(lang_name);
     }
-    var element = '<li><a>'+ lang_name +'</a></li>';
+    var element = '<li class="language" data-langmap-id=' + map_id +
+    '><a>'+ lang_name +'</a></li>';
     $('.dropdown-menu').prepend(element);
   }
+  $('li.language').click(function() {
+    var lang_name = $(this).html(); // Have left this as is, should fix though
+    var map_id = parseInt($(this).attr('data-langmap-id'));
+    userMapId = map_id;
+    $('#lang-label').html(lang_name);
+  })
 }
 
 // Returns the current speed level
@@ -130,15 +126,14 @@ function add_sentence() {
 
 // Will send 3rd last sentence to clear_report
 function monitor_sents() {
-  attrLength = attrArray.length;
-  if (attrLength >= 3) {
-    var sentGroup = attrArray[attrLength - 3];
-    var targetSent = $('*[data-sentence-group="' + sentGroup + '"]').children()[0];
-    var words = targetSent.children;
-    var length = words.length
-    for (var i = 0; i < length; i++) {
-      wordId = words[i].getAttribute('data-word-id');
-      send_report(sentGroup, wordId, false);
+  if (attrArray.length >= 3) {
+    var sentGroup = attrArray[attrArray.length - 3];
+    var slide = $('*[data-sentence-group="' + sentGroup + '"]')
+    var userMap = slide[0].getAttribute('data-usermap-id')
+    var words = slide.children()[0].children;
+    for (var i = 0; i < words.length; i++) {
+      var wordId = words[i].getAttribute('data-word-id');
+      send_report(sentGroup, wordId, userMap, false);
     }
   }
 }
