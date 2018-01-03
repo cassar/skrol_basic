@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CharactersCatalogueTest < ActiveSupport::TestCase
   test 'derive_chars_catalogue' do
-    script = lang_by_name('English').base_script
+    script = lang_by_name('English').standard_script
 
     template = { 'h' => 3, 'e' => 9, 'l' => 7, 'o' => 6, 'c' => 3, 'w' => 2,
                  'u' => 4, 'd' => 2, 'y' => 3, 'a' => 4, 'p' => 5, 'r' => 4,
@@ -11,7 +11,7 @@ class CharactersCatalogueTest < ActiveSupport::TestCase
   end
 
   test 'add_chars_to_catalogue' do
-    script = lang_by_name('English').base_script
+    script = lang_by_name('English').standard_script
     word = script.word_by_entry('apple')
 
     catalogue = { a: 0, p: 0, l: 0, e: 0 }

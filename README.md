@@ -17,6 +17,10 @@ This is the Skrol Basic App for Language Acquisition.
 * Database initialization
   Run Scripts loosly skewed across Luke's Desktop.
 
+* Database Restart
+  pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+  pg_ctl -D /usr/local/var/postgres stop -s -m fast
+
 * How to run the test suite
   none yet
 

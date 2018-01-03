@@ -11,10 +11,10 @@ class UserTest < ActiveSupport::TestCase
 
   test 'User associations' do
     user = user_by_name('Luke')
-    call = 'user.user_maps.count'
-    UserMap.first.destroy
+    call = 'user.enrolments.count'
+    Enrolment.first.destroy
     assert_difference(call, 1, 'map did not save') do
-      user.user_maps.create(word_rank: 1, lang_map_id: 1)
+      user.enrolments.create(word_rank: 1, lang_map_id: 1)
     end
   end
 

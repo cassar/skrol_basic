@@ -1,0 +1,20 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+hello-hola:
+  id: 1
+  associate_a_id: 1
+  associate_b_id: 7
+
+thanks-gracias:
+  id: 2
+  associate_a_id: 8
+  associate_b_id: 2
+
+please-porfa:
+  id: 3
+  associate_a_id: 3
+  associate_b_id: 9

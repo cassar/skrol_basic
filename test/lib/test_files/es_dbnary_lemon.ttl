@@ -1,0 +1,52 @@
+@prefix olia:  <http://purl.org/olia/olia.owl#> .
+@prefix lemon: <http://lemon-model.net/lemon#> .
+@prefix spa:   <http://kaiko.getalp.org/dbnary/spa/> .
+@prefix dbnary: <http://kaiko.getalp.org/dbnary#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix lexvo: <http://lexvo.org/id/iso639-3/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#> .
+
+spa:restablecer  a       dbnary:Vocable ;
+        dbnary:refersTo  spa:restablecer__verbo__1 .
+
+spa:__ws_1_Chico__sustantivo__1
+        a                   lemon:LexicalSense ;
+        dbnary:senseNumber  "1"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        lemon:definition    [ lemon:value  "Apellido."@es ] .
+
+spa:__ws_1_abocardado__adjetivo__1
+        a                   lemon:LexicalSense ;
+        dbnary:senseNumber  "1"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        lemon:definition    [ lemon:value  "Dicho de un arma de fuego, que tiene la boca del cañón en forma de trompeta"@es ] .
+
+spa:__cf_uso__sustantivo__1
+        a                      lemon:Form ;
+        lemon:writtenRep       "uso"@es ;
+        lexinfo:pronunciation  "[ ˈu.so ]"@es-ipa .
+
+spa:__cf_menosprecio__sustantivo__1
+        a                      lemon:Form ;
+        lemon:writtenRep       "menosprecio"@es ;
+        lexinfo:pronunciation  "me.nosˈpɾe.sjo"@es-s-ipa , "me.nosˈpɾe.θjo"@es-c-ipa .
+
+spa:__cf_obsceno__adjetivo__1
+        a                      lemon:Form ;
+        lemon:writtenRep       "obsceno"@es ;
+        lexinfo:pronunciation  "[ obsˈθe.no ] u [ obˈse.no ]"@es-ipa .
+
+spa:__cf_aborto__sustantivo__1
+        a                      lemon:Form ;
+        lemon:writtenRep       "aborto"@es ;
+        lexinfo:pronunciation  "[ aˈ.βoɾ.to  ]"@es-ipa , "[ aˈβoɾ.to  ]"@es-ipa .
+
+spa:__cf_trapilacucha__sustantivo__1
+        a                      lemon:Form ;
+        lemon:writtenRep       "trapilacucha"@es ;
+        lexinfo:pronunciation  "[ tɾa.pi.laˈku.tʃa ] o [ ta.pe.laˈku.tʃa ]"@es-ipa .
+
+spa:__cf_llanos__sustantivo__1
+        a                      lemon:Form ;
+        lemon:writtenRep       "llanos"@es ;
+        lexinfo:pronunciation  "ˈʎa.nos"@es-ll-ipa , "ˈʝa.nos"@es-y-ipa .

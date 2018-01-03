@@ -1,63 +1,43 @@
 class Word < ApplicationRecord
   validates :entry, :script_id, presence: true
+  validates :entry, uniqueness: { scope: :script_id }
   belongs_to :script
   has_one :language, through: :script
-  has_many :scores, as: :entriable, dependent: :destroy
-  has_many :ranks, as: :entriable, dependent: :destroy
-  has_many :rep_sents, dependent: :destroy
+  has_many :meta_data, as: :contentable, dependent: :destroy
 
-  # Creates a new phonetic entry for a particular word record.
-  def create_phonetic(entry)
-    p_script = script.phonetic
-    update(group_id: id) if group_id.nil?
-    p_script.words.create(entry: entry, assoc_id: id, group_id: group_id)
+  has_many :standard_word_phonetics, foreign_key: 'phonetic_id', class_name: 'WordPhonetic', dependent: :destroy
+  has_many :standards, through: :standard_word_phonetics, source: :standard
+
+  has_many :phonetic_word_phonetics, foreign_key: 'standard_id', class_name: 'WordPhonetic', dependent: :destroy
+  has_many :phonetics, through: :phonetic_word_phonetics, source: :phonetic
+
+  def standard
+    standards.take unless standards.empty?
   end
 
-  # Returns phonetic word of given word.
-  # The method currently assumes a word only has one phonetic entry.
   def phonetic
-    script.phonetic.words.find_by! assoc_id: id
+    phonetics.take unless phonetics.empty?
   end
 
-  # Returns true if a phoneic word is attached to word record
-  def phonetic_present?
-    phonetic = script.phonetic.words.find_by assoc_id: id
-    return false if phonetic.nil?
-    true
+  has_many :associate_b_word_associates, foreign_key: 'associate_a_id', class_name: 'WordAssociate', dependent: :destroy
+  has_many :associate_bs, through: :associate_b_word_associates, source: :associate_b
+
+  has_many :associate_a_word_associates, foreign_key: 'associate_b_id', class_name: 'WordAssociate', dependent: :destroy
+  has_many :associate_as, through: :associate_a_word_associates, source: :associate_a
+
+  def all_associates
+    associate_as | associate_bs
   end
 
-  # Returs the base entry of a phonetic word record.
-  def base
-    script.base.words.find_by! id: assoc_id
+  def new_associate(new_associate)
+    associate_as << new_associate
   end
 
-  # Returns all word records in the same group
-  def return_group
-    Word.where(group_id: group_id)
+  # returns a corresponding word given a corresponding_script.
+  def corresponding(corr_script)
+    all_associates.each { |w| return w if w.script_id == corr_script.id }
   end
 
-  # Retrieves the WTS for a Word record given a base_script
-  def retrieve_score(name, map_to)
-    scores.find_by! name: name, map_to_id: map_to.id,
-                    map_to_type: map_to.class.to_s
-  end
-
-  # Creates or updates an existing score given a name, script, entry
-  def create_update_score(name, map_to, entry)
-    score = scores.find_by name: name, map_to_id: map_to.id,
-                           map_to_type: map_to.class.to_s
-    if score.nil?
-      scores.create(name: name, map_to_id: map_to.id,
-                    map_to_type: map_to.class.to_s, entry: entry)
-    else
-      score.update(entry: entry)
-    end
-  end
-
-  # Creates a REP score in order to be able to retrive sentences associated
-  # with the word.
-  # Duplicates prevented because of active record associations.
-  def create_rep(sentence)
-    rep_sents.create(rep_sent_id: sentence.id)
-  end
+  has_many :sentences_words
+  has_many :sentences, through: :sentences_words
 end

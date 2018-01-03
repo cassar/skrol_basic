@@ -2,7 +2,7 @@ require 'test_helper'
 
 class WordsCatalogueTest < ActiveSupport::TestCase
   test 'derive_words_catalogue' do
-    script = lang_by_name('English').base_script
+    script = lang_by_name('English').standard_script
     script.sentences.destroy_all
     sentence =
       script.sentences.create(entry: 'Would you like a apple a pear?')
@@ -14,7 +14,7 @@ class WordsCatalogueTest < ActiveSupport::TestCase
   end
 
   test 'add_words_to_catalogue' do
-    script = lang_by_name('English').base_script
+    script = lang_by_name('English').standard_script
     sentence =
       script.sentences.where(entry: 'Would you like a apple a pear?').first
 

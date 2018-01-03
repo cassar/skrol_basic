@@ -41,6 +41,12 @@
   display: flex;
 }
 
+/* Text Styling */
+
+.highlight {
+  color: #337ab7;
+}
+
 #placeholder {
   color: white;
 }

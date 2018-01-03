@@ -15,3 +15,15 @@ spanish:
 german:
   id: 4
   name: German
+
+french:
+  id: 5
+  name: French
+
+russian:
+  id: 6
+  name: Russian
+
+danish:
+  id: 7
+  name: Danish

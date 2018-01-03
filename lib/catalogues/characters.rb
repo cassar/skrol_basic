@@ -1,20 +1,17 @@
-# Takes a script record and return a catalogue object with all the characters
+# Takes an array of words and returns a catalogue object with all the characters
 # used in the word records of that script along with its corresponding count.
-def derive_chars_catalogue(script)
+# {char => char_count}
+def derive_chars_catalogue(words)
   catalogue = {}
-  script.words.each { |word| add_chars_to_catalogue(word, catalogue) }
+  words.each { |word| add_chars_to_catalogue(word, catalogue) }
   catalogue
 end
 
-# Adds chars to catalogue object, increments existing entry by 1 if already
-# present.
+# Takes a word entry which gets broken up into constituent characters.
+# Chars are then added to catalogue object or incremented if they already exist.
 def add_chars_to_catalogue(word, catalogue)
-  char_arr = word.entry.scan(/./)
-  char_arr.each do |char|
-    if catalogue[char].nil?
-      catalogue[char] = 1
-    else
-      catalogue[char] += 1
-    end
+  word.entry.scan(/./).each do |char|
+    catalogue[char] = 0 if catalogue[char].nil?
+    catalogue[char] += 1
   end
 end

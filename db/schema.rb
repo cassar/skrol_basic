@@ -10,108 +10,125 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208084646) do
+ActiveRecord::Schema.define(version: 20171230050754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "characters", force: :cascade do |t|
-    t.string  "entry"
-    t.integer "script_id"
+  create_table "courses", force: :cascade do |t|
+    t.integer  "language_map_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
-  create_table "lang_maps", force: :cascade do |t|
-    t.integer "base_lang"
-    t.integer "target_lang"
+  create_table "enrolments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "course_id"
+  end
+
+  create_table "language_maps", force: :cascade do |t|
+    t.integer "base_language_id"
+    t.integer "target_language_id"
   end
 
   create_table "languages", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "ranks", force: :cascade do |t|
-    t.integer "entriable_id"
-    t.string  "entriable_type"
-    t.integer "lang_map_id"
-    t.integer "entry"
-    t.index ["entriable_type", "entriable_id"], name: "index_ranks_on_entriable_type_and_entriable_id", using: :btree
-  end
-
-  create_table "regexes", force: :cascade do |t|
-    t.string  "entry"
-    t.integer "script_id"
-  end
-
-  create_table "rep_sents", force: :cascade do |t|
-    t.integer "word_id"
-    t.integer "rep_sent_id"
-  end
-
-  create_table "scores", force: :cascade do |t|
-    t.integer "entriable_id"
-    t.string  "entriable_type"
-    t.integer "map_to_id"
-    t.string  "map_to_type"
-    t.string  "name"
-    t.float   "entry"
-    t.index ["entriable_type", "entriable_id"], name: "index_scores_on_entriable_type_and_entriable_id", using: :btree
+  create_table "meta_data", force: :cascade do |t|
+    t.integer  "contentable_id"
+    t.string   "contentable_type"
+    t.text     "entry"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "source"
+    t.index ["contentable_type", "contentable_id"], name: "index_meta_data_on_contentable_type_and_contentable_id", using: :btree
   end
 
   create_table "scripts", force: :cascade do |t|
     t.string  "name"
-    t.string  "lang_code"
     t.integer "language_id"
-    t.integer "parent_script_id"
+    t.integer "standard_id"
+  end
+
+  create_table "sentence_associates", force: :cascade do |t|
+    t.integer "associate_a_id"
+    t.integer "associate_b_id"
+    t.text    "representations"
+    t.index ["associate_a_id", "associate_b_id"], name: "index_sentence_associates_on_associate_a_id_and_associate_b_id", unique: true, using: :btree
+  end
+
+  create_table "sentence_scores", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "sentence_id"
+    t.float   "entry"
   end
 
   create_table "sentences", force: :cascade do |t|
     t.string  "entry"
     t.integer "script_id"
-    t.integer "group_id"
   end
 
-  create_table "user_maps", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "word_rank"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "lang_map_id"
+  create_table "sentences_words", id: false, force: :cascade do |t|
+    t.integer "word_id",     null: false
+    t.integer "sentence_id", null: false
+    t.index ["sentence_id"], name: "index_sentences_words_on_sentence_id", using: :btree
+    t.index ["word_id"], name: "index_sentences_words_on_word_id", using: :btree
   end
 
   create_table "user_metrics", force: :cascade do |t|
-    t.integer  "user_map_id"
-    t.integer  "target_word_id"
-    t.integer  "target_sentence_id"
+    t.integer  "user_score_id"
+    t.integer  "sentence_id"
     t.integer  "speed"
     t.boolean  "pause"
     t.boolean  "hover"
     t.boolean  "hide"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "user_scores", force: :cascade do |t|
-    t.integer  "user_map_id"
-    t.integer  "target_word_id"
+    t.integer  "enrolment_id"
+    t.integer  "word_id"
     t.float    "entry"
     t.string   "status"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "sentence_rank"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "current_lang"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "current_speed"
+    t.boolean  "base_hidden"
+    t.boolean  "paused"
+  end
+
+  create_table "word_associates", force: :cascade do |t|
+    t.integer "associate_a_id"
+    t.integer "associate_b_id"
+    t.index ["associate_a_id", "associate_b_id"], name: "index_word_associates_on_associate_a_id_and_associate_b_id", unique: true, using: :btree
+  end
+
+  create_table "word_phonetics", force: :cascade do |t|
+    t.integer "standard_id"
+    t.integer "phonetic_id"
+    t.index ["standard_id", "phonetic_id"], name: "index_word_phonetics_on_standard_id_and_phonetic_id", unique: true, using: :btree
+  end
+
+  create_table "word_scores", force: :cascade do |t|
+    t.integer "word_id"
+    t.integer "course_id"
+    t.float   "entry"
+    t.integer "rank"
   end
 
   create_table "words", force: :cascade do |t|
     t.string  "entry"
     t.integer "script_id"
-    t.integer "group_id"
-    t.integer "assoc_id"
   end
 
 end

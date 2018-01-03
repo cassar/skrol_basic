@@ -2,9 +2,8 @@
 
 metric-1:
   id: 1
-  user_map_id: 1
-  target_word_id: 3
-  target_sentence_id: 1
+  user_score_id: 1
+  sentence_id: 2
   speed: 1
   pause: true
   hover: true
@@ -12,9 +11,8 @@ metric-1:
 
 metric-2:
   id: 2
-  user_map_id: 1
-  target_word_id: 14
-  target_sentence_id: 3
+  user_score_id: 2
+  sentence_id: 2
   speed: 2
   pause: false
   hover: true
@@ -22,6 +20,5 @@ metric-2:
 
 metric-3:
   id: 3
-  user_map_id: 1
-  target_word_id: 20
-  target_sentence_id: 4
+  user_score_id: 3
+  sentence_id: 2

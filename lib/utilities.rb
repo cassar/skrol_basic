@@ -1,7 +1,7 @@
-# Retrieves the max word length mapped to a particular script.
-def max_word_length(script)
+# Retrieves the max word length in an array of word records
+def max_word_length(words)
   max_length = 0
-  script.words.each do |word|
+  words.each do |word|
     word_length = word.entry.length
     max_length = word_length if max_length < word_length
   end
@@ -10,11 +10,13 @@ end
 
 # Turns the logger off
 def logger_off
-  $old_logger = ActiveRecord::Base.logger
+  old_logger = ActiveRecord::Base.logger
   ActiveRecord::Base.logger = nil
+  old_logger
 end
 
 # Turns the logger on
-def logger_on
-  ActiveRecord::Base.logger = $old_logger
+def logger_on(old_logger)
+  ActiveRecord::Base.logger = old_logger
+  nil
 end

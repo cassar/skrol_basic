@@ -1,44 +1,38 @@
 class Sentence < ApplicationRecord
-  validates :entry, :script_id, presence: true
-  # validates :entry, uniqueness: { scope: :script_id }
+  validates :entry, :script, presence: true
+  validates :entry, uniqueness: { scope: :script_id }
   belongs_to :script
   has_one :language, through: :script
-  has_many :scores, as: :entriable, dependent: :destroy
-  has_many :ranks, as: :entriable, dependent: :destroy
+  has_many :meta_data, as: :contentable, dependent: :destroy
 
-  # Creates a new phonetic entry for a particular sentence record.
-  def create_phonetic
-    p_script = script.phonetic
-    update(group_id: id) if group_id.nil?
-    phonetic_entry = entry.translate(script.lang_code, 'ipa')
-    p_script.sentences.create(entry: phonetic_entry, group_id: group_id)
+  has_many :associate_b_sentence_associates, foreign_key: 'associate_a_id',
+                                             class_name: 'SentenceAssociate', dependent: :destroy
+  has_many :associate_bs, through: :associate_b_sentence_associates, source: :associate_b
+
+  has_many :associate_a_sentence_associates, foreign_key: 'associate_b_id',
+                                             class_name: 'SentenceAssociate', dependent: :destroy
+  has_many :associate_as, through: :associate_a_sentence_associates, source: :associate_a
+
+  def all_associates
+    associate_as + associate_bs
   end
 
-  # Will retrieve the STS for a sentence given a base_script
-  def retrieve_score(name, map_to)
-    scores.find_by! name: name, map_to_id: map_to.id,
-                    map_to_type: map_to.class.to_s
+  def new_associate(new_associate)
+    associate_as << new_associate
   end
 
-  # Returns the phonetic version of a sentence record
-  def phonetic
-    script.phonetic.sentences.find_by! group_id: group_id
-  end
-
-  # Creates or updates an existing score given a name, script, entry
-  def create_update_score(name, map_to, entry)
-    score = scores.find_by name: name, map_to_id: map_to.id,
-                           map_to_type: map_to.class.to_s
-    if score.nil?
-      scores.create(name: name, map_to_id: map_to.id,
-                    map_to_type: map_to.class.to_s, entry: entry)
-    else
-      score.update(entry: entry)
-    end
+  def associate_and_corresponding(corr_script)
+    corr_sentence = corresponding(corr_script)
+    ids = [id, corr_sentence.id]
+    assoc = SentenceAssociate.find_by(associate_a_id: ids, associate_b_id: ids)
+    [assoc, corr_sentence]
   end
 
   # returns a corresponding sentence given a corresponding_script.
   def corresponding(corr_script)
-    corr_script.sentences.find_by! group_id: group_id
+    (associate_as.where(script: corr_script) | associate_bs.where(script: corr_script)).first
   end
+
+  has_many :sentences_words
+  has_many :words, through: :sentences_words
 end

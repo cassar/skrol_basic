@@ -1,91 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-pear-apple:
+greetings:
   id: 1
-  entry: Would you like a apple a pear?
+  entry: Hello thank you please.
   script_id: 1
-  group_id: 1
 
-car-blue:
+saludos:
   id: 2
-  entry: The car is blue!
-  script_id: 1
-  group_id: 2
-
-coche-azul:
-  id: 3
-  entry: El coche es de color azul!
+  entry: Hola gracias por favor!
   script_id: 5
-  group_id: 2
-
-bottle-crumble:
-  id: 4
-  entry: bottle and crumble!
-  script_id: 1
-  group_id: 4
-
-crumble-bottle:
-  id: 5
-  entry: crumble the bottle?
-  script_id: 1
-  group_id: 5
-
-bottiglia-sbriciolano:
-  id: 6
-  entry: bottiglia e si sbriciolano!
-  script_id: 3
-  group_id: 4
-
-sbriciolano-bottiglia:
-  id: 7
-  entry: sbriciolare la bottiglia?
-  script_id: 3
-  group_id: 5
-
-not-blue:
-  id: 8
-  entry: The car is not blue!
-  script_id: 1
-  group_id: 8
-
-no-azul:
-  id: 9
-  entry: El coche no es azul!
-  script_id: 5
-  group_id: 8
-
-paper-thin:
-  id: 10
-  entry: Would paper thin!
-  script_id: 1
-  group_id: 10
-
-would-like:
-  id: 11
-  entry: I would like it.
-  script_id: 1
-  group_id: 11
-
-kɹʌmbə-ðə:
-  id: 12
-  entry: ˈkɹʌmbəl ðə ˈbɒ.təl
-  script_id: 2
-  group_id: 5
-
-veni-vidi:
-  id: 13
-  entry: 'veni vedi vinci'
-  script_id: 2
-  group_id:
-
-el-coche-ipa:
-  id: 14
-  entry: el ˈko.tʃe es de ko̞.'lo̞ɾ aˈsul
-  script_id: 6
-  group_id: 2
-
-el-coche-no-ipa:
-  id: 15
-  entry: el ˈko.tʃe no es aˈsul
-  script_id: 6
-  group_id: 8

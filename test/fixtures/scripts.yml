@@ -4,50 +4,82 @@ english-latin:
   id: 1
   name: Latin
   language_id: 1
-  parent_script_id:
-  lang_code: en
+  standard_id:
 
 english-ipa:
   id: 2
   name: IPA
   language_id: 1
-  parent_script_id: 1
+  standard_id: 1
 
 italian-latin:
   id: 3
   name: Latin
   language_id: 2
-  parent_script_id:
-  lang_code: it
+  standard_id:
 
 italian-ipa:
   id: 4
   name: IPA
   language_id: 2
-  parent_script_id: 3
+  standard_id: 3
 
 spanish-latin:
   id: 5
   name: Latin
   language_id: 3
-  parent_script_id:
-  lang_code: es
+  standard_id:
 
 spanish-ipa:
   id: 6
   name: IPA
   language_id: 3
-  parent_script_id: 5
+  standard_id: 5
 
 german-latin:
   id: 7
   name: Latin
   language_id: 4
-  parent_script_id:
-  lang_code: de
+  standard_id:
 
 german-ipa:
   id: 8
   name: IPA
   language_id: 4
-  parent_script_id: 7
+  standard_id: 7
+
+french-latin:
+  id: 9
+  name: Latin
+  language_id: 5
+  standard_id:
+
+french-ipa:
+  id: 10
+  name: IPA
+  language_id: 5
+  standard_id: 9
+
+russian-cyrillic:
+  id: 11
+  name: Latin
+  language_id: 6
+  standard_id:
+
+russian-ipa:
+  id: 12
+  name: IPA
+  language_id: 6
+  standard_id: 11
+
+danish-latin:
+  id: 13
+  name: Latin
+  language_id: 7
+  standard_id:
+
+danish-ipa:
+  id: 14
+  name: IPA
+  language_id: 7
+  standard_id: 13

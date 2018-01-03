@@ -1,3 +1,5 @@
+<!-- The Marquee and with its placeholders -->
+<!-- [Fix: Rename to something like frame, canvas, marquee]  -->
 <div id='frame'>
   <div id='marquee'>
     <div id='slide'>
@@ -9,23 +11,28 @@
     </div>
   </div>
 </div>
+
 <div id='controls'>
+  <!-- Controls to 'play' and 'pause' marquee -->
   <div class='btn-group' role='group' aria-label='...'>
     <button type='button' class='btn btn-default'>Marquee:</button>
     <button type='button' class='btn btn-warning' id='stop-start' disabled="true">Loading</button>
   </div>
 
+  <!-- Controls to speed up and slow down the marquee -->
   <div class='btn-group' role='group' aria-label='...'>
     <button type='button' class='btn btn-primary' id='lessSpeed'>Slower</button>
-    <button type='button' class='btn btn-default' id='speedLabel'>(Font Speed)</button>
+    <button type='button' class='btn btn-default' id='speedLabel'>-</button>
     <button type='button' class='btn btn-primary' id='moreSpeed'>Faster</button>
   </div>
 
+  <!-- Controls to hide and show the English Row -->
   <div class='btn-group' role='group' aria-label='...'>
     <button type='button' class='btn btn-default'>English:</button>
-    <button type='button' class='btn btn-primary' id='hide-base'>Showing</button>
+    <button type='button' class='btn btn-primary' id='hide-base'>-</button>
   </div>
 
+  <!-- Controls to display and change Languages  -->
   <div class='btn-group' role='group' aria-label='...'>
     <div class="btn-group">
       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -36,6 +43,22 @@
         <li><a>IPA English</a></li>
       </ul>
     </div>
-    <button type='button' class='btn btn-default' id="lang-label">(language)</button>
+    <button type='button' class='btn btn-default' id="lang-label">-</button>
   </div>
 </div>
+<script>
+  $(document).ready(function() {
+    // Cleans up Legacy Scores and Metrics on the server.
+    requestSessionReset();
+
+    // Requests available languages and user settings, be retrieved from the
+    // server. Then, updates models and views.
+    requestUserInfo();
+
+    // Set event for Controls
+    initControls();
+
+    // Set events for Marquee
+    initMarquee();
+  });
+</script>

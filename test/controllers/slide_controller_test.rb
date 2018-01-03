@@ -2,8 +2,7 @@ require 'test_helper'
 
 class SlideControllerTest < ActionDispatch::IntegrationTest
   test 'send_slide' do
-    lang_map = LangMap.first
-    setup_map(lang_map)
+    lang_map = LanguageMap.first
 
     # get '/slides'
     # assert_equal(@response.body, @response.body, 'incorrect object returned')

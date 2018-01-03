@@ -1,0 +1,36 @@
+@prefix olia:  <http://purl.org/olia/olia.owl#> .
+@prefix lemon: <http://lemon-model.net/lemon#> .
+@prefix dbnary: <http://kaiko.getalp.org/dbnary#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ita:   <http://kaiko.getalp.org/dbnary/ita/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix lexvo: <http://lexvo.org/id/iso639-3/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#> .
+
+ita:Gervasia  a          dbnary:Vocable ;
+        dbnary:refersTo  ita:Gervasia__nome__1 .
+
+ita:__tr_eng_3_nano  a          dbnary:Translation ;
+        dbnary:isTranslationOf  ita:nano ;
+        dbnary:targetLanguage   lexvo:eng ;
+        dbnary:writtenForm      "dwar"@en .
+
+ita:__cf_bosco_planiziale__loc_nom__1
+        a                 lemon:Form ;
+        lemon:writtenRep  "bosco planiziale"@it .
+
+ita:__cf_editore__sost__1
+        a                      lemon:Form ;
+        lemon:writtenRep       "editore"@it ;
+        lexinfo:pronunciation  "/ediˈtore/"@it-fonipa .
+
+ita:__cf_espressionismo__sost__1
+        a                      lemon:Form ;
+        lemon:writtenRep       "espressionismo"@it ;
+        lexinfo:pronunciation  "/espressjo'nizmo/"@it-fonipa .
+
+ita:__cf_orrendo__agg__1
+        a                      lemon:Form ;
+        lemon:writtenRep       "orrendo"@it ;
+        lexinfo:pronunciation  "/or'rɛndo/"@it-fonipa .

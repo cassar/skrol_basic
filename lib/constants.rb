@@ -1,9 +1,11 @@
-# The user will no longer have to revise this word after its user_score gets
-# above this.
-THRESHOLD = 0.9
+# Maximum length in characters that a sentence can be to be mapped.
+MAX_LENGTH_MAP = 40
 
-# The entry that a user_score is ititialised with.
-START_SCORE = 0.5
+# Maximum length in characters that a sentence can be to be loaded
+MAX_LENGTH_LOAD = 40
+
+# Maximum length in charcters that a word can be to be loaded
+MAX_LENGTH_WORD = 80
 
 # Score weights to determine how much a particular score will contribute to the
 # WTS
@@ -21,32 +23,29 @@ SWOSW = 0.33
 
 # View Metric Constants, used to determine how much a user will be penalised or
 # rewarded.
+HIDE_BONUS = 0.3
 NORMAL_BONUS = 0.3
-NORMAL_SPEED = 15
 PAUSE_PENALTY = 0.1
 HOVER_PENALTY = 0.5
-HIDE_BONUS = 0.3
 
-# Word Placeholders
+# Record Placeholder Sentinals
 NONE = '[none]'.freeze
-CHECK = '[check]'.freeze
-NEW = '[new]'.freeze
+
+# Point at which a score is 'acquired'
+ACQUIRY_POINT = 1.0
 
 # User Score placeholder
 TESTING = '[testing]'.freeze
 TESTED = '[tested]'.freeze
+EXHAUSTED = '[exhausted]'.freeze
 
-# Sentences Info Index Label Names
-# sentences_info[_]
-TARGET = 0
-PHONETIC = 1
-BASE = 2
+# Onboard Sources
+TATOEBA = 'Tatoeba'.freeze
+DBNARY = 'Dbnary'.freeze
+WIKI = 'Wiktionary'.freeze
+BING = 'Microsoft Bing API'.freeze
+SENTENCE_SPLITTER = 'Skrol Sentence Splitter'.freeze
+COURSE_CREATOR = 'Skrol Course Creator'.freeze
 
-# sentences_info[_][_]
-SENTENCE = 0
-NAME = 1
-RECORD_ARR = 2
-ENTRY_ARR = 3
-
-# # Logger Var
-# $old_logger = nil
+# Microsoft Bing Translate
+COGNITIVE_SUBSCRIPTION_KEY = '4e75483f61a849d88c666d4ea0b88ca1'.freeze

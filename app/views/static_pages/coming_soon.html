@@ -1,0 +1,55 @@
+<div id="logo">skr<span>ō</span>l</div>
+<div id='msg'></div>
+<style>
+
+  body {
+    padding-top: 4em;
+  }
+
+  div {
+    text-align: center;
+  }
+
+  #logo {
+
+    font-family: 'dejavu_serifbook';
+    margin: auto;
+    width: 60%;
+    font-size: 25em;
+    border: .03em black solid;
+  }
+
+  span {
+    font-size: 1.18em;
+  }
+
+  #msg {
+   font-size: 10em;
+   font-family: 'Open Sans', sans-serif;
+  }
+
+  }
+</style>
+<script>
+  $(document).ready(function() {
+    change();
+  });
+
+  var comingSoon = [ "coming soon", "ˈkʌmɪŋ suːn", "prossimamente",
+  "prossimaˈmente", "arrive bientôt", "a.ʁiv bjɛ̃.to", "demnächst",
+  "ˌdeːmˈnɛːçst", "快來了", "快来了", "近日公開", "скоро", "ˈskorə",
+  "kommer snart", "wkrótce", "ˈfkrutʦ̑ɛ", "próximamente", "mox adventu",
+  "Ερχομαι συντομα", "ġej dalwaqt", "قريبا", "בקרוב", "baldaŭ", "მალე"];
+
+  var counter = 0;
+
+  function change() {
+      $('#msg').text(comingSoon[counter]);
+      if (counter == (comingSoon.length - 1)) {
+        counter = 0;
+      } else {
+        counter++;
+      }
+      $('#msg').fadeIn(5000).fadeOut(5000, 'swing', change);
+  }
+</script>
