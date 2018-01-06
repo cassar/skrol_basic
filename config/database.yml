@@ -76,10 +76,10 @@ test:
 # You can use this database configuration with:
 #
 production:
-  <<: *default
-  database: skrol_basic_production
   url: <%= ENV['DATABASE_URL'] %>
 
 # production:
+#   <<: *default
+#   database: skrol_basic_production
 #   username: skrol_basic
 #   password: <%= ENV['SKROL_BASIC_DATABASE_PASSWORD'] %>
