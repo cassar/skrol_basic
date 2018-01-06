@@ -49,3 +49,6 @@ COURSE_CREATOR = 'Skrol Course Creator'.freeze
 
 # Microsoft Bing Translate
 COGNITIVE_SUBSCRIPTION_KEY = '4e75483f61a849d88c666d4ea0b88ca1'.freeze
+
+# Skrol Inter Communication Key
+SKROL_KEY = 'ffd9d0464401ab2e301763fc02196178'.freeze
