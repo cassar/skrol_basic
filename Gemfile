@@ -33,7 +33,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bing_translator', '~> 5.0.0'
 gem 'httparty'
 gem 'open_uri_redirections'
-#gem 'rubysl-zlib', '~> 2.0', '>= 2.0.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
