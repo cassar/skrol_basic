@@ -1,8 +1,8 @@
 class AssociateWordChecker
   def initialize(standard_script, associate_script, source)
     std_bing_wa_ids = retrieve_wa_ids(standard_script, source)
-    asc_bing_was = retrieve_wa_ids(associate_script, source)
-    word_associates = WordAssociate.find(std_bing_metas & asc_bing_metas)
+    asc_bing_wa_ids = retrieve_wa_ids(associate_script, source)
+    word_associates = WordAssociate.find(std_bing_wa_ids & asc_bing_wa_ids)
     sorter = WordAssociateSorter.new(word_associates, standard_script, associate_script)
     std_words, asc_words = sorter.words
     @words_to_check = standard_script.words_with_phonetics - std_words

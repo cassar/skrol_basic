@@ -34,7 +34,6 @@ class Language < ApplicationRecord
       @language = language
       @standard_script = language.standard_script
       @phonetic_script = language.phonetic_script
-      @standard_none = SentinalManager.retrieve(@standard_script)
       @phonetic_none = SentinalManager.retrieve(@phonetic_script)
     end
 
@@ -63,7 +62,6 @@ class Language < ApplicationRecord
     def standard_word_info
       puts "Standard Words: #{@standard_script.words.count}"
       puts "#{@standard_script.word_associates.count} word associates."
-      puts "#{@standard_none.all_associates.count} requests to be mapped to this language."
       puts ''
     end
 
