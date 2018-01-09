@@ -33,19 +33,20 @@
   </div>
 
   <!-- Controls to display and change Languages  -->
-  <div class='btn-group' role='group' aria-label='...'>
-    <div class="btn-group">
-      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <div class='btn-group' role='group' aria-label='Button group with nested dropdown'>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Languages <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu">
-        <li role="separator" class="divider"></li>
-        <li><a>IPA English</a></li>
+      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <div role="separator" class="dropdown-divider"></div>
+        <a class="dropdown-item">IPA English</a>
       </ul>
     </div>
     <button type='button' class='btn btn-default' id="lang-label">-</button>
   </div>
 </div>
+
 <script>
   $(document).ready(function() {
     // Cleans up Legacy Scores and Metrics on the server.

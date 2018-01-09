@@ -14,7 +14,7 @@ function updateLangButton() {
 }
 
 function addLangListElement(enrolmentId, langName) {
-  $('.dropdown-menu').prepend('<li class="language" data-enrolment=' +
+  $('.dropdown-menu').prepend('<li class="language dropdown-item" data-enrolment=' +
   enrolmentId + '><a>'+ langName +'</a></li>');
 }
 
