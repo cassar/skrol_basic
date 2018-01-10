@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
-  has_many :enrolments
+  has_one :student
+  has_many :enrolments, through: :student
   has_many :user_scores, through: :enrolments
   has_many :user_metrics, through: :user_scores
 
@@ -41,15 +42,5 @@ class User < ApplicationRecord
   def reset
     enrolments.each(&:reset)
     puts "All metrics and scores from user '#{name}' destroyed"
-  end
-
-  # Given a {'setting': value } will update the value for user.
-  def update_setting(settings)
-    settings.each do |setting, value|
-      update(current_map: value.to_i) if setting == 'current_map'
-      update(current_speed: value.to_i) if setting == 'current_speed'
-      update(base_hidden: value) if setting == 'base_hidden'
-      update(paused: value) if setting == 'paused'
-    end
   end
 end

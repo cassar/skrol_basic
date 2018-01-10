@@ -1,11 +1,11 @@
 class Enrolment < ApplicationRecord
-  validates :user, :course, presence: true
-  validates :user, uniqueness: { scope: :course }
+  validates :course, presence: true
+  validates :student, uniqueness: { scope: :course }
+  belongs_to :student
+  belongs_to :course
   has_many :user_scores
   has_many :user_metrics, through: :user_scores
   has_many :sentences, through: :user_metrics
-  belongs_to :user
-  belongs_to :course
   has_one :language_map, through: :course
 
   # Returns the base_script of a given enrolment

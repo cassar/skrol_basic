@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  current_speed: 1
+  base_hidden: false
+  paused: false
+
+two:
+  user_id: 1
+  current_speed: 1
+  base_hidden: false
+  paused: false

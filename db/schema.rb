@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171230050754) do
+ActiveRecord::Schema.define(version: 20180110051103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20171230050754) do
   end
 
   create_table "enrolments", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "course_id"
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 20171230050754) do
     t.index ["word_id"], name: "index_sentences_words_on_word_id", using: :btree
   end
 
+  create_table "students", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "current_speed"
+    t.boolean  "base_hidden"
+    t.boolean  "paused"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "user_metrics", force: :cascade do |t|
     t.integer  "user_score_id"
     t.integer  "sentence_id"
@@ -100,11 +109,8 @@ ActiveRecord::Schema.define(version: 20171230050754) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "current_speed"
-    t.boolean  "base_hidden"
-    t.boolean  "paused"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "word_associates", force: :cascade do |t|

@@ -27,7 +27,7 @@ class SlideController < ApplicationController
   # Updates the setting for a user
   def update_user_setting
     user = User.find(params[:user_id])
-    user.update_setting(params[:new_setting])
+    user.student.update_setting(params[:new_setting])
     puts "user setting: #{params[:new_setting]}"
     render json: { message: "User setting updated for #{user.name}." }
   end
