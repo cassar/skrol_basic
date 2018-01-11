@@ -3,6 +3,7 @@ function initControls() {
   $('#moreSpeed').click(increaseSpeed);
   $('#stop-start').click(togglePause);
   $('#hide-base').click(toggleHideBase);
+  $('#signOut').click(disable);
 }
 
 function update_speed() {
@@ -14,7 +15,7 @@ function updateLangButton() {
 }
 
 function addLangListElement(enrolmentId, langName) {
-  $('.dropdown-menu').prepend('<li class="language dropdown-item" data-enrolment=' +
+  $('.languages').prepend('<li class="language dropdown-item" data-enrolment=' +
   enrolmentId + '><a>'+ langName +'</a></li>');
 }
 

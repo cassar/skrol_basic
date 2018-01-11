@@ -3,12 +3,11 @@
 #frame {
   width: 75%;
   margin: auto;
-  margin-top: 2em;
   border: 1px solid #ccc;
   overflow: hidden;
   font-family: 'Open Sans', sans-serif;
   border-radius: 15px;
-  font-size: 4em;
+  font-size: 4vw;
   cursor: grab;
 }
 

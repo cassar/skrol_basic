@@ -1,7 +1,5 @@
 // Initial Map Value
 var NO_ENROLMENT_SET = 0;
-// User
-var DEFAULT_USER = 1;
 // Amount of miliseconds before the backend checks if a slide should be inserted.
 var SLIDE_MONITOR_INTERVAL = 50;
 // The dafault marqueeInterval in milliseconds that the marquee will start at.

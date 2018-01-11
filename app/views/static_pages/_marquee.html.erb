@@ -38,20 +38,23 @@
       <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Languages <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <ul class="dropdown-menu languages" aria-labelledby="btnGroupDrop1">
         <div role="separator" class="dropdown-divider"></div>
         <a class="dropdown-item">IPA English</a>
       </ul>
     </div>
     <button type='button' class='btn btn-default' id="lang-label">-</button>
   </div>
+
+  <!-- User name and logout button  -->
+  <div class='btn-group' role='group' aria-label='...'>
+    <button type='button' class='btn btn-default'><%= current_user.name %></button>
+    <%= link_to "Sign out", sign_out_path, class:"btn btn-primary", id:"signOut" %>
+  </div>
 </div>
 
 <script>
   $(document).ready(function() {
-    // Cleans up Legacy Scores and Metrics on the server.
-    requestSessionReset();
-
     // Requests available languages and user settings, be retrieved from the
     // server. Then, updates models and views.
     requestUserInfo();

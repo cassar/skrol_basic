@@ -1,0 +1,44 @@
+<style>
+
+  div {
+    color: black;
+    text-align: center;
+  }
+
+  #logo {
+    font-family: 'dejavu_serifbook';
+    margin: auto;
+    width: 60vw;
+    font-size: 17vw;
+    border: .03em black solid;
+    line-height: 1.42857143;
+  }
+
+  #macron {
+    position: relative;
+    background: black;
+    width: 7vw;
+    height: 1.1vw;
+    top: -17vw;
+    left: 36.9vw;
+  }
+
+  .signLinks {
+    font-size: 6vw;
+    font-family: 'Open Sans', sans-serif;
+    margin-left: 4vw;
+    margin-right: 4vw;
+  }
+
+  a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: black;
+  }
+
+</style>
+
+<div id="logo">skrol<div id='macron'></div></div>
+<div>
+  <%= link_to "sign in", sign_in_path, :class=> "signLinks" %>
+  <%= link_to "sign up", sign_up_path, :class=> "signLinks" %>
+</div>

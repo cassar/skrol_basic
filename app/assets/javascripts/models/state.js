@@ -28,13 +28,17 @@ function checkEnoughSlides() {
 function toggleDisabled() {
   disabled = !disabled;
   if (disabled) {
-    changeToLoading();
-    stopMarquee();
-    stopSlideMonitor();
+    disable();
   } else {
     setPause();
     startSlideMonitor();
   }
+}
+
+function disable() {
+  changeToLoading();
+  stopMarquee();
+  stopSlideMonitor();
 }
 
 // Toggles between skroling or paused and updates view.

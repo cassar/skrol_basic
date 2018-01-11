@@ -13,22 +13,18 @@ class SlideController < ApplicationController
 
   # Will reset user metrics and scores and send back confirmation
   def reset_user_session
-    user = User.find(params[:user_id])
-    user.reset_outstanding
-    render json: { message: "User scores and metrics for #{user.name} reset." }
+    current_user.reset_outstanding
+    render json: { message: "User scores and metrics for #{current_user.name} reset." }
   end
 
   # Returns lang info, and user info for use in client
   def return_user_info
-    user = User.find(params[:user_id])
-    render json: { lang: user.lang_info, user: user.user_info }
+    render json: { lang: current_user.lang_info, user: current_user.user_info }
   end
 
   # Updates the setting for a user
   def update_user_setting
-    user = User.find(params[:user_id])
-    user.student.update_setting(params[:new_setting])
-    puts "user setting: #{params[:new_setting]}"
-    render json: { message: "User setting updated for #{user.name}." }
+    current_user.student.update_setting(params[:new_setting])
+    render json: { message: "User setting updated for #{current_user.name}." }
   end
 end
