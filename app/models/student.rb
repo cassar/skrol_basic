@@ -6,9 +6,11 @@ class Student < ApplicationRecord
   # Given a {'setting': value } will update the value for student.
   def update_setting(settings)
     settings.each do |setting, value|
-      update(current_speed: value.to_i) if setting == 'current_speed'
-      update(base_hidden: value) if setting == 'base_hidden'
-      update(paused: value) if setting == 'paused'
+      case setting
+      when 'current_speed' then update(current_speed: value.to_i)
+      when 'base_hidden' then update(base_hidden: value)
+      when 'paused' then update(paused: value)
+      end
     end
   end
 end

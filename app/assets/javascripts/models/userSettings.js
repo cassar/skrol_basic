@@ -1,6 +1,3 @@
-// User settings.
-var userId = DEFAULT_USER;
-
 // Assigns variables based on retrieved user info
 function loadUserInfo(user) {
   setBaseHidden(user['base_hidden']);
@@ -12,8 +9,7 @@ function loadUserInfo(user) {
 function requestUserInfo() {
   $.ajax({
     method: "GET",
-    url: "/user-info",
-    data: { 'user_id': userId }
+    url: "/user-info"
   })
   .done(function(json) {
     console.log( json );
@@ -31,8 +27,7 @@ function requestUserInfo() {
 function requestSessionReset() {
   $.ajax({
     method: "POST",
-    url: "/reset-user-session",
-    data: { 'user_id': userId }
+    url: "/reset-user-session"
   })
   .done(function( msg ) {
     console.log( "Complete: " + msg["message"] );
@@ -47,7 +42,7 @@ function updateUserSetting(setting) {
   $.ajax({
     method: "POST",
     url: "/update-user-setting",
-    data: {'user_id': userId, 'new_setting': setting }
+    data: { 'new_setting': setting }
   })
   .done(function( msg ) {
     console.log( "Complete: " + msg["message"] );
