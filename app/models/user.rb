@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true
   validates :name, uniqueness: true
   has_one :student
@@ -15,7 +19,7 @@ class User < ApplicationRecord
 
   def lang_info
     lang_arr = []
-    enrolments.each do |enrolment|
+    student.enrolments.each do |enrolment|
       lang_name = enrolment.target_script.language.name
       lang_arr << [lang_name, enrolment.id]
     end
@@ -24,9 +28,9 @@ class User < ApplicationRecord
 
   def user_info
     user_info = {}
-    user_info[:current_speed] = current_speed
-    user_info[:base_hidden] = base_hidden
-    current_enrolment = user_scores.order(updated_at: :desc).first.enrolment.id
+    user_info[:current_speed] = student.current_speed
+    user_info[:base_hidden] = student.base_hidden
+    current_enrolment = student.user_scores.order(updated_at: :desc).first.enrolment.id
     user_info[:current_enrolment] = current_enrolment
     user_info
   end
