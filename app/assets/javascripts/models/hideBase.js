@@ -33,7 +33,7 @@ function set_hide_base() {
 
 function checkUnhideBase() {
   if (baseHidden) {
-    revealBaseLine()
+    BaseSentenceColorApply(this, REAVEAL_COLOUR);
     baseHidden = false;
     buttonDown = true;
   }
@@ -41,9 +41,10 @@ function checkUnhideBase() {
 
 function checkHideBase() {
   if (buttonDown) {
-    hideBaseLine();
+    BaseSentenceColorApply(this, HIDE_COLOUR);
     baseHidden = true;
     buttonDown = false;
+    reportReveal();
   }
 }
 

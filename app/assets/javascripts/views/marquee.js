@@ -34,3 +34,7 @@ function cursorGrabbing() {
 function appendSlide(nextSlide) {
   $('#slide').append(nextSlide);
 }
+
+function BaseSentenceColorApply(element, color) {
+  $(element).css('color', color);
+}
