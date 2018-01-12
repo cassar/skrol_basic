@@ -28,7 +28,7 @@ function getMarqueeWidth() {
 }
 
 function cursorGrabbing() {
-  return $('#frame').css('cursor') == 'grabbing';
+  return $('#frame').css('cursor').match('grabbing') != null;
 }
 
 function appendSlide(nextSlide) {
