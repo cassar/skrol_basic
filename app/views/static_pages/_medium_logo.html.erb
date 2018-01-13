@@ -16,6 +16,11 @@
     left: 16.4vw;
   }
 
-</style>
+  #homeLink:hover {
+    text-decoration: none;
+  }
 
-<%= render partial: 'static_pages/logo' %>
+</style>
+<a id="homeLink" href="<%= root_path %>" >
+  <%= render partial: 'static_pages/logo' %>
+</a>
