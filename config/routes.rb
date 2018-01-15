@@ -19,5 +19,7 @@ Rails.application.routes.draw do
   end
 
   get 'acquire', to: 'static_pages#marquee'
+  post 'key', to: 'static_pages#check_key'
+  get 'enter_key', to: 'static_pages#enter_key'
   root 'static_pages#landing'
 end

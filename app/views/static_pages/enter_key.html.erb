@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Enter Key</h2>
+      <%= form_tag '/key' do %>
+        <div class="form-group">
+          <label for="entry">Secret Key</label>
+          <%= text_field_tag 'entry', '', class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= submit_tag 'Check', class: 'btn btn-dark' %>
+        </div>
+      <% end %>
+      <%= link_to "Sign in", sign_in_path %>
+    </div>
+    <div class="col">
+      <%= render partial: 'static_pages/medium_logo' %>
+    </div>
+  </div>
+</div>
