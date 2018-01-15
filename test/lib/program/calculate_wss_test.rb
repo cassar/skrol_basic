@@ -10,8 +10,8 @@ class CalculateWSSTest < ActiveSupport::TestCase
   end
 
   test 'return_score' do
-    base_char_arr = %w(h e l l o)
-    target_char_arr = %w(h a l o)
+    base_char_arr = %w[h e l l o]
+    target_char_arr = %w[h a l o]
     result = return_score(base_char_arr, target_char_arr)
 
     assert_equal(3 / 4.5, result, 'wrong score returned')
@@ -19,7 +19,7 @@ class CalculateWSSTest < ActiveSupport::TestCase
 
   test 'return_base_candidate' do
     template = [0, 1]
-    result = return_base_candidate('l', 2, %w(h e l l o))
+    result = return_base_candidate('l', 2, %w[h e l l o])
 
     assert_equal(template, result, 'wrong base_candidate')
   end
@@ -33,8 +33,8 @@ class CalculateWSSTest < ActiveSupport::TestCase
 
   test 'compile_wss_score' do
     score_array = [0.25, 1]
-    base_char_arr = %w(a b c)
-    target_char_arr = %w(a b c)
+    base_char_arr = %w[a b c]
+    target_char_arr = %w[a b c]
     score = compile_wss_score(score_array, base_char_arr, target_char_arr)
 
     assert_equal(1.25 / 3, score, 'incorrect score calculated')
