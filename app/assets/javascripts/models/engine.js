@@ -8,7 +8,7 @@ var oldXpos;
 var slideMonitorId = TIME_OUT_NOT_SET;
 
 // Initiate Marquee
-function initMarqueeModel() {
+function initEngine() {
   // [Fix: entry does not update when screen is resized]
   entryPoint = getMarqueeWidth() + BUFFER;
   marqueePosition = entryPoint;

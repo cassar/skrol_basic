@@ -39,8 +39,6 @@
         Languages <span class="caret"></span>
       </button>
       <ul class="dropdown-menu languages" aria-labelledby="btnGroupDrop1">
-        <div role="separator" class="dropdown-divider"></div>
-        <a class="dropdown-item">IPA English</a>
       </ul>
     </div>
     <button type='button' class='btn btn-default' id="lang-label">-</button>
@@ -54,16 +52,5 @@
 </div>
 
 <script>
-  $(document).ready(function() {
-    requestSessionReset();
-    // Requests available languages and user settings, be retrieved from the
-    // server. Then, updates models and views.
-    requestUserInfo();
-
-    // Set event for Controls
-    initControls();
-
-    // Set events for Marquee
-    initMarquee();
-  });
+  $(document).ready(skrolInit);
 </script>
