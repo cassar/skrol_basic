@@ -41,4 +41,5 @@ function changeLanguage() {
   requestSessionReset();
   updateUserSetting({'current_enrolment': enrolmentId});
   updateLangButton();
+  setPause();
 }

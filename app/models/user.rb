@@ -30,8 +30,12 @@ class User < ApplicationRecord
     user_info = {}
     user_info[:current_speed] = student.current_speed
     user_info[:base_hidden] = student.base_hidden
-    current_enrolment = student.user_scores.order(updated_at: :desc).first.enrolment.id
-    user_info[:current_enrolment] = current_enrolment
+    scores = student.user_scores.order(updated_at: :desc)
+    if scores.empty?
+      user_info[:current_enrolment] = NO_ENROLMENT_SET
+    else
+     user_info[:current_enrolment] = scores.first.enrolment.id
+    end
     user_info
   end
 

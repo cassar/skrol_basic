@@ -15,7 +15,11 @@ function requestUserInfo() {
     console.log( json );
     loadLangInfo(json['lang']);
     loadUserInfo(json['user']);
-    checkSlideQueue();
+    if (enrolmentSet()) {
+      checkSlideQueue();
+    } else {
+      transitionToSelect();
+    }
   })
   .fail(function() {
     console.log( "Error: Could not retrieve lang_info." );

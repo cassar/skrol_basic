@@ -34,6 +34,9 @@ NONE = '[none]'.freeze
 # Point at which a score is 'acquired'
 ACQUIRY_POINT = 1.0
 
+# New User Values
+NO_ENROLMENT_SET = 0
+
 # User Score placeholder
 TESTING = '[testing]'.freeze
 TESTED = '[tested]'.freeze
