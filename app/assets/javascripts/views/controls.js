@@ -1,7 +1,7 @@
 function initControls() {
   $('#lessSpeed').click(decreaseSpeed);
   $('#moreSpeed').click(increaseSpeed);
-  $('#stop-start').click(togglePause);
+  $('#state').click(togglePause);
   $('#hide-base').click(toggleHideBase);
   $('#signOut').click(disable);
 }
@@ -39,29 +39,17 @@ function changeToHidden() {
   .addClass('btn-default');
 }
 
-// Change button #stop_start button to Paused
-function changeToPaused() {
-  $('#stop-start')
-  .removeAttr('disabled')
-  .html('Paused')
+function changeStateButton(label, subClass) {
+  $('#state')
+  .html(label)
   .removeClass()
-  .addClass('btn btn-default');
+  .addClass('btn btn-' + subClass);
 }
 
-// Change button #stop_start button to Skroling
-function changeToSkroling() {
-  $('#stop-start')
-  .removeAttr('disabled')
-  .html('Skroling')
-  .removeClass()
-  .addClass('btn btn-primary');
+function disableStateButton() {
+  $('#state').attr('disabled', 'true');
 }
 
-// Change button #stop_start button to Loading
-function changeToLoading() {
-  $('#stop-start')
-  .attr('disabled', 'true')
-  .html('Loading')
-  .removeClass()
-  .addClass('btn btn-warning');
+function enableStateButton() {
+  $('#state').removeAttr('disabled');
 }

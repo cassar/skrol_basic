@@ -15,7 +15,6 @@ function requestUserInfo() {
     console.log( json );
     loadLangInfo(json['lang']);
     loadUserInfo(json['user']);
-    // [Fix: waste of time, see if the first slide can be sent with lang/user info]
     checkSlideQueue();
   })
   .fail(function() {
