@@ -3,7 +3,7 @@ function initControls() {
   $('#moreSpeed').click(increaseSpeed);
   $('#state').click(togglePause);
   $('#hide-base').click(toggleHideBase);
-  $('#signOut').click(exit);
+  $('#signOut, #account').click(exit);
 }
 
 function update_speed() {

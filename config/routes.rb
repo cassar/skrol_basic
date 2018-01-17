@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get 'sign_in', to: 'devise/sessions#new'
     get 'sign_up', to: 'devise/registrations#new'
     get 'sign_out', to: 'devise/sessions#destroy'
+    get 'account', to: 'devise/registrations#edit'
   end
 
   post 'key', to: 'static_pages#check_key'
