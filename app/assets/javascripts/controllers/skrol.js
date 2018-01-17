@@ -10,4 +10,5 @@ function skrolInit() {
   initMarquee();
 
   initEngine();
+  clearNotification();
 }

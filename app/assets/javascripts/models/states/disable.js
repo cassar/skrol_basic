@@ -16,6 +16,7 @@ function toggleDisabled() {
   } else {
     setPause();
     startSlideMonitor();
+    clearNotification();
   }
 }
 
@@ -24,6 +25,7 @@ function disable() {
     changeToComplete()
   } else {
     changeToWorking();
+    addNotification(SERVER_ERROR);
   }
   stopMarquee();
   stopSlideMonitor();
