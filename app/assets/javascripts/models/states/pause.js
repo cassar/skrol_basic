@@ -32,23 +32,23 @@ function checkForUnpause() {
 
 function pause() {
   stopMarquee();
-  changeToPaused();
+  changeToResume();
   reportPause();
 }
 
 function unpause() {
   startMarquee();
-  changeToSkroling();
+  changeToPause();
 }
 
 // Change button #stop_start button to Paused
-function changeToPaused() {
+function changeToResume() {
   enableStateButton();
-  changeStateButton('Paused', 'default');
+  changeStateButton('Resume', 'default');
 }
 
 // Change button #stop_start button to Skroling
-function changeToSkroling() {
+function changeToPause() {
   enableStateButton();
-  changeStateButton('Skroling', 'primary');
+  changeStateButton('Pause', 'primary');
 }
