@@ -20,7 +20,11 @@ function toggleDisabled() {
 }
 
 function disable() {
-  changeToWorking();
+  if (isComplete()) {
+    changeToComplete()
+  } else {
+    changeToWorking();
+  }
   stopMarquee();
   stopSlideMonitor();
 }

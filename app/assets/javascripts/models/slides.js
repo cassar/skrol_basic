@@ -2,10 +2,20 @@ var slideQueue = [];
 
 var requestPending = false;
 
+var complete = false;
+
 function getNextSlide() {
   var nextSlide = slideQueue.shift();
   checkSlideQueue();
   return nextSlide;
+}
+
+function isComplete() {
+  return complete;
+}
+
+function resetComplete() {
+  complete = false;
 }
 
 function requestNotPending() {
@@ -27,7 +37,7 @@ function enoughSlides() {
 
 // Makes sure the strings array has a minimum of MIN_ELEMENTS of elements in it.
 function checkSlideQueue() {
-  if (slideQueue.length < MAX_ELEMENTS && requestNotPending()) {
+  if (slideQueue.length < MAX_ELEMENTS && requestNotPending() && !complete) {
     requestSlide();
   }
 }
@@ -46,11 +56,16 @@ function requestSlide() {
     data: { 'enrolment_id': getEnrolmentId() }
   })
   .done(function(json) {
-    console.log(json)
-    addToSlideQueue(json);
-    console.log( "Success: Slide successfully retrieved." );
-    checkSlideQueue();
-    checkEnoughSlides();
+    if (json['service'] == 'GOOD') {
+      console.log( "Success: Slide successfully retrieved." );
+      console.log(json);
+      addToSlideQueue(json);
+      checkSlideQueue();
+      checkEnoughSlides();
+    } else {
+      console.log( "Course complete. No more Slides.")
+      complete = true;
+    }
   })
   .fail(function() {
     // [Fix: Would like a system here for waiting before next request.]

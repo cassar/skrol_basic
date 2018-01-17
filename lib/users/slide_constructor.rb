@@ -13,7 +13,7 @@ class SlideConstructor
     assign_word_scores
     content = compile_content
     slide = @html_constructor.compile_sentences_tag(content)
-    { slide: slide, metrics: @html_constructor.user_metric_ids }
+    { slide: slide, metrics: @html_constructor.user_metric_ids, service: 'GOOD' }
   end
 
   private

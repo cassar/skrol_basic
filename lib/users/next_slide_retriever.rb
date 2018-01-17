@@ -16,6 +16,7 @@ module NextSlideRetriever
       target_sentence = nil
       loop do
         target_word = @enrolment_manager.next_word
+        return { service: 'EMPTY' } if target_word.nil?
         target_sentence = @next_sentence_retriever.retrieve(target_word)
         break if target_sentence.present?
         @enrolment_manager.assign_status(target_word, EXHAUSTED)

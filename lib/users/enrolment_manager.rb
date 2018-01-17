@@ -13,8 +13,7 @@ class EnrolmentManager
     score = max_score
     return score.word unless score.nil?
     word = word_from_ranks
-    return word unless word.nil?
-    raise Invalid, 'no more words!'
+    return word
   end
 
   def associated_scripts
