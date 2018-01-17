@@ -1,6 +1,6 @@
 function wordOn() {
   var domWord = $(this);
-  if (!domWord.parent().hasClass('base') || notHidden()) {
+  if (!domWord.parent().hasClass('base')) {
     var metric_id = domWord.attr('data-metric');
     if (metric_id != '0') {
       $('*[data-metric="' + metric_id + '"]').addClass('highlight');

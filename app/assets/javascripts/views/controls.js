@@ -2,7 +2,6 @@ function initControls() {
   $('#lessSpeed').click(decreaseSpeed);
   $('#moreSpeed').click(increaseSpeed);
   $('#state').click(togglePause);
-  $('#hide-base').click(toggleHideBase);
   $('#signOut, #account').click(exit);
 }
 
@@ -21,22 +20,6 @@ function addLangListElement(enrolmentId, langName) {
 
 function setLangChange() {
   $('li.language').click(changeLanguage);
-}
-
-// Change button #hide-base button to Showing
-function changeToShowing() {
-  $('#hide-base')
-  .html('Showing')
-  .removeClass('btn-default')
-  .addClass('btn-primary');
-}
-
-// Change button #hide-base button to Hidden
-function changeToHidden() {
-  $('#hide-base')
-  .html('Hidden')
-  .removeClass('btn-primary')
-  .addClass('btn-default');
 }
 
 function changeStateButton(label, subClass) {

@@ -1,6 +1,5 @@
 // Assigns variables based on retrieved user info
 function loadUserInfo(user) {
-  setBaseHidden(user['base_hidden']);
   setSpeed(user['current_speed']);
   setEnrolmentId(user['current_enrolment']);
 }
