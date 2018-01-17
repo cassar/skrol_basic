@@ -16,7 +16,7 @@ function addSlideInfo(metrics) {
       'hover': false,
       'hide': true,
       'pause': false,
-      'sent': false
+      'complete': false
      };
   }
 }
@@ -80,10 +80,10 @@ function timerOff() {
 // Compiles and sends report to server
 function checkAndSendReport(metric_id) {
   metric_record = metricsObject[metric_id]
-  if (metric_record['sent']) {
+  if (metric_record['complete']) {
     return;
   }
-  metric_record['sent'] = true;
+  metric_record['complete'] = true;
   console.log(metric_record);
   sendMetric(metric_record);
 }
@@ -99,6 +99,8 @@ function sendMetric(json) {
     console.log( "Complete: metric saved " + msg["message"] );
   })
   .fail(function() {
-    console.log( "Error: Could not save metric." );
+    console.log( "Error: Could not save metric: " + json['metric_id']);
+    console.log( "Attempting again in 10secs.");
+    setTimeout(sendMetric, 10000, json);
   });
 }
