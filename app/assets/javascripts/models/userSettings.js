@@ -18,7 +18,7 @@ function requestUserInfo() {
     if (enrolmentSet()) {
       checkSlideQueue();
     } else {
-      transitionToSelect();
+      changeToSelect();
     }
   })
   .fail(function() {
