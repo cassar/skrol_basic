@@ -6,17 +6,11 @@ var marqueeIntervalId = TIME_OUT_NOT_SET;
 
 // Sets the marqueeInterval given a past speed level
 function setSpeed(speed) {
-  marqueeInterval = (NORMAL_INTERVAL * 2) - speed;
-  update_speed();
+  marqueeInterval = speed;
 }
 
 function getInterval() {
   return marqueeInterval;
-}
-
-// Returns the current speed level
-function getSpeedLevel() {
-  return (NORMAL_INTERVAL * 2) - marqueeInterval;
 }
 
 // Increases marqueeInterval to slow down marquee
@@ -26,9 +20,8 @@ function decreaseSpeed() {
     if (canContinueSkroling()) {
       restartMarquee();
     }
-    update_speed();
     reportSpeed();
-    updateUserSetting({'current_speed': getSpeedLevel()});
+    updateUserSetting({'current_speed': marqueeInterval });
   }
 }
 
@@ -39,9 +32,8 @@ function increaseSpeed() {
     if (canContinueSkroling()) {
       restartMarquee();
     }
-    update_speed();
     reportSpeed();
-    updateUserSetting({'current_speed': getSpeedLevel()});
+    updateUserSetting({'current_speed': marqueeInterval });
   }
 }
 

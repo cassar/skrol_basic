@@ -5,10 +5,6 @@ function initControls() {
   $('#signOut, #account').click(exit);
 }
 
-function update_speed() {
-  $('#speedLabel').html(getSpeedLevel());
-}
-
 function updateLangButton() {
   $('#lang-label').html(currentLanguageName());
 }
