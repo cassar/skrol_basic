@@ -3,6 +3,7 @@
 #frame {
   width: 75%;
   margin: auto;
+  margin-top: 2vw;
   border: 1px solid #ccc;
   overflow: hidden;
   font-family: 'Open Sans', sans-serif;
