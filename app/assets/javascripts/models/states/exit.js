@@ -1,6 +1,6 @@
 function exit() {
   disableStateButton();
-  changeStateButton('Exiting', 'success');
+  changeStateButton('Exiting', 'warning');
   stopMarquee();
   stopSlideMonitor();
 }

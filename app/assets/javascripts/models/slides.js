@@ -49,14 +49,15 @@ function requestSlide() {
     console.log(json)
     addToSlideQueue(json);
     console.log( "Success: Slide successfully retrieved." );
+    checkSlideQueue();
+    checkEnoughSlides();
   })
   .fail(function() {
     // [Fix: Would like a system here for waiting before next request.]
-    console.log( "Error: Could not retrieve next slide." );
+    console.log( "Error: Could not retrieve next slide. Recheck in 10 secs" );
+    setTimeout(checkSlideQueue, 10000);
   })
   .always(function() {
     toggleRequestPending();
-    checkEnoughSlides();
-    checkSlideQueue();
   });
 }

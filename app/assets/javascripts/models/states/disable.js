@@ -20,7 +20,7 @@ function toggleDisabled() {
 }
 
 function disable() {
-  changeToLoading();
+  changeToWorking();
   stopMarquee();
   stopSlideMonitor();
 }
