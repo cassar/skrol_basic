@@ -37,11 +37,10 @@ function currentLanguageName() {
 
 function changeLanguage() {
   enrolmentId = parseInt($(this).attr('data-enrolment'));
+  resetComplete();
   emptySlideQueue();
-  requestSessionReset();
   updateUserSetting({'current_enrolment': enrolmentId});
   updateLangButton();
-  resetComplete();
   clearNotification();
-  setPause();
+  changeToLoading();
 }

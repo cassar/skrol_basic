@@ -1,5 +1,6 @@
 var LANGUAGE_SELECT = 'Please select a language to learn below';
 var SERVER_ERROR = 'No server connection, please comeback later.';
+var COURSE_COMPLETE = 'Course complete, please select another course.';
 
 var messageQueue = [];
 var transitionCalled = false;

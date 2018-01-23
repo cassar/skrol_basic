@@ -22,10 +22,9 @@ function toggleDisabled() {
 
 function disable() {
   if (isComplete()) {
-    changeToComplete()
+    changeToComplete();
   } else {
     changeToWorking();
-    addNotification(SERVER_ERROR);
   }
   stopMarquee();
   stopSlideMonitor();

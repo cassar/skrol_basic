@@ -65,6 +65,9 @@ function requestSlide() {
     } else {
       console.log( "Course complete. No more Slides.")
       complete = true;
+      if (isDisabled()) {
+        changeToComplete();
+      }
     }
   })
   .fail(function() {

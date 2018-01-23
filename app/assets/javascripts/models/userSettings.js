@@ -18,7 +18,6 @@ function requestUserInfo() {
       checkSlideQueue();
     } else {
       changeToSelect();
-      addNotification(LANGUAGE_SELECT);
     }
   })
   .fail(function() {

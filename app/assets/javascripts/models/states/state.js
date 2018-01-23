@@ -19,11 +19,13 @@ function checkEnoughSlides() {
 function changeToWorking() {
   disableStateButton();
   changeStateButton('Working', 'warning');
+  addNotification(SERVER_ERROR);
 }
 
 function changeToSelect() {
   disableStateButton();
   changeStateButton('Select', 'warning');
+  addNotification(LANGUAGE_SELECT);
 }
 
 function changeToLoading() {
@@ -34,6 +36,7 @@ function changeToLoading() {
 function changeToComplete() {
   disableStateButton();
   changeStateButton('Complete', 'success');
+  addNotification(COURSE_COMPLETE);
 }
 
 function exit() {
