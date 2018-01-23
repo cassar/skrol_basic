@@ -37,10 +37,6 @@ module LanguageMapConsolidator
       [@tar_stn_spt, @bse_stn_spt]
     end
 
-    def phonetic_scripts
-      [@tar_phn_spt, @bse_phn_spt]
-    end
-
     def language_pairs
       [[@tar_stn_spt, @tar_phn_spt], [@bse_stn_spt, @bse_phn_spt]]
     end

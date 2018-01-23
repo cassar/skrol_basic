@@ -22,6 +22,17 @@ class Language < ApplicationRecord
     scripts.find_by! standard_id: standard_script.id
   end
 
+  def self.all_info
+    old_logger = logger_off
+    all.each do |language|
+      puts language.name
+      puts "standard: #{language.standard_script.name}"
+      puts "phonetic: #{language.phonetic_script.name}"
+      puts ''
+    end
+    logger_on(old_logger)
+  end
+
   # Prints out useful info about a particular language
   def info
     old_logger = logger_off

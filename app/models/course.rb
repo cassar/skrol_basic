@@ -7,7 +7,6 @@ class Course < ApplicationRecord
   has_many :sentences, through: :sentence_scores
   has_many :sentences_words, through: :sentences
   has_many :enrolments
-  has_many :meta_data, as: :contentable, dependent: :destroy
 
   def info
     old_logger = logger_off
@@ -16,19 +15,6 @@ class Course < ApplicationRecord
     puts "Word count: #{word_scores.count}\nSentence count: #{sentence_scores.count}"
     puts "Enrolments: #{enrolments.count}"
     logger_on(old_logger)
-  end
-
-  def create_metadatum
-    entry = { max_length_map: MAX_LENGTH_MAP }
-    entry[:WCFBSW] = WCFBSW
-    entry[:WCFTSW] = WCFTSW
-    entry[:WFSW] = WFSW
-    entry[:WLSW] = WLSW
-    entry[:WSSW] = WSSW
-    entry[:SCWTSW] = SCWTSW
-    entry[:SWLSW] = SWLSW
-    entry[:SWOSW] = SWOSW
-    meta_data.create(source: COURSE_CREATOR, entry: entry)
   end
 
   private

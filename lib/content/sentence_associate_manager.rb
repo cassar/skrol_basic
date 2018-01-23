@@ -8,6 +8,7 @@ class SentenceAssociateManager
   end
 
   attr_reader :sent_assocs
+  attr_reader :sent_to_assocs
 
   def sentences(sentence_associate)
     sent1 = @sent_id_to_sent1[sentence_associate.associate_a_id]
@@ -37,14 +38,9 @@ class SentenceAssociateManager
   end
 
   def associates(sentence)
-    @sent_to_assocs[sentence]
-  end
-
-  def pair!(sentence1, sentence2)
-    assocs1 = associates(sentence1)
-    assocs2 = associates(sentence2)
-    return unless assocs1.nil? || assocs2.nil? || (assocs1 &= assocs2).empty?
-    sentence1.associate_bs << sentence2
+    assocs = @sent_to_assocs[sentence]
+    return [] if assocs.nil?
+    assocs
   end
 
   def representation(associate, script)

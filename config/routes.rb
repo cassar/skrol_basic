@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   post 'update-user-setting', to: 'slide#update_user_setting'
 
   # Private API to add content
-  post 'words', to: 'content#add_words'
+  post 'word_pairs', to: 'content#word_pairs'
+  post 'sentence_pairs', to: 'content#sentence_pairs'
 
   devise_scope :user do
     get 'sign_in', to: 'devise/sessions#new'

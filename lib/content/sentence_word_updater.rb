@@ -73,7 +73,7 @@ class SentenceWordUpdater
 
     def derive_word_lengths
       word_lengths = []
-      @entry_to_word.each do |entry, _word|
+      @entry_to_word.each_key do |entry|
         next if word_lengths.include? entry.length
         word_lengths << entry.length
       end

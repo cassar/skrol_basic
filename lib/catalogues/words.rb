@@ -21,7 +21,7 @@ end
 # Compile catalogue entry => word.id
 def check_no_dup_entries(standard_script)
   if standard_script.standard_id.present?
-    raise Invalid, "script_id: #{standard_script.id} not a standard_script!"
+    raise StandardError, "script_id: #{standard_script.id} not a standard_script!"
   end
   count_catalogue = derive_word_entry_count_catalogue(standard_script)
   return unless analyse_count_catalogue(count_catalogue)

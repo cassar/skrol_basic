@@ -3,6 +3,7 @@ class EnrolmentManager
     @enrolment = enrolment
     @course = enrolment.course
     @course_manager = CourseManager.new(@course)
+    @existing_scores = @enrolment.user_scores.pluck(:word_id)
   end
 
   attr_reader :enrolment
@@ -13,7 +14,7 @@ class EnrolmentManager
     score = max_score
     return score.word unless score.nil?
     word = word_from_ranks
-    return word
+    word
   end
 
   def associated_scripts
@@ -48,10 +49,9 @@ class EnrolmentManager
   end
 
   def word_from_ranks
-    existing_scores = @enrolment.user_scores.pluck(:word_id)
-    batch_size = existing_scores.count + 1
+    batch_size = @existing_scores.count + 1
     ranked_words = @course_manager.limited_batch(batch_size).pluck(:word_id)
-    word_id = (ranked_words - existing_scores).first
+    word_id = (ranked_words - @existing_scores).first
     Word.find(word_id) if word_id.present?
   end
 end

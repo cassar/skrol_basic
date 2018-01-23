@@ -1,4 +1,4 @@
-# { sent => [word, ...]}
+# { sent => [word, ...], ... }
 def derive_sent_to_words(sents, words, sent_words)
   sent_id_to_sent = derive_record_id_to_record(sents)
   word_id_to_word = derive_record_id_to_record(words)
@@ -17,7 +17,7 @@ def add_to_sent_words(sent_to_words, sw, sent_id_to_sent, word_id_to_word)
   sent_to_words[sent] = word_arr
 end
 
-# { Sentence => SentenceScore}
+# { Sentence => SentenceScore, ... }
 def derive_sent_to_sent_score(sents, scores)
   sent_id_to_score = derive_sent_id_to_score(scores)
   sent_to_sent_scores = {}

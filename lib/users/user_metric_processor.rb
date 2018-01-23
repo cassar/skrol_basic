@@ -8,7 +8,8 @@ class UserMetricProcessor
   end
 
   def process
-    metric = UserMetric.find(@metric_id)
+    metric = UserMetric.find_by_id(@metric_id)
+    return [0, 'METRIC RESET'] if metric.nil?
     metric.update(speed: @speed, pause: @pause, hover: @hover, hide: @hide)
     metric.user_score.update(status: TESTED)
     [metric.apply_user_score, metric.word.entry]

@@ -8,6 +8,8 @@ class WordAssociateManager
     @word_to_assocs = derive_record_to_assocs((words1 | words2), @word_assocs)
   end
 
+  attr_reader :word_to_assocs
+
   def suitable_word_associates(suitable_words)
     word_id_to_word = derive_record_id_to_record(suitable_words)
     suitable_word_associates = []
@@ -34,7 +36,9 @@ class WordAssociateManager
   end
 
   def associates(word)
-    @word_to_assocs[word]
+    assocs = @word_to_assocs[word]
+    return [] if assocs.nil?
+    assocs
   end
 
   def associated(script, word_associate)

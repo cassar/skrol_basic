@@ -18,6 +18,7 @@ class User < ApplicationRecord
   end
 
   def lang_info
+    create_student_and_enrolments if student.nil?
     lang_arr = []
     student.enrolments.each do |enrolment|
       lang_name = enrolment.target_script.language.name
@@ -31,11 +32,11 @@ class User < ApplicationRecord
     user_info[:current_speed] = student.current_speed
     user_info[:base_hidden] = student.base_hidden
     scores = student.user_scores.order(updated_at: :desc)
-    if scores.empty?
-      user_info[:current_enrolment] = NO_ENROLMENT_SET
-    else
-     user_info[:current_enrolment] = scores.first.enrolment.id
-    end
+    user_info[:current_enrolment] = if scores.empty?
+                                      NO_ENROLMENT_SET
+                                    else
+                                      scores.first.enrolment.id
+                                    end
     user_info
   end
 
@@ -50,5 +51,16 @@ class User < ApplicationRecord
   def reset
     enrolments.each(&:reset)
     puts "All metrics and scores from user '#{name}' destroyed"
+  end
+
+  private
+
+  def create_student_and_enrolments
+    base_lang = Language.first
+    student = create_student(language: base_lang)
+    LanguageMap.all.each do |lm|
+      next unless lm.base_language == base_lang
+      student.enrolments.create(course: lm.latest_course)
+    end
   end
 end

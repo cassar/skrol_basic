@@ -47,7 +47,7 @@ class CourseContentManager
     word_assoc_ids = []
     @sent_assoc_manager = SentenceAssociateManager.new([@tar_stn_spt, @bse_stn_spt])
     @sentence_associates.each do |sent_assoc|
-      word_assoc_ids << sent_assoc_manager.representation(sent_assoc, @tar_stn_spt)
+      word_assoc_ids << @sent_assoc_manager.representation(sent_assoc, @tar_stn_spt)
     end
     @word_associates = WordAssociate.find(word_assoc_ids.flatten.uniq)
   end

@@ -12,7 +12,7 @@ This is the Skrol Basic App for Language Acquisition.
   huh?
 
 * Database creation
-  Use ContentController and offboard/WordSender & SentenceSender
+  $ heroku run rake db:setup
 
 * Database initialization
   $ heroku run rake db:schema:load
@@ -22,12 +22,17 @@ This is the Skrol Basic App for Language Acquisition.
   $ pg_ctl -D /usr/local/var/postgres stop -s -m fast
 
 * How to run the test suite
-  none yet
+  rails test
 
 * Services (job queues, cache servers, search engines, etc.)
   none yet.
 
 * Deployment instructions
-  Haven't got Heroku Deployment up and running yet.
+  $ git push heroku master
 
-* ...
+* Course Pipe Line
+- Create Languages and Scripts (English first)
+- Send sentence and word pairs through the api.
+- Run SentenceWordUpdater for all standard scripts.
+- Run the LanguageMapConsolidator for all LanguageMaps.
+- Run the CourseCreator for all applicable LanguageMaps.

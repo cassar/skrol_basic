@@ -7,3 +7,13 @@ def compile_wls_script(words, wts_scores_obj)
     wts_scores_obj[word.id] += score * WLSW
   end
 end
+
+# Retrieves the max word length in an array of word records
+def max_word_length(words)
+  max_length = 0
+  words.each do |word|
+    word_length = word.entry.length
+    max_length = word_length if max_length < word_length
+  end
+  max_length
+end

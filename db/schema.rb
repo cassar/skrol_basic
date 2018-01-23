@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114084857) do
+ActiveRecord::Schema.define(version: 20180122230317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20180114084857) do
     t.text     "entry"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "source"
+    t.integer  "source_id"
     t.index ["contentable_type", "contentable_id"], name: "index_meta_data_on_contentable_type_and_contentable_id", using: :btree
   end
 
@@ -85,6 +85,12 @@ ActiveRecord::Schema.define(version: 20180114084857) do
     t.index ["word_id"], name: "index_sentences_words_on_word_id", using: :btree
   end
 
+  create_table "sources", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "students", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "current_speed"
@@ -92,6 +98,7 @@ ActiveRecord::Schema.define(version: 20180114084857) do
     t.boolean  "paused"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "language_id"
   end
 
   create_table "user_metrics", force: :cascade do |t|

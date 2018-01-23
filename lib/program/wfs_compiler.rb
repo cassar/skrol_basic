@@ -36,7 +36,7 @@ module WFSCompiler
 
     def return_word_total(catalogue)
       total = 0
-      catalogue.each { |_entry, count| total += count }
+      catalogue.each_value { |count| total += count }
       total
     end
   end

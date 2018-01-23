@@ -2,6 +2,7 @@ class Student < ApplicationRecord
   belongs_to :user
   has_many :enrolments
   has_many :user_scores, through: :enrolments
+  belongs_to :language
 
   # Given a {'setting': value } will update the value for student.
   def update_setting(settings)

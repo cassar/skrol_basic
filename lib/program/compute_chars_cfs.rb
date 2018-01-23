@@ -11,7 +11,7 @@ end
 # Character frequency score (CFS) computation.
 def return_total_char_count(catalogue)
   total = 0
-  catalogue.each { |_key, value| total += value }
+  catalogue.each_value { |value| total += value }
   total
 end
 

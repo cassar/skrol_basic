@@ -20,7 +20,7 @@ module WordScoreRankCompiler
     private
 
     def derive_scores_arr_obj
-      @wts_scores_obj.each { |_word_id, wts| @scores_obj[wts] = [] }
+      @wts_scores_obj.each_value { |wts| @scores_obj[wts] = [] }
       @wts_scores_obj.each do |word_id, wts|
         @scores_arr << wts
         @scores_obj[wts] << word_id
