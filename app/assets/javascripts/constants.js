@@ -3,7 +3,7 @@ var NO_ENROLMENT_SET = 0;
 // Amount of miliseconds before the backend checks if a slide should be inserted.
 var SLIDE_MONITOR_INTERVAL = 50;
 // The dafault marqueeInterval in milliseconds that the marquee will start at.
-var NORMAL_INTERVAL = 15;
+var NORMAL_INTERVAL = 25;
 // The minimum marqueeInterval that represents the maximum speed.
 var MIN_INTERVAL = 10;
 // The maximum marqueeInterval which represents the minimum speed.
