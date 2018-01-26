@@ -37,7 +37,7 @@ class ContentController < ActionController::API
     true
   end
 
-  def standard_script?
+  def standard_scripts?
     @msg = { message: "script_b: '#{@script_a.name}' not a standard script" }
     return false unless @script_a.standard_id.nil?
     @msg = { message: "script_b: '#{@script_b.name}' not a standard script" }

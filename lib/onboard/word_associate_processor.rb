@@ -19,7 +19,7 @@ class WordAssociateProcessor
 
   def report
     report = "#{@created_count} WordAssociate records created"
-    report << " from source '#{@source.name}'"
+    report << " from source '#{@source.name}'\n"
     report << @errors
     report << "\n"
   end
@@ -29,8 +29,8 @@ class WordAssociateProcessor
   def create(word1, word2)
     word_assoc = WordAssociate.create(associate_a: word1, associate_b: word2)
     if word_assoc.persisted?
-      @word_to_assocs[word1] = word_assoc
-      @word_to_assocs[word2] = word_assoc
+      @word_to_assocs[word1] = [word_assoc]
+      @word_to_assocs[word2] = [word_assoc]
       @created_count += 1
       return word_assoc
     else

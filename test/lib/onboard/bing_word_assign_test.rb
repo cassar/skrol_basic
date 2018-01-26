@@ -8,11 +8,11 @@ class BingWordAssignTest < ActiveSupport::TestCase
   end
 
   test 'assign_assocs' do
-    hello = Word.find(1)
-    Word.find(7).destroy
+    WordAssociate.destroy_all
     BingWordAssign.create_metadatum(@english, 'en')
     BingWordAssign.create_metadatum(@spanish, 'es')
-    BingWordAssign.assign_assocs(@associate_pair)
-    assert_equal(Word.find_by(entry: 'hola'), hello.all_associates.first)
+    assert_difference('WordAssociate.count', 3) do
+      BingWordAssign.assign_assocs(@associate_pair)
+    end
   end
 end

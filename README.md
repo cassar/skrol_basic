@@ -33,6 +33,9 @@ This is the Skrol Basic App for Language Acquisition.
 * Course Pipe Line
 - Create Languages and Scripts (English first)
 - Send sentence and word pairs through the api.
+- Run SentenceSplitter on all standard scripts.
+- Run BingWordAssign on all standard scripts
 - Run SentenceWordUpdater for all standard scripts.
 - Run the LanguageMapConsolidator for all LanguageMaps.
 - Run the CourseCreator for all applicable LanguageMaps.
+- Run 'update_to_latest_course' method on all Enrolments.

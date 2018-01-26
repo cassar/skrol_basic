@@ -10,6 +10,7 @@ class SentencePairProcessorTest < ActiveSupport::TestCase
   test 'process' do
     processor = SentencePairProcessor.new(@english, @italian, @google)
     processor.process([['A lovely bunch of coconuts.', 'Un bel mazzo di noci di cocco.']])
+    processor.process([['A lovely bunch of coconuts.', 'Un bel mazzo di noci di cocco.']])
     processor = SentencePairProcessor.new(@english, @italian, @google)
     processor.process([[Sentence.first.entry, Sentence.second.entry]])
   end

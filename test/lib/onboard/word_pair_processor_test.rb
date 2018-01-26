@@ -9,9 +9,14 @@ class WordPairProcessorTest < ActiveSupport::TestCase
   end
 
   test 'process' do
-    processor = WordPairProcessor.new(@english, @italian, @google)
-    processor.process([%w[hello chao]])
-    processor = WordPairProcessor.new(@english, @english_ipa, @google)
-    processor.process([%w[hello həˈləʊ]])
+    Word.destroy_all
+    assert_difference('WordPhonetic.count', 1) do
+      processor = WordPairProcessor.new(@english, @english_ipa, @google)
+      processor.process([%w[hello həˈləʊ]])
+    end
+    assert_difference('WordAssociate.count', 1) do
+      processor = WordPairProcessor.new(@english, @italian, @google)
+      processor.process([%w[hello chao]])
+    end
   end
 end

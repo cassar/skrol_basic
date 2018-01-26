@@ -33,6 +33,6 @@ class Sentence < ApplicationRecord
     (associate_as.where(script: corr_script) | associate_bs.where(script: corr_script)).first
   end
 
-  has_many :sentences_words
+  has_many :sentences_words, dependent: :destroy
   has_many :words, through: :sentences_words
 end

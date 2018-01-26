@@ -23,7 +23,7 @@ class MetaDataProcessor
   end
 
   def report
-    report = "#{@created_count} meta records created"
+    report = "#{@created_count} meta records created "
     report << "for #{@source.name} in #{@model_name} model\n"
     report << @errors
     report << "\n"

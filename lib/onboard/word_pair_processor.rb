@@ -1,10 +1,9 @@
 class WordPairProcessor
   def initialize(script1, script2, source)
-    words1 = script1.words
-    @entry_processor1 = WordEntryProcessor.new(script1, source, words1)
+    @entry_processor1 = WordEntryProcessor.new(script1, source)
     @entry_processor2 = WordEntryProcessor.new(script2, source)
     @processor = if script1.language_id == script2.language_id
-                   WordPhoneticProcessor.new(script1, source, words1)
+                   WordPhoneticProcessor.new(script1, script2, source)
                  else
                    WordAssociateProcessor.new(script1, script2, source)
                  end

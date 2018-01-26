@@ -11,20 +11,29 @@ class SentenceEntryProcessor
 
   def process(sentence_entry)
     sentence = @entry_to_sentence[sentence_entry]
-    sentence = @sentences.create(entry: sentence_entry) if sentence.nil?
-    if sentence.persisted?
-      @entry_to_sentence[sentence_entry] = sentence
-      @created_count += 1
-    else
-      @errors << "entry: '#{sentence_entry}'"
-    end
-    @meta_manager.process(sentence)
+    sentence = create(sentence_entry) if sentence.nil?
+    @meta_manager.process(sentence) unless sentence.nil?
     sentence
   end
 
   def report
     report = "#{@created_count} Sentences created for '#{@script.name}'.\n"
     report << @errors
+    report << @meta_manager.report
     report << "\n"
+  end
+
+  private
+
+  def create(sentence_entry)
+    sentence = @sentences.create(entry: sentence_entry)
+    if sentence.persisted?
+      @entry_to_sentence[sentence_entry] = sentence
+      @created_count += 1
+      return sentence
+    else
+      @errors << "entry: '#{sentence_entry}'"
+      return nil
+    end
   end
 end

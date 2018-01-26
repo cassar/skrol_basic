@@ -10,8 +10,8 @@ class SentenceAssociateProcessor
   end
 
   def process(sent1, sent2)
-    sent_assoc = @manager.associates(sent1) | @manager.associates(sent2)
-    sent_assoc = create(sent1, sent2) if sent_assoc.empty?
+    sent_assoc = (@manager.associates(sent1) | @manager.associates(sent2)).first
+    sent_assoc = create(sent1, sent2) if sent_assoc.nil?
     return if sent_assoc.nil?
     @meta_processor.process(sent_assoc)
   end
@@ -19,6 +19,7 @@ class SentenceAssociateProcessor
   def report
     report = "#{@created_count} SentenceAssociates created.\n"
     report << @errors
+    report << @meta_processor.report
     report << "\n"
   end
 

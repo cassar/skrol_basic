@@ -10,6 +10,7 @@ class Word < ApplicationRecord
 
   has_many :phonetic_word_phonetics, foreign_key: 'standard_id', class_name: 'WordPhonetic', dependent: :destroy
   has_many :phonetics, through: :phonetic_word_phonetics, source: :phonetic
+  has_many :word_phon_meta_data, through: :phonetic_word_phonetics, source: :meta_data
 
   def standard
     standards.take unless standards.empty?
@@ -38,6 +39,6 @@ class Word < ApplicationRecord
     all_associates.each { |w| return w if w.script_id == corr_script.id }
   end
 
-  has_many :sentences_words
+  has_many :sentences_words, dependent: :destroy
   has_many :sentences, through: :sentences_words
 end

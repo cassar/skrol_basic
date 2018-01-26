@@ -22,24 +22,30 @@ class Script < ApplicationRecord
   has_many :sentence_linked_words, through: :sentences, source: :words
 
   # Standard to Phonetic
-  has_one :phonetic, class_name: 'Script', foreign_key: 'standard_id'
-  belongs_to :standard, class_name: 'Script'
+  def standard
+    Script.find_by(id: standard_id)
+  end
+
+  def phonetic
+    Script.find_by(standard_id: id)
+  end
 
   # WordPhonetics
+  has_many :word_phon_meta_data, through: :words
+
   has_many :standard_word_phonetics, foreign_key: 'phonetic_id',
                                      class_name: 'WordPhonetic',
                                      dependent: :destroy
   has_many :standards, through: :standard_word_phonetics, source: :standard
 
-  has_many :word_phonetic_meta_data, through: :standard_word_phonetics,
-                                     source: :meta_data
+  # has_many :phonetic_word_phonetics, foreign_key: 'standard_id',
+  #                                    class_name: 'WordPhonetic',
 
-  has_many :phonetic_word_phonetics, foreign_key: 'standard_id',
-                                     class_name: 'WordPhonetic',
-                                     dependent: :destroy
+  has_many :phonetic_word_phonetics, through: :words, dependent: :destroy
+
   has_many :phonetics, through: :phonetic_word_phonetics, source: :phonetic
 
-  has_many :phonetic_word_phonetics, through: :words
+  has_many :word_phon_meta_data, through: :words
 
   # SentenceAssociates
   has_many :associate_sents_bs, through: :sentences, source: :associate_bs
@@ -60,7 +66,7 @@ class Script < ApplicationRecord
     these_assocs & associate_script.word_associates
   end
 
-  has_many :word_b_meta_data, through: :associate_a_word_associates,
+  has_many :word_b_meta_data, through: :associate_b_word_associates,
                               source: :meta_data
   has_many :word_a_meta_data, through: :associate_a_word_associates,
                               source: :meta_data

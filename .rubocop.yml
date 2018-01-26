@@ -11,7 +11,7 @@ AllCops:
     - 'Rakefile'
     - 'bin/*'
     - 'db/**/*'
-    - 'lib/onboard/standard_sentence_splitter.rb'
+    - 'lib/onboard/sentence_splitter.rb'
     - 'lib/onboard/eu_sentence_read.rb'
     - 'test/test_helper.rb'
     - 'test/lib/content/retrieve_ipa_test.rb'

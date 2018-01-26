@@ -7,15 +7,17 @@ module BingWordAssign
   end
 
   def self.create_metadatum(standard_script, lang_code)
-    standard_script.meta_data.create(source: BING, entry: { lang_code: lang_code })
+    source = Source.find_or_create_by(name: BING)
+    standard_script.meta_data.create(source: source, entry: { lang_code: lang_code })
   end
 
   class BulkBingHelper
     def initialize(standard_script, associate_script)
-      @checker = AssociateWordHelper.new(standard_script, associate_script, BING)
-      @std_lang_code = standard_script.meta_data.find_by(source: BING).entry[:lang_code]
-      @assoc_lang_code = associate_script.meta_data.find_by(source: BING).entry[:lang_code]
-      @assoc_word_updater = AssociateWordUpdater.new(associate_script, BING)
+      source = Source.find_or_create_by(name: BING)
+      @checker = AssociateWordHelper.new(standard_script, associate_script, source)
+      @std_lang_code = standard_script.meta_data.find_by(source: source).entry[:lang_code]
+      @assoc_lang_code = associate_script.meta_data.find_by(source: source).entry[:lang_code]
+      @processor = WordPairProcessor.new(standard_script, associate_script, source)
     end
 
     BUNDLE_SIZE = 100
@@ -27,26 +29,27 @@ module BingWordAssign
     private
 
     def process_bundles
+      entries = []
       loop do
-        return if @checker.empty?
+        break if @checker.empty?
         std_bundle = @checker.bundle(BUNDLE_SIZE)
         std_entry_bundle = std_bundle.map(&:entry)
         asc_bundle = std_entry_bundle.translate(@std_lang_code, @assoc_lang_code)
-        asc_bundle.each do |asc_entry|
-          @assoc_word_updater.update(asc_entry, std_bundle.shift)
-        end
+        asc_bundle.each { |asc_entry| entries << [std_entry_bundle.shift, asc_entry] }
       end
+      @processor.process(entries)
     end
   end
 
   class AssociateWordHelper
     def initialize(standard_script, associate_script, source)
+      all_ids = standard_script.words.pluck(:id)
       std_bing_wa_ids = retrieve_wa_ids(standard_script, source)
-      asc_bing_wa_ids = retrieve_wa_ids(associate_script, source)
-      word_associates = WordAssociate.find(std_bing_wa_ids & asc_bing_wa_ids)
-      sorter = WordAssociateSorter.new(word_associates, standard_script, associate_script)
-      std_words, asc_words = sorter.words
-      @words_to_check = standard_script.words_with_phonetics - std_words
+      ass_bing_wa_ids = retrieve_wa_ids(associate_script, source)
+      word_assocs = WordAssociate.find(std_bing_wa_ids & ass_bing_wa_ids)
+      bing_ids = word_assocs.pluck(:associate_a_id, :associate_b_id).flatten
+      words = Word.find(all_ids - bing_ids)
+      @words_to_check = words & standard_script.words_with_phonetics
     end
 
     def bundle(size)
