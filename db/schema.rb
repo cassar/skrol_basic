@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122230317) do
+ActiveRecord::Schema.define(version: 20180129055157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,9 +78,9 @@ ActiveRecord::Schema.define(version: 20180122230317) do
     t.integer "script_id"
   end
 
-  create_table "sentences_words", id: false, force: :cascade do |t|
-    t.integer "word_id",     null: false
-    t.integer "sentence_id", null: false
+  create_table "sentences_words", force: :cascade do |t|
+    t.string "word_id"
+    t.string "sentence_id"
     t.index ["sentence_id"], name: "index_sentences_words_on_sentence_id", using: :btree
     t.index ["word_id"], name: "index_sentences_words_on_word_id", using: :btree
   end
