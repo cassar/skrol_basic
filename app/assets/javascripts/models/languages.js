@@ -18,6 +18,7 @@ function getEnrolmentId() {
 function setEnrolmentId(iD) {
   enrolmentId = iD;
   updateLangButton();
+  retrieveMeter();
 }
 
 // Loads the languages available into languages dropdown
@@ -43,4 +44,5 @@ function changeLanguage() {
   updateLangButton();
   clearNotification();
   changeToLoading();
+  retrieveMeter();
 }

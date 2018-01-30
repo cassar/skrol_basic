@@ -34,6 +34,9 @@ NONE = '[none]'.freeze
 # Point at which a score is 'acquired'
 ACQUIRY_POINT = 1.0
 
+# Average time that a user takes to learn a word in seconds (a guess)
+AVG_ACQUIRY_TIME = 4
+
 # New User Values
 NO_ENROLMENT_SET = 0
 

@@ -44,6 +44,7 @@ function checkForInsert() {
       reinitAfterInsert();
       addSlideInfo(nextSlide['metrics'])
       reportResults();
+      checkForMeterUpdate();
     }
   }
 }

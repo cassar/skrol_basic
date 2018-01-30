@@ -32,3 +32,7 @@ function disableStateButton() {
 function enableStateButton() {
   $('#state').removeAttr('disabled');
 }
+
+function updateMeterButton(msg) {
+  $('#meter').text(msg);
+}

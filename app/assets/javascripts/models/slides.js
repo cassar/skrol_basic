@@ -30,7 +30,6 @@ function addToSlideQueue(slide) {
   slideQueue.push(slide);
 }
 
-// [Fix: don't hard code,]
 function enoughSlides() {
   return slideQueue.length > EMPTY;
 }
@@ -71,9 +70,9 @@ function requestSlide() {
     }
   })
   .fail(function() {
-    // [Fix: Would like a system here for waiting before next request.]
-    console.log( "Error: Could not retrieve next slide. Recheck in 10 secs" );
-    setTimeout(checkSlideQueue, 10000);
+    seconds = FAIL_WAIT / 1000;
+    console.log( "Error: Could not retrieve next slide. Recheck in " + seconds + " secs" );
+    setTimeout(checkSlideQueue, FAIL_WAIT);
   })
   .always(function() {
     toggleRequestPending();

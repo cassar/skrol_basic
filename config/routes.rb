@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post 'metrics', to: 'slide#recieve_metrics'
   post 'reset-user-session', to: 'slide#reset_user_session'
   post 'update-user-setting', to: 'slide#update_user_setting'
+  post 'meter', to: 'slide#meter'
 
   # Private API to add content
   post 'word_pairs', to: 'content#word_pairs'

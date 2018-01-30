@@ -27,4 +27,23 @@ class SlideController < ApplicationController
     current_user.student.update_setting(params[:new_setting])
     render json: { message: "User setting updated for #{current_user.name}." }
   end
+
+  # Returns estimated time till completion
+  def meter
+    enrolment = Enrolment.find(params[:enrolment_id])
+    render json: { meter: hours_to_completion(enrolment) }
+  end
+
+  private
+
+  def hours_to_completion(enrolment)
+    acquired = enrolment.user_scores.where(entry: ACQUIRY_POINT..Float::INFINITY,
+                                           status: TESTED).count
+    total = enrolment.course.word_scores.count
+    seconds = (total - acquired) * AVG_ACQUIRY_TIME
+    return "#{seconds} seconds" if seconds < 60
+    minutes = seconds / 60
+    return "#{minutes} minutes" if minutes < 60
+    "#{minutes / 60} hours"
+  end
 end

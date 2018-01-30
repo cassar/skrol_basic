@@ -7,6 +7,10 @@ var metricsObject = {}
 var start;
 var end;
 
+function slideCount() {
+  return slideMetricsArray.length;
+}
+
 function addSlideInfo(metrics) {
   slideMetricsArray.push(metrics);
   for (var i = 0; i < metrics.length; i++) {
