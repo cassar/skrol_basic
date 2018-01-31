@@ -42,7 +42,8 @@ function checkForInsert() {
       var nextSlide = getNextSlide();
       appendSlide(nextSlide['slide']);
       reinitAfterInsert();
-      addSlideInfo(nextSlide['metrics'])
+      addSlideInfo(nextSlide['metrics']);
+      retrieveSounds(nextSlide['phn_chars'])
       reportResults();
       checkForMeterUpdate();
     }

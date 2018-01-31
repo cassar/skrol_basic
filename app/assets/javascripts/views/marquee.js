@@ -7,6 +7,8 @@ function reinitAfterInsert() {
   $('.word').hover(timerOn, timerOff);
   $('.word').hover(wordOn, wordOff);
   $('.base').mousedown(checkUnhideBase).mouseup(checkHideBase);
+  $('.phnChar').hover(charOn, charOff);
+  $('.phnChar').click(playSound);
   applyBaseColour();
 }
 
@@ -36,4 +38,18 @@ function appendSlide(nextSlide) {
 
 function BaseSentenceColorApply(element, color) {
   $(element).css('color', color);
+}
+
+function charOn() {
+  if (soundPresent($(this).text())) {
+    $(this)
+    .css('color', 'green')
+    .css('cursor','default');
+  }
+}
+
+function charOff() {
+  $(this)
+  .css('color', '')
+  .css('cursor','');
 }

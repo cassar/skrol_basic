@@ -2,7 +2,10 @@ class HTMLConstructor
   def initialize(enrolment_manager, word_manager)
     @metrics_manager = MetricsManager.new(enrolment_manager, word_manager)
     @word_manager = word_manager
+    @phn_chars = []
   end
+
+  attr_reader :phn_chars
 
   def standard_inner_rep(script)
     assoc_rep, sentence = @word_manager.assoc_rep_and_sentence(script)
@@ -32,7 +35,16 @@ class HTMLConstructor
 
   def compile_word_tags_with_entry(metric, word)
     opening_tag, closing_tag = compile_word_tags(metric.id)
-    opening_tag + word.entry + closing_tag + '&nbsp'
+    opening_tag + compile_char_string(word) + closing_tag + '&nbsp'
+  end
+
+  def compile_char_string(word)
+    char_string = ''
+    word.entry.each_char do |char|
+      char_string << "<div class='phnChar'>#{char}</div>"
+      @phn_chars << char
+    end
+    char_string
   end
 
   def compile_word_tags(metric_id)

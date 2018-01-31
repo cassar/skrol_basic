@@ -30,7 +30,7 @@
   margin-right: .5em;
 }
 
-.sentence, #innerholder {
+.sentence, .word, #innerholder {
   display: flex;
 }
 
