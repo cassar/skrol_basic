@@ -11,7 +11,7 @@ class WordAssociateProcessor
   end
 
   def process(word1, word2)
-    word_assoc = (@manager.associates(word1) | @manager.associates(word2)).first
+    word_assoc = (@manager.associates(word1) & @manager.associates(word2)).first
     word_assoc = create(word1, word2) if word_assoc.nil?
     return if word_assoc.nil?
     @meta_processor.process(word_assoc)

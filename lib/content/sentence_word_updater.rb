@@ -22,6 +22,7 @@ class SentenceWordUpdater
 
   def update_all
     @sentences.each { |sentence| update(sentence) }
+    nil
   end
 
   class AuthorityHelper

@@ -9,6 +9,8 @@ class WordPairProcessor
                  end
   end
 
+  attr_reader :entry_processor1
+
   def process(entries)
     entries.each do |entry1, entry2|
       word1, word2 = process_entries(entry1, entry2)

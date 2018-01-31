@@ -12,7 +12,7 @@ class BingWordAssignTest < ActiveSupport::TestCase
     BingWordAssign.create_metadatum(@english, 'en')
     BingWordAssign.create_metadatum(@spanish, 'es')
     assert_difference('WordAssociate.count', 3) do
-      BingWordAssign.assign_assocs(@associate_pair)
+      BingWordAssign.assign_assocs(@english, @spanish)
     end
   end
 end

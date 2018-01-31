@@ -35,6 +35,7 @@ class Enrolment < ApplicationRecord
 
   def update_to_latest_course
     update(course: language_map.courses.order(:created_at).last)
+    user_scores.where(status: EXHAUSTED).update_all(status: TESTED)
   end
 
   class InfoHelper
