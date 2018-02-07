@@ -6,7 +6,7 @@ class Course < ApplicationRecord
   has_many :sentence_scores, dependent: :destroy
   has_many :sentences, through: :sentence_scores
   has_many :sentences_words, through: :sentences
-  has_many :enrolments
+  has_many :enrolments, dependent: :destroy
 
   def info
     old_logger = logger_off
@@ -15,6 +15,10 @@ class Course < ApplicationRecord
     puts "Word count: #{word_scores.count}\nSentence count: #{sentence_scores.count}"
     puts "Enrolments: #{enrolments.count}"
     logger_on(old_logger)
+  end
+
+  def create_enrolments
+    Student.all.each { |s| s.enrolments.create(course: self) }
   end
 
   private

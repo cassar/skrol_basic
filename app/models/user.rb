@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true
   validates :name, uniqueness: true
-  has_one :student
+  has_one :student, dependent: :destroy
   has_many :enrolments, through: :student
   has_many :user_scores, through: :enrolments
   has_many :user_metrics, through: :user_scores

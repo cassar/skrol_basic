@@ -3,7 +3,7 @@ class WordPairProcessor
     @entry_processor1 = WordEntryProcessor.new(script1, source)
     @entry_processor2 = WordEntryProcessor.new(script2, source)
     @processor = if script1.language_id == script2.language_id
-                   WordPhoneticProcessor.new(script1, script2, source)
+                   WordPhoneticProcessor.new(script1, source)
                  else
                    WordAssociateProcessor.new(script1, script2, source)
                  end

@@ -28,14 +28,11 @@ NORMAL_BONUS = 0.3
 PAUSE_PENALTY = 0.1
 HOVER_PENALTY = 0.5
 
-# Record Placeholder Sentinals
-NONE = '[none]'.freeze
-
 # Point at which a score is 'acquired'
 ACQUIRY_POINT = 1.0
 
 # Average time that a user takes to learn a word in seconds (a guess)
-AVG_ACQUIRY_TIME = 4
+AVG_ACQUIRY_TIME = 10
 
 # New User Values
 NO_ENROLMENT_SET = 0

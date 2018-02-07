@@ -1,7 +1,6 @@
 class CourseContentManager
   def initialize(lang_map)
     assign_scripts(lang_map)
-    check_phonetics
     assign_sentence_and_word_associates
     assign_words
     assign_sentences
@@ -35,11 +34,6 @@ class CourseContentManager
     @tar_phn_spt = @tar_stn_spt.phonetic
     @bse_stn_spt = lang_map.base_script
     @bse_phn_spt = @bse_stn_spt.phonetic
-  end
-
-  def check_phonetics
-    IntegrityManager.new(@tar_stn_spt, @tar_phn_spt).enforce
-    IntegrityManager.new(@bse_stn_spt, @bse_phn_spt).enforce
   end
 
   def assign_sentence_and_word_associates

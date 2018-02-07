@@ -1,6 +1,6 @@
 class PhoneticJoiner
   def initialize(standard_script, phonetic_script)
-    @phonetic_script = phonetic_script
+    @standard_script = standard_script
     source = Source.find_or_create_by(name: 'Phonetic Joiner')
     @pair_processor = WordPairProcessor.new(standard_script, phonetic_script, source)
     @std_processor = @pair_processor.entry_processor1
@@ -8,8 +8,8 @@ class PhoneticJoiner
   end
 
   def join_all
-    none = @phonetic_script.words.find_or_create_by(entry: NONE)
-    none.standards.each { |word| join(word.entry) }
+    none_phonectics = @standard_script.words - @standard_script.words_with_phonetics
+    none_phonectics.each { |word| join(word.entry) }
     puts @pair_processor.process(@entries)
   end
 

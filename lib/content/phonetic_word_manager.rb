@@ -10,7 +10,7 @@ class PhoneticWordManager
   def first_phonetic(standard_word)
     @std_word_to_phons[standard_word].first
   rescue StandardError
-    puts "standard_word: #{standard_word.entry} has no phonetic"
+    puts "standard_word: '#{standard_word.entry}' has no phonetic"
   end
 
   def phonetic_entry(standard_entry)

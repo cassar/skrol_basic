@@ -37,8 +37,8 @@ This is the Skrol Basic App for Language Acquisition.
 - Run SentenceWordUpdater for all standard scripts.
 - Run BingWordAssign on all standard scripts.
 - Run PhoneticJoiner on all standard scripts.
-- Run the LanguageMapConsolidator for all LanguageMaps.
+- Run the SuitableAssociateCompiler for all LanguageMaps.
 - Run the CourseCreator for all applicable LanguageMaps.
 - Run 'update_to_latest_course' method on all Enrolments.
   or
-- Run 'create_enrolments' if new LanguageMap.
+- Run 'create_enrolments' on course if new LanguageMap.

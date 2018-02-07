@@ -8,8 +8,6 @@ class PhoneticJoinerTest < ActiveSupport::TestCase
 
   test 'join_all' do
     joint = @english.words.create(entry: 'hello please')
-    none = @english_ipa.words.find_or_create_by(entry: NONE)
-    none.standards << joint
     joiner = PhoneticJoiner.new(@english, @english_ipa)
     assert_difference('Word.count', 1) do
       joiner.join_all

@@ -3,6 +3,7 @@ require 'test_helper'
 class ScriptTest < ActiveSupport::TestCase
   setup do
     @romanian = Language.create(name: 'Romanian')
+    @english = Script.first
   end
 
   test 'Script.create' do
@@ -20,5 +21,12 @@ class ScriptTest < ActiveSupport::TestCase
     assert_equal(phonetic, standard.phonetic)
     assert_nil(phonetic.phonetic)
     assert_nil(standard.standard)
+  end
+
+  test 'words_with_phonetics' do
+    @english.words.create(entry: 'test')
+    result = @english.words_with_phonetics
+    template = [Word.first, Word.second, Word.third]
+    assert_equal(template, result)
   end
 end

@@ -31,18 +31,10 @@ class Script < ApplicationRecord
   end
 
   # WordPhonetics
-  has_many :word_phon_meta_data, through: :words
-
-  has_many :standard_word_phonetics, foreign_key: 'phonetic_id',
-                                     class_name: 'WordPhonetic',
-                                     dependent: :destroy
+  has_many :standard_word_phonetics, through: :words
   has_many :standards, through: :standard_word_phonetics, source: :standard
 
-  # has_many :phonetic_word_phonetics, foreign_key: 'standard_id',
-  #                                    class_name: 'WordPhonetic',
-
-  has_many :phonetic_word_phonetics, through: :words, dependent: :destroy
-
+  has_many :phonetic_word_phonetics, through: :words
   has_many :phonetics, through: :phonetic_word_phonetics, source: :phonetic
 
   has_many :word_phon_meta_data, through: :words
@@ -91,11 +83,10 @@ class Script < ApplicationRecord
   end
 
   def words_with_phonetics
-    phonetic_none_sentinal = SentinalManager.retrieve(phonetic)
-    words - phonetic_none_sentinal.standards
+    Word.find(phonetic_word_phonetics.pluck(:standard_id).uniq)
   end
 
-  has_many :sentence_b_meta_data, through: :associate_a_sentence_associates,
+  has_many :sentence_b_meta_data, through: :associate_b_sentence_associates,
                                   source: :meta_data
   has_many :sentence_a_meta_data, through: :associate_a_sentence_associates,
                                   source: :meta_data

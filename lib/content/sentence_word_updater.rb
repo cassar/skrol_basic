@@ -1,6 +1,7 @@
 # Updates the SentenceWord table for a particular Sentence.
 class SentenceWordUpdater
   def initialize(standard_script)
+    @standard_script = standard_script
     @sentences = standard_script.sentences
     words = standard_script.words
     sent_words = standard_script.sentences_words
@@ -20,8 +21,13 @@ class SentenceWordUpdater
     authorities
   end
 
-  def update_all
-    @sentences.each { |sentence| update(sentence) }
+  def update_all(corr_script = nil)
+    if corr_script.nil?
+      @sentences.each { |sentence| update(sentence) }
+    else
+      sentences = corr_script.associate_sentences(@standard_script)
+      sentences.each { |sentence| update(sentence) }
+    end
     nil
   end
 

@@ -1,7 +1,7 @@
 class LanguageMap < ApplicationRecord
   validates :base_language, :target_language, presence: true
   validates :base_language, uniqueness: { scope: :target_language }
-  has_many :courses
+  has_many :courses, dependent: :destroy
 
   belongs_to :base_language, class_name: 'Language'
   belongs_to :target_language, class_name: 'Language'
@@ -32,6 +32,10 @@ class LanguageMap < ApplicationRecord
     sentence_info
     word_info
     logger_on(old_logger)
+  end
+
+  def self.info
+    all.each { |lm| lm.info + "\n" }
   end
 
   private

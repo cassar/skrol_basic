@@ -3,7 +3,7 @@ class Enrolment < ApplicationRecord
   validates :student, uniqueness: { scope: :course }
   belongs_to :student
   belongs_to :course
-  has_many :user_scores
+  has_many :user_scores, dependent: :destroy
   has_many :user_metrics, through: :user_scores
   has_many :sentences, through: :user_metrics
   has_one :language_map, through: :course

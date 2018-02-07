@@ -45,7 +45,7 @@ class Language < ApplicationRecord
       @language = language
       @standard_script = language.standard_script
       @phonetic_script = language.phonetic_script
-      @phonetic_none = SentinalManager.retrieve(@phonetic_script)
+      @std_word_count = @standard_script.words.count
     end
 
     def print
@@ -71,7 +71,7 @@ class Language < ApplicationRecord
     end
 
     def standard_word_info
-      puts "Standard Words: #{@standard_script.words.count}"
+      puts "Standard Words: #{@std_word_count}"
       puts "#{@standard_script.word_associates.count} word associates."
       puts ''
     end
@@ -79,7 +79,8 @@ class Language < ApplicationRecord
     def phonetic_word_info
       puts "Phonetic Words: #{@phonetic_script.words.count}"
       puts "#{@standard_script.phonetic_word_phonetics.count} word phonetics"
-      puts "#{@phonetic_none.standards.count} standard words failed to find phonetic equivalents for."
+      none_count = @std_word_count - @standard_script.standard_word_phonetics.pluck(:standard_id).uniq.count
+      puts "#{none_count} standard words without phonetic equivalents."
       puts ''
     end
   end
