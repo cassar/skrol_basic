@@ -1,14 +1,16 @@
 function skrolInit() {
-  changeToLoading();
-  requestSessionReset();
-  // Requests available languages and user settings, be retrieved from the
-  // server. Then, updates models and views.
-  requestUserInfo();
+  if (isTouchScreen()) {
+    $('#noTouch').show();
+  } else {
+    changeToLoading();
+    requestSessionReset();
+    requestUserInfo();
 
-  // Set event for Controls and Marquee
-  initControls();
-  initMarquee();
+    // Set event views
+    initControls();
+    initMarquee();
 
-  initEngine();
-  clearNotification();
+    initEngine();
+    clearNotification();
+  }
 }

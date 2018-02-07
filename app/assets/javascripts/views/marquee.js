@@ -1,6 +1,7 @@
 function initMarquee() {
   $('#frame').hover(checkForPause, checkForUnpause);
   $('#frame').mousemove(moveMarquee);
+  $(window).resize(updateEntryPoint);
 }
 
 function reinitAfterInsert() {

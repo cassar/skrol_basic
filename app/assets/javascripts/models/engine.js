@@ -7,12 +7,19 @@ var oldXpos;
 
 var slideMonitorId = TIME_OUT_NOT_SET;
 
+function updateEntryPoint() {
+  entryPoint = getMarqueeWidth() + BUFFER;
+}
+
 // Initiate Marquee
 function initEngine() {
-  // [Fix: entry does not update when screen is resized]
-  entryPoint = getMarqueeWidth() + BUFFER;
+  updateEntryPoint();
   marqueePosition = entryPoint;
   updateMarqueePosition();
+}
+
+function isTouchScreen() {
+  return 'ontouchstart' in window;
 }
 
 function getMarqueePosition() {
@@ -23,7 +30,7 @@ function moveMarquee(event){
   var newXpos = event.pageX;
   if (cursorGrabbing() && notDisabled()) {
     marqueePosition += newXpos - oldXpos;
-    updateMarqueePosition()
+    updateMarqueePosition();
   }
   oldXpos = newXpos;
 }

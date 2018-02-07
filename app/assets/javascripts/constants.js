@@ -20,7 +20,7 @@ var MAX_ELEMENTS = 3;
 var HOVER_WAIT = 1000;
 // The number of pixels to push a slide out of view
 var BUFFER = 1;
-// Number of pixels to move at each increment.
+// Number of pixels to move at each mouse increment.
 var STEP = 1;
 // The default marqueeInterval ID when none is set.
 var TIME_OUT_NOT_SET = 0;

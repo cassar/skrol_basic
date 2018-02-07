@@ -43,6 +43,5 @@ function changeLanguage() {
   updateUserSetting({'current_enrolment': enrolmentId});
   updateLangButton();
   clearNotification();
-  changeToLoading();
   retrieveMeter();
 }

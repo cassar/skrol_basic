@@ -14,7 +14,10 @@
 
 #frame:active {
   cursor: grabbing;
+  z-index: 100;
 }
+
+/* Marquee Styling */
 
 #marquee {
   overflow: hidden;
@@ -44,9 +47,25 @@
   color: white;
 }
 
-/* Control Styling */
-
 #controls {
-  margin-left: 34vw;
   margin-top: 1vw;
+  z-index: 100;
+}
+
+#noTouch {
+  display: none;
+  position: fixed;
+  padding: 9vw;
+  margin: 0;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 200;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 5vw;
+  text-align: center;
 }
