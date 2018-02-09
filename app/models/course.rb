@@ -6,7 +6,7 @@ class Course < ApplicationRecord
   has_many :sentence_scores, dependent: :destroy
   has_many :sentences, through: :sentence_scores
   has_many :sentences_words, through: :sentences
-  has_many :enrolments, dependent: :destroy
+  has_many :enrolments
 
   def info
     old_logger = logger_off

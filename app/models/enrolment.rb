@@ -1,7 +1,7 @@
 class Enrolment < ApplicationRecord
   validates :course, presence: true
   validates :student, uniqueness: { scope: :course }
-  belongs_to :student
+  belongs_to :student, dependent: :destroy
   belongs_to :course
   has_many :user_scores, dependent: :destroy
   has_many :user_metrics, through: :user_scores
