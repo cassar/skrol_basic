@@ -2,7 +2,7 @@
 <div class="modal fade bd-about-modal-lg" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <%= render 'about_logo' %> <span id="beta">β</span>
+      <%= render 'about_logo' %> <span class="bigChar">β</span>
       <div class='container'>
         <p>Welcome to the skrol beta!</p>
 
@@ -17,41 +17,45 @@
           to understand and learn.
         <p>
 
-        <h3>Tools</h3>
-        <ul>
-          <li>
-            Use the controls to speed the marquee up, slow it down, and to
-            change languages.
-          </li>
-          <li>
-            Hover over words to see their equivalents highlighted in blue in
-            other sentences.
-          </li>
-          <li>
-            Click on individual phonetic characters to hear the audio if they
-            turn to green.
-          </li>
-          <li>
-            Click and hold down on the white space below the phonetic sentence
-            to reveal the English equivalent.
-          </li>
-        </ul>
         <p>
           The app will monitor your progress and will choose the best sentences
           for you to see next.
         </p>
 
-        <h3>Warning</h3>
-        <ul>
-          <li>
-            Sentences have been sourced from an external database and have not
-            been filtered, apologies if some are rude or cause offence.
+        <h3>Tools</h3>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>Control buttons</strong>, use to speed the marquee up,
+            slow it down, and to change languages.
           </li>
-          <li>
-            As I said, expect a few bugs, refreshing the page will fix most of
-            them.
+          <li class="list-group-item">
+            <strong>Hover</strong> over words to see their equivalents
+            highlighted in blue in other sentences.
+          </li>
+          <li class="list-group-item">
+            <strong>Click</strong> on individual phonetic characters to hear
+            the audio if they turn to green.
+          </li>
+          <li class="list-group-item">
+            <strong>Click and hold</strong> down on the white space below the
+            phonetic sentence to reveal the English equivalent.
+          </li>
+          <li class="list-group-item">
+            <strong>Click, hold, and drag</strong> the marquee if you wish to
+            bring past sentences back into view.
           </li>
         </ul>
+        <br>
+
+        <h3>Warning</h3>
+        <p>
+          Sentences have been sourced from an external database and have not
+          been filtered, apologies if some are rude or cause offence.
+        </p>
+        <p>
+          As I said, expect a few bugs, refreshing the page will fix most of
+          them.
+        </p>
 
         <h3>International Phonetic Alphabet</h3>
         <p>
@@ -68,19 +72,51 @@
         </p>
 
         <p>
-          A quick reference on other common markings are below, check the
+          A quick reference on other common markings is below, check the
           <a href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet" target="_blank">
           wikipedia page</a> for a more comprehensive reference.
         </p>
 
-        <ul class="list-group">
-          <li class="list-group-item">ˈa - Primary stress</li>
-          <li class="list-group-item">ˌa - Secondary stress</li>
-          <li class="list-group-item">aː - Long vowel</li>
-          <li class="list-group-item">a.a - Syllable break</li>
-          <li class="list-group-item">s‿a - Linking (absence of a break)</li>
-        </ul>
-        <br>
+        <div class="row .mx-auto">
+          <div class="card">
+            <span class="bigChar">ˈa</span>
+            <div class="card-body">
+              <p class="card-text">Primary stress</p>
+            </div>
+          </div>
+          <div class="card">
+            <span class="bigChar">ˌa</span>
+            <div class="card-body">
+              <p class="card-text">Secondary stress</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="bigChar">a.a</span>
+            <div class="card-body">
+              <p class="card-text">Syllable break</p>
+            </div>
+          </div>
+          <div class="card">
+            <span class="bigChar">aː</span>
+            <div class="card-body">
+              <p class="card-text">Long vowel</p>
+            </div>
+          </div>
+          <div class="card">
+            <span class="bigChar">aˑ</span>
+            <div class="card-body">
+              <p class="card-text">Half-long</p>
+            </div>
+          </div>
+          <div class="card">
+            <span class="bigChar">s‿a</span>
+            <div class="card-body">
+              <p class="card-text">Linking (absence of a break)</p>
+            </div>
+          </div>
+        </div>
+
         <h3>Future Development</h3>
         <h5>Short Term</h5>
         <p>A way for language ‘masters’ to enter new content.</p>

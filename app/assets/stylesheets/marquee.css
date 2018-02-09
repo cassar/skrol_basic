@@ -84,7 +84,14 @@
   color: white;
 }
 
-#beta {
+.bigChar {
   font-size: 4vw;
   text-align: center;
+}
+
+.card {
+  width: 16rem;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: .5vw;
 }
