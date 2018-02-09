@@ -18,6 +18,8 @@ function requestUserInfo() {
       checkSlideQueue();
     } else {
       changeToSelect();
+      setLangButtonSelect();
+      showAboutModal();
     }
   })
   .fail(function() {

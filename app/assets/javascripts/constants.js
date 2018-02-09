@@ -5,7 +5,7 @@ var SLIDE_MONITOR_INTERVAL = 50;
 // Amount of slides after which client will check server for meter update.
 var METER_CHECK = 20;
 // The dafault marqueeInterval in milliseconds that the marquee will start at.
-var NORMAL_INTERVAL = 25;
+var NORMAL_INTERVAL = 18;
 // The minimum marqueeInterval that represents the maximum speed.
 var MIN_INTERVAL = 10;
 // The maximum marqueeInterval which represents the minimum speed.

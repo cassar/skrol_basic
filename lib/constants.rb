@@ -34,6 +34,9 @@ ACQUIRY_POINT = 1.0
 # Average time that a user takes to learn a word in seconds (a guess)
 AVG_ACQUIRY_TIME = 10
 
+# Speed at which an new student is automatically set at.
+DEFAULT_SPEED = 18
+
 # New User Values
 NO_ENROLMENT_SET = 0
 

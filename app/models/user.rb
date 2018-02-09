@@ -56,8 +56,8 @@ class User < ApplicationRecord
   private
 
   def create_student_and_enrolments
-    base_lang = Language.first
-    student = create_student(language: base_lang)
+    base_lang = Language.find_or_create_by(name: 'English')
+    student = create_student(language: base_lang, current_speed: DEFAULT_SPEED)
     LanguageMap.all.each do |lm|
       next unless lm.base_language == base_lang
       student.enrolments.create(course: lm.latest_course)

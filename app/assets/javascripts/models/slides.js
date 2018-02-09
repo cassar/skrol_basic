@@ -73,6 +73,9 @@ function requestSlide() {
     seconds = FAIL_WAIT / 1000;
     console.log( "Error: Could not retrieve next slide. Recheck in " + seconds + " secs" );
     setTimeout(checkSlideQueue, FAIL_WAIT);
+    if (!enoughSlides()) {
+      changeToError();
+    }
   })
   .always(function() {
     toggleRequestPending();

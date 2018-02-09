@@ -2,15 +2,32 @@ function initControls() {
   $('#lessSpeed').click(decreaseSpeed);
   $('#moreSpeed').click(increaseSpeed);
   $('#state').click(togglePause);
-  $('#signOut, #account').click(exit);
+  $('#signOut').click(exit);
+  $('#about, #account').click(pause);
 }
 
 function updateLangButton() {
-  $('#lang-label').html(currentLanguageName());
+  $('#langLabel').html(currentLanguageName());
+  if ($('#langLabel').hasClass('btn-warning')) {
+    $('#langLabel')
+    .removeClass('btn-warning')
+    .addClass('btn-primary');
+  }
+}
+
+function setLangButtonSelect() {
+  $('#langLabel')
+  .removeClass('btn-primary')
+  .addClass('btn-warning')
+  .html('Languages');
+}
+
+function showAboutModal() {
+  $('#aboutModal').modal('show');
 }
 
 function addLangListElement(enrolmentId, langName) {
-  $('.languages').prepend('<li class="language dropdown-item" data-enrolment=' +
+  $('#languages').prepend('<li class="language dropdown-item" data-enrolment=' +
   enrolmentId + '><a>'+ langName +'</a></li>');
 }
 

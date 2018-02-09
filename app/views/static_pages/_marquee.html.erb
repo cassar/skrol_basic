@@ -1,19 +1,5 @@
-<style>
-
-  a:link, a:visited, a:hover, a:active {
-    text-decoration: none;
-    color: black;
-  }
-
-</style>
-
-<!-- No touch screens message -->
-<div id='noTouch'>
-  <%= render 'big_logo' %>
-  Apologies, skrol is not setup for touch screen devices as yet, please switch
-  to a laptop or desktop.
-</div>
-
+<%= render 'no_touch' %>
+<%= render 'about_modal' %>
 
 <!-- The Marquee and with its placeholders -->
 <div id='frame'>
@@ -28,59 +14,7 @@
   </div>
 </div>
 
-
-<div class="container text-center">
-  <div id="controls" class="btn-group" role="group" aria-label="Button group with nested dropdown">
-    <!-- Controls to 'play' and 'pause' marquee -->
-    <button type='button' class='btn' id='state'>-</button>
-
-    <!-- Controls to speed up and slow down the marquee -->
-    <button type='button' class='btn btn-primary' id='lessSpeed'>Slower</button>
-    <button type='button' class='btn btn-primary' id='moreSpeed'>Faster</button>
-
-    <!-- Controls to display and change Languages  -->
-    <div class="btn-group" role="group">
-      <button id="lang-label" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        - <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu languages" aria-labelledby="btnGroupDrop1">
-      </ul>
-    </div>
-
-    <!-- User name and logout button  -->
-    <div class="btn-group" role="group">
-      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <%= current_user.name %> <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <li class="dropdown-item">
-          <%= link_to "Account", account_path, id:"account" %>
-        </li>
-        <li class="dropdown-item">
-          <a data-toggle="modal" data-target=".bd-example-modal-lg">About</a>
-        </li>
-        <li class="dropdown-item">
-          <%= link_to "Sign out", sign_out_path, id:"signOut" %>
-        </li>
-      </ul>
-    </div>
-
-    <button type='button' class='btn btn-primary' id='meter'>-</button>
-  </div>
-</div>
-
-<!-- Large modal -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <p>
-        Welcome to the skrol alpha. Alpha means the app is nowhere near finished,
-        so expect a few bugs and errors.
-      </p>
-
-    </div>
-  </div>
-</div>
+<%= render 'controls' %>
 
 <script>
   $(document).ready(skrolInit);

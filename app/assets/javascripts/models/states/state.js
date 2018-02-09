@@ -16,10 +16,16 @@ function checkEnoughSlides() {
   }
 }
 
+function changeToError() {
+  disableStateButton();
+  changeStateButton('Error', 'warning');
+  addNotification(SERVER_ERROR);
+}
+
 function changeToWorking() {
   disableStateButton();
   changeStateButton('Working', 'warning');
-  addNotification(SERVER_ERROR);
+  addNotification(WORKING_MSG);
 }
 
 function changeToSelect() {
@@ -37,6 +43,7 @@ function changeToComplete() {
   disableStateButton();
   changeStateButton('Complete', 'success');
   addNotification(COURSE_COMPLETE);
+  retrieveMeter();
 }
 
 function exit() {

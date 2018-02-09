@@ -8,8 +8,16 @@
   overflow: hidden;
   font-family: 'Open Sans', sans-serif;
   border-radius: 15px;
-  font-size: 4vw;
+  font-size: 3vw;
   cursor: grab;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome and Opera */
 }
 
 #frame:active {
@@ -67,5 +75,16 @@
   z-index: 200;
   font-family: 'Open Sans', sans-serif;
   font-size: 5vw;
+  text-align: center;
+}
+
+.noTouchOptions, .noTouchOptions:link, .noTouchOptions:visited,
+.noTouchOptions:hover, .noTouchOptions:active {
+  text-decoration: none;
+  color: white;
+}
+
+#beta {
+  font-size: 4vw;
   text-align: center;
 }
