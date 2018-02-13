@@ -35,3 +35,6 @@ var PROGRESS_THRESHOLD = 2;
 // Time in miliseconds to wait before checking for another slide after initial
 // fail
 var FAIL_WAIT = 10000;
+// Indexes where Language Name and User Map ID can be found.
+var LANG_NAME = 0;
+var ENROLMENT_ID = 1;

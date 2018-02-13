@@ -27,12 +27,12 @@ function showAboutModal() {
 }
 
 function addLangListElement(enrolmentId, langName) {
-  $('#languages').prepend('<li class="language dropdown-item" data-enrolment=' +
-  enrolmentId + '><a>'+ langName +'</a></li>');
+  $('#languages').prepend('<a class="language dropdown-item" data-enrolment=' +
+  enrolmentId + '>' + langName +'</a>');
 }
 
 function setLangChange() {
-  $('li.language').click(changeLanguage);
+  $('.language').click(changeLanguage);
 }
 
 function changeStateButton(label, subClass) {

@@ -1,5 +1,11 @@
 var HOST = 'https://upload.wikimedia.org/wikipedia/commons/';
 
+var sounds;
+
+function initSounds() {
+  sounds = {};
+}
+
 var files = {
   'i': '9/91/Close_front_unrounded_vowel.ogg',
   'y': 'e/ea/Close_front_rounded_vowel.ogg',
@@ -191,8 +197,6 @@ var files = {
   'ɥ': 'f/fe/Labial-palatal_approximant.ogg',
   'ʍ': 'a/a7/Voiceless_labio-velar_fricative.ogg'
 }
-
-var sounds = {}
 
 function retrieveSounds(chars) {
   for (var i = 0; i < chars.length; i++) {

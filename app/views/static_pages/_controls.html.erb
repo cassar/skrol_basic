@@ -24,11 +24,11 @@
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <%= link_to "Account", account_path, id:"account", class: 'dropdown-item' %>
-        <a id="about" class="dropdown-item" data-toggle="modal" data-target=".bd-about-modal-lg">Help</a>
+        <a id="about" class="dropdown-item" data-toggle="modal" data-target=".bd-about-modal-lg">Info</a>
         <%= link_to "Sign out", sign_out_path, id:"signOut", class: 'dropdown-item' %>
       </div>
     </div>
 
-    <button type='button' class='btn btn-primary' id='meter'>-</button>
+    <button class='btn btn-default' id='meter' type='button'>-</button>
   </div>
 </div>

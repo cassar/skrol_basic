@@ -1,4 +1,8 @@
-var skroling = true;
+var skroling;
+
+function initSkroling() {
+  skroling = true;
+}
 
 function isSkroling() {
   return skroling;

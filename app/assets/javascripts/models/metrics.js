@@ -1,11 +1,13 @@
 // An array to keep track of elements in the marquee view
-var slideMetricsArray = [];
+var slideMetricsArray, metricsObject;
 
-var metricsObject = {}
+function initMetrics() {
+  slideMetricsArray = [];
+  metricsObject = {};
+}
 
 // Word Hover Reporting
-var start;
-var end;
+var start, end;
 
 function slideCount() {
   return slideMetricsArray.length;
@@ -70,7 +72,7 @@ function timerOn() {
 function timerOff() {
   end = Date.now();
   if ((end - start) > HOVER_WAIT) {
-    metric_id = $(this).attr('data-metric');
+    var metric_id = $(this).attr('data-metric');
     if (metric_id == '0') {
       return;
     }
@@ -83,7 +85,7 @@ function timerOff() {
 
 // Compiles and sends report to server
 function checkAndSendReport(metric_id) {
-  metric_record = metricsObject[metric_id]
+  var metric_record = metricsObject[metric_id];
   if (metric_record['complete']) {
     return;
   }

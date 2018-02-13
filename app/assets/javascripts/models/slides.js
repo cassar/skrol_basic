@@ -1,8 +1,10 @@
-var slideQueue = [];
+var slideQueue, requestPending, complete;
 
-var requestPending = false;
-
-var complete = false;
+function initSlides() {
+  slideQueue = [];
+  requestPending = false;
+  complete = false;
+}
 
 function getNextSlide() {
   var nextSlide = slideQueue.shift();

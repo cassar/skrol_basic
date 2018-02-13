@@ -1,11 +1,10 @@
 // Languages
-var enrolmentId = NO_ENROLMENT_SET;
-var languages = {};
+var enrolmentId, languages;
 
-// Indexes where Language Name and User Map ID can be found.
-var LANG_NAME = 0;
-var ENROLMENT_ID = 1;
-
+function initLanguages() {
+  enrolmentId = NO_ENROLMENT_SET;
+  languages = {};
+}
 
 function enrolmentSet() {
   return enrolmentId != NO_ENROLMENT_SET;

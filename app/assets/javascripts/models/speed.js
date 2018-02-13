@@ -1,8 +1,12 @@
 // time in milliseconds before the marquee is moved.
-var marqueeInterval = NORMAL_INTERVAL;
-
+var marqueeInterval;
 // Timer vars
-var marqueeIntervalId = TIME_OUT_NOT_SET;
+var marqueeIntervalId;
+
+function initSpeed() {
+  marqueeInterval = NORMAL_INTERVAL;
+  marqueeIntervalId = TIME_OUT_NOT_SET;
+}
 
 // Sets the marqueeInterval given a past speed level
 function setSpeed(speed) {

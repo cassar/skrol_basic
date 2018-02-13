@@ -95,3 +95,11 @@
   margin: 0 auto;
   margin-top: .5vw;
 }
+
+.dropdown-item {
+  cursor: pointer;
+}
+
+#meter {
+  cursor: default;
+}

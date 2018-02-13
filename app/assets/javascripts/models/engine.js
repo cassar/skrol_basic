@@ -1,21 +1,19 @@
 // Marquee Variables
-var entryPoint;
-var marqueePosition;
+var entryPoint, marqueePosition;
 
 // The old X axis position of the marquee when the mouse was moved.
-var oldXpos;
-
-var slideMonitorId = TIME_OUT_NOT_SET;
-
-function updateEntryPoint() {
-  entryPoint = getMarqueeWidth() + BUFFER;
-}
+var oldXpos, slideMonitorId;
 
 // Initiate Marquee
 function initEngine() {
+  slideMonitorId = TIME_OUT_NOT_SET;
   updateEntryPoint();
   marqueePosition = entryPoint;
   updateMarqueePosition();
+}
+
+function updateEntryPoint() {
+  entryPoint = getMarqueeWidth() + BUFFER;
 }
 
 function isTouchScreen() {

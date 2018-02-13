@@ -1,4 +1,8 @@
-var disabled = true;
+var disabled;
+
+function initDisable() {
+  disabled = true;
+}
 
 function notDisabled() {
   return !disabled;

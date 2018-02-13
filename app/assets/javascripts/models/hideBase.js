@@ -1,6 +1,10 @@
 // Base Hide Settings
-var baseColour = HIDE_COLOUR;
-var buttonDown = false;
+var baseColour, buttonDown;
+
+function initHideBase() {
+  baseColour = HIDE_COLOUR;
+  buttonDown = false;
+}
 
 function checkUnhideBase() {
   BaseSentenceColorApply(this, REAVEAL_COLOUR);
