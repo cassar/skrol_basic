@@ -58,6 +58,7 @@ class Enrolment < ApplicationRecord
       puts "Words 'tested': #{@tested_count}"
       puts "Words 'exhausted': #{@exhausted_count}"
       puts "Words past Acquiry Point: #{@acquired}"
+      puts "\n"
     end
 
     private

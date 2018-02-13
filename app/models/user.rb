@@ -10,6 +10,14 @@ class User < ApplicationRecord
   has_many :user_scores, through: :enrolments
   has_many :user_metrics, through: :user_scores
 
+  # Print out a summary of users.
+  def self.info
+    all.each do |u|
+      puts "id: #{u.id}, name: '#{u.name}', score_count: #{u.user_scores.count}"
+    end
+    nil
+  end
+
   # Prints out useful information about the user
   def info
     puts "Name: #{name}"
