@@ -195,7 +195,8 @@ var files = {
   // 'ʟ̆': ,
   'w': 'f/f2/Voiced_labio-velar_approximant.ogg',
   'ɥ': 'f/fe/Labial-palatal_approximant.ogg',
-  'ʍ': 'a/a7/Voiceless_labio-velar_fricative.ogg'
+  'ʍ': 'a/a7/Voiceless_labio-velar_fricative.ogg',
+  'ɫ': 'd/d3/Velarized_alveolar_lateral_approximant.ogg'
 }
 
 function retrieveSounds(chars) {
