@@ -1,7 +1,7 @@
 // Initial Map Value
 var NO_ENROLMENT_SET = 0;
 // Amount of miliseconds before the backend checks if a slide should be inserted.
-var SLIDE_MONITOR_INTERVAL = 50;
+var SLIDE_MONITOR_INTERVAL = 5;
 // Amount of slides after which client will check server for meter update.
 var METER_CHECK = 20;
 // The dafault marqueeInterval in milliseconds that the marquee will start at.
@@ -15,7 +15,7 @@ var INTERVAL_INCREMENT = 1;
 // Number of elements at which marquee cannot operate.
 var EMPTY = 0;
 // The maximum number of slides to keep in the buffer before requesting more.
-var MAX_ELEMENTS = 3;
+var MAX_ELEMENTS = 2;
 // The amount of time to wait in miliseconds before a metric is logged
 var HOVER_WAIT = 1000;
 // The number of pixels to push a slide out of view
@@ -28,9 +28,9 @@ var TIME_OUT_NOT_SET = 0;
 // [Fix: Move this into CSS.]
 var REAVEAL_COLOUR = 'black';
 var HIDE_COLOUR = 'white';
-// Positions from the back of the marquee at which metrics about the words that
-// make up a sentence are sent
-var MONITOR_THRESHOLD = 3;
+// Minimum number of slides inserted before metrics are sent
+var MONITOR_THRESHOLD = 4;
+// Minimum number of slides reached before metrics are recorded
 var PROGRESS_THRESHOLD = 2;
 // Time in miliseconds to wait before checking for another slide after initial
 // fail
