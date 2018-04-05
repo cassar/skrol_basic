@@ -25,7 +25,6 @@ SWOSW = 0.33
 # rewarded.
 HIDE_BONUS = 0.3
 NORMAL_BONUS = 0.3
-PAUSE_PENALTY = 0.1
 HOVER_PENALTY = 0.5
 
 # Point at which a score is 'acquired'

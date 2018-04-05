@@ -17,7 +17,6 @@ class UserMetric < ApplicationRecord
   def return_user_word_score(old_entry)
     old_entry += HIDE_BONUS if hide
     old_entry += NORMAL_BONUS unless pause
-    old_entry -= PAUSE_PENALTY if pause
     old_entry -= HOVER_PENALTY if hover
     return 0.0 if old_entry < 0.0
     old_entry
