@@ -18,7 +18,7 @@ function checkEnoughSlides() {
 
 function changeToError() {
   disableStateButton();
-  changeStateButton('Error', 'warning');
+  changeStateButton('Error', 'danger');
   addNotification(SERVER_ERROR);
 }
 
