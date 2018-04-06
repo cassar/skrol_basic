@@ -22,4 +22,9 @@ class SentenceTest < ActiveSupport::TestCase
     assert_nil(SentenceAssociate.take)
     assert(@spanish_sent.present?)
   end
+
+  test 'words method' do
+    temp = [Word.find(1), Word.find(2), Word.find(3)]
+    assert_equal(temp, @english_sent.words)
+  end
 end

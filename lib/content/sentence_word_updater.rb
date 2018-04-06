@@ -66,6 +66,8 @@ class SentenceWordUpdater
 
     def check_substring
       substring = @entry[@start_index...@end_index]
+      boundary = @entry[@end_index]
+      return unless boundary.nil? || boundary.contains_deliniator?
       candidate = @entry_to_word[substring]
       @candidates << candidate unless candidate.nil?
     end

@@ -8,7 +8,7 @@ class SentenceSplitter
   def process(standard_sentence)
     standard_sentence.entry.split_sentence.each do |word_entry|
       next if word_entry == ''
-      std_word = @word_entry_processor.process(word_entry)
+      @word_entry_processor.process(word_entry)
     end
   end
 
@@ -25,11 +25,20 @@ end
 
 # Split sentence into words removing any punctuation
 class String
+  @@sentence_deliniators = %r{\.|\!|\?|\:|\,|\;|\¿|\¡|\(|\)|\"}
+  @@word_deliniators = %r{\s|\'|\-}
+
   def split_sentence
-    remove_sentence_deliniators.split(%r{\s|\'|\-})
+    remove_sentence_deliniators.split(@@word_deliniators)
   end
 
   def remove_sentence_deliniators
-    gsub(%r{\.|\!|\?|\:|\,|\;|\¿|\¡|\(|\)|\"}, '')
+    gsub(@@sentence_deliniators, '')
+  end
+
+  def contains_deliniator?
+    combined = Regexp.union(@@word_deliniators, @@sentence_deliniators)
+    return true if match(combined)
+    false
   end
 end
