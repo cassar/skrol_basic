@@ -26,7 +26,7 @@ class HTMLConstructor
   end
 
   def compile_sentences_tag(content)
-    entry = "<div class=\"sentences\">#{content}</div>"
+    "<div class=\"slides\">#{content}</div>"
   end
 
   def user_metric_ids

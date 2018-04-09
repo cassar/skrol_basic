@@ -25,18 +25,13 @@
   z-index: 100;
 }
 
-/* Marquee Styling */
-
 #marquee {
+  display: inline;
   overflow: hidden;
   white-space: nowrap;
 }
 
-#slide {
-  display: inline;
-}
-
-.sentences, #placeholder {
+.slides, #placeholder {
   display: inline-block;
   margin-right: .5em;
 }

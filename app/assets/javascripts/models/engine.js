@@ -13,7 +13,7 @@ function initEngine() {
 }
 
 function updateEntryPoint() {
-  entryPoint = getMarqueeWidth() + BUFFER;
+  entryPoint = getFrameWidth() + BUFFER;
 }
 
 function isTouchScreen() {
@@ -42,7 +42,7 @@ function incrementMarquee() {
 // Checks to see if a new slide needs to be added into the marquee, and inserts
 // a new one from slideQueue if needs be.
 function checkForInsert() {
-  if (((marqueePosition + getSlideWidth() + BUFFER) <= entryPoint)) {
+  if (((marqueePosition + getMarqueeWidth() + BUFFER) <= entryPoint)) {
     if (checkEnoughSlides()) {
       var nextSlide = getNextSlide();
       appendSlide(nextSlide['slide']);

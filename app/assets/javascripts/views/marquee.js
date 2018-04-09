@@ -21,12 +21,12 @@ function updateMarqueePosition() {
   $('#marquee').css('margin-left', getMarqueePosition() + 'px');
 }
 
-function getSlideWidth() {
-  return $('#slide').width();
-}
-
 function getMarqueeWidth() {
   return $('#marquee').width();
+}
+
+function getFrameWidth() {
+  return $('#frame').width();
 }
 
 function cursorGrabbing() {
@@ -34,7 +34,7 @@ function cursorGrabbing() {
 }
 
 function appendSlide(nextSlide) {
-  $('#slide').append(nextSlide);
+  $('#marquee').append(nextSlide);
 }
 
 function BaseSentenceColorApply(element, color) {
