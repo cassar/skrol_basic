@@ -13,7 +13,8 @@ function initFrameDrag() {
 
 function reinitAfterInsert() {
   $('.word').hover(timerOn, timerOff);
-  $('.word').hover(wordOn, wordOff);
+  $('.word').hover(highlightOn, highlightOff);
+  $('.word').click(toggleHighlight);
   $('.base').mousedown(checkUnhideBase).mouseup(checkHideBase);
   $('.phnChar').hover(charOn, charOff);
   $('.phnChar').click(playSound);
