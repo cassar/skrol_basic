@@ -1,24 +1,24 @@
 function initMarquee() {
   $('#frame').hover(checkForPause, checkForUnpause);
-  initFrameDrag();
+  initMarqueeDrag();
   $(window).resize(updateEntryPoint);
 }
 
-function initFrameDrag() {
+function reinitAfterInsert() {
+  $('.slides:last .word').hover(timerOn, timerOff);
+  $('.slides:last .word').hover(highlightOn, highlightOff);
+  $('.slides:last .word').click(toggleHighlight);
+  $('.slides:last .base').click(unhideBase);
+  $('.slides:last .base').addClass('hide');
+  $('.slides:last .phnChar').hover(charOn, charOff);
+  $('.slides:last .phnChar').click(playSound);
+}
+
+function initMarqueeDrag() {
   var frame = document.getElementById('frame');
   var frameInstance = new Hammer(frame);
   frameInstance.add( new Hammer.Pan({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 0 }) );
   frameInstance.on('pan', marqueeDrag);
-}
-
-function reinitAfterInsert() {
-  $('.word').hover(timerOn, timerOff);
-  $('.word').hover(highlightOn, highlightOff);
-  $('.word').click(toggleHighlight);
-  $('.base').mousedown(checkUnhideBase).mouseup(checkHideBase);
-  $('.phnChar').hover(charOn, charOff);
-  $('.phnChar').click(playSound);
-  applyBaseColour();
 }
 
 function marqueeDrag(event){
@@ -28,7 +28,6 @@ function marqueeDrag(event){
     $('#marquee').css('margin-left', newPosition + 'px');
     if (event.isFinal) {
       updateMarqueePosition(newPosition);
-      checkForUnpause();
     }
   }
 }
@@ -53,6 +52,9 @@ function appendSlide(nextSlide) {
   $('#marquee').append(nextSlide);
 }
 
+function highlightOff() {
+  $('.highlight').removeClass('highlight');
+}
 
 function hideBase() {
   $('.reveal').removeClass('reveal');
