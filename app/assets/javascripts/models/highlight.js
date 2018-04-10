@@ -5,6 +5,7 @@ function toggleHighlight() {
   if (domWord.hasClass('highlight')) {
     highlightOff();
   } else {
+    checkForPause();
     highlightOff();
     highlightOn();
   }
@@ -20,13 +21,13 @@ function highlightOn() {
     var metric_id = domWord.attr('data-metric');
     if (metric_id != '0') {
       $('*[data-metric="' + metric_id + '"]').addClass('highlight');
+    } else {
+      domWord.addClass('highlight');
     }
   }
   domWord = null;
 }
 
-function highlightOff() {
-  $('.highlight').removeClass('highlight');
 function unhideBase() {
   checkForPause();
   hideBase();
