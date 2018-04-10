@@ -11,7 +11,6 @@ function skrolInit() {
       // Models
       initDisable();
       initSkroling();
-      initHideBase();
       initSounds();
       initLanguages();
       initMetrics();

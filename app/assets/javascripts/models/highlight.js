@@ -15,7 +15,8 @@ function highlightOn() {
   if (domWord == null) {
     domWord = $(this);
   }
-  if (!domWord.parent().hasClass('base')) {
+  var parent = domWord.parent();
+  if (!parent.hasClass('base') || parent.hasClass('reveal')) {
     var metric_id = domWord.attr('data-metric');
     if (metric_id != '0') {
       $('*[data-metric="' + metric_id + '"]').addClass('highlight');
@@ -26,4 +27,9 @@ function highlightOn() {
 
 function highlightOff() {
   $('.highlight').removeClass('highlight');
+function unhideBase() {
+  checkForPause();
+  hideBase();
+  $(this).addClass('reveal');
+  reportReveal();
 }

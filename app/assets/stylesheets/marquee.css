@@ -46,6 +46,14 @@
   color: #007bff;
 }
 
+.hide {
+  color: white;
+}
+
+.reveal {
+  color: black;
+}
+
 #placeholder {
   color: white;
 }

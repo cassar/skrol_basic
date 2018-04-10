@@ -41,6 +41,7 @@ function pause() {
 }
 
 function unpause() {
+  hideBase();
   startMarquee();
   changeToPause();
 }

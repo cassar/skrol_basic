@@ -24,10 +24,6 @@ var BUFFER = 1;
 var STEP = 1;
 // The default marqueeInterval ID when none is set.
 var TIME_OUT_NOT_SET = 0;
-// The reveal and hide colour's of the marquee.
-// [Fix: Move this into CSS.]
-var REAVEAL_COLOUR = 'black';
-var HIDE_COLOUR = 'white';
 // Minimum number of slides inserted before metrics are sent
 var MONITOR_THRESHOLD = 4;
 // Minimum number of slides reached before metrics are recorded

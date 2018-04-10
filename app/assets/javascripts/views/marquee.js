@@ -33,10 +33,6 @@ function marqueeDrag(event){
   }
 }
 
-function applyBaseColour() {
-  $('.base').css('color', baseColour);
-}
-
 function updateMarqueeView() {
   $('#marquee').css('margin-left', getMarqueePosition() + 'px');
 }
@@ -57,8 +53,9 @@ function appendSlide(nextSlide) {
   $('#marquee').append(nextSlide);
 }
 
-function BaseSentenceColorApply(element, color) {
-  $(element).css('color', color);
+
+function hideBase() {
+  $('.reveal').removeClass('reveal');
 }
 
 function charOn() {
