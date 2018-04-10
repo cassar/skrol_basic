@@ -3,31 +3,27 @@ var initialised = false;
 function skrolInit() {
   if (!initialised) {
     initialized = true;
-    if (isTouchScreen()) {
-      $('#noTouch').show();
-    } else {
-      changeToLoading();
+    changeToLoading();
 
-      // Models
-      initDisable();
-      initSkroling();
-      initSounds();
-      initLanguages();
-      initMetrics();
-      initSlides();
-      initSpeed();
+    // Models
+    initDisable();
+    initSkroling();
+    initSounds();
+    initLanguages();
+    initMetrics();
+    initSlides();
+    initSpeed();
 
-      // User Setup
-      requestSessionReset();
-      requestUserInfo();
+    // User Setup
+    requestSessionReset();
+    requestUserInfo();
 
-      // Views
-      initControls();
-      initMarquee();
+    // Views
+    initControls();
+    initMarquee();
 
-      // Start
-      initEngine();
-      clearNotification();
-    }
+    // Start
+    initEngine();
+    clearNotification();
   }
 }

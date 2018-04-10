@@ -63,30 +63,6 @@
   z-index: 100;
 }
 
-#noTouch {
-  display: none;
-  position: fixed;
-  padding: 9vw;
-  margin: 0;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-  background: white;
-  z-index: 200;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 5vw;
-  text-align: center;
-}
-
-.noTouchOptions, .noTouchOptions:link, .noTouchOptions:visited,
-.noTouchOptions:hover, .noTouchOptions:active {
-  text-decoration: none;
-  color: white;
-}
-
 .bigChar {
   font-size: 4vw;
   text-align: center;
