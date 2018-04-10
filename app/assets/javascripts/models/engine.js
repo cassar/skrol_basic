@@ -1,15 +1,12 @@
 // Marquee Variables
-var entryPoint, marqueePosition;
-
-// The old X axis position of the marquee when the mouse was moved.
-var oldXpos, slideMonitorId;
+var entryPoint, marqueePosition, slideMonitorId;
 
 // Initiate Marquee
 function initEngine() {
   slideMonitorId = TIME_OUT_NOT_SET;
   updateEntryPoint();
   marqueePosition = entryPoint;
-  updateMarqueePosition();
+  updateMarqueeView();
 }
 
 function updateEntryPoint() {
@@ -24,19 +21,14 @@ function getMarqueePosition() {
   return marqueePosition;
 }
 
-function moveMarquee(event){
-  var newXpos = event.pageX;
-  if (cursorGrabbing() && notDisabled()) {
-    marqueePosition += newXpos - oldXpos;
-    updateMarqueePosition();
-  }
-  oldXpos = newXpos;
+function updateMarqueePosition(newPosition) {
+  marqueePosition = newPosition;
 }
 
 // Moves the marquee based on the size of the step variable.
 function incrementMarquee() {
   marqueePosition -= STEP;
-  updateMarqueePosition();
+  updateMarqueeView();
 }
 
 // Checks to see if a new slide needs to be added into the marquee, and inserts

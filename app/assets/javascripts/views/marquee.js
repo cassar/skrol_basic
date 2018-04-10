@@ -1,7 +1,14 @@
 function initMarquee() {
   $('#frame').hover(checkForPause, checkForUnpause);
-  $('#frame').mousemove(moveMarquee);
+  initFrameDrag();
   $(window).resize(updateEntryPoint);
+}
+
+function initFrameDrag() {
+  var frame = document.getElementById('frame');
+  var frameInstance = new Hammer(frame);
+  frameInstance.add( new Hammer.Pan({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 0 }) );
+  frameInstance.on('pan', marqueeDrag);
 }
 
 function reinitAfterInsert() {
@@ -13,11 +20,23 @@ function reinitAfterInsert() {
   applyBaseColour();
 }
 
+function marqueeDrag(event){
+  if (notDisabled()) {
+    checkForPause();
+    var newPosition = event.deltaX + getMarqueePosition();
+    $('#marquee').css('margin-left', newPosition + 'px');
+    if (event.isFinal) {
+      updateMarqueePosition(newPosition);
+      checkForUnpause();
+    }
+  }
+}
+
 function applyBaseColour() {
   $('.base').css('color', baseColour);
 }
 
-function updateMarqueePosition() {
+function updateMarqueeView() {
   $('#marquee').css('margin-left', getMarqueePosition() + 'px');
 }
 
