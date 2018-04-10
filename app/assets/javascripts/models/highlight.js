@@ -2,7 +2,6 @@ var domWord = null;
 
 function toggleHighlight() {
   domWord = $(this);
-  console.log(domWord);
   if (domWord.hasClass('highlight')) {
     highlightOff();
   } else {
