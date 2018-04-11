@@ -29,6 +29,8 @@ function updateMarqueePosition(newPosition) {
 function incrementMarquee() {
   marqueePosition -= STEP;
   updateMarqueeView();
+  checkForPortrait();
+  updateEntryPoint();
 }
 
 // Checks to see if a new slide needs to be added into the marquee, and inserts

@@ -10,6 +10,7 @@
   border-radius: 15px;
   font-size: 3vw;
   cursor: grab;
+  z-index: 100;
 
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -29,6 +30,24 @@
   display: inline;
   overflow: hidden;
   white-space: nowrap;
+}
+
+#mobilePortrait {
+  display: none;
+  position: fixed;
+  padding: 9vw;
+  margin: 0;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 200;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 5vw;
+  text-align: center;
 }
 
 .slides, #placeholder {

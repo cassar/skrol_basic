@@ -3,9 +3,11 @@ var initialised = false;
 function skrolInit() {
   if (!initialised) {
     initialized = true;
+    checkForPortrait();
     changeToLoading();
 
     // Models
+    initPortraitMonitor();
     initDisable();
     initSkroling();
     initSounds();
