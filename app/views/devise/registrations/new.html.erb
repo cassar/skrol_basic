@@ -1,7 +1,7 @@
 <% controller.redirect_to enter_key_path unless session[:valid_key_entered] %>
 <div class="container">
-  <div class="row">
-    <div class="col">
+  <div class="formContainer">
+    <div class="formPan">
       <h2>Sign up</h2>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -37,8 +37,8 @@
 
       <%= render "devise/shared/links" %>
     </div>
-    <div class="col">
-      <%= render partial: 'static_pages/medium_logo' %>
+    <div class="logoPan">
+      <%= render partial: 'static_pages/link_logo' %>
     </div>
   </div>
 </div>

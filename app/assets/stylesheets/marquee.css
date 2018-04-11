@@ -1,103 +1,108 @@
-/* Marquee Styling */
+/*==========  Mobile First Method  ==========*/
 
-#frame {
-  width: 75vw;
-  margin: auto;
-  margin-top: 2vw;
-  border: 1px solid #ccc;
-  overflow: hidden;
-  font-family: 'Open Sans', sans-serif;
-  border-radius: 15px;
-  font-size: 3vw;
-  cursor: grab;
-  z-index: 100;
+/* Custom, iPhone Retina */
 
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-   -khtml-user-select: none; /* Konqueror HTML */
-     -moz-user-select: none; /* Firefox */
-      -ms-user-select: none; /* Internet Explorer/Edge */
-          user-select: none; /* Non-prefixed version, currently
-                                supported by Chrome and Opera */
+@media only screen and (min-width : 320px) {
+  /* Marquee Styling */
+
+  #frame {
+    width: 100vw;
+    font-size: 6vw;
+    margin: auto;
+    margin-top: 2vw;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+
+    cursor: grab;
+    z-index: 100;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+  }
+
+  #frame:active {
+    cursor: grabbing;
+    z-index: 100;
+  }
+
+  #marquee {
+    display: inline;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  #mobilePortrait {
+    display: none;
+    position: fixed;
+    padding-top: 5vw;
+    margin: 0;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 200;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 9vw;
+    text-align: center;
+  }
+
+  .slides, #placeholder {
+    display: inline-block;
+    margin-right: .5em;
+  }
+
+  .sentence, .word, #innerholder {
+    display: flex;
+  }
+
+  /* Text Styling */
+
+  .highlight {
+    color: #007bff;
+  }
+
+  .hide {
+    color: white;
+  }
+
+  .reveal {
+    color: black;
+  }
+
+  #placeholder {
+    color: white;
+  }
 }
 
-#frame:active {
-  cursor: grabbing;
-  z-index: 100;
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+
 }
 
-#marquee {
-  display: inline;
-  overflow: hidden;
-  white-space: nowrap;
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  #frame {
+    width: 80vw;
+    font-size: 3vw;
+    border-radius: 15px;
+  }
 }
 
-#mobilePortrait {
-  display: none;
-  position: fixed;
-  padding: 9vw;
-  margin: 0;
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
 
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-  background: white;
-  z-index: 200;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 5vw;
-  text-align: center;
 }
 
-.slides, #placeholder {
-  display: inline-block;
-  margin-right: .5em;
-}
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
 
-.sentence, .word, #innerholder {
-  display: flex;
-}
-
-/* Text Styling */
-
-.highlight {
-  color: #007bff;
-}
-
-.hide {
-  color: white;
-}
-
-.reveal {
-  color: black;
-}
-
-#placeholder {
-  color: white;
-}
-
-#controls {
-  margin-top: 1vw;
-  z-index: 100;
-}
-
-.bigChar {
-  font-size: 4vw;
-  text-align: center;
-}
-
-.card {
-  width: 16rem;
-  text-align: center;
-  margin: 0 auto;
-  margin-top: .5vw;
-}
-
-.dropdown-item {
-  cursor: pointer;
-}
-
-#meter {
-  cursor: default;
 }

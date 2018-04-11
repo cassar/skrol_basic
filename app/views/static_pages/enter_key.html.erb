@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row">
-    <div class="col">
+  <div class="formContainer">
+    <div class="formPan">
       <h2>Enter Key</h2>
       <%= form_tag '/key' do %>
         <div class="form-group">
@@ -13,8 +13,8 @@
       <% end %>
       <%= link_to "Sign in", sign_in_path %>
     </div>
-    <div class="col">
-      <%= render partial: 'static_pages/medium_logo' %>
+    <div class="logoPan">
+      <%= render partial: 'static_pages/link_logo' %>
     </div>
   </div>
 </div>

@@ -1,0 +1,82 @@
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+  .logo {
+    color: black;
+    text-align: center;
+    line-height: 1.42857143;
+    margin: auto;
+    font-family: 'dejavu_serifbook';
+    border: .03em black solid;
+  }
+
+  .macron {
+    position: relative;
+    background: black;
+  }
+
+  #frontLogo {
+    width: 90vw;
+    font-size: 28vw;
+  }
+
+  #linkLogo {
+    width: 20vw;
+    font-size: 6vw;
+  }
+
+  #frontMacron {
+    width: 12vw;
+    height: 1.5vw;
+    top: -28vw;
+    left: 55.9vw;
+  }
+
+  #linkMacron {
+    width: 2.3vw;
+    height: 0.4vw;
+    top: -6vw;
+    left: 12.5vw;
+  }
+
+  #homeLink {
+    display: none;
+  }
+
+  #homeLink:hover {
+    text-decoration: none;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+  #frontLogo {
+    width: 60vw;
+    font-size: 17vw;
+  }
+
+  #frontMacron {
+    width: 7vw;
+    height: 1.1vw;
+    top: -17vw;
+    left: 36.9vw;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+  #homeLink {
+    display: inherit;
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}

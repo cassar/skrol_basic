@@ -1,0 +1,49 @@
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+  .signOptions {
+    color: black;
+    text-align: center;
+    display: grid;
+  }
+
+  .signLinks {
+    font-size: 15vw;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 2;
+  }
+
+  .signLinks:link, .signLinks:visited, .signLinks:hover, .signLinks:active {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+  .signOptions {
+    display: block;
+  }
+
+  .signLinks {
+    font-size: 6vw;
+    margin-left: 4vw;
+    margin-right: 4vw;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}

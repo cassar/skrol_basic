@@ -1,26 +1,5 @@
-<style>
-
-  div {
-    color: black;
-    text-align: center;
-  }
-
-  .signLinks {
-    font-size: 6vw;
-    font-family: 'Open Sans', sans-serif;
-    margin-left: 4vw;
-    margin-right: 4vw;
-  }
-
-  a:link, a:visited, a:hover, a:active {
-    text-decoration: none;
-    color: black;
-  }
-
-</style>
-
-<%= render 'big_logo' %>
-<div>
+<%= render 'front_logo' %>
+<div class="signOptions">
   <%= link_to "sign in", sign_in_path, :class=> "signLinks" %>
   <%= link_to "sign up", enter_key_path, :class=> "signLinks" %>
 </div>

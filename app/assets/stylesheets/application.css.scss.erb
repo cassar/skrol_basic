@@ -11,32 +11,27 @@
  * It is generally better to create a new file per style scope.
  *
  */
+@import 'logo';
+@import 'sign';
+@import 'notification';
+@import 'forms';
+@import 'about';
+@import 'marquee';
+@import 'controls';
 
- @import 'marquee';
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import 'bootstrap';
 
- // Custom bootstrap variables must be set or imported *before* bootstrap.
- @import 'bootstrap';
+@font-face {
+  font-family: 'dejavu_serifbook';
+  src:font-url('DejaVuSerif-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
- @font-face {
-     font-family: 'dejavu_serifbook';
-     src:font-url('DejaVuSerif-webfont.woff') format('woff');
-     font-weight: normal;
-     font-style: normal;
- }
-
- @font-face {
-     font-family: 'Open Sans';
-     src:font-url('OpenSans-Regular.ttf') format('truetype');
-     font-weight: normal;
-     font-style: normal;
- }
-
- #notifications {
-   height: 6vw;
-   text-align: center;
- }
-
- #notification {
-   top: 3vw;
-   position: relative;
- }
+@font-face {
+  font-family: 'Open Sans';
+  src:font-url('OpenSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
