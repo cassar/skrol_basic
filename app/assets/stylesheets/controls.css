@@ -1,7 +1,7 @@
 /*==========  Mobile First Method  ==========*/
 
 /* Custom, iPhone Retina */
-@media only screen and (min-width : 320px) {
+@media only screen and (min-device-width: 320px) and (min-width : 320px) {
   #controls {
     margin-top: 1vw;
     z-index: 100;
