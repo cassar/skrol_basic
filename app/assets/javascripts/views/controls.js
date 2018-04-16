@@ -51,5 +51,5 @@ function enableStateButton() {
 }
 
 function updateMeterButton(msg) {
-  $('#meter').text(msg);
+  $('.meter').text(msg);
 }

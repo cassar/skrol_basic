@@ -10,7 +10,6 @@
     font-size: 6vw;
     margin: auto;
     margin-top: 2vw;
-    border: 1px solid #ccc;
     overflow: hidden;
     font-family: 'Open Sans', sans-serif;
 
@@ -93,6 +92,7 @@
   #frame {
     width: 80vw;
     font-size: 3vw;
+    border: 1px solid #ccc;
     border-radius: 15px;
   }
 }

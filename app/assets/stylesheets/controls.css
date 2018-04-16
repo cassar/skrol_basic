@@ -10,10 +10,6 @@
   .dropdown-item {
     cursor: pointer;
   }
-
-  #meter {
-    cursor: default;
-  }
 }
 
 /* Extra Small Devices, Phones */
