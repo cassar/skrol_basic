@@ -5,8 +5,6 @@ function initMarquee() {
 }
 
 function reinitAfterInsert() {
-  $('.slides:last .word').hover(timerOn, timerOff);
-  $('.slides:last .word').hover(highlightOn, highlightOff);
   $('.slides:last .word').click(toggleHighlight);
   $('.slides:last .base').click(unhideBase);
   $('.slides:last .base').addClass('hide');

@@ -8,6 +8,7 @@ function toggleHighlight() {
     checkForPause();
     highlightOff();
     highlightOn();
+    reportHighlight(domWord);
   }
   domWord = null;
 }
@@ -25,7 +26,6 @@ function highlightOn() {
       domWord.addClass('highlight');
     }
   }
-  domWord = null;
 }
 
 function unhideBase() {

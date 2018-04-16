@@ -6,9 +6,6 @@ function initMetrics() {
   metricsObject = {};
 }
 
-// Word Hover Reporting
-var start, end;
-
 function slideCount() {
   return slideMetricsArray.length;
 }
@@ -65,22 +62,15 @@ function reportPause() {
   reportCurrentSlide('pause', true, msg);
 }
 
-function timerOn() {
-  start = Date.now();
-}
-
-function timerOff() {
-  end = Date.now();
-  if ((end - start) > HOVER_WAIT) {
-    var metric_id = $(this).attr('data-metric');
-    if (metric_id == '0') {
-      return;
-    }
-    metricsObject[metric_id]['hover'] = true;
-    metricsObject[metric_id]['pause'] = true;
-    console.log('Hoverd on metric: ' + metric_id);
-    checkAndSendReport(metric_id);
+function reportHighlight(domWord) {
+  var metric_id = domWord.attr('data-metric');
+  if (metric_id == '0') {
+    return;
   }
+  metricsObject[metric_id]['hover'] = true;
+  metricsObject[metric_id]['pause'] = true;
+  console.log('Hoverd on metric: ' + metric_id);
+  checkAndSendReport(metric_id);
 }
 
 // Compiles and sends report to server

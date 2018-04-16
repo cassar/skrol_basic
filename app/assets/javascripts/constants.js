@@ -16,8 +16,6 @@ var INTERVAL_INCREMENT = 1;
 var EMPTY = 0;
 // The maximum number of slides to keep in the buffer before requesting more.
 var MAX_ELEMENTS = 2;
-// The amount of time to wait in miliseconds before a metric is logged
-var HOVER_WAIT = 1000;
 // The number of pixels to push a slide out of view
 var BUFFER = 1;
 // Number of pixels to move at each mouse increment.
