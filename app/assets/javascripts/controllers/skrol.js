@@ -15,7 +15,6 @@ function skrolInit() {
     initMetrics();
     initSlides();
     initSpeed();
-    setBlink();
 
     // User Setup
     requestSessionReset();
