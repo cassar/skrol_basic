@@ -5,7 +5,10 @@ function initMarquee() {
 }
 
 function reinitAfterInsert() {
-  $('.slides:last .word').click(toggleHighlight);
+  $('.slides:last .word').on('mouseover mouseout', toggleHighlight);
+  if (notBlink()) {
+    $('.slides:last .word').click(toggleHighlight);
+  }
   $('.slides:last .base').click(unhideBase);
   $('.slides:last .base').addClass('hide');
   $('.slides:last .phnChar').hover(charOn, charOff);
