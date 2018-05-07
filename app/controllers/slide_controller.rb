@@ -31,19 +31,23 @@ class SlideController < ApplicationController
   # Returns estimated time till completion
   def meter
     enrolment = Enrolment.find(params[:enrolment_id])
-    render json: { meter: hours_to_completion(enrolment) }
+    render json: { meter: time_to_completion(enrolment) }
   end
 
   private
 
-  def hours_to_completion(enrolment)
+  def time_to_completion(enrolment)
     acquired = enrolment.user_scores.where(entry: ACQUIRY_POINT..Float::INFINITY,
                                            status: TESTED).count
     total = enrolment.course.word_scores.count
-    seconds = (total - acquired) * AVG_ACQUIRY_TIME
-    return "#{seconds} seconds" if seconds < 60
-    minutes = seconds / 60
-    return "#{minutes} minutes" if minutes < 60
-    "#{minutes / 60} hours"
+    total_seconds = (total - acquired) * AVG_ACQUIRY_TIME
+    format_seconds(total_seconds)
+  end
+
+  def format_seconds(total_seconds)
+    seconds = total_seconds % 60
+    minutes = (total_seconds / 60) % 60
+    hours = total_seconds / (60 * 60)
+    format('%02d:%02d:%02d', hours, minutes, seconds)
   end
 end
