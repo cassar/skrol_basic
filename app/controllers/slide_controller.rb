@@ -37,8 +37,7 @@ class SlideController < ApplicationController
   private
 
   def time_to_completion(enrolment)
-    acquired = enrolment.user_scores.where(entry: ACQUIRY_POINT..Float::INFINITY,
-                                           status: TESTED).count
+    acquired = enrolment.user_scores.where(entry: ACQUIRY_POINT..Float::INFINITY).count
     exhausted = enrolment.user_scores.where(status: EXHAUSTED).count
     total = enrolment.course.word_scores.count
     total_seconds = (total - acquired - exhausted) * AVG_ACQUIRY_TIME

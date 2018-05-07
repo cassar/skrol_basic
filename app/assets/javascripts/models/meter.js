@@ -7,10 +7,8 @@ function checkForMeterUpdate() {
 }
 
 function applyMeterUpdate(meterUpdate) {
-  if (lastCount == null || meterUpdate < lastCount) {
-    lastCount = meterUpdate;
-    updateMeterButton(meterUpdate + ' hours till completion');
-  }
+  lastCount = meterUpdate;
+  updateMeterButton(meterUpdate + ' hours till completion');
 }
 
 function retrieveMeter() {
