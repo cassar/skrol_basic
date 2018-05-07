@@ -31,7 +31,7 @@ HOVER_PENALTY = 0.5
 ACQUIRY_POINT = 1.0
 
 # Average time that a user takes to learn a word in seconds (a guess)
-AVG_ACQUIRY_TIME = 10
+AVG_ACQUIRY_TIME = 60
 
 # Speed at which an new student is automatically set at.
 DEFAULT_SPEED = 18
