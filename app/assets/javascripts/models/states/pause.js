@@ -42,7 +42,7 @@ function pause() {
 
 function unpause() {
   hideBase();
-  highlightOff();
+  removeHighlight();
   startMarquee();
   changeToPause();
 }

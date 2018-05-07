@@ -1,14 +1,19 @@
 var domWord = null;
 
+// Word Hover Reporting
+var start, end;
+
 function toggleHighlight() {
   domWord = $(this);
   if (domWord.hasClass('highlight')) {
-    highlightOff();
+    timerOff();
+    checkforReport();
+    removeHighlight();
   } else {
     checkForPause();
-    highlightOff();
+    removeHighlight();
+    timerOn();
     highlightOn();
-    reportHighlight(domWord);
   }
   domWord = null;
 }
@@ -28,9 +33,23 @@ function highlightOn() {
   }
 }
 
+function checkforReport() {
+  if ((end - start) > HOVER_WAIT && domWord != null) {
+    reportHighlight(domWord);
+  }
+}
+
 function unhideBase() {
   checkForPause();
   hideBase();
   $(this).addClass('reveal');
   reportReveal();
+}
+
+function timerOn() {
+  start = Date.now();
+}
+
+function timerOff() {
+  end = Date.now();
 }

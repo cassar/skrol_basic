@@ -44,7 +44,7 @@ function appendSlide(nextSlide) {
   $('#marquee').append(nextSlide);
 }
 
-function highlightOff() {
+function removeHighlight() {
   $('.highlight').removeClass('highlight');
 }
 
