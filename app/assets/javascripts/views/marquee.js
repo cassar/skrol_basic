@@ -18,8 +18,7 @@ function marqueeDrag(event){
   checkForPause();
   var newXpos = event.pageX;
   if (cursorGrabbing() && notDisabled()) {
-    var newPosition = (newXpos - oldXpos) + getMarqueePosition();
-    updateMarqueePosition(newPosition);
+    updateMarqueePosition(getMarqueePosition() + newXpos - oldXpos);
     updateMarqueeView();
   }
   oldXpos = newXpos;
