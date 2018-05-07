@@ -3,7 +3,7 @@ var NO_ENROLMENT_SET = 0;
 // Amount of miliseconds before the backend checks if a slide should be inserted.
 var SLIDE_MONITOR_INTERVAL = 5;
 // The amount of time to wait in miliseconds before a metric is logged
-var HOVER_WAIT = 1000;
+var HOVER_WAIT = 400;
 // Amount of slides after which client will check server for meter update.
 var METER_CHECK = 1;
 // The dafault marqueeInterval in milliseconds that the marquee will start at.
