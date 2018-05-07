@@ -43,7 +43,6 @@ function reportCurrentSlide(attr, value, msg) {
     for (var i = 0; i < slideMetrics.length; i++) {
       metricsObject[slideMetrics[i]][attr] = value;
     }
-    console.log(msg + slideMetrics);
   }
 }
 

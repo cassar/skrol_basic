@@ -58,8 +58,6 @@ function requestSlide() {
   })
   .done(function(json) {
     if (json['service'] == 'GOOD') {
-      console.log( "Success: Slide successfully retrieved." );
-      console.log(json);
       addToSlideQueue(json);
       checkSlideQueue();
       checkEnoughSlides();
