@@ -1,6 +1,15 @@
+var lastCount;
+
 function checkForMeterUpdate() {
   if ((slideCount() % METER_CHECK) == 0) {
     retrieveMeter();
+  }
+}
+
+function applyMeterUpdate(meterUpdate) {
+  if (lastCount == null || meterUpdate < lastCount) {
+    lastCount = meterUpdate;
+    updateMeterButton(meterUpdate + ' hours till completion');
   }
 }
 
@@ -12,7 +21,7 @@ function retrieveMeter() {
       data: { 'enrolment_id': getEnrolmentId() }
     })
     .done(function( json ) {
-      updateMeterButton(json['meter'] + ' till completion');
+      applyMeterUpdate(json['meter']);
     })
     .fail(function() {
       updateMeterButton('-');

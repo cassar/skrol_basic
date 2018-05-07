@@ -3,7 +3,7 @@ var NO_ENROLMENT_SET = 0;
 // Amount of miliseconds before the backend checks if a slide should be inserted.
 var SLIDE_MONITOR_INTERVAL = 5;
 // Amount of slides after which client will check server for meter update.
-var METER_CHECK = 20;
+var METER_CHECK = 1;
 // The dafault marqueeInterval in milliseconds that the marquee will start at.
 var NORMAL_INTERVAL = 18;
 // The minimum marqueeInterval that represents the maximum speed.
