@@ -23,9 +23,7 @@ SWOSW = 0.33
 
 # View Metric Constants, used to determine how much a user will be penalised or
 # rewarded.
-HIDE_BONUS = 0.3
 NORMAL_BONUS = 0.3
-HOVER_PENALTY = 0.5
 
 # Point at which a score is 'acquired'
 ACQUIRY_POINT = 1.0

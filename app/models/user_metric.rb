@@ -15,9 +15,7 @@ class UserMetric < ApplicationRecord
 
   # Returns a new word score entry given the metric and score records
   def return_user_word_score(old_entry)
-    old_entry += HIDE_BONUS if hide
-    old_entry += NORMAL_BONUS unless pause
-    old_entry -= HOVER_PENALTY if hover
+    old_entry += NORMAL_BONUS unless hover
     return 0.0 if old_entry < 0.0
     old_entry
   end
