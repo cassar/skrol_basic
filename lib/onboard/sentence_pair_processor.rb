@@ -8,16 +8,16 @@ class SentencePairProcessor
   end
 
   def process(entries)
-    entries.each do |entry1, entry2|
-      sentence1 = @entry_processor1.process(entry1)
-      sentence2 = @entry_processor2.process(entry2)
-      next if sentence1.nil? || sentence2.nil?
-      @sent_assoc_manager.process(sentence1, sentence2)
-    end
+    entries.each { |entry1, entry2| process_pair(entry1, entry2) }
     report
   end
 
-  private
+  def process_pair(entry1, entry2)
+    sentence1 = @entry_processor1.process(entry1)
+    sentence2 = @entry_processor2.process(entry2)
+    return if sentence1.nil? || sentence2.nil?
+    @sent_assoc_manager.process(sentence1, sentence2)
+  end
 
   def report
     report = @entry_processor1.report
