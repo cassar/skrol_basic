@@ -27,13 +27,13 @@ window.gpAsyncInit = function() {
     }, function(response) {
       if (response && !response.error) {
         // google authentication succeed, now post data to server.
-        jQuery.ajax({type: 'POST', url: '/auth/google_oauth2/callback', data: response,
+        jQuery.ajax({type: 'POST', url: 'users/auth/google_oauth2/callback', data: response,
           success: function(data) {
-            console.log("Signon success.");
+            // success
           }
         });
       } else {
-        console.log("Signon failure.");
+        // failure.
       }
     });
   });
