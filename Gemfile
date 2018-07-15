@@ -21,6 +21,7 @@ gem 'httparty'
 gem 'open_uri_redirections'
 gem 'bootstrap', '~> 4.0.0.beta3'
 gem 'devise'
+gem 'omniauth-google-oauth2'
 gem 'google-analytics-rails', '1.1.1'
 
 group :development, :test do
