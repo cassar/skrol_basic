@@ -2,6 +2,7 @@
   <div class="formContainer">
     <div class="formPan">
       <h2>Sign in</h2>
+      <a class="googleplus-login">Sign in with Google Client Side</a>
       <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group">
