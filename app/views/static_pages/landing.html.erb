@@ -1,5 +1,4 @@
 <% if user_signed_in? %>
-  <% session[:valid_key_entered] = nil %>
   <%= render 'marquee' %>
 <% else %>
   <%= render 'welcome' %>
