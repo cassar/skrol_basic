@@ -3,7 +3,7 @@
     <div class="formPan">
       <h2>Sign in</h2>
       <div class="form-group">
-        <button type="button" class="btn btn-primary btn-lg btn-block googleplus-login">Sign in with Google</button>
+        <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary btn-lg btn-block' %>
       </div>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group">
