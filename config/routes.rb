@@ -20,8 +20,6 @@ Rails.application.routes.draw do
     get 'sign_out', to: 'devise/sessions#destroy'
     get 'account', to: 'devise/registrations#edit'
   end
-
-  post 'key', to: 'static_pages#check_key'
-  get 'enter_key', to: 'static_pages#enter_key'
+  
   root 'static_pages#landing'
 end
