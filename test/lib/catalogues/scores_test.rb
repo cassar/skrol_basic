@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ScoresCatalogueTest < ActiveSupport::TestCase
   setup do
-    spanish = lang_by_name('Spanish')
+    spanish = Language.find_by_name('Spanish')
     @words = spanish.standard_script.words
   end
 

@@ -3,17 +3,17 @@ def derive_sent_to_words(sents, words, sent_words)
   sent_id_to_sent = derive_record_id_to_record(sents)
   word_id_to_word = derive_record_id_to_record(words)
   sent_to_words = {}
-  sent_words.each do |sw|
-    add_to_sent_words(sent_to_words, sw, sent_id_to_sent, word_id_to_word)
+  sent_words.each do |sent_word|
+    add_to_sent_words(sent_to_words, sent_word, sent_id_to_sent, word_id_to_word)
   end
   sent_to_words
 end
 
-def add_to_sent_words(sent_to_words, sw, sent_id_to_sent, word_id_to_word)
-  sent = sent_id_to_sent[sw.sentence_id]
+def add_to_sent_words(sent_to_words, sent_word, sent_id_to_sent, word_id_to_word)
+  sent = sent_id_to_sent[sent_word.sentence_id]
   word_arr = sent_to_words[sent]
   word_arr = [] if word_arr.nil?
-  word_arr << word_id_to_word[sw.word_id]
+  word_arr << word_id_to_word[sent_word.word_id]
   sent_to_words[sent] = word_arr
 end
 

@@ -32,8 +32,8 @@ class WordTest < ActiveSupport::TestCase
   end
 
   # test 'Word.create and destroy' do
-  #   script = lang_by_name('English').standard_script
-  #   script2 = lang_by_name('Spanish').standard_script
+  #   script = Language.find_by_name('English').standard_script
+  #   script2 = Language.find_by_name('Spanish').standard_script
   #
   #   assert_difference('Word.count', 3, 'Wrong number of words saved!') do
   #     script.words.create(entry: 'unique')
@@ -43,7 +43,7 @@ class WordTest < ActiveSupport::TestCase
   #     script2.words.create(entry: 'unique')
   #   end
   #
-  #   word = script.word_by_entry('apple')
+  #   word = script.words.find_by_entry('apple')
   #   score = word.scores.create(map_to_id: 2, map_to_type: 'Word',
   #                              name: 'WSS', entry: 0.23)
   #
@@ -79,9 +79,9 @@ class WordTest < ActiveSupport::TestCase
   # end
   #
   # test 'Word.phonetic_present?' do
-  #   word = lang_by_name('English').standard_script.word_by_entry('bottle')
+  #   word = Language.find_by_name('English').standard_script.words.find_by_entry('bottle')
   #   assert(word.phonetic_present?, 'Wrong bool returned')
-  #   word = lang_by_name('English').standard_script.word_by_entry('paper')
+  #   word = Language.find_by_name('English').standard_script.words.find_by_entry('paper')
   #   assert_not(word.phonetic_present?, 'Wrong bool returned')
   # end
   #
@@ -93,19 +93,19 @@ class WordTest < ActiveSupport::TestCase
   # end
   #
   # test 'Word.return_group' do
-  #   word = lang_by_name('English').standard_script.word_by_entry('car')
+  #   word = Language.find_by_name('English').standard_script.words.find_by_entry('car')
   #
   #   assert_equal(4, word.return_group.count, 'return_group does not work')
   # end
   #
   # test 'Word.retrieve_score' do
-  #   word = lang_by_name('Spanish').standard_script.word_by_entry('botella')
+  #   word = Language.find_by_name('Spanish').standard_script.words.find_by_entry('botella')
   #   lang_map = LanguageMap.first
   #   score = Score.where(name: 'WTS').first
   #   name = 'WTS'
   #   result = word.retrieve_score(name, lang_map)
   #   assert_equal(score, result, 'retrieve_wts failed')
-  #   word = lang_by_name('Spanish').standard_script.word_by_entry('color')
+  #   word = Language.find_by_name('Spanish').standard_script.words.find_by_entry('color')
   #   assert_raises(ActiveRecord::RecordNotFound, 'Invalid was not raised') do
   #     word.retrieve_score(name, lang_map)
   #   end

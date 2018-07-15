@@ -18,7 +18,7 @@ class UserScoreTest < ActiveSupport::TestCase
   test 'UserScore.target_script' do
     user_score = UserScore.first
 
-    template = lang_by_name('Spanish').standard_script
+    template = Language.find_by_name('Spanish').standard_script
     result = user_score.target_script
     assert_equal(template, result, 'target_script did not work')
   end

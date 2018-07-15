@@ -2,8 +2,8 @@ require 'test_helper'
 
 class CalculateWLSTest < ActiveSupport::TestCase
   test 'calculate_wls' do
-    script = lang_by_name('English').standard_script
-    word = script.word_by_entry('bottle')
+    script = Language.find_by_name('English').standard_script
+    word = script.words.find_by_entry('bottle')
     script.words.create(entry: 'neighbor')
     script.words.create(entry: 'top')
 

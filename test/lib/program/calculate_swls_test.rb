@@ -5,7 +5,7 @@ class CalculateSWLSTest < ActiveSupport::TestCase
   end
 
   test 'calculate_swls' do
-    script = lang_by_name('English').standard_script
+    script = Language.find_by_name('English').standard_script
     max_length = max_sentence_word_length(script)
     sentence = script.sentences.create(entry: 'I would like it.')
 
@@ -14,7 +14,7 @@ class CalculateSWLSTest < ActiveSupport::TestCase
   end
 
   test 'max_sentence_word_length' do
-    script = lang_by_name('English').standard_script
+    script = Language.find_by_name('English').standard_script
     sentence = script.sentences.create(entry: 'I would like it.')
 
     result = max_sentence_word_length(script)

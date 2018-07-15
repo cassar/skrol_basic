@@ -1,4 +1,3 @@
-
 # Extends the String class so that a word can be transalted from a 'base'
 # language to any other 'target' languages in the bing library.
 # https://msdn.microsoft.com/en-us/library/hh456380.aspx

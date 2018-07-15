@@ -35,7 +35,10 @@ class LanguageMap < ApplicationRecord
   end
 
   def self.info
-    all.each { |lm| lm.info + "\n" }
+    all.each do |lang_map|
+      lang_map.info
+      puts
+    end
   end
 
   private

@@ -16,21 +16,21 @@ class WordAssociateSorter
 
   def retrieve_words
     word_ids = []
-    @word_assocs.each do |wa|
-      word_ids << wa.associate_a_id
-      word_ids << wa.associate_b_id
+    @word_assocs.each do |word_assoc|
+      word_ids << word_assoc.associate_a_id
+      word_ids << word_assoc.associate_b_id
     end
     organise_words(Word.find(word_ids.uniq))
   end
 
   def organise_words(words)
     @word_id_to_word = derive_record_id_to_record(words)
-    @word_assocs.each { |wa| retrieve_and_assign(wa) }
+    @word_assocs.each { |word_assoc| retrieve_and_assign(word_assoc) }
   end
 
-  def retrieve_and_assign(wa)
-    word_a = @word_id_to_word[wa.associate_a_id]
-    word_b = @word_id_to_word[wa.associate_b_id]
+  def retrieve_and_assign(word_assoc)
+    word_a = @word_id_to_word[word_assoc.associate_a_id]
+    word_b = @word_id_to_word[word_assoc.associate_b_id]
     if word_a.script_id == @script1.id
       assign_to_hash(word_a, word_b)
     else

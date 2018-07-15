@@ -3,8 +3,8 @@ require 'test_helper'
 class CalculateWCFTSTest < ActiveSupport::TestCase
   test 'compile_wcfts' do
     puts 'Test is empty!'
-    # script = lang_by_name('English').standard_script
-    # word = script.word_by_entry('bottle')
+    # script = Language.find_by_name('English').standard_script
+    # word = script.words.find_by_entry('bottle')
     # compile_chars_cfs(script)
     #
     # compile_wcfts(word)
@@ -16,8 +16,8 @@ class CalculateWCFTSTest < ActiveSupport::TestCase
 
   test 'calculate_wcfts' do
     puts 'Test is empty!'
-    # script = lang_by_name('English').standard_script
-    # word = script.word_by_entry('bottle')
+    # script = Language.find_by_name('English').standard_script
+    # word = script.words.find_by_entry('bottle')
     # compile_chars_cfs(script)
     #
     # score = calculate_wcfts(word)

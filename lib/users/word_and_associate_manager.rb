@@ -27,9 +27,9 @@ class WordAndAssociateManager
 
   def retrieve_words
     word_ids = []
-    (word_assocs = @target_assoc_rep | @base_assoc_rep).each do |wa|
-      word_ids << wa.associate_a_id
-      word_ids << wa.associate_b_id
+    (word_assocs = @target_assoc_rep | @base_assoc_rep).each do |word_assoc|
+      word_ids << word_assoc.associate_a_id
+      word_ids << word_assoc.associate_b_id
     end
     organise_words(Word.find(word_ids.uniq), word_assocs)
   end
@@ -38,23 +38,23 @@ class WordAndAssociateManager
     word_id_to_word = derive_record_id_to_record(words)
     @word_associate_to_target_word = {}
     @word_associate_to_base_word = {}
-    word_assocs.each do |wa|
-      retrieve_and_assign(wa, word_id_to_word)
+    word_assocs.each do |word_assoc|
+      retrieve_and_assign(word_assoc, word_id_to_word)
     end
   end
 
-  def retrieve_and_assign(wa, word_id_to_word)
-    word_a = word_id_to_word[wa.associate_a_id]
-    word_b = word_id_to_word[wa.associate_b_id]
+  def retrieve_and_assign(word_assoc, word_id_to_word)
+    word_a = word_id_to_word[word_assoc.associate_a_id]
+    word_b = word_id_to_word[word_assoc.associate_b_id]
     if word_a.script_id == @base_script.id
-      assign_to_hash(wa, word_a, word_b)
+      assign_to_hash(word_assoc, word_a, word_b)
     else
-      assign_to_hash(wa, word_b, word_a)
+      assign_to_hash(word_assoc, word_b, word_a)
     end
   end
 
-  def assign_to_hash(wa, base_word, target_word)
-    @word_associate_to_base_word[wa] = base_word
-    @word_associate_to_target_word[wa] = target_word
+  def assign_to_hash(word_assoc, base_word, target_word)
+    @word_associate_to_base_word[word_assoc] = base_word
+    @word_associate_to_target_word[word_assoc] = target_word
   end
 end

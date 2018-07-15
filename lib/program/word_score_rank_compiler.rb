@@ -30,7 +30,7 @@ module WordScoreRankCompiler
     # Assigns ranks to the words based on the scores_arr, scores_obj.
     def assign_word_ranks
       rank = 1
-      @scores_arr.uniq.sort.reverse.each do |score_entry|
+      @scores_arr.uniq.sort.reverse_each do |score_entry|
         @scores_obj[score_entry].each do |word_id|
           @course.word_scores.create(word_id: word_id, entry: score_entry, rank: rank)
           rank += 1

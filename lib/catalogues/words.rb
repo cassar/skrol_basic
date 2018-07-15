@@ -72,15 +72,15 @@ def derive_word_to_sents(sents, words, sent_words)
   sent_id_to_sent = derive_record_id_to_record(sents)
   word_id_to_word = derive_record_id_to_record(words)
   word_to_sents = {}
-  sent_words.each do |sw|
-    add_to_word_to_sents(word_to_sents, sw, sent_id_to_sent, word_id_to_word)
+  sent_words.each do |sent_word|
+    add_to_word_to_sents(word_to_sents, sent_word, sent_id_to_sent, word_id_to_word)
   end
   word_to_sents
 end
 
-def add_to_word_to_sents(word_to_sents, sw, sent_id_to_sent, word_id_to_word)
-  word = word_id_to_word[sw.word_id]
-  sent = sent_id_to_sent[sw.sentence_id]
+def add_to_word_to_sents(word_to_sents, sent_word, sent_id_to_sent, word_id_to_word)
+  word = word_id_to_word[sent_word.word_id]
+  sent = sent_id_to_sent[sent_word.sentence_id]
   return if word.nil? || sent.nil?
   sent_arr = word_to_sents[word]
   sent_arr = [] if sent_arr.nil?

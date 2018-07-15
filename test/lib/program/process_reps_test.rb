@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ProcessRepsTest < ActiveSupport::TestCase
   setup do
-    @standard = lang_by_name('Spanish').standard_script
+    @standard = Language.find_by_name('Spanish').standard_script
     @sents = @standard.sentences
     @words = @standard.words
   end

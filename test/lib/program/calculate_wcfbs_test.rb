@@ -3,12 +3,12 @@ require 'test_helper'
 class CalculateWCFBSTest < ActiveSupport::TestCase
   test 'compile_wcfbs' do
     puts 'Test is empty!'
-    # script = lang_by_name('English').standard_script
-    # word = script.word_by_entry('bottle')
+    # script = Language.find_by_name('English').standard_script
+    # word = script.words.find_by_entry('bottle')
     # compile_chars_cfs(script)
     #
-    # script2 = lang_by_name('Spanish').standard_script
-    # word2 = script2.word_by_entry('botella')
+    # script2 = Language.find_by_name('Spanish').standard_script
+    # word2 = script2..words.find_by_entry('botella')
     # compile_chars_cfs(script2)
     #
     # compile_wcfbs(word, script2)
@@ -19,13 +19,13 @@ class CalculateWCFBSTest < ActiveSupport::TestCase
 
   test 'calculate_wcfbs' do
     puts 'Test is empty!'
-    # script = lang_by_name('English').standard_script
-    # word = script.word_by_entry('bottle')
+    # script = Language.find_by_name('English').standard_script
+    # word = script.words.find_by_entry('bottle')
     # word3 = script.words.create(entry: 'fun')
     # compile_chars_cfs(script)
     #
-    # script2 = lang_by_name('Spanish').standard_script
-    # word2 = script2.word_by_entry('botella')
+    # script2 = Language.find_by_name('Spanish').standard_script
+    # word2 = script2..words.find_by_entry('botella')
     # compile_chars_cfs(script2)
     #
     # score = calculate_wcfbs(word, script2)
@@ -34,8 +34,8 @@ class CalculateWCFBSTest < ActiveSupport::TestCase
 
   test 'cfils_score' do
     puts 'Test is empty!'
-    # script = lang_by_name('English').standard_script
-    # word = script.word_by_entry('bottle')
+    # script = Language.find_by_name('English').standard_script
+    # word = script.words.find_by_entry('bottle')
     # compile_chars_cfs(script)
     #
     # increment = cfils_score('t', script)

@@ -3,8 +3,8 @@ require 'test_helper'
 class CompileWLSScriptTest < ActiveSupport::TestCase
   test 'compile_wls_script' do
     puts 'Test is empty!'
-    # script = lang_by_name('English').standard_script
-    # word = script.word_by_entry('apple')
+    # script = Language.find_by_name('English').standard_script
+    # word = script.words.find_by_entry('apple')
     #
     # compile_wls_script(script)
     # score_count = Score.where(name: 'WLS').count
@@ -14,8 +14,8 @@ class CompileWLSScriptTest < ActiveSupport::TestCase
   end
 
   test 'compute_wls' do
-    script = lang_by_name('English').standard_script
-    word = script.word_by_entry('bottle')
+    script = Language.find_by_name('English').standard_script
+    word = script.words.find_by_entry('bottle')
     score = compute_wls(word, 8)
 
     assert_equal(0.25, score, 'Incorrect wls score')

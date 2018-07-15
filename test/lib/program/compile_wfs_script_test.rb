@@ -3,7 +3,7 @@ require 'test_helper'
 class CompileWFSScriptTest < ActiveSupport::TestCase
   test 'compile_wfs_script' do
     puts 'Test is empty!'
-    # lang = lang_by_name('English')
+    # lang = Language.find_by_name('English')
     # script = lang.scripts.find_by name: 'Latin'
     # word = script.words.find_by entry: 'would'
     # script.sentences.destroy_all
@@ -28,7 +28,7 @@ class CompileWFSScriptTest < ActiveSupport::TestCase
 
   test 'assign_wfs' do
     puts 'Test is empty!'
-    # script = lang_by_name('English').standard_script
+    # script = Language.find_by_name('English').standard_script
     # word = script.words.where(entry: 'bottle').first
     # word2 = script.words.where(entry: 'Sydney').first
     #
