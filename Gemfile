@@ -40,6 +40,7 @@ group :development do
   gem 'guard-rubocop'
   gem 'guard-minitest'
   gem 'guard-bundler'
+  gem 'figaro'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
