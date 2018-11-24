@@ -24,7 +24,7 @@ end
 phonetic_scripts = []
 standard_scripts.each_index do |i|
   phonetic_scripts << languages[i].scripts.create(name: "phon script#{i}",
-                                                  standard: standard_scripts[i])
+                                                  standard_id: standard_scripts[i].id)
 end
 
 # Create Word Strings
@@ -57,7 +57,5 @@ standard_scripts.each_index do |i|
     end
   end
 end
-
-LanguageMap.all.each { |lm| LanguageMapConsolidator.consolidate_all(lm) }
 
 LanguageMap.all.each { |lm| CourseCreator.create(lm) }
