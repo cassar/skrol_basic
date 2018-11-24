@@ -27,3 +27,6 @@ Metrics/LineLength:
 
 Lint/UselessAssignment:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
