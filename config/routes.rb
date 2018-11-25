@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'admin', to: 'static_pages#admin'
   namespace :admin do
     resources :users, only: [:index]
+    resources :language_maps, only: [:index, :show]
   end
 
   # Static Pages

@@ -10,9 +10,10 @@
     enrolled in courses.
   %p= button_to 'All Users', admin_users_path, class: 'btn btn-dark', method: :get
   %hr
-  %h2 Courses
+  %h2 Language Maps
   %p
     Currently
-    = pluralize @user_count, 'course'
+    = pluralize @language_map_count, 'language map'
     on platform.
+  %p= button_to 'All Language Maps', admin_language_maps_path, class: 'btn btn-dark', method: :get
   = link_to 'Back', :back

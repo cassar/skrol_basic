@@ -1,0 +1,5 @@
+.container
+  #aboutLogo
+    = render partial: 'static_pages/link_logo'
+  %h1= "#{@base_language.name} >> #{@target_language.name}"
+  = link_to 'Back', :back
