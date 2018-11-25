@@ -24,7 +24,9 @@
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <%= link_to 'Account', account_path, id:'account', class: 'dropdown-item' %>
-        <%= link_to 'Admin', admin_path, id: 'admin', class: 'dropdown-item' %>
+        <% if current_user.admin %>
+          <%= link_to 'Admin', admin_path, id: 'admin', class: 'dropdown-item' %>
+        <% end %>
         <a id="about" class="dropdown-item" data-toggle="modal" data-target=".bd-about-modal-lg">About</a>
         <%= link_to 'Sign out', sign_out_path, id:'signOut', class: 'dropdown-item' %>
       </div>
