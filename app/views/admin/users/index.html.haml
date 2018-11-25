@@ -1,0 +1,14 @@
+.container
+  #aboutLogo
+    = render partial: 'static_pages/link_logo'
+  %h1 Users
+  %table.table.table-hover
+    %thead.thread-dark
+      %th{ scope: 'col' } #
+      %th{ scope: 'col' } Name
+    %tbody
+      - @users.each do |user|
+        %tr
+          %th{ scope: 'row' }= user.id
+          %td= user.name
+  = link_to 'Back', :back

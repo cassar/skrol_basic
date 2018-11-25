@@ -8,10 +8,11 @@
     Currently
     = pluralize @user_count, 'user'
     enrolled in courses.
+  %p= button_to 'All Users', admin_users_path, class: 'btn btn-dark', method: :get
   %hr
   %h2 Courses
   %p
     Currently
     = pluralize @user_count, 'course'
     on platform.
-  = link_to 'back', :back
+  = link_to 'Back', :back
