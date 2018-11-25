@@ -3,7 +3,7 @@ function initControls() {
   $('#moreSpeed').click(increaseSpeed);
   $('#state').click(togglePause);
   $('#signOut').click(exit);
-  $('#about, #account').click(pause);
+  $('#about, #account, #admin').click(pause);
 }
 
 function updateLangButton() {

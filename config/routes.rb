@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  # Devise
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_scope :user do
+    get 'sign_in', to: 'devise/sessions#new'
+    get 'sign_up', to: 'devise/registrations#new'
+    get 'sign_out', to: 'devise/sessions#destroy'
+    get 'account', to: 'devise/registrations#edit'
+  end
 
   # Client API for Ajax requestes
   get 'next-slide', to: 'slide#send_slide'
@@ -14,12 +22,12 @@ Rails.application.routes.draw do
   post 'word_pairs', to: 'content#word_pairs'
   post 'sentence_pairs', to: 'content#sentence_pairs'
 
-  devise_scope :user do
-    get 'sign_in', to: 'devise/sessions#new'
-    get 'sign_up', to: 'devise/registrations#new'
-    get 'sign_out', to: 'devise/sessions#destroy'
-    get 'account', to: 'devise/registrations#edit'
+  # Admin Pages
+  get 'admin', to: 'static_pages#admin'
+  namespace :admin do
+    resources :users
   end
-  
+
+  # Static Pages
   root 'static_pages#landing'
 end

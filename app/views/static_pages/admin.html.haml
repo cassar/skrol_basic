@@ -1,0 +1,17 @@
+.container
+  #aboutLogo
+    = render partial: 'link_logo'
+  %h1 Admin
+  %hr
+  %h2 Users
+  %p
+    Currently
+    = pluralize @user_count, 'user'
+    enrolled in courses.
+  %hr
+  %h2 Courses
+  %p
+    Currently
+    = pluralize @user_count, 'course'
+    on platform.
+  = link_to 'back', :back
