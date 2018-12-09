@@ -1,6 +1,6 @@
 class Admin::LanguageMapsController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_admin_privileges
+  before_action :authorize_user!
 
   def index
     @language_maps = LanguageMap.all.preload(:base_language, :target_language)

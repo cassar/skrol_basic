@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   # Makes sure a user is an admin before letting them proceed.
-  def check_admin_privileges
+  def authorize_user!
     return if current_user.admin
 
     flash[:alert] = 'You must have admin privileges to access this section.'

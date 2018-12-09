@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_admin_privileges
+  before_action :authorize_user!
 
   def index
     @users = User.all.order(:id).preload(:enrolments, :user_scores)

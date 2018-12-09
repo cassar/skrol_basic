@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
 
   def admin
     authenticate_user!
-    check_admin_privileges
+    authorize_user!
     @user_count = User.count
     @language_count = Language.count
     @language_map_count = LanguageMap.count
