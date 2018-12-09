@@ -1,0 +1,14 @@
+.container
+  #aboutLogo
+    = render partial: 'static_pages/link_logo'
+  %h1 Languages
+  %table.table.table-hover
+    %thead.thread-dark
+      %th{ scope: 'col' } Name
+      %th{ scope: 'col' }
+    %tbody
+      - @languages.each do |language|
+        %tr
+          %td= language.name
+          %td= link_to 'Show', admin_language_path(language)
+  = link_to 'Back to Admin', admin_path

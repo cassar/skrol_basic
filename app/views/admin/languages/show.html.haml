@@ -1,0 +1,7 @@
+.container
+  #aboutLogo
+    = render partial: 'static_pages/link_logo'
+  %h1= @language.name
+  %p= "Words: #{@language_words_count}"
+  %p= "Sentences: #{@language_sentences_count}"
+  %p= link_to 'Back to Languages', admin_language_path

@@ -23,12 +23,11 @@ Rails.application.routes.draw do
   post 'sentence_pairs', to: 'content#sentence_pairs'
 
   # Admin Pages
-  get 'admin', to: 'static_pages#admin'
   namespace :admin do
-    resources :users, only: [:index, :show]
-    resources :language_maps, only: [:index, :show]
+    resources :users, :language_maps, :languages, only: [:index, :show]
   end
 
   # Static Pages
+  get 'admin', to: 'static_pages#admin'
   root 'static_pages#landing'
 end

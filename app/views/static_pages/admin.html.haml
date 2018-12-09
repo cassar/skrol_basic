@@ -4,16 +4,14 @@
   %h1 Admin
   %hr
   %h2 Users
-  %p
-    Currently
-    = pluralize @user_count, 'user'
-    enrolled in courses.
+  %p= "Currently #{pluralize @user_count, 'user'} enrolled in courses."
   %p= button_to 'All Users', admin_users_path, class: 'btn btn-dark', method: :get
   %hr
+  %h2 Languages
+  %p= "Currently #{pluralize @language_count, 'language'} on platform."
+  %p= button_to 'All Languages', admin_languages_path, class: 'btn btn-dark', method: :get
+  %hr
   %h2 Language Maps
-  %p
-    Currently
-    = pluralize @language_map_count, 'language map'
-    on platform.
+  %p= "Currently #{pluralize @language_map_count, 'language map'} on platform."
   %p= button_to 'All Language Maps', admin_language_maps_path, class: 'btn btn-dark', method: :get
-  = link_to 'Back', :back
+  = link_to 'Back', root_path
