@@ -3,10 +3,12 @@ class Enrolment < ApplicationRecord
   validates :student, uniqueness: { scope: :course }
   belongs_to :student, dependent: :destroy
   belongs_to :course
+  has_one :language_map, through: :course
+  has_one :base_language, through: :language_map
+  has_one :target_language, through: :language_map
   has_many :user_scores, dependent: :destroy
   has_many :user_metrics, through: :user_scores
   has_many :sentences, through: :user_metrics
-  has_one :language_map, through: :course
 
   # Returns the base_script of a given enrolment
   def base_script

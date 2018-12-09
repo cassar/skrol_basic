@@ -1,0 +1,17 @@
+.container
+  #aboutLogo
+    = render partial: 'static_pages/link_logo'
+  %h1= @user.name
+  %hr
+  %h2 Enrolments
+  %table.table.table-hover
+    %thead.thread-dark
+      %th{ scope: 'col' } Target Language
+      %th{ scope: 'col' } User Scores
+    %tbody
+      - @enrolments.each do |enrolment|
+        %tr
+          %td= enrolment.target_language.name
+          %td= enrolment.user_scores.count
+
+  = link_to 'Back to Users', admin_users_path

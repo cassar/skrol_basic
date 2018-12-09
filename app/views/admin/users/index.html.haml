@@ -6,9 +6,15 @@
     %thead.thread-dark
       %th{ scope: 'col' } #
       %th{ scope: 'col' } Name
+      %th{ scope: 'col' } Enrolments
+      %th{ scope: 'col' } Scores
+      %th{ scope: 'col' }
     %tbody
       - @users.each do |user|
         %tr
           %th{ scope: 'row' }= user.id
           %td= user.name
-  = link_to 'Back', :back
+          %td= user.enrolments.count
+          %td= user.user_scores.count
+          %td= link_to 'show', admin_user_path(user)
+  = link_to 'Back to Admin', admin_path
