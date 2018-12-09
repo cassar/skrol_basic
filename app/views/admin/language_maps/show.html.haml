@@ -2,4 +2,19 @@
   #aboutLogo
     = render partial: 'static_pages/link_logo'
   %h1= "#{@base_language.name} >> #{@target_language.name}"
-  = link_to 'Back', :back
+  %hr
+  %h2 Courses
+  %table.table.table-hover
+    %thead.thread-dark
+      %th{ scope: 'col' } Created At
+      %th{ scope: 'col' } Word Scores
+      %th{ scope: 'col' } Sentence Scores
+      %th{ scope: 'col' } Enrolments
+    %tbody
+      - @courses.each do |course|
+        %tr
+          %td= course.created_at.to_s(:rfc822)
+          %td= course.word_scores.count
+          %td= course.sentence_scores.count
+          %td= course.enrolments.count
+  = link_to 'Back to Language Maps', admin_language_maps_path

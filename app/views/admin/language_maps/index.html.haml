@@ -9,11 +9,8 @@
       %th{ scope: 'col' }
     %tbody
       - @language_maps.each do |language_map|
-        %a
-          %tr
-            - base_language = @id_languages[language_map.base_language_id]
-            %td= base_language.name
-            - target_language = @id_languages[language_map.target_language_id]
-            %td= target_language.name
-            %td= link_to 'Show', admin_language_map_path(language_map)
-  = link_to 'Back', :back
+        %tr
+          %td= language_map.base_language.name
+          %td= language_map.target_language.name
+          %td= link_to 'Show', admin_language_map_path(language_map)
+  = link_to 'Back to Admin', admin_path
