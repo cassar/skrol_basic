@@ -7,8 +7,9 @@ class Admin::LanguagesController < ApplicationController
   end
 
   def show
-    @language = Language.find(params[:id])
+    @language = Language.find params[:id]
     @language_words_count = @language.words.count
     @language_sentences_count = @language.sentences.count
+    @contributors = @language.contributors.preload :user
   end
 end

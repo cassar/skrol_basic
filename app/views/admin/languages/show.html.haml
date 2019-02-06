@@ -4,4 +4,18 @@
   %h1= @language.name
   %p= "Words: #{@language_words_count}"
   %p= "Sentences: #{@language_sentences_count}"
-  %p= link_to 'Back to Languages', admin_language_path
+  %hr
+  %h2 Contributors
+  %p= link_to 'Add New Contributor', new_admin_language_contributor_path(@language)
+  - if @contributors.present?
+    %table.table.table-hover
+      %thead.thread-dark
+        %th{ scope: 'col' } Name
+      %tbody
+        - @contributors.each do |contributor|
+          %tr
+            %td= contributor.user.name
+  - else
+    %p This language does not currently have any contributors.
+  %hr
+  %p= link_to 'Back to Languages', admin_languages_path

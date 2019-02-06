@@ -3,3 +3,4 @@
 luke:
   id: 1
   name: Luke
+  admin: true

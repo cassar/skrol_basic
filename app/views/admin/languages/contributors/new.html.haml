@@ -1,0 +1,26 @@
+.container
+  %header#aboutLogo
+    = render partial: 'static_pages/link_logo'
+  %h1= "Add New Contributor to #{@language.name}"
+  %hr
+  = form_tag new_admin_language_contributor_path(@language), method: :get, class: 'form-inline' do
+    %div.form-group.mb-2
+      = text_field_tag :term, params[:term], class: 'form-control mx-sm-3 mb-2'
+    = submit_tag 'Search', type: 'submit', class: 'btn btn-primary mb-2'
+  %hr
+  - if @users.present?
+    %table.table.table-hover
+      %thead.thread-dark
+        %th{ scope: 'col' } Name
+        %th{ scope: 'col' }
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= user.name
+            - unless user.contributing_languages.include? @language
+              %td= link_to 'Make Contributor', admin_language_contributors_path(@language, contributor: { user_id: user.id }), method: :post
+            - else
+              %td User already a contributor
+  - elsif params[:term].present?
+    %p= "No users matching term search term '#{params[:term]}'"
+  %p= link_to 'Back to Language', admin_language_path(@language)

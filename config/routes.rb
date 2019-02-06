@@ -24,7 +24,10 @@ Rails.application.routes.draw do
 
   # Admin Pages
   namespace :admin do
-    resources :users, :language_maps, :languages, only: [:index, :show]
+    resources :users, :language_maps, only: [:index, :show]
+    resources :languages, only: [:index, :show] do
+      resources :contributors, only: [:new, :create], controller: 'languages/contributors'
+    end
   end
 
   # Static Pages
