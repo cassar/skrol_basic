@@ -13,6 +13,7 @@ class ContributorTest < ActiveSupport::TestCase
   end
 
   test 'validations' do
+    # No duplicate contributor entries.
     assert_not @contributor.update language_id: 2
   end
 end
