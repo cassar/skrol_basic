@@ -1,16 +1,18 @@
 class Language < ApplicationRecord
-  validates :name, presence: true
-  validates :name, uniqueness: true
   has_many :scripts
   has_many :words, through: :scripts
   has_many :sentences, through: :scripts
   has_many :standards, through: :scripts
   has_many :phonetics, through: :scripts
+  has_many :contributors, dependent: :destroy
 
   has_many :lang_maps_as_base, foreign_key: 'base_language_id',
                                class_name: 'LanguageMap', dependent: :destroy
   has_many :lang_maps_as_target, foreign_key: 'target_language_id',
                                  class_name: 'LanguageMap', dependent: :destroy
+
+  validates :name, presence: true
+  validates :name, uniqueness: true
 
   # Retrieves the standard script of a language (assumes only one)
   def standard_script
