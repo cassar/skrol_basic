@@ -4,12 +4,19 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
-  validates :name, presence: true
-  validates :name, uniqueness: true
+
   has_one :student, dependent: :destroy
+
   has_many :enrolments, through: :student
   has_many :user_scores, through: :enrolments
   has_many :user_metrics, through: :user_scores
+  has_many :contributors, dependent: :destroy
+  has_many :contributing_languages, through: :contributors, source: :language
+
+  scope :search, ->(term) { where 'name ~~* ? OR email ~~* ?', "%#{term}%", "%#{term}%" }
+
+  validates :name, presence: true
+  validates :name, uniqueness: true
 
   def self.from_omniauth(access_token)
     data = access_token.info
